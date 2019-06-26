@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using ParsnipData.UacApi;
+using ParsnipData.Accounts;
 using ParsnipData.Media;
 using ParsnipData.Logs;
 using System.Data.SqlClient;
@@ -46,9 +46,9 @@ namespace ParsnipWebsite
             else
             {
                 if (Request.QueryString["videoid"] == null)
-                    myUser = Uac.SecurePage("video_player", this, Data.DeviceType, "member");
+                    myUser = Account.SecurePage("video_player", this, Data.DeviceType, "member");
                 else
-                    myUser = Uac.SecurePage(string.Format("video_player?videoid={0}", Request.QueryString["videoid"]), this, Data.DeviceType, "member");
+                    myUser = Account.SecurePage(string.Format("video_player?videoid={0}", Request.QueryString["videoid"]), this, Data.DeviceType, "member");
                 
                 if (Request.QueryString["data-id"] == null)
                 {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using ParsnipData.UacApi;
+using ParsnipData.Accounts;
 using ParsnipData.Logs;
 using ParsnipData.Cookies;
 
@@ -19,7 +19,7 @@ namespace ParsnipWebsite
             //This ensures that the user is logged in etc
             //You only need to change where it says '_NEW TEMPLATE'.
             //Change this to match your page name without the '.aspx' extension.
-            myUser = Uac.SecurePage("_NEW TEMPLATE", this, Data.DeviceType);
+            myUser = Account.SecurePage("_NEW TEMPLATE", this, Data.DeviceType);
         }
     }
 }

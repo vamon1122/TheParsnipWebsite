@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using ParsnipData.UacApi;
+using ParsnipData.Accounts;
 using System.Data.SqlClient;
 using ParsnipData.Logs;
 using ParsnipData;
@@ -17,7 +17,7 @@ namespace ParsnipWebsite
         Log Debug = new Log("Debug");
         protected void Page_Load(object sender, EventArgs e)
         {
-            myAccount = Uac.SecurePage("admin", this, Data.DeviceType, "admin");
+            myAccount = Account.SecurePage("admin", this, Data.DeviceType, "admin");
         }
 
         protected void OpenLogsButton_Click(object sender, EventArgs e)

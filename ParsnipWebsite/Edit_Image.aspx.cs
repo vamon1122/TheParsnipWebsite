@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using ParsnipData.UacApi;
+using ParsnipData.Accounts;
 using ParsnipData.Media;
 using ParsnipData.Logs;
 using System.Data.SqlClient;
@@ -29,9 +29,9 @@ namespace ParsnipWebsite
             //Change this to match your page name without the '.aspx' extension.
 
             if (Request.QueryString["imageid"] == null)
-                myUser = Uac.SecurePage("edit_image", this, Data.DeviceType);
+                myUser = Account.SecurePage("edit_image", this, Data.DeviceType);
             else
-                myUser = Uac.SecurePage("edit_image?imageid=" + Request.QueryString["imageid"], this, Data.DeviceType);
+                myUser = Account.SecurePage("edit_image?imageid=" + Request.QueryString["imageid"], this, Data.DeviceType);
 
             //myUser = Uac.SecurePage("edit_image", this, Data.DeviceType);
 

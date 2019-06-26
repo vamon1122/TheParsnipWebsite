@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using ParsnipData.UacApi;
+using ParsnipData.Accounts;
 using ParsnipData.Media;
 using ParsnipData.Logs;
 using System.Data.SqlClient;
@@ -63,9 +63,9 @@ namespace ParsnipWebsite
             else
             {
                 if (Request.QueryString["imageid"] == null)
-                    myUser = Uac.SecurePage("view_image", this, Data.DeviceType);
+                    myUser = Account.SecurePage("view_image", this, Data.DeviceType);
                 else
-                    myUser = Uac.SecurePage("view_image?imageid=" + Request.QueryString["imageid"], this, Data.DeviceType);
+                    myUser = Account.SecurePage("view_image?imageid=" + Request.QueryString["imageid"], this, Data.DeviceType);
 
                 
 

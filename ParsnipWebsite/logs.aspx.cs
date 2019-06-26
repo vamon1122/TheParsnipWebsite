@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using ParsnipData.UacApi;
+using ParsnipData.Accounts;
 using ParsnipData.Logs;
 
 namespace ParsnipWebsite
@@ -18,7 +18,7 @@ namespace ParsnipWebsite
             if (Request.QueryString["logId"] == null)
                 Response.Redirect("logs?logId=" + Guid.Empty);
 
-            myUser = Uac.SecurePage("logs", this, Data.DeviceType, "admin");
+            myUser = Account.SecurePage("logs", this, Data.DeviceType, "admin");
 
             selectedLogId = new Guid(Request.QueryString["logId"]);
 

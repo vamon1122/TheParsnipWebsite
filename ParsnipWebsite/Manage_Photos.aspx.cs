@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using ParsnipData.UacApi;
+using ParsnipData.Accounts;
 using ParsnipData.Logs;
 using System.Data.SqlClient;
 using ParsnipData;
@@ -24,7 +24,7 @@ namespace ParsnipWebsite
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            myUser = Uac.SecurePage("manage_photos", this, Data.DeviceType, "admin");
+            myUser = Account.SecurePage("manage_photos", this, Data.DeviceType, "admin");
         }
 
         protected void Page_LoadComplete(object sender, EventArgs e)
@@ -74,7 +74,7 @@ namespace ParsnipWebsite
         void UpdateUserList()
         {
             var tempUsers = new List<User>();
-            tempUsers.AddRange(ParsnipData.UacApi.User.GetAllUsers());
+            tempUsers.AddRange(ParsnipData.Accounts.User.GetAllUsers());
 
             ListItem[] ListItems = new ListItem[tempUsers.Count];
 

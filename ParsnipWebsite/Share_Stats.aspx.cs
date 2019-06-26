@@ -6,7 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using ParsnipData;
-using ParsnipData.UacApi;
+using ParsnipData.Accounts;
 using System.Data;
 using ParsnipData.Media;
 
@@ -18,7 +18,7 @@ namespace ParsnipWebsite
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            myUser = Uac.SecurePage("share_stats", this, Data.DeviceType, "admin");
+            myUser = Account.SecurePage("share_stats", this, Data.DeviceType, "admin");
             
         }
 

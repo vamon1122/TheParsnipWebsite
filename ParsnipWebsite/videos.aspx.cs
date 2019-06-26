@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using ParsnipData.UacApi;
+using ParsnipData.Accounts;
 
 namespace ParsnipWebsite
 {
@@ -14,7 +14,7 @@ namespace ParsnipWebsite
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            myUser = Uac.SecurePage("videos", this, Data.DeviceType, "member");
+            myUser = Account.SecurePage("videos", this, Data.DeviceType, "member");
 
             List<ParsnipData.Media.Video> allVideos = ParsnipData.Media.Video.GetAllVideos();
 

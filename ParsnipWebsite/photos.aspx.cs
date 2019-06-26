@@ -1,5 +1,5 @@
 ﻿using System;
-using ParsnipData.UacApi;
+using ParsnipData.Accounts;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -28,7 +28,7 @@ namespace ParsnipWebsite
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            myUser = Uac.SecurePage("photos", this, Data.DeviceType, "member");
+            myUser = Account.SecurePage("photos", this, Data.DeviceType, "member");
 
             if (IsPostBack && PhotoUpload.PostedFile != null)
             {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using ParsnipData.UacApi;
+using ParsnipData.Accounts;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using ParsnipData.Logs;
@@ -21,7 +21,7 @@ namespace ParsnipWebsite
             if (Request.QueryString["userId"] == null)
                 Response.Redirect("users?userId=" + Guid.Empty.ToString());
 
-            myUser = Uac.SecurePage("users", this, Data.DeviceType, "admin");
+            myUser = Account.SecurePage("users", this, Data.DeviceType, "admin");
 
             selectedUserId = new Guid(Request.QueryString["userId"]);
 
@@ -70,7 +70,7 @@ namespace ParsnipWebsite
         {
             var tempUsers = new List<User>();
             tempUsers.Add(new User(Guid.Empty) { Forename = "New", Surname = "User", Username = "Create a new user" });
-            tempUsers.AddRange(ParsnipData.UacApi.User.GetAllUsers());
+            tempUsers.AddRange(ParsnipData.Accounts.User.GetAllUsers());
 
             ListItem[] ListItems = new ListItem[tempUsers.Count];
 
