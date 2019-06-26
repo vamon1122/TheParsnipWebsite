@@ -40,7 +40,7 @@ namespace ParsnipWebsite
 
                 Debug.WriteLine("---------- posted back with id = " + selectedUserId);
 
-                List<ParsnipData.Media.Image> MyPhotos = ParsnipData.Media.Image.GetImagesByUser(selectedUserId).Where(user => user.AlbumId != Guid.Empty).ToList();
+                List<ParsnipData.Media.Image> MyPhotos = ParsnipData.Media.Image.GetImagesByUser(selectedUserId);
                 //new LogEntry(Debug) { text = "Got all photos. There were {0} photo(s) = " + AllPhotos.Count() };
                 foreach (ParsnipData.Media.Image temp in MyPhotos)
                 {
