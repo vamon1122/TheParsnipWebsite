@@ -39,7 +39,7 @@
             </asp:DropDownList>
             <br />
             <!--<asp:Button runat="server" ID="btnDelete"  CssClass="btn btn-primary" Text="Delete" Visible="false" data-toggle="modal" data-target="#confirmDelete" OnClientClick="return false;"></asp:Button>-->
-                    <button data-toggle="modal" data-target="#confirmDelete" class="btn btn-primary" onclick="return false" >Delete</button>
+                    <button data-toggle="modal" data-target="#confirmDelete" class="btn btn-danger" onclick="return false" >Delete ALL images</button>
             <br />
             <br />
                 <div runat="server" id="DisplayPhotosDiv">
@@ -63,7 +63,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <asp:Button ID="BtnDeleteUploads" runat="server" class="btn btn-primary" OnClick="BtnDeleteUploads_Click" Text="Confirm"></asp:Button>
+                        <asp:Button ID="BtnDeleteUploads" runat="server" class="btn btn-danger" OnClick="BtnDeleteUploads_Click" Text="DELETE 'EM ALL!!!"></asp:Button>
                     </div>
                 </div>
             </div>
