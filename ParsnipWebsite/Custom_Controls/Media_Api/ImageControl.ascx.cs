@@ -24,7 +24,8 @@ namespace ParsnipWebsite.Custom_Controls.Media_Api
                 MyImageHolder.ImageUrl = "../../Resources/Media/Images/Web_Media/placeholder.gif";
                 MyImageHolder.Attributes.Add("data-src", MyImage.Directory);
                 MyImageHolder.Attributes.Add("data-srcset", MyImage.Directory);
-                MyImageHolder.CssClass = "meme lazy";
+                MyImageHolder.CssClass = "lazy";
+                MyImageHolder.Style.Add("margin-bottom", "8px");
                 MyImageContainer.ID = myImage.Id.ToString();
 
                 

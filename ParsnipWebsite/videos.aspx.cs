@@ -21,7 +21,7 @@ namespace ParsnipWebsite
             foreach(ParsnipData.Media.Video video in allVideos)
             {
                 links_div.InnerHtml += "<div><hr class=\"break\" />";
-                links_div.InnerHtml += string.Format("<h2>{0}</h2>", video.Title);
+                links_div.InnerHtml += string.Format("<h3>{0}</h3>", video.Title);
                 links_div.InnerHtml += string.Format("<a href=\"{0}/video_player?videoid={1}\">", Request.Url.GetLeftPart(UriPartial.Authority), video.Id, video.Thumbnail);
                 links_div.InnerHtml += "<div class=\"play-button-div\">";
                 links_div.InnerHtml += string.Format("<img src=\"{2}\" class=\"thumbnail\" />", Request.Url.GetLeftPart(UriPartial.Authority), video.Id, video.Thumbnail);
