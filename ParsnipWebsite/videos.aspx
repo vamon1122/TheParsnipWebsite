@@ -1,6 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Videos.aspx.cs" Inherits="ParsnipWebsite.Videos" %>
 <%@ Register Src="~/Custom_Controls/Menu/Menu.ascx" TagPrefix="menuControls" TagName="Menu" %>
 
+
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -26,7 +27,8 @@
     <div class="cens_req padded-text"><label>Certain elements of this page were removed by request. <a href="content_removal">Click here</a> to learn more.</label></div>
 
     <div class="padded-text">
-        <h2>Videos</h2>       
+        <h2>Videos</h2>  
+        <hr class="break" />
         </div>
         <!-- VIDEO TEMPLATE
         DATE
@@ -38,9 +40,12 @@
         
         -->
     
-    <div runat="server" id="links_div">
-
-    </div>
+    <form runat="server">
+        <div runat="server" id="links_div">
+            
+        </div>
+    </form>
+    
 
 
     <!--27 Jun
@@ -141,7 +146,6 @@
     </div>-->
 
     <!--15 May-->
-    <hr class="break" />
     <h2>Pablo Slaps Ass</h2>
     <div class="youtube-container">
         <div class="youtube-player" data-id="L0z041sv9EA"></div>

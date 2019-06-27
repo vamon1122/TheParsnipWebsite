@@ -25,6 +25,7 @@
     <menuControls:Menu runat="server" ID="Menu" />
 
     <h2>Home</h2>
+    <hr class="break" />
     <div class="padded-text center_div">
         <asp:Label runat="server" ID="WelcomeLabel"></asp:Label>
             

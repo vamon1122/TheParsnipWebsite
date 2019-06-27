@@ -16,17 +16,17 @@ namespace ParsnipWebsite.Custom_Controls.Media_Api
             
         }
 
-        private ParsnipData.Media.Image myImage;
-        public ParsnipData.Media.Image MyImage { get { return myImage; } set
+        private ParsnipData.Media.Image _myImage;
+        public ParsnipData.Media.Image MyImage { get { return _myImage; } set
             {
-                myImage = value;
+                _myImage = value;
                 MyTitle.InnerHtml = MyImage.Title;
                 MyImageHolder.ImageUrl = "../../Resources/Media/Images/Web_Media/placeholder.gif";
                 MyImageHolder.Attributes.Add("data-src", MyImage.Directory);
                 MyImageHolder.Attributes.Add("data-srcset", MyImage.Directory);
                 MyImageHolder.CssClass = "lazy";
                 MyImageHolder.Style.Add("margin-bottom", "8px");
-                MyImageContainer.ID = myImage.Id.ToString();
+                MyImageContainer.ID = _myImage.Id.ToString();
 
                 
 
