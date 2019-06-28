@@ -11,13 +11,22 @@
     width: 80%;
 }
 
+/*Youtube CSS*/
+.youtube-container {
+    display: block;
+    margin: auto;
+    width: 50%;
+    min-width: 600px;
+}
+
 .center_form {
     width: 30%;
     display: inline-block;
 }
 
 .meme {
-    width: 30%;
+    width: 50%;
+    min-width: 600px;
 }
 
 .image-preview {

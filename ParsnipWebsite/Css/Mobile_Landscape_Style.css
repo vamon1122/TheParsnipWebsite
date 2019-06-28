@@ -11,6 +11,14 @@
     width: 80%;
 }
 
+/*Youtube CSS*/
+.youtube-container {
+    display: block;
+    margin: auto;
+    width: 100%;
+    max-width: 600px;
+}
+
 .center_form {
     width: 50%;
     display: inline-block;

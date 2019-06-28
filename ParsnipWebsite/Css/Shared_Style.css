@@ -203,17 +203,6 @@ a {
                    */
 
 /*Youtube CSS*/
-.youtube-container {
-    display: block;
-    margin: auto;
-    
-    width: 100%;
-    
-    max-width: 600px;
-      
-}
-
-
 .youtube-player {
     display: block;
     width: 100%; /* assuming that the video has a 16:9 ratio */
