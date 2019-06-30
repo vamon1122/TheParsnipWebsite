@@ -40,8 +40,7 @@ namespace ParsnipWebsite.Custom_Controls.Media
 
 
                 //MyEdit.HRef = string.Format("../../edit_image?imageid={0}", MyVideo.Id);
-                //a_play_video.HRef = string.Format("../../video_player?videoid={0}", MyYoutubeVideo.Id);
-                //MyShare.HRef = string.Format("../../video_player?videoid={0}", MyYoutubeVideo.Id);
+                MyShare.HRef = string.Format("../../video_player?data-id={0}", MyYoutubeVideo.DataId);
             }
         }
     }
