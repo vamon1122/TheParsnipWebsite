@@ -15,8 +15,9 @@
 .youtube-container {
     display: block;
     margin: auto;
-    width: 50%;
-    min-width: 600px;
+    width: 40%;
+    min-width: 400px;
+    max-width: 550px;
 }
 
 .center_form {
@@ -25,8 +26,9 @@
 }
 
 .meme {
-    width: 50%;
-    min-width: 600px;
+    width: 40%;
+    min-width: 400px;
+    max-width: 550px;
 }
 
 .image-preview {

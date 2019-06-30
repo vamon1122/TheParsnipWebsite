@@ -75,7 +75,7 @@ namespace ParsnipWebsite
             //new LogEntry(Debug) { text = "Got all photos. There were {0} photo(s) = " + AllPhotos.Count() };
             foreach (ParsnipData.Media.Image temp in AllPhotos)
             {
-                var MyImageControl = (ImageControl)LoadControl("~/Custom_Controls/Media_Api/ImageControl.ascx");
+                var MyImageControl = (ImageControl)LoadControl("~/Custom_Controls/Media/ImageControl.ascx");
                 MyImageControl.MyImage = temp;
                 DynamicMemesDiv.Controls.Add(MyImageControl);
             }

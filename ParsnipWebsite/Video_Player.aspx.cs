@@ -18,6 +18,7 @@ namespace ParsnipWebsite
         User myUser;
         Log DebugLog = new Log("Debug");
         ParsnipData.Media.Video myVideo;
+        ParsnipData.Media.YoutubeVideo myYoutubeVideo;
         AccessToken myAccessToken;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -41,18 +42,31 @@ namespace ParsnipWebsite
                     throw ex;
                 }
 
-                myVideo = new ParsnipData.Media.Video(myAccessToken.MediaId);
+
+                if (ParsnipData.Media.Video.Exists(myAccessToken.MediaId))
+                {
+                    myVideo = new ParsnipData.Media.Video(myAccessToken.MediaId);
+                }
+                
             }
             else
             {
                 if (Request.QueryString["videoid"] == null)
-                    myUser = Account.SecurePage("video_player", this, Data.DeviceType, "member");
+                {
+                    if (Request.QueryString["data-id"] == null)
+                        myUser = Account.SecurePage("video_player", this, Data.DeviceType, "member");
+                    else
+                        myUser = Account.SecurePage(string.Format("video_player?data-id={0}", Request.QueryString["data-id"]), this, Data.DeviceType, "member");
+                }
                 else
+                {
                     myUser = Account.SecurePage(string.Format("video_player?videoid={0}", Request.QueryString["videoid"]), this, Data.DeviceType, "member");
-                
+                }
+
+
                 if (Request.QueryString["data-id"] == null)
                 {
-                    if(Request.QueryString["videoid"] == null)
+                    if (Request.QueryString["videoid"] == null)
                     {
                         Response.Redirect("home");
                     }
@@ -64,7 +78,7 @@ namespace ParsnipWebsite
                 else
                 {
                     youtube_video.Attributes.Add("data-id", Request.QueryString["data-id"]);
-                    
+
                 }
             }
         }
@@ -74,26 +88,60 @@ namespace ParsnipWebsite
             //If the image has been deleted, display a warning.
             //If the image has not been deleted, display the image.
 
-            
 
-            if (Request.QueryString["data-id"] == null)
-            {
+
+            /*if (Request.QueryString["data-id"] == null)
+            {*/
                 if (Data.IsMobile)
+                {
+                    video_container.Attributes.Add("preload", "none");
+                }
+                else
+                {
+                    video_container.Attributes.Add("autoplay", "true");
+                }
+
+            if (myVideo == null)
             {
-                video_container.Attributes.Add("preload", "none");
+                Button_ViewAlbum.Visible = false;
+                if (Request.QueryString["data-id"] != null)
+                {
+
+
+                    myYoutubeVideo = new YoutubeVideo(Request.QueryString["data-id"]);
+                    myYoutubeVideo.Select();
+                    youtube_video.Attributes.Add("data-id", Request.QueryString["data-id"]);
+                }
+                else
+                {
+                    Debug.WriteLine("Got youtube video from database. DataId not null.");
+                    myYoutubeVideo = new YoutubeVideo(myAccessToken.MediaId);
+                    myYoutubeVideo.Select();
+                    Debug.WriteLine("DataId = " + myYoutubeVideo.DataId);
+                    youtube_video.Attributes.Add("data-id", myYoutubeVideo.DataId);
+                }
+
+                
+
+                youtube_video_container.Visible = true;
+                video_container.Visible = false;
             }
             else
             {
-                video_container.Attributes.Add("autoplay", "true");
-            }
                 myVideo.Select();
+            }
 
+
+            if (myVideo != null)
+            {
                 Debug.WriteLine(string.Format("AlbumId {0}", myVideo.AlbumId));
 
                 if (myVideo.AlbumId == Guid.Empty)
                 {
                     Debug.WriteLine(string.Format("AlbumId {0} == {1}", myVideo.AlbumId, Guid.Empty));
-                    NotExistError.Visible = true;
+                    if(Request.QueryString["data-id"] != null)
+                        NotExistError.Visible = true;
+
                     Button_ViewAlbum.Visible = false;
                 }
                 else
@@ -104,28 +152,46 @@ namespace ParsnipWebsite
                     Page.Title = myVideo.Title;
                     VideoSource.Src = myVideo.Directory;
                 }
-            
 
-            
+            }
 
-            //If there was no access token, the user is trying to share the photo.
-            //Generate a shareable link and display it on the screen.
-            if (Request.QueryString["access_token"] == null)
+
+                //If there was no access token, the user is trying to share the photo.
+                //Generate a shareable link and display it on the screen.
+                if (Request.QueryString["access_token"] == null)
                 {
+
                     Button_ViewAlbum.Visible = false;
 
                     AccessToken myAccessToken;
 
-                    if (AccessToken.TokenExists(myUser.Id, myVideo.Id))
+                    if (Request.QueryString["data-id"] != null)
                     {
-                        myAccessToken = AccessToken.GetToken(myUser.Id, myVideo.Id);
+                        
+                        if (AccessToken.TokenExists(myUser.Id, myYoutubeVideo.Id))
+                        {
+                            myAccessToken = AccessToken.GetToken(myUser.Id, myYoutubeVideo.Id);
+                        }
+                        else
+                        {
+                            myAccessToken = new AccessToken(myUser.Id, myYoutubeVideo.Id);
+                            myAccessToken.Insert();
+                        }
                     }
                     else
                     {
-                        myAccessToken = new AccessToken(myUser.Id, myVideo.Id);
-                        myAccessToken.Insert();
-                    }
+                        if (AccessToken.TokenExists(myUser.Id, myVideo.Id))
+                        {
+                            myAccessToken = AccessToken.GetToken(myUser.Id, myVideo.Id);
+                        }
+                        else
+                        {
+                            myAccessToken = new AccessToken(myUser.Id, myVideo.Id);
+                            myAccessToken.Insert();
+                        }
 
+
+                    }
                     //Gets URL without sub pages
                     ShareLink.Value = Request.Url.GetLeftPart(UriPartial.Authority) + myAccessToken.VideoRedirect;
                 }
@@ -148,18 +214,18 @@ namespace ParsnipWebsite
 
                     ShareLinkContainer.Visible = false;
                 }
-            }
+            /*}
             else
             {
                 youtube_video_container.Visible = true;
                 video_container.Visible = false;
-                ShareLinkContainer.Visible = false;
+                //ShareLinkContainer.Visible = false;
                 Button_ViewAlbum.Visible = false;
-//                youtube_video.Attributes.Add("data-id", Request.QueryString["data-id"]);
+                //                youtube_video.Attributes.Add("data-id", Request.QueryString["data-id"]);
 
                 Debug.WriteLine("Data id = " + Request.QueryString["data-id"]);
                 //Response.Redirect("home?data-id=" + Request.QueryString["data-id"]);
-            }
+            }*/
         }
 
         protected void Button_ViewAlbum_Click(object sender, EventArgs e)

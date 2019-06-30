@@ -88,6 +88,7 @@
     <Content Include="Css\Mobile_Landscape_Style.css" />
     <Content Include="Custom_Controls\Media\ImageControl.ascx" />
     <Content Include="Custom_Controls\Media\VideoControl.ascx" />
+    <Content Include="Custom_Controls\Media\YoutubeControl.ascx" />
     <Content Include="Custom_Controls\Menu\Menu.ascx" />
     <Content Include="Edit_Image.aspx" />
     <Content Include="Get_Device_Info.aspx" />
@@ -453,6 +454,13 @@
     </Compile>
     <Compile Include="Custom_Controls\Media\VideoControl.ascx.designer.cs">
       <DependentUpon>VideoControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Custom_Controls\Media\YoutubeControl.ascx.cs">
+      <DependentUpon>YoutubeControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Custom_Controls\Media\YoutubeControl.ascx.designer.cs">
+      <DependentUpon>YoutubeControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="Custom_Controls\Menu\Menu.ascx.cs">
       <DependentUpon>Menu.ascx</DependentUpon>
