@@ -10,7 +10,7 @@ using System.Data.SqlClient;
 using ParsnipData;
 using ParsnipData.Media;
 using System.Diagnostics;
-using ParsnipWebsite.Custom_Controls.Media_Api;
+using ParsnipWebsite.Custom_Controls.Media;
 
 namespace ParsnipWebsite
 {
@@ -44,7 +44,7 @@ namespace ParsnipWebsite
                 //new LogEntry(Debug) { text = "Got all photos. There were {0} photo(s) = " + AllPhotos.Count() };
                 foreach (ParsnipData.Media.Image temp in MyPhotos)
                 {
-                    var MyImageControl = (ImageControl)LoadControl("~/Custom_Controls/Media_Api/ImageControl.ascx");
+                    var MyImageControl = (MediaControl)LoadControl("~/Custom_Controls/Media/MediaControl.ascx");
                     MyImageControl.MyImage = temp;
                     DisplayPhotosDiv.Controls.Add(MyImageControl);
 

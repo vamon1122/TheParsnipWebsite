@@ -26,14 +26,14 @@ namespace ParsnipWebsite
             foreach (ParsnipData.Media.Video video in ParsnipData.Media.Video.GetAllVideos())
             {
 
-                var MyVideoControl = (VideoControl)LoadControl("~/Custom_Controls/Media/VideoControl.ascx");
+                var MyVideoControl = (MediaControl)LoadControl("~/Custom_Controls/Media/MediaControl.ascx");
                 MyVideoControl.MyVideo = video;
                 links_div.Controls.Add(MyVideoControl);
             }
 
             foreach (ParsnipData.Media.YoutubeVideo youtubeVideo in ParsnipData.Media.YoutubeVideo.GetAllYoutubeVideos())
             {
-                var MyVideoControl = (YoutubeControl)LoadControl("~/Custom_Controls/Media/YoutubeControl.ascx");
+                var MyVideoControl = (MediaControl)LoadControl("~/Custom_Controls/Media/MediaControl.ascx");
                 MyVideoControl.MyYoutubeVideo = youtubeVideo;
                 links_div.Controls.Add(MyVideoControl);
             }

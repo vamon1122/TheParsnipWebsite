@@ -86,9 +86,7 @@
     <Content Include="Css\Jonsuh_Hamburgers\Hamburgers.css" />
     <Content Include="Css\Jonsuh_Hamburgers\Hamburgers.min.css" />
     <Content Include="Css\Mobile_Landscape_Style.css" />
-    <Content Include="Custom_Controls\Media\ImageControl.ascx" />
-    <Content Include="Custom_Controls\Media\VideoControl.ascx" />
-    <Content Include="Custom_Controls\Media\YoutubeControl.ascx" />
+    <Content Include="Custom_Controls\Media\MediaControl.ascx" />
     <Content Include="Custom_Controls\Menu\Menu.ascx" />
     <Content Include="Edit_Image.aspx" />
     <Content Include="Get_Device_Info.aspx" />
@@ -443,26 +441,12 @@
       <DependentUpon>Content_Removal.aspx</DependentUpon>
     </Compile>
     <Compile Include="Custom_Controls\App_Start\RouteConfig.cs" />
-    <Compile Include="Custom_Controls\Media\ImageControl.ascx.cs">
-      <DependentUpon>ImageControl.ascx</DependentUpon>
+    <Compile Include="Custom_Controls\Media\MediaControl.ascx.cs">
+      <DependentUpon>MediaControl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Custom_Controls\Media\ImageControl.ascx.designer.cs">
-      <DependentUpon>ImageControl.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="Custom_Controls\Media\VideoControl.ascx.cs">
-      <DependentUpon>VideoControl.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Custom_Controls\Media\VideoControl.ascx.designer.cs">
-      <DependentUpon>VideoControl.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="Custom_Controls\Media\YoutubeControl.ascx.cs">
-      <DependentUpon>YoutubeControl.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Custom_Controls\Media\YoutubeControl.ascx.designer.cs">
-      <DependentUpon>YoutubeControl.ascx</DependentUpon>
+    <Compile Include="Custom_Controls\Media\MediaControl.ascx.designer.cs">
+      <DependentUpon>MediaControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="Custom_Controls\Menu\Menu.ascx.cs">
       <DependentUpon>Menu.ascx</DependentUpon>

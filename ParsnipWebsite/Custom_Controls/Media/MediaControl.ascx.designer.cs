@@ -7,19 +7,19 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ParsnipWebsite.Custom_Controls.Media_Api {
+namespace ParsnipWebsite.Custom_Controls.Media {
     
     
-    public partial class ImageControl {
+    public partial class MediaControl {
         
         /// <summary>
-        /// MyImageContainer control.
+        /// MediaContainer control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl MyImageContainer;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl MediaContainer;
         
         /// <summary>
         /// MyTitle control.
@@ -38,6 +38,33 @@ namespace ParsnipWebsite.Custom_Controls.Media_Api {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Image MyImageHolder;
+        
+        /// <summary>
+        /// a_play_video control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor a_play_video;
+        
+        /// <summary>
+        /// thumbnail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlImage thumbnail;
+        
+        /// <summary>
+        /// YoutubePlayer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl YoutubePlayer;
         
         /// <summary>
         /// MyEdit control.
