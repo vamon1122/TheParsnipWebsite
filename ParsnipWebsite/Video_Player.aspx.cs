@@ -111,7 +111,7 @@ namespace ParsnipWebsite
                     myYoutubeVideo = new YoutubeVideo(Request.QueryString["data-id"]);
                     myYoutubeVideo.Select();
                     youtube_video.Attributes.Add("data-id", Request.QueryString["data-id"]);
-                    VideoTitle.InnerText = myYoutubeVideo.Title;
+                    
                 }
                 else
                 {
@@ -121,8 +121,8 @@ namespace ParsnipWebsite
                     Debug.WriteLine("DataId = " + myYoutubeVideo.DataId);
                     youtube_video.Attributes.Add("data-id", myYoutubeVideo.DataId);
                 }
+                VideoTitle.InnerText = myYoutubeVideo.Title;
 
-                
 
                 youtube_video_container.Visible = true;
                 video_container.Visible = false;

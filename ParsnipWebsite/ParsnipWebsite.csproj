@@ -55,8 +55,9 @@
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="ParsnipData">
-      <HintPath>..\..\TheParsnipData\ParsnipData\bin\Debug\ParsnipData.dll</HintPath>
+    <Reference Include="ParsnipData, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\TheParsnipData\ParsnipData\bin\Release\ParsnipData.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.DynamicData" />
@@ -327,6 +328,7 @@
     <Content Include="Resources\Media\Images\Video_Thumbnails\Coppa 90.png" />
     <Content Include="Resources\Media\Images\Video_Thumbnails\Dancing.png" />
     <Content Include="Resources\Media\Images\Video_Thumbnails\Get Hyper.png" />
+    <Content Include="Resources\Media\Images\Video_Thumbnails\I like to be social I like to kill myself.png" />
     <Content Include="Resources\Media\Images\Video_Thumbnails\It Makes You Smile!.png" />
     <Content Include="Resources\Media\Images\Video_Thumbnails\Kieron At Aaron%27s.PNG" />
     <Content Include="Resources\Media\Images\Video_Thumbnails\Kieron Pissed In The Garden.PNG" />
@@ -356,6 +358,7 @@
     <Content Include="Resources\Media\Videos\Local\Coppa 90.mp4" />
     <Content Include="Resources\Media\Videos\Local\Dancing.mp4" />
     <Content Include="Resources\Media\Videos\Local\Get Hyper.mp4" />
+    <Content Include="Resources\Media\Videos\Local\I like to be social I like to kill myself.mp4" />
     <Content Include="Resources\Media\Videos\Local\It Makes You Smile!.mp4" />
     <Content Include="Resources\Media\Videos\Local\Kieron At Aaron%27s.mp4" />
     <Content Include="Resources\Media\Videos\Local\Kieron Pissed In The Garden.mp4" />
