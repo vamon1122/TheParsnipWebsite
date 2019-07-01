@@ -37,7 +37,7 @@ namespace ParsnipWebsite.Custom_Controls.Media
 
                 VideoContainer.ID = _myYoutubeVideo.Id.ToString();
 
-
+                MyTitle.InnerText = MyYoutubeVideo.Title;
 
                 //MyEdit.HRef = string.Format("../../edit_image?imageid={0}", MyVideo.Id);
                 MyShare.HRef = string.Format("../../video_player?data-id={0}", MyYoutubeVideo.DataId);
