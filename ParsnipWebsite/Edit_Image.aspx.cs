@@ -38,6 +38,7 @@ namespace ParsnipWebsite
             if (Request.QueryString["imageid"] != null)
             {
                 MyImage = new ParsnipData.Media.Image(new Guid(Request.QueryString["imageid"]));
+                Debug.WriteLine("Selecting image with id = " + Request.QueryString["imageid"]);
                 MyImage.Select();
 
                 Debug.WriteLine("----------Image album = " + MyImage.AlbumId);
@@ -90,12 +91,14 @@ namespace ParsnipWebsite
 
                 if (IsPostBack)
                 {
+                    Debug.WriteLine("I am a postback!!!");
                     new LogEntry(DebugLog) { text = "Delete image NOT clicked" };
                     /*
                     new LogEntry(DebugLog) { text = "Posted back title3 = " + Request["InputTitleTwo"].ToString() };
                     new LogEntry(DebugLog) { text = "Posted back albumid3 = " + Request["NewAlbumsDropDown"].ToString() };
                     */
 
+                    Debug.WriteLine("Getting title from request: " + Request["InputTitleTwo"].ToString());
                     MyImage.Title = Request["InputTitleTwo"].ToString();
 
                     //This breaks on some older browsers. Seems android specific?
@@ -142,6 +145,7 @@ namespace ParsnipWebsite
 
                 if (MyImage.Title != null && !string.IsNullOrEmpty(MyImage.Title) && !string.IsNullOrWhiteSpace(MyImage.Title))
                 {
+                    Debug.WriteLine("Updating title from image object: " + MyImage.Title);
                     InputTitleTwo.Text = MyImage.Title;
                 }
 
@@ -167,6 +171,7 @@ namespace ParsnipWebsite
                         Response.Redirect("photos?error=0");
                     }
                 }
+                Debug.WriteLine("Setting image directory to: " + MyImage.Directory);
                     ImagePreview.ImageUrl = MyImage.Directory;
 
                     

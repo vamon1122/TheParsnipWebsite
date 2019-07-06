@@ -57,7 +57,7 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="ParsnipData, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\TheParsnipData\ParsnipData\bin\Release\ParsnipData.dll</HintPath>
+      <HintPath>..\..\TheParsnipData\ParsnipData\bin\Debug\ParsnipData.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.DynamicData" />
@@ -226,6 +226,8 @@
     <Content Include="Resources\Media\Images\Uploads\BenBarton_51f10d7e-1849-493d-8f5e-36c7af6155ea_15-02-2019_image.jpg" />
     <Content Include="Resources\Media\Images\Uploads\BenBarton_53f4d829-f885-4433-891c-38aa2da30238_30-03-2019_image.jpg" />
     <Content Include="Resources\Media\Images\Uploads\BenBarton_54b18b5b-3162-452f-898a-777864a37293_15-02-2019_image.jpg" />
+    <Content Include="Resources\Media\Images\Uploads\BenBarton_55147862-6a58-42a1-8ad4-a2ba3ecb7559_05-07-2019_image.jpg" />
+    <Content Include="Resources\Media\Images\Uploads\BenBarton_55df9f35-ea51-4775-8da3-0adb9ccb63f6_05-07-2019_A527342D-0AD6-4B68-BA9F-4C6A379E1E60.png" />
     <Content Include="Resources\Media\Images\Uploads\BenBarton_5f48e6df-4446-4ce6-bb33-2f115e3c0dfd_04-03-2019_IMG_0015.PNG" />
     <Content Include="Resources\Media\Images\Uploads\BenBarton_62f0b134-2c1d-47b5-a54c-f984e6f96fcd_15-02-2019_E9561BCC-05FE-4C0B-BC31-277BCC8C8741.jpeg" />
     <Content Include="Resources\Media\Images\Uploads\BenBarton_6499d828-e03c-48cf-9830-1e147642f82b_15-02-2019_image.jpg" />
@@ -239,6 +241,7 @@
     <Content Include="Resources\Media\Images\Uploads\BenBarton_7bd6b2db-c007-47f3-81d3-8370ca459027_01-03-2019_image.jpg" />
     <Content Include="Resources\Media\Images\Uploads\BenBarton_7ecec396-8cf6-468e-a8d1-7ddd16656226_26-02-2019_Chris Day %28Dad%27s 50th%29.JPG" />
     <Content Include="Resources\Media\Images\Uploads\BenBarton_7fba46e6-10c4-4798-b8e6-74dd1cecb12b_22-02-2019_image.jpg" />
+    <Content Include="Resources\Media\Images\Uploads\BenBarton_80ea663c-a2ba-44e8-b2c9-1a48729e5b00_05-07-2019_3399A3C7-7B97-41A2-9B3E-69C4A535D06F.png" />
     <Content Include="Resources\Media\Images\Uploads\BenBarton_8a6525ac-cf3e-4fb3-973c-bc03782a08da_22-02-2019_D6370526-F84D-4F13-AFC9-FB3C29C79B91.jpeg" />
     <Content Include="Resources\Media\Images\Uploads\BenBarton_8e011c6f-0df7-4be0-8615-467e424430d1_18-02-2019_image.jpg" />
     <Content Include="Resources\Media\Images\Uploads\BenBarton_9234b9c6-d265-44d4-9ade-4ac5bc2bba32_15-02-2019_image.jpg" />
@@ -248,7 +251,9 @@
     <Content Include="Resources\Media\Images\Uploads\BenBarton_ac641cf6-ae28-44ac-88a7-af6995d12539_15-02-2019_image.jpg" />
     <Content Include="Resources\Media\Images\Uploads\BenBarton_acea3dcf-a26c-4148-9e6f-41c4baa433df_15-02-2019_image.jpg" />
     <Content Include="Resources\Media\Images\Uploads\BenBarton_ad043d38-8a1f-4d70-84bf-f9bd8c8cf394_19-03-2019_image.jpg" />
+    <Content Include="Resources\Media\Images\Uploads\BenBarton_b012d89f-f405-4272-8827-7a6cded6ca41_26-06-2019_image.jpg" />
     <Content Include="Resources\Media\Images\Uploads\BenBarton_ba580c6d-2ea3-4428-9782-f70b9b4f2509_16-02-2019_image.jpg" />
+    <Content Include="Resources\Media\Images\Uploads\BenBarton_bbd7b8b2-861b-467f-8efe-08227a038d45_05-07-2019_image.jpg" />
     <Content Include="Resources\Media\Images\Uploads\BenBarton_bbe0560b-0807-4014-af36-30854e213211_18-06-2019_9AEE6D89-4859-4258-9AF8-B655260831CF.jpeg" />
     <Content Include="Resources\Media\Images\Uploads\BenBarton_c39b3093-76cf-47b1-92aa-6443fc1a3d18_15-02-2019_image.jpg" />
     <Content Include="Resources\Media\Images\Uploads\BenBarton_c625b77d-a46b-48eb-ac73-6f160367db34_15-02-2019_image.jpg" />
