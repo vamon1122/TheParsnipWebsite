@@ -88,17 +88,23 @@ namespace ParsnipWebsite
             if (myImage.AlbumId == Guid.Empty)
             {
                 Debug.WriteLine(string.Format("AlbumId {0} == {1}", myImage.AlbumId, Guid.Empty));
-                NotExistError.Visible = true;
+                //NotExistError.Visible = true;
                 Button_ViewAlbum.Visible = false;
             }
             else
             {
                 Debug.WriteLine(string.Format("AlbumId {0} != {1}", myImage.AlbumId, Guid.Empty));
 
+                /*
                 ImageTitle.InnerText = myImage.Title;
                 Page.Title = myImage.Title;
                 ImagePreview.ImageUrl = myImage.Directory;   
+                */
             }
+
+            ImageTitle.InnerText = myImage.Title;
+            Page.Title = myImage.Title;
+            ImagePreview.ImageUrl = myImage.Directory;
 
             //If there was no access token, the user is trying to share the photo.
             //Generate a shareable link and display it on the screen.
