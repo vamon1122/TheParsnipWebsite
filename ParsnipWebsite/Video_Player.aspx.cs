@@ -139,20 +139,27 @@ namespace ParsnipWebsite
 
                 if (myVideo.AlbumId == Guid.Empty)
                 {
+                    /*
                     Debug.WriteLine(string.Format("AlbumId {0} == {1}", myVideo.AlbumId, Guid.Empty));
                     if(Request.QueryString["data-id"] != null)
                         NotExistError.Visible = true;
-
+                        */
                     Button_ViewAlbum.Visible = false;
                 }
                 else
                 {
                     Debug.WriteLine(string.Format("AlbumId {0} != {1}", myVideo.AlbumId, Guid.Empty));
 
+                    /*
                     VideoTitle.InnerText = myVideo.Title;
                     Page.Title = myVideo.Title;
                     VideoSource.Src = myVideo.Directory;
+                    */
                 }
+
+                VideoTitle.InnerText = myVideo.Title;
+                Page.Title = myVideo.Title;
+                VideoSource.Src = myVideo.Directory;
 
             }
 
