@@ -65,6 +65,7 @@ namespace ParsnipWebsite
 
                 if (Request.QueryString["delete"] != null)
                 {
+                    //I am NOT being deleted
                     new LogEntry(DebugLog) { text = "Delete image clicked" };
                     MyImage.Delete();
 
@@ -79,6 +80,7 @@ namespace ParsnipWebsite
                             Redirect = "memes";
                             break;
                         case "00000000-0000-0000-0000-000000000000":
+                            Debug.WriteLine("No album selected. Must be none! Redirecting to manage photos...");
                             Redirect = "manage_photos";
                             break;
                         default:
@@ -100,8 +102,8 @@ namespace ParsnipWebsite
 
                     Debug.WriteLine("Getting title from request: " + Request["InputTitleTwo"].ToString());
                     MyImage.Title = Request["InputTitleTwo"].ToString();
-
-                    //This breaks on some older browsers. Seems android specific?
+                    
+                    Debug.WriteLine("Getting album from request...");
                     string newAlbumId;
                     try
                     {
@@ -109,6 +111,7 @@ namespace ParsnipWebsite
                     }
                     catch
                     {
+                        Debug.WriteLine("There was no album!");
                         newAlbumId = null;
                     }
 
@@ -134,6 +137,7 @@ namespace ParsnipWebsite
                             Redirect = "memes?imageid=" + MyImage.Id.ToString();
                             break;
                         case "00000000-0000-0000-0000-000000000000":
+                            Debug.WriteLine("Album id is empty guid. Redirecting to manage_photos");
                             Redirect = "manage_photos?imageid=" + MyImage.Id.ToString();
                             break;
                         default:
@@ -154,7 +158,7 @@ namespace ParsnipWebsite
                     if (AlbumIds.Count() > 0)
                         btn_AdminDelete.Visible = true;
 
-                    DropDownDiv.Visible = true;
+                    //DropDownDiv.Visible = true;
                 }
 
                 if (MyImage.CreatedById.ToString() != myUser.Id.ToString())

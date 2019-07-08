@@ -31,7 +31,7 @@
             </div>
 
             <!-- Album select -->
-            <div runat="server" id="DropDownDiv" visible="false" style="padding-left:5%; padding-right: 5%;">
+            <div runat="server" id="DropDownDiv" style="padding-left:5%; padding-right: 5%;">
                 <label>Select an album:</label>
                 <asp:DropDownList ID="NewAlbumsDropDown" runat="server" AutoPostBack="False" CssClass="form-control" >
                 </asp:DropDownList>
