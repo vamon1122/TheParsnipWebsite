@@ -46,7 +46,10 @@ namespace ParsnipWebsite
                         if (ParsnipData.Media.Image.IsValidFileExtension(myFileExtension))
                         {
 
-                            string newDir = string.Format("Resources/Media/Images/Uploads/{0}{1}_{2}_{3}_{4}", myUser.Forename, myUser.Surname, Guid.NewGuid(), Parsnip.adjustedTime.ToString("dd-MM-yyyy"), myFileName);
+                            string newDir = string.Format("Resources/Media/Images/Uploads/{0}{1}_{2}_{3}_{4}", 
+                                myUser.Forename, myUser.Surname, Guid.NewGuid(), 
+                                Parsnip.AdjustedTime.ToString("dd-MM-yyyy"), myFileName);
+
                             Debug.WriteLine("Newdir = " + newDir);
                             /*if (PhotoUpload.PostedFile.HasFile)
                             {*/
@@ -100,9 +103,12 @@ namespace ParsnipWebsite
             {
                 new LogEntry(DebugLog) { text = "Attempting to upload the photo image" };
 
-                string newDir = string.Format("Resources/Media/Images/Uploads/{0}{1}_{2}", myUser.Forename, myUser.Surname, PhotoUpload.FileName);
+                string newDir = string.Format("Resources/Media/Images/Uploads/{0}{1}_{2}", 
+                    myUser.Forename, myUser.Surname, PhotoUpload.FileName);
+
                 if (PhotoUpload.HasFile)
                 {
+
                     PhotoUpload.SaveAs(Server.MapPath("~/" + newDir));
                     ParsnipData.Media.Image temp = new ParsnipData.Media.Image(newDir, myUser, PhotosAlbum);
                     temp.Update();

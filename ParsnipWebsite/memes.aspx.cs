@@ -42,7 +42,7 @@ namespace ParsnipWebsite
                         if (ParsnipData.Media.Image.IsValidFileExtension(myFileExtension))
                         {
 
-                            string newDir = string.Format("Resources/Media/Images/Uploads/{0}{1}_{2}_{3}_{4}", myUser.Forename, myUser.Surname, Guid.NewGuid(), Parsnip.adjustedTime.ToString("dd-MM-yyyy"), myFileName);
+                            string newDir = string.Format("Resources/Media/Images/Uploads/{0}{1}_{2}_{3}_{4}", myUser.Forename, myUser.Surname, Guid.NewGuid(), Parsnip.AdjustedTime.ToString("dd-MM-yyyy"), myFileName);
                             Debug.WriteLine("Newdir = " + newDir);
                             /*if (PhotoUpload.PostedFile.HasFile)
                             {*/

@@ -52,7 +52,7 @@ namespace ParsnipWebsite.CustomControls.UacApi
 
         public void UpdateDateCreated()
         {
-            dateTimeCreated.Attributes.Add("placeholder", Parsnip.adjustedTime.ToString("dd/MM/yyyy"));
+            dateTimeCreated.Attributes.Add("placeholder", Parsnip.AdjustedTime.ToString("dd/MM/yyyy"));
         }
 
         public void UpdateFields()
@@ -120,7 +120,7 @@ namespace ParsnipWebsite.CustomControls.UacApi
             if (PersistentData.DataSubject.DateTimeCreated.ToString("dd/MM/yyyy") == "01/01/0001")
             {
                 //Debug.WriteLine(string.Format("{0}'s datetimecreated {1} == 01/01/0001", dataSubject.fullName, dataSubject.dateTimeCreated.ToString("dd/MM/yyyy")));
-                dateTimeCreated.Value = Parsnip.adjustedTime.ToString("dd/MM/yyyy");
+                dateTimeCreated.Value = Parsnip.AdjustedTime.ToString("dd/MM/yyyy");
             }
             else
             {
@@ -165,13 +165,10 @@ namespace ParsnipWebsite.CustomControls.UacApi
             PersistentData.DataSubject.MobilePhone = mobilePhone.Text;
             PersistentData.DataSubject.HomePhone = homePhone.Text;
             PersistentData.DataSubject.WorkPhone = workPhone.Text;
-            PersistentData.DataSubject.DateTimeCreated = Parsnip.adjustedTime;
+            PersistentData.DataSubject.DateTimeCreated = Parsnip.AdjustedTime;
             PersistentData.DataSubject.AccountType = accountType.Value;
             PersistentData.DataSubject.AccountStatus = accountStatus.Value;
             PersistentData.DataSubject.AccountType = accountType.Value;
-
         }
-
-
     }
 }

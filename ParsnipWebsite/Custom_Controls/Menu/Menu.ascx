@@ -101,8 +101,9 @@
     {*/
         createButton("Memes", "memes");
         createButton("Photos", "photos");
-        createButton("AfternoonT", "https://www.mixcloud.com/afternoontlive/");
         createButton("Videos", "videos");
+        createButton("AfternoonT", "https://www.mixcloud.com/afternoontlive/");
+        createButton("Tuesday 7s", "https://www.playfootball.net/venues/bury/players-lounge/2886/10389/152")
         createButton("Bios", "bios");    
     //}
 
