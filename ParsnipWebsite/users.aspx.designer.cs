@@ -103,30 +103,30 @@ namespace ParsnipWebsite {
         protected global::ParsnipWebsite.CustomControls.UacApi.AdminUserForm UserForm;
         
         /// <summary>
-        /// btnAction control.
+        /// Button_Action control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAction;
+        protected global::System.Web.UI.WebControls.Button Button_Action;
         
         /// <summary>
-        /// btnDelete control.
+        /// Button_Delete control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnDelete;
+        protected global::System.Web.UI.WebControls.Button Button_Delete;
         
         /// <summary>
-        /// btnDeleteConfirm control.
+        /// Button_DeleteConfirm control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnDeleteConfirm;
+        protected global::System.Web.UI.WebControls.Button Button_DeleteConfirm;
     }
 }

@@ -47,8 +47,8 @@
                 onselectedindexchanged="SelectUser_Changed">
             </asp:DropDownList>
             <admin:AdminUserForm runat="server" ID="UserForm" />
-            <asp:Button runat="server" ID="btnAction" OnClick="btnAction_Click" CssClass="btn btn-primary" Text="Action"></asp:Button>
-            <asp:Button runat="server" ID="btnDelete"  CssClass="btn btn-primary" Text="Delete" Visible="false" data-toggle="modal" data-target="#confirmDelete" OnClientClick="return false;"></asp:Button>
+            <asp:Button runat="server" ID="Button_Action" OnClick="Button_Action_Click" CssClass="btn btn-primary" Text="Action"></asp:Button>
+            <asp:Button runat="server" ID="Button_Delete"  CssClass="btn btn-primary" Text="Delete" Visible="false" data-toggle="modal" data-target="#confirmDelete" OnClientClick="return false;"></asp:Button>
         </div>
 
         <!-- Modal -->
@@ -66,7 +66,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <asp:Button runat="server" class="btn btn-primary" ID="btnDeleteConfirm" OnClick="btnDeleteConfirm_Click" Text="Confirm"></asp:Button>
+                        <asp:Button runat="server" class="btn btn-primary" ID="Button_DeleteConfirm" OnClick="Button_DeleteConfirm_Click" Text="Confirm"></asp:Button>
                     </div>
                 </div>
             </div>

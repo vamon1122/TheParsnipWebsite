@@ -27,13 +27,13 @@ namespace ParsnipWebsite
 
             if (selectedUserId.ToString() == Guid.Empty.ToString())
             {
-                btnAction.Text = "Insert";
-                btnDelete.Visible = false;
+                Button_Action.Text = "Insert";
+                Button_Delete.Visible = false;
             }
             else
             {
-                btnAction.Text = "Update";
-                btnDelete.Visible = true;
+                Button_Action.Text = "Update";
+                Button_Delete.Visible = true;
             }
         }
 
@@ -50,7 +50,9 @@ namespace ParsnipWebsite
 
                     if (success == "true")
                     {
-                        SuccessText.Text = string.Format("<strong>Success</strong> User was successfully {0}d on the database!", action);
+                        SuccessText.Text = string.Format("<strong>Success</strong> User was successfully {0}d on " +
+                            "the database!", action);
+
                         Success.Attributes.CssStyle.Add("display", "block");
                     }
                 }
@@ -77,7 +79,9 @@ namespace ParsnipWebsite
             int i = 0;
             foreach (User temp in tempUsers)
             {
-                ListItems[i] = new ListItem(String.Format("{0} ({1})", temp.FullName, temp.Username), temp.Id.ToString());
+                ListItems[i] = new ListItem(String.Format("{0} ({1})", temp.FullName, temp.Username), 
+                    temp.Id.ToString());
+
                 i++;
             }
             selectUser.Items.Clear();
@@ -91,11 +95,13 @@ namespace ParsnipWebsite
             Response.Redirect("users?userId=" + selectUser.SelectedValue);
         }
 
-        protected void btnAction_Click(object sender, EventArgs e)
+        protected void Button_Action_Click(object sender, EventArgs e)
         {
             string rememberSelectedValue = selectUser.SelectedValue;
             Debug.WriteLine("BEN!!!1 " + UserForm.DataSubject.Id.ToString());
-            string temp = string.Format("{0} button was clicked. Selected user id = {1}", btnAction.Text, rememberSelectedValue);
+            string temp = string.Format("{0} button was clicked. Selected user id = {1}", Button_Action.Text, 
+                rememberSelectedValue);
+
             //Debug.WriteLine(temp);
             new LogEntry(Log.Default) { text = temp };
 
@@ -108,7 +114,9 @@ namespace ParsnipWebsite
             {
                 if (UserForm.DataSubject.Update())
                 {
-                    new LogEntry(Log.Default) { text = String.Format("{0} {1} an account for {2} via the UserForm", myUser.FullName, actionPast, UserForm.DataSubject.FullName) };
+                    new LogEntry(Log.Default) { text = String.Format("{0} {1} an account for {2} via the UserForm", 
+                        myUser.FullName, actionPast, UserForm.DataSubject.FullName) };
+
                     Response.Redirect(string.Format("users?userId={0}&action=update&success=true", UserForm.DataSubject.Id.ToString()));
                 }
 
@@ -125,36 +133,37 @@ namespace ParsnipWebsite
                 Debug.WriteLine("User failed to validate!");
                 new LogEntry(Log.Default)
                 {
-                    text = String.Format("{0} attempted to {1} an account for {2} via the UserForm, but {3} was not validated successfully.",
-                    myUser.FullName, actionPresent, UserForm.DataSubject.FullName, UserForm.DataSubject.SubjectiveGenderPronoun)
+                    text = String.Format("{0} attempted to {1} an account for {2} via the UserForm, but {3} was not " +
+                    "validated successfully.", myUser.FullName, actionPresent, UserForm.DataSubject.FullName, 
+                    UserForm.DataSubject.SubjectiveGenderPronoun)
                 };
+
                 Error.Attributes.CssStyle.Add("display", "block");
 
-                string ValidationInfo = string.Format("<strong>Validation Error</strong> {0} could not be updated because {1} failed to validate: ", UserForm.DataSubject.FullName, UserForm.DataSubject.SubjectiveGenderPronoun);
+                string ValidationInfo = string.Format("<strong>Validation Error</strong> {0} could not be updated " +
+                    "because {1} failed to validate: ", UserForm.DataSubject.FullName, 
+                    UserForm.DataSubject.SubjectiveGenderPronoun);
+
                 foreach (string error in UserForm.DataSubject.ValidationErrors)
                 {
                     ValidationInfo += error + ", ";
                 }
+
                 ValidationInfo = ValidationInfo.Substring(0, ValidationInfo.Length - 2);
                 ValidationInfo += ".";
 
                 ErrorText.Text = ValidationInfo;
             }
-
-
         }
 
-        protected void btnDeleteConfirm_Click(object sender, EventArgs e)
+        protected void Button_DeleteConfirm_Click(object sender, EventArgs e)
         {
             Debug.WriteLine("Delete was confirmed");
             string temp = string.Format("Delete button was clicked. Selected user id = {0}", selectUser.SelectedValue);
             //Debug.WriteLine(temp);
             new LogEntry(Log.Default) { text = temp };
 
-
-
             bool success;
-            string feedback;
 
             if (UserForm.DataSubject.ExistsOnDb())
             {
@@ -163,11 +172,10 @@ namespace ParsnipWebsite
             else
                 success = false;
 
-
-            Response.Redirect(string.Format("users?userId={0}&action=delete&success=true", Guid.Empty.ToString()));
+            Response.Redirect(string.Format("users?userId={0}&action=delete&success={1}", Guid.Empty.ToString(), success));
         }
 
-        protected void btnDelete_Click(object sender, EventArgs e)
+        protected void Button_Delete_Click(object sender, EventArgs e)
         {
             Debug.WriteLine("Delete was clicked");
         }
