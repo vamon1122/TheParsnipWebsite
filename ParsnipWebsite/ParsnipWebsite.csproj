@@ -54,7 +54,7 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="ParsnipData, Version=0.0.0.5, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\TheParsnipData\ParsnipData\bin\Release\ParsnipData.dll</HintPath>
+      <HintPath>..\..\TheParsnipData\ParsnipData\bin\Debug\ParsnipData.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.DynamicData" />
