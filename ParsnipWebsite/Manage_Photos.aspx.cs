@@ -73,7 +73,9 @@ namespace ParsnipWebsite
         void UpdateUserList()
         {
             var tempUsers = new List<User>();
-            tempUsers.Add(new User(Guid.Empty) { Forename = "None", Surname = "Selected", Username = "No user selected" });
+            tempUsers.Add(new User(Guid.Empty) { Forename = "None", Surname = "Selected",
+                Username = "No user selected" });
+
             tempUsers.AddRange(ParsnipData.Accounts.User.GetAllUsers());
 
             ListItem[] ListItems = new ListItem[tempUsers.Count];
