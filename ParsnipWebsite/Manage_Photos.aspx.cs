@@ -20,8 +20,6 @@ namespace ParsnipWebsite
         Guid selectedUserId;
         Log DebugLog = new Log("Debug");
 
-
-
         protected void Page_Load(object sender, EventArgs e)
         {
             myUser = Account.SecurePage("manage_photos", this, Data.DeviceType, "admin");
@@ -68,12 +66,14 @@ namespace ParsnipWebsite
         {
             selectedUserId = new Guid(Request.QueryString["userId"].ToString());
             ParsnipData.Media.Image.DeleteImagesByUser(selectedUserId);
-            new LogEntry(DebugLog) { text = "Successfully deleted photos uploaded photos createdbyid = " + selectedUserId };
+            new LogEntry(DebugLog) { text = "Successfully deleted photos uploaded photos createdbyid = " + 
+                selectedUserId };
         }
 
         void UpdateUserList()
         {
             var tempUsers = new List<User>();
+            tempUsers.Add(new User(Guid.Empty) { Forename = "None", Surname = "Selected", Username = "No user selected" });
             tempUsers.AddRange(ParsnipData.Accounts.User.GetAllUsers());
 
             ListItem[] ListItems = new ListItem[tempUsers.Count];
