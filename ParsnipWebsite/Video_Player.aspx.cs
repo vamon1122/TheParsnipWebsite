@@ -42,12 +42,10 @@ namespace ParsnipWebsite
                     throw ex;
                 }
 
-
                 if (ParsnipData.Media.Video.Exists(myAccessToken.MediaId))
                 {
                     myVideo = new ParsnipData.Media.Video(myAccessToken.MediaId);
                 }
-                
             }
             else
             {
@@ -72,13 +70,21 @@ namespace ParsnipWebsite
                     }
                     else
                     {
-                        myVideo = new ParsnipData.Media.Video(new Guid(Request.QueryString["videoid"]));
+                        if (ParsnipData.Media.Video.Exists(new Guid(Request.QueryString["videoid"])))
+                        {
+                            Debug.WriteLine("---------- This is a normie video");
+                            myVideo = new ParsnipData.Media.Video(new Guid(Request.QueryString["videoid"]));
+                        }
+                        else
+                        {
+                            Debug.WriteLine("---------- This is a youtube video");
+                            myYoutubeVideo = new YoutubeVideo(new Guid(Request.QueryString["videoid"]));
+                        }
                     }
                 }
                 else
                 {
                     youtube_video.Attributes.Add("data-id", Request.QueryString["data-id"]);
-
                 }
             }
         }
@@ -106,32 +112,34 @@ namespace ParsnipWebsite
                 Button_ViewAlbum.Visible = false;
                 if (Request.QueryString["data-id"] != null)
                 {
-
-
                     myYoutubeVideo = new YoutubeVideo(Request.QueryString["data-id"]);
+                    Debug.WriteLine("----------BEN selecting the youtube video by DATAID");
                     myYoutubeVideo.Select();
                     youtube_video.Attributes.Add("data-id", Request.QueryString["data-id"]);
-                    
                 }
                 else
                 {
-                    Debug.WriteLine("Got youtube video from database. DataId not null.");
+                    Debug.WriteLine("----------BEN selecting the youtube video by GUID " + Request.QueryString["videoid"]);
+                    if (myYoutubeVideo == null)
+                    {
+                    Debug.WriteLine("");
                     myYoutubeVideo = new YoutubeVideo(myAccessToken.MediaId);
                     myYoutubeVideo.Select();
-                    Debug.WriteLine("DataId = " + myYoutubeVideo.DataId);
-                    youtube_video.Attributes.Add("data-id", myYoutubeVideo.DataId);
+                        Debug.WriteLine("DataId = " + myYoutubeVideo.DataId);
+                        youtube_video.Attributes.Add("data-id", myYoutubeVideo.DataId);
+                    }
                 }
+
                 VideoTitle.InnerText = myYoutubeVideo.Title;
-
-
                 youtube_video_container.Visible = true;
                 video_container.Visible = false;
             }
+            /*
             else
             {
                 myVideo.Select();
             }
-
+            */
 
             if (myVideo != null)
             {
@@ -160,7 +168,6 @@ namespace ParsnipWebsite
                 VideoTitle.InnerText = myVideo.Title;
                 Page.Title = myVideo.Title;
                 VideoSource.Src = myVideo.Directory;
-
             }
 
 
@@ -173,7 +180,8 @@ namespace ParsnipWebsite
 
                     AccessToken myAccessToken;
 
-                    if (Request.QueryString["data-id"] != null)
+                    //if (Request.QueryString["data-id"] != null)
+                    if(myYoutubeVideo != null)
                     {
                         
                         if (AccessToken.TokenExists(myUser.Id, myYoutubeVideo.Id))
@@ -197,8 +205,6 @@ namespace ParsnipWebsite
                             myAccessToken = new AccessToken(myUser.Id, myVideo.Id);
                             myAccessToken.Insert();
                         }
-
-
                     }
                     //Gets URL without sub pages
                     ShareLink.Value = Request.Url.GetLeftPart(UriPartial.Authority) + myAccessToken.VideoRedirect;
