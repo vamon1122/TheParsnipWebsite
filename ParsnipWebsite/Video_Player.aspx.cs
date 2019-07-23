@@ -32,7 +32,7 @@ namespace ParsnipWebsite
                 {
                     if (Request.QueryString["videoid"] == null)
                     {
-                        Response.Redirect("home");
+                        Response.Redirect("videos");
                     }
                     else
                     {
