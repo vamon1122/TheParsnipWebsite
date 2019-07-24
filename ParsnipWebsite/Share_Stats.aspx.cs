@@ -34,7 +34,6 @@ namespace ParsnipWebsite
                     case "73C436A1-893B-4418-8800-821823C18DFE":
                         mediaRedirect = "video_player?videoid=";
                         shareRedirect = "video_player?access_token=";
-
                         break;
                     default:
                         mediaRedirect = "view_image?imageid=";
@@ -44,15 +43,19 @@ namespace ParsnipWebsite
                 var myRow = new TableRow();
 
                 var titleCell = new TableCell();
-                titleCell.Controls.Add(new LiteralControl(string.Format("<a href={0}>{1}</a>", mediaRedirect + row[0].ToString(), row[1].ToString())));
+                titleCell.Controls.Add(new LiteralControl(
+                    string.Format("<a href={0}>{1}</a>", mediaRedirect + row[0].ToString(), row[1].ToString())));
+
                 myRow.Cells.Add(titleCell);
 
                 var userCell = new TableCell();
-                userCell.Controls.Add(new LiteralControl(string.Format("<a href={0}>{1}</a>", "users?userid=" + row[7].ToString(), row[3].ToString())));
+                userCell.Controls.Add(new LiteralControl(
+                    string.Format("<a href={0}>{1}</a>", "users?userid=" + row[7].ToString(), row[3].ToString())));
                 myRow.Cells.Add(userCell);
 
                 var timesUsedCell = new TableCell();
-                timesUsedCell.Controls.Add(new LiteralControl(string.Format("<a href={0}>{1}</a>", shareRedirect + row[5].ToString(), row[4].ToString())));
+                timesUsedCell.Controls.Add(new LiteralControl(
+                    string.Format("<a href={0}>{1}</a>", shareRedirect + row[5].ToString(), row[4].ToString())));
                 myRow.Cells.Add(timesUsedCell);
 
 

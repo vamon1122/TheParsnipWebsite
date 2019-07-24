@@ -27,7 +27,6 @@ namespace ParsnipWebsite
             {
                 Button_ViewAlbum.Visible = false;
 
-                myUser = Account.SecurePage("video_player", this, Data.DeviceType);
                 if (Request.QueryString["data-id"] == null)
                 {
                     if (Request.QueryString["videoid"] == null)
@@ -36,22 +35,46 @@ namespace ParsnipWebsite
                     }
                     else
                     {
-                        myVideo = new Video(new Guid(Request.QueryString["videoid"]));
-                        myVideo.Select();
+                        myUser = Account.SecurePage("video_player?videoid=" + Request.QueryString["videoid"], this,
+                        Data.DeviceType);
 
-                        if (AccessToken.TokenExists(myUser.Id, myVideo.Id))
+                        if (Video.Exists(new Guid(Request.QueryString["videoid"])))
                         {
-                            myAccessToken = AccessToken.GetToken(myUser.Id, myVideo.Id);
+                            myVideo = new Video(new Guid(Request.QueryString["videoid"]));
+                            myVideo.Select();
+
+                            if (AccessToken.TokenExists(myUser.Id, myVideo.Id))
+                            {
+                                myAccessToken = AccessToken.GetToken(myUser.Id, myVideo.Id);
+                            }
+                            else
+                            {
+                                myAccessToken = new AccessToken(myUser.Id, myVideo.Id);
+                                myAccessToken.Insert();
+                            }
                         }
                         else
                         {
-                            myAccessToken = new AccessToken(myUser.Id, myVideo.Id);
-                            myAccessToken.Insert();
+                            myYoutubeVideo = new YoutubeVideo(new Guid(Request.QueryString["videoid"]));
+                            myYoutubeVideo.Select();
+
+                            if (AccessToken.TokenExists(myUser.Id, myYoutubeVideo.Id))
+                            {
+                                myAccessToken = AccessToken.GetToken(myUser.Id, myYoutubeVideo.Id);
+                            }
+                            else
+                            {
+                                myAccessToken = new AccessToken(myUser.Id, myYoutubeVideo.Id);
+                                myAccessToken.Insert();
+                            }
                         }
                     }
                 }
                 else
                 {
+                    myUser = Account.SecurePage("video_player?data-id=" + Request.QueryString["data-id"], this, 
+                        Data.DeviceType);
+
                     Debug.WriteLine("Getting youtube video with data-id = " + Request.QueryString["data-id"]);
                     myYoutubeVideo = new YoutubeVideo(Request.QueryString["data-id"]);
                     myYoutubeVideo.Select();
@@ -72,6 +95,9 @@ namespace ParsnipWebsite
                 Debug.WriteLine("Getting access token with id = " + Request.QueryString["access_token"]);
                 myAccessToken = new AccessToken(new Guid(Request.QueryString["access_token"]));
                 myAccessToken.Select();
+
+                myAccessToken.TimesUsed++;
+                myAccessToken.Update();
 
                 Debug.WriteLine("Access token media id = " + myAccessToken.MediaId);
 
@@ -107,13 +133,13 @@ namespace ParsnipWebsite
                 VideoSource.Src = myVideo.Directory;
             }
 
-            ShareLink.Value = Request.Url.GetLeftPart(UriPartial.Authority) + "/video_player?access_token=" + myAccessToken.Id;
+            ShareLink.Value = Request.Url.GetLeftPart(UriPartial.Authority) + "/video_player?access_token=" + 
+                myAccessToken.Id;
         }
 
         protected void Button_ViewAlbum_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/videos");
         }
-
     }
 }
