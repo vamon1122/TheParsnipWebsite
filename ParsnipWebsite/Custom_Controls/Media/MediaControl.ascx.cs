@@ -60,8 +60,8 @@ namespace ParsnipWebsite.Custom_Controls.Media
 
 
                 //MyEdit.HRef = string.Format("../../edit_image?imageid={0}", MyVideo.Id);
-                a_play_video.HRef = string.Format("../../video_player?videoid={0}", MyVideo.Id);
-                MyShare.HRef = string.Format("../../video_player?videoid={0}", MyVideo.Id);
+                a_play_video.HRef = string.Format("../../video_player?video_id={0}", MyVideo.Id);
+                MyShare.HRef = string.Format("../../video_player?video_id={0}", MyVideo.Id);
             }
         }
         #endregion
@@ -77,19 +77,10 @@ namespace ParsnipWebsite.Custom_Controls.Media
                 MyEdit.Visible = false;
                 _myYoutubeVideo = value;
                 MyTitle.InnerHtml = MyYoutubeVideo.Title;
-                /*
-                thumbnail.Src = "../../" + MyYoutubeVideo.Thumbnail;
-
-                Debug.WriteLine("Thumbnail = " + MyYoutubeVideo.Thumbnail);
-                */
                 YoutubePlayer.Attributes.Add("data-id", MyYoutubeVideo.DataId);
-
                 MediaContainer.ID = _myYoutubeVideo.Id.ToString();
-
                 MyTitle.InnerText = MyYoutubeVideo.Title;
-
-                //MyEdit.HRef = string.Format("../../edit_image?imageid={0}", MyVideo.Id);
-                MyShare.HRef = string.Format("../../video_player?data-id={0}", MyYoutubeVideo.DataId);
+                MyShare.HRef = string.Format("../../video_player?video_id={0}", MyYoutubeVideo.Id);
             }
         }
         #endregion

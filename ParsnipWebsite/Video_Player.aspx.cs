@@ -27,20 +27,21 @@ namespace ParsnipWebsite
             {
                 Button_ViewAlbum.Visible = false;
 
+                //We handle data-id since Youtube.js cannot access the video_id
                 if (Request.QueryString["data-id"] == null)
                 {
-                    if (Request.QueryString["videoid"] == null)
+                    if (Request.QueryString["video_id"] == null)
                     {
                         Response.Redirect("videos");
                     }
                     else
                     {
-                        myUser = Account.SecurePage("video_player?videoid=" + Request.QueryString["videoid"], this,
+                        myUser = Account.SecurePage("video_player?video_id=" + Request.QueryString["video_id"], this,
                         Data.DeviceType);
 
-                        if (Video.Exists(new Guid(Request.QueryString["videoid"])))
+                        if (Video.Exists(new Guid(Request.QueryString["video_id"])))
                         {
-                            myVideo = new Video(new Guid(Request.QueryString["videoid"]));
+                            myVideo = new Video(new Guid(Request.QueryString["video_id"]));
                             myVideo.Select();
 
                             if (AccessToken.TokenExists(myUser.Id, myVideo.Id))
@@ -55,7 +56,7 @@ namespace ParsnipWebsite
                         }
                         else
                         {
-                            myYoutubeVideo = new YoutubeVideo(new Guid(Request.QueryString["videoid"]));
+                            myYoutubeVideo = new YoutubeVideo(new Guid(Request.QueryString["video_id"]));
                             myYoutubeVideo.Select();
 
                             if (AccessToken.TokenExists(myUser.Id, myYoutubeVideo.Id))
@@ -124,7 +125,6 @@ namespace ParsnipWebsite
                 VideoTitle.InnerText = myYoutubeVideo.Title;
                 Debug.WriteLine("Retrieved a data-id from Data.dll = " + myYoutubeVideo.DataId);
                 youtube_video.Attributes.Add("data-id", myYoutubeVideo.DataId);
-
             }
             else
             {
@@ -139,7 +139,7 @@ namespace ParsnipWebsite
 
         protected void Button_ViewAlbum_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/videos");
+            Response.Redirect("videos");
         }
     }
 }

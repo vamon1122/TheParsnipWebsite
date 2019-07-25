@@ -16,9 +16,6 @@ namespace ParsnipWebsite
         protected void Page_Load(object sender, EventArgs e)
         {
             myUser = Account.SecurePage("videos", this, Data.DeviceType, "member");
-
-            
-                
         }
 
         protected void Page_LoadComplete(object sender, EventArgs e)

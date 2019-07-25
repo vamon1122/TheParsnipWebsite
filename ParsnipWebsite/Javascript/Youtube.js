@@ -5,7 +5,7 @@
     Use this snippet of code instead of the default youtube code
 
         < div class="youtube-container" >
-            <div class="youtube-player" data-id="VIDEOID"></div>
+            <div class="youtube-player" data-id="video_id"></div>
 </div >
 
 */
