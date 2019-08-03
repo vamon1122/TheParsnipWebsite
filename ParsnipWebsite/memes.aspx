@@ -45,7 +45,7 @@
                     </label>
 
                 </div>
-                <br />
+                <hr class="break">
                 <div runat="server" id="DynamicMemesDiv">
 
                 </div>

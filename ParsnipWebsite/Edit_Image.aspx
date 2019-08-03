@@ -62,7 +62,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            Are you sure that you want to this photo from all albums?
+                            Are you sure that you want to remove this photo from all albums?
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>

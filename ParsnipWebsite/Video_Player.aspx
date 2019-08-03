@@ -1,5 +1,4 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Video_Player.aspx.cs" Inherits="ParsnipWebsite.Video_Player" %>
-
 <%@ Register Src="~/Custom_Controls/Menu/Menu.ascx" TagPrefix="menuControls" TagName="Menu" %>
 
 <!DOCTYPE html>
@@ -37,12 +36,12 @@
 </div>
     <div runat="server" class="alert alert-danger alert-dismissible parsnip-alert" Visible="false" id="NotExistError">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        <strong>Error:</strong> Could not access image. The image which you are trying to access has been deleted or 
+        <strong>Error:</strong> Could not access video. The video which you are trying to access has been deleted or 
         the link which you are using has expired!
     </div>
     <h2 runat="server" id="VideoTitle"></h2>
     <div class="video-container">
-        <video runat="server" id="video_container" controls="controls" style="width:100%" autoplay="true" visible="false">
+        <video runat="server" id="video_container" controls="controls" style="width:100%" preload="none" autoplay="autoplay" visible="false">
             <source runat="server" id="VideoSource" type="video/mp4" />
             Your browser does not support HTML5 video.
         </video>
