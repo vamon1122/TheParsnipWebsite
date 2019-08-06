@@ -71,21 +71,21 @@
         var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
         var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
 
-        buttonPadding = "15px";
+        buttonPadding = "10px";
 
         if (h > w) {
             dropDownWidth = "50%";
         
         }
         else {
-            dropDownWidth = "30%";
+            dropDownWidth = "25%";
         }
 
     
     }
     else{
-        buttonPadding = "20px";
-        dropDownWidth = "300px";
+        buttonPadding = "10px";
+        dropDownWidth = "200px";
     }
 
     height = "45px";
@@ -94,31 +94,31 @@
     titleFontSize = "30px";
 
     /////Buttons/////
-    createButton("Home", "home");
+    createButton("Home 🏠", "home");
     
 
     /*if (getCookie("accountType") === "admin" || getCookie("accountType") === "member")
     {*/
-        createButton("Memes", "memes");
-        createButton("Photos", "photos");
-        createButton("Videos", "videos");
-        createButton("Krakow", "krakow");
-        createButton("AfternoonT", "https://www.mixcloud.com/afternoontlive/");
-        createButton("Tuesday 7s", "https://www.playfootball.net/venues/bury/players-lounge/2886/10389/152")
-        createButton("Bios", "bios");    
+        createButton("✈😎KRAKOW 2K19😎✈", "krakow");
+        createButton("Memes 😂", "memes");
+        createButton("Photos 📷", "photos");
+        createButton("Videos 📹", "videos");
+        createButton("AfternoonT ☕", "https://www.mixcloud.com/afternoontlive/");
+        createButton("Tuesday 7s ⚽", "https://www.playfootball.net/venues/bury/players-lounge/2886/10389/152")
+        createButton("Bios 💩", "bios");    
     //}
 
     if (getCookie("accountType") === "admin") {
-        createButton("Admin", "admin");
+        createButton("Admin 💪", "admin");
     }
 
     if (getCookie("accountType") === "admin" || getCookie("accountType") === "member" || getCookie("accountType") === "user")
     {
-        createButton("Log Out", "logout");
+        createButton("Log Out 👋", "logout");
     }
     else
     {
-        createButton("Log In", "login");
+        createButton("Log In 🔓", "login");
     }
     
 
