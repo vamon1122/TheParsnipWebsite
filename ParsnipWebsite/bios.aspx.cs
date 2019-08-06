@@ -13,7 +13,7 @@ namespace ParsnipWebsite
         private User myUser;
         protected void Page_Load(object sender, EventArgs e)
         {
-            myUser = Account.SecurePage("minecraft", this, Data.DeviceType);
+            myUser = Account.SecurePage("bios", this, Data.DeviceType);
         }
     }
 }

@@ -19,7 +19,7 @@
 
     <script src="Javascript/Intersection_Observer.js"></script>
 
-    <title>Photos</title>
+    <title>Krakow</title>
 </head>
 <body class="fade0p5" id="body" style="text-align:center">
     <menuControls:Menu runat="server" ID="Menu" />
@@ -37,11 +37,47 @@
 
 
     <h2>Krakow</h2>
-    <h4>Upload your Krakow photos</h4>
     <hr class="break" />
-        
+    <h4 id="countdownToKrakow"></h4>
+
+<script>
+    // Set the date we're counting down to
+    var countDownDate = new Date("Aug 14, 2019 19:05:00").getTime();
+
+    // Update the count down every 1 second
+    var x = setInterval(function () {
+
+        // Get today's date and time
+        var now = new Date().getTime();
+
+        // Find the distance between now and the count down date
+        var distance = countDownDate - now;
+
+        // Time calculations for days, hours, minutes and seconds
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // Output the result in an element with id="demo"
+        document.getElementById("countdownToKrakow").innerHTML = "Flying in " + days + " days " + hours + " hours "
+            + minutes + " minutes " + seconds + " seconds!!!";
+
+        // If the count down is over, write some text 
+        if (distance < 0) {
+            clearInterval(x);
+            document.getElementById("countdownToKrakow").innerHTML = "EXPIRED";
+        }
+    }, 1000);
+</script>
+
+    <hr class="break" />
+    <img src="Resources/Media/Images/Local/Krakow/Krakow%20Flight%20Times.png" class="image-preview" />
+    <hr class="break" />
+
     <form runat="server">
         
+    <h4>Upload your Krakow photos</h4>
         <div runat="server" id="UploadDiv" class="form-group" style="display:none; ">
             <label class="file-upload btn">                
                 <span><strong>Upload Photo</strong></span>
