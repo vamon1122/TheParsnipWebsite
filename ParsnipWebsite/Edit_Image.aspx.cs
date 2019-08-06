@@ -79,6 +79,9 @@ namespace ParsnipWebsite
                         case "5F15861A-689C-482A-8E31-2F13429C36E5":
                             Redirect = "memes";
                             break;
+                        case "FF3127DF-70B2-47EF-B77B-2E086D2EF370":
+                            Redirect = "krakow";
+                            break;
                         case "00000000-0000-0000-0000-000000000000":
                             Debug.WriteLine("No album selected. Must be none! Redirecting to manage photos...");
                             Redirect = "manage_photos";
@@ -130,18 +133,24 @@ namespace ParsnipWebsite
 
                     switch (MyImage.AlbumId.ToString().ToUpper())
                     {
+                        
+
                         case "4B4E450A-2311-4400-AB66-9F7546F44F4E":
                             Redirect = "photos?imageid=" + MyImage.Id.ToString();
                             break;
                         case "5F15861A-689C-482A-8E31-2F13429C36E5":
                             Redirect = "memes?imageid=" + MyImage.Id.ToString();
                             break;
+                        case "FF3127DF-70B2-47EF-B77B-2E086D2EF370":
+                            Redirect = "krakow?imageid=" + MyImage.Id.ToString();
+                            break;
                         case "00000000-0000-0000-0000-000000000000":
                             Debug.WriteLine("Album id is empty guid. Redirecting to manage_photos");
                             Redirect = "manage_photos?imageid=" + MyImage.Id.ToString();
                             break;
                         default:
-                            Redirect = "home?error=noimagealbum2";
+                            //Debug.WriteLine(string.Format("The album id {0} != ff3127df-70b2-47ef-b77b-2e086d2ef370", MyImage.AlbumId));
+                            Redirect = "home?error=noimagealbum3";
                             break;
                     }
                     Response.Redirect(Redirect);

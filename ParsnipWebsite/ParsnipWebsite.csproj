@@ -88,6 +88,7 @@
     <Content Include="Javascript\Focus_Image.js" />
     <Content Include="Javascript\Useful_Functions.js" />
     <Content Include="Javascript\Youtube.js" />
+    <Content Include="Krakow.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Logout.aspx" />
     <Content Include="Manage_Photos.aspx" />
@@ -493,6 +494,13 @@
     </Compile>
     <Compile Include="Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Krakow.aspx.cs">
+      <DependentUpon>Krakow.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Krakow.aspx.designer.cs">
+      <DependentUpon>Krakow.aspx</DependentUpon>
     </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
