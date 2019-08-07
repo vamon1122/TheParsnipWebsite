@@ -13,22 +13,25 @@
 
 // Exits early if all IntersectionObserver and IntersectionObserverEntry
 // features are natively supported.
-if ('IntersectionObserver' in window &&
-    'IntersectionObserverEntry' in window &&
-    'intersectionRatio' in window.IntersectionObserverEntry.prototype) {
+    if ('IntersectionObserver' in window &&
+        'IntersectionObserverEntry' in window &&
+        'intersectionRatio' in window.IntersectionObserverEntry.prototype)
+    {
 
-  // Minimal polyfill for Edge 15's lack of `isIntersecting`
-  // See: https://github.com/w3c/IntersectionObserver/issues/211
-  if (!('isIntersecting' in window.IntersectionObserverEntry.prototype)) {
-    Object.defineProperty(window.IntersectionObserverEntry.prototype,
-      'isIntersecting', {
-      get: function () {
-        return this.intersectionRatio > 0;
-      }
-    });
-  }
-  return;
-}
+        // Minimal polyfill for Edge 15's lack of `isIntersecting`
+        // See: https://github.com/w3c/IntersectionObserver/issues/211
+        if (!('isIntersecting' in window.IntersectionObserverEntry.prototype))
+        {
+            Object.defineProperty(window.IntersectionObserverEntry.prototype,
+                'isIntersecting', {
+                    get: function ()
+                    {
+                        return this.intersectionRatio > 0;
+                    }
+                });
+        }
+        return;
+    }
 
 
 /**
@@ -46,30 +49,33 @@ var registry = [];
  * @param {Object} entry A dictionary of instance properties.
  * @constructor
  */
-function IntersectionObserverEntry(entry) {
-  this.time = entry.time;
-  this.target = entry.target;
-  this.rootBounds = entry.rootBounds;
-  this.boundingClientRect = entry.boundingClientRect;
-  this.intersectionRect = entry.intersectionRect || getEmptyRect();
-  this.isIntersecting = !!entry.intersectionRect;
+    function IntersectionObserverEntry(entry)
+    {
+        this.time = entry.time;
+        this.target = entry.target;
+        this.rootBounds = entry.rootBounds;
+        this.boundingClientRect = entry.boundingClientRect;
+        this.intersectionRect = entry.intersectionRect || getEmptyRect();
+        this.isIntersecting = !!entry.intersectionRect;
 
-  // Calculates the intersection ratio.
-  var targetRect = this.boundingClientRect;
-  var targetArea = targetRect.width * targetRect.height;
-  var intersectionRect = this.intersectionRect;
-  var intersectionArea = intersectionRect.width * intersectionRect.height;
+        // Calculates the intersection ratio.
+        var targetRect = this.boundingClientRect;
+        var targetArea = targetRect.width * targetRect.height;
+        var intersectionRect = this.intersectionRect;
+        var intersectionArea = intersectionRect.width * intersectionRect.height;
 
-  // Sets intersection ratio.
-  if (targetArea) {
-    // Round the intersection ratio to avoid floating point math issues:
-    // https://github.com/w3c/IntersectionObserver/issues/324
-    this.intersectionRatio = Number((intersectionArea / targetArea).toFixed(4));
-  } else {
-    // If area is zero and is intersecting, sets to 1, otherwise to 0
-    this.intersectionRatio = this.isIntersecting ? 1 : 0;
-  }
-}
+        // Sets intersection ratio.
+        if (targetArea)
+        {
+            // Round the intersection ratio to avoid floating point math issues:
+            // https://github.com/w3c/IntersectionObserver/issues/324
+            this.intersectionRatio = Number((intersectionArea / targetArea).toFixed(4));
+        } else
+        {
+            // If area is zero and is intersecting, sets to 1, otherwise to 0
+            this.intersectionRatio = this.isIntersecting ? 1 : 0;
+        }
+    }
 
 
 /**
@@ -81,35 +87,39 @@ function IntersectionObserverEntry(entry) {
  * @param {Object=} opt_options Optional configuration options.
  * @constructor
  */
-function IntersectionObserver(callback, opt_options) {
+    function IntersectionObserver(callback, opt_options)
+    {
 
-  var options = opt_options || {};
+        var options = opt_options || {};
 
-  if (typeof callback != 'function') {
-    throw new Error('callback must be a function');
-  }
+        if (typeof callback != 'function')
+        {
+            throw new Error('callback must be a function');
+        }
 
-  if (options.root && options.root.nodeType != 1) {
-    throw new Error('root must be an Element');
-  }
+        if (options.root && options.root.nodeType != 1)
+        {
+            throw new Error('root must be an Element');
+        }
 
-  // Binds and throttles `this._checkForIntersections`.
-  this._checkForIntersections = throttle(
-      this._checkForIntersections.bind(this), this.THROTTLE_TIMEOUT);
+        // Binds and throttles `this._checkForIntersections`.
+        this._checkForIntersections = throttle(
+            this._checkForIntersections.bind(this), this.THROTTLE_TIMEOUT);
 
-  // Private properties.
-  this._callback = callback;
-  this._observationTargets = [];
-  this._queuedEntries = [];
-  this._rootMarginValues = this._parseRootMargin(options.rootMargin);
+        // Private properties.
+        this._callback = callback;
+        this._observationTargets = [];
+        this._queuedEntries = [];
+        this._rootMarginValues = this._parseRootMargin(options.rootMargin);
 
-  // Public properties.
-  this.thresholds = this._initThresholds(options.threshold);
-  this.root = options.root || null;
-  this.rootMargin = this._rootMarginValues.map(function(margin) {
-    return margin.value + margin.unit;
-  }).join(' ');
-}
+        // Public properties.
+        this.thresholds = this._initThresholds(options.threshold);
+        this.root = options.root || null;
+        this.rootMargin = this._rootMarginValues.map(function (margin)
+        {
+            return margin.value + margin.unit;
+        }).join(' ');
+    }
 
 
 /**
@@ -138,41 +148,48 @@ IntersectionObserver.prototype.USE_MUTATION_OBSERVER = true;
  * the thresholds values.
  * @param {Element} target The DOM element to observe.
  */
-IntersectionObserver.prototype.observe = function(target) {
-  var isTargetAlreadyObserved = this._observationTargets.some(function(item) {
-    return item.element == target;
-  });
+    IntersectionObserver.prototype.observe = function (target)
+    {
+        var isTargetAlreadyObserved = this._observationTargets.some(function (item)
+        {
+            return item.element == target;
+        });
 
-  if (isTargetAlreadyObserved) {
-    return;
-  }
+        if (isTargetAlreadyObserved)
+        {
+            return;
+        }
 
-  if (!(target && target.nodeType == 1)) {
-    throw new Error('target must be an Element');
-  }
+        if (!(target && target.nodeType == 1))
+        {
+            throw new Error('target must be an Element');
+        }
 
-  this._registerInstance();
-  this._observationTargets.push({element: target, entry: null});
-  this._monitorIntersections();
-  this._checkForIntersections();
-};
+        this._registerInstance();
+        this._observationTargets.push({ element: target, entry: null });
+        this._monitorIntersections();
+        this._checkForIntersections();
+    };
 
 
 /**
  * Stops observing a target element for intersection changes.
  * @param {Element} target The DOM element to observe.
  */
-IntersectionObserver.prototype.unobserve = function(target) {
-  this._observationTargets =
-      this._observationTargets.filter(function(item) {
+    IntersectionObserver.prototype.unobserve = function (target)
+    {
+        this._observationTargets =
+            this._observationTargets.filter(function (item)
+            {
 
-    return item.element != target;
-  });
-  if (!this._observationTargets.length) {
-    this._unmonitorIntersections();
-    this._unregisterInstance();
-  }
-};
+                return item.element != target;
+            });
+        if (!this._observationTargets.length)
+        {
+            this._unmonitorIntersections();
+            this._unregisterInstance();
+        }
+    };
 
 
 /**
