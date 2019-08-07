@@ -4,6 +4,10 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
+    <!-- iPhone FAVICONS -->
+    <link rel="apple-touch-icon" sizes="114×114" href="Resources/Favicons/apple-icon-114×114.png" />
+    <link rel="apple-touch-icon" sizes="72×72" href="Resources/Favicons/apple-icon-72x72.png" />
+    <link rel="apple-touch-icon" href="Resources/Favicons/apple-icon.png" />
     <title>Logs</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
