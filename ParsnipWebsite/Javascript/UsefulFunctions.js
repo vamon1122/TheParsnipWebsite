@@ -74,10 +74,12 @@ second() returns time (SS)
 
 */
 
-function dateAdd(date, interval, units) {
+function dateAdd(date, interval, units)
+{
     var ret = new Date(date); //don't change original date
     var checkRollover = function () { if (ret.getDate() !== date.getDate()) ret.setDate(0); };
-    switch (interval.toLowerCase()) {
+    switch (interval.toLowerCase())
+    {
         case 'year': ret.setFullYear(ret.getFullYear() + units); checkRollover(); break;
         case 'quarter': ret.setMonth(ret.getMonth() + 3 * units); checkRollover(); break;
         case 'month': ret.setMonth(ret.getMonth() + units); checkRollover(); break;
@@ -91,40 +93,44 @@ function dateAdd(date, interval, units) {
     return ret;
 }
 
-function testCookie() {
+function testCookie()
+{
     document.cookie = "test = yes";
     if (checkCookie("test")) { return true; }
 }
 
-
-function createCookie(cname, cvalue) {
+function createCookie(cname, cvalue)
+{
     document.cookie = cname + "=" + cvalue;
 }
 
-
-function createCookiePerm(cname, cvalue) {
+function createCookiePerm(cname, cvalue)
+{
     document.cookie = cname + "=" + cvalue + "; expires=Thu, 2 Aug 2020 20:47:11 UTC;";
 }
 
-
-function getLocation() {
+function getLocation()
+{
     createCookie("deviceLocation", "Geolocation function was called.");
-    if (navigator.geolocation) {
+    if (navigator.geolocation)
+    {
         navigator.geolocation.getCurrentPosition(showPosition, showError);
-    } else {
+    } else
+    {
         createCookie("deviceLocation", "Geolocation is not supported by this browser.");
     }
 }
 
-
-
-function showPosition(position) {
+function showPosition(position)
+{
     createCookie("deviceLatitude", position.coords.latitude);
     createCookie("deviceLongitude", position.coords.longitude);
 }
 
-function showError(error) {
-    switch (error.code) {
+function showError(error)
+{
+    switch (error.code)
+    {
         case error.PERMISSION_DENIED:
             createCookie("deviceLatitude", "User denied the request for Geolocation.");
             createCookie("deviceLongitude", "User denied the request for Geolocation.");
@@ -145,35 +151,42 @@ function showError(error) {
 }
 
 //Get cookie
-function getCookie(cname) {
+function getCookie(cname)
+{
     var name = cname + "=";
     var ca = document.cookie.split(';');
-    for (var i = 0; i < ca.length; i++) {
+    for (var i = 0; i < ca.length; i++)
+    {
         var c = ca[i];
-        while (c.charAt(0) === ' ') {
+        while (c.charAt(0) === ' ')
+        {
             c = c.substring(1);
         }
-        if (c.indexOf(name) === 0) {
+        if (c.indexOf(name) === 0)
+        {
             return c.substring(name.length, c.length);
         }
     }
     return "";
 }
 
-
 //Check Cookie
-function checkCookie(p) {
+function checkCookie(p)
+{
     //alert('got here')
     var checkThis = getCookie(p);
-    if (checkThis !== "") {
+    if (checkThis !== "")
+    {
         return true;
-    } else {
+    } else
+    {
         return false;
     }
 }
 
 //Checks if element exists
-function elementExists(element) {
+function elementExists(element)
+{
     if (document.getElementById(element) !== null) return true; else return false;
 }
 
@@ -183,11 +196,11 @@ var colCodeTemp = "#"; //Complete Color
 var stringCharacter = 1; //This goes up every time a new character is added to the string (color value e.g. #123abc)
 resetAuto(); //Auto set values to default
 
-function randomColor() {
+function randomColor()
+{
     resetAuto();
     return colCode;
 }
-
 
 function resetAuto() //Resets all values to default
 {
@@ -197,7 +210,6 @@ function resetAuto() //Resets all values to default
     createNumber();
 }
 
-
 function createNumber() //Creates a random number between 1 & 15
 {
     var x = Math.round(Math.random() * 100);
@@ -205,59 +217,56 @@ function createNumber() //Creates a random number between 1 & 15
 }
 
 
-function letterSwitch(x) {
-    switch (x) {
+function letterSwitch(x)
+{
+    switch (x)
+    {
         case 10:
             stringAdd('a');
             break;
-
         case 11:
             stringAdd('b');
             break;
-
         case 12:
             stringAdd('c');
             break;
-
         case 13:
             stringAdd('d');
             break;
-
         case 14:
             stringAdd('e');
             break;
-
         case 15:
             stringAdd('f');
             break;
-
         default:
             stringAdd(x);
             break;
     }
 }
 
-
 function stringAdd(x) //Collates the characters for the hex number code
 {
-    if (stringCharacter <= 6) {
+    if (stringCharacter <= 6)
+    {
         stringCharacter++;
         colCodeTemp = colCodeTemp + x;
         createNumber();
     }
-    else {
+    else
+    {
         colCode = colCodeTemp;
-
     }
 }
 
-
 //Random Letter Generator (lower)
-function randomLetter() {
+function randomLetter()
+{
     var x = 99;
     while (x > 25)
     { x = randomNumber99(); }
-    switch (x) {
+    switch (x)
+    {
         case 0:
             return "a";
         case 1:
@@ -316,13 +325,14 @@ function randomLetter() {
     }
 }
 
-
 //Random Letter Generator (upper)
-function randomLetterCAPS() {
+function randomLetterCAPS()
+{
     var x = 99;
     while (x > 25)
     { x = randomNumber99(); }
-    switch (x) {
+    switch (x)
+    {
         case 0:
             return "A";
         case 1:
@@ -380,39 +390,40 @@ function randomLetterCAPS() {
     }
 }
 
-
 //Random Number Generator (0-9)
-function randomNumber() {
+function randomNumber()
+{
     var x = 100;
     while (x > 9)
     { x = Math.round(Math.random() * 10); }
     return x;
 }
 
-
 //Random Number Generator (0-99)
-function randomNumber99() {
+function randomNumber99()
+{
     var x = 100;
     while (x > 99)
     { x = Math.round(Math.random() * 100); }
     return x;
 }
 
-
 //Random Number Generator (0-999)
-function randomNumber999() {
+function randomNumber999()
+{
     var x = 100;
     while (x > 999)
     { x = Math.round(Math.random() * 1000); }
     return x;
 }
 
-
 //Day (long)
-function day() {
+function day()
+{
     var day = new Date().getDay();
     {
-        switch (day) {
+        switch (day)
+        {
             case 0:
                 return "Sunday";
 
@@ -436,44 +447,37 @@ function day() {
 
             default:
                 return "broken";
-
         }
     }
 }
 
 
 //Day (short)
-function dayShort() {
+function dayShort()
+{
     var day = new Date().getDay();
     {
-        switch (day) {
+        switch (day)
+        {
             case 0:
                 return "Sun";
-
             case 1:
                 return "Mon";
-
             case 2:
                 return "Tue";
-
             case 3:
                 return "Wed";
-
             case 4:
                 return "Thu";
-
             case 5:
                 return "Fri";
-
             case 6:
                 return "Sat";
-
             default:
                 return "broken";
         }
     }
 }
-
 
 //Time (HH:MM:SS)
 function hourMinuteSecond() {
@@ -484,14 +488,12 @@ function hourMinuteSecond() {
     if (minute < 10) { minute = '0' + +minute; }
     if (second < 10) { second = '0' + +second; }
 
-    {
-        return hour + ":" + minute + ":" + second;
-    }
+    return hour + ":" + minute + ":" + second;
 }
 
-
 //Time (HH:MM)
-function hourMinute() {
+function hourMinute()
+{
     var hour = new Date().getHours();
     var minute = new Date().getMinutes();
     if (hour < 10) { hour = '0' + +hour; }
@@ -503,12 +505,12 @@ function hourMinute() {
 
 
 //Time (HH)
-function hour() {
+function hour()
+{
     var hour = new Date().getHours();
     if (hour < 10) { hour = '0' + +hour; }
-    {
-        return hour;
-    }
+
+    return hour;
 }
 
 
@@ -517,9 +519,7 @@ function minute() {
     var minute = new Date().getMinutes();
     if (minute < 10) { minute = '0' + +minute; }
 
-    {
-        return minute;
-    }
+    return minute;
 }
 
 //Time (SS)
@@ -527,30 +527,32 @@ function second() {
     var second = new Date().getSeconds();
     if (second < 10) { second = '0' + +second; }
 
-    {
-        return second;
-    }
+    return second;
 }
 
 //Mobile / Desktop Check ----- KEYWORDS: Device, phone, pc
-function isMobile() {
+function isMobile()
+{
     if (navigator.userAgent.match(/Android/i)
-    || navigator.userAgent.match(/webOS/i)
-    || navigator.userAgent.match(/iPhone/i)
-    || navigator.userAgent.match(/iPad/i)
-    || navigator.userAgent.match(/iPod/i)
-    || navigator.userAgent.match(/BlackBerry/i)
-    || navigator.userAgent.match(/Windows Phone/i)
-    ) {
+        || navigator.userAgent.match(/webOS/i)
+        || navigator.userAgent.match(/iPhone/i)
+        || navigator.userAgent.match(/iPad/i)
+        || navigator.userAgent.match(/iPod/i)
+        || navigator.userAgent.match(/BlackBerry/i)
+        || navigator.userAgent.match(/Windows Phone/i)
+    )
+    {
         return true;
     }
-    else {
+    else
+    {
         return false;
     }
 }
 
 //Device Check ----- KEYWORDS: Device, phone, pc, user, agent, useragent
-function deviceDetect() {
+function deviceDetect()
+{
     if (navigator.userAgent.match(/Android/i)) { return 'Android'; }
     else if (navigator.userAgent.match(/webOS/i)) { return 'webOS'; }
     else if (navigator.userAgent.match(/iPhone/i)) { return 'iPhone'; }
@@ -565,7 +567,8 @@ function deviceDetect() {
 }
 
 //Device Check ----- KEYWORDS: Device, phone, pc, user, agent, useragent
-function userAgent() {
+function userAgent()
+{
     if (navigator.userAgent.match(/Android/i)) { return Android; }
     else if (navigator.userAgent.match(/webOS/i)) { return webOS; }
     else if (navigator.userAgent.match(/iPhone/i)) { return iPhone; }

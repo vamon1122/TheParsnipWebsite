@@ -6,17 +6,21 @@ var krakowToManchesterDepartureDate = new Date("Aug 21, 2019 23:10:00").getTime(
 var krakowToManchesterArrivalDate = new Date("Aug 22, 2019 00:55:00").getTime();
 var now = new Date().getTime();
 
-if (manchesterToKrakowDepartureDate > now) {
+if (manchesterToKrakowDepartureDate > now)
+{
     countdown(manchesterToKrakowDepartureDate, "Departing to Krakow in ");
 }
-else if (manchesterToKrakowArrivalDate > now) {
+else if (manchesterToKrakowArrivalDate > now)
+{
     countdown(manchesterToKrakowArrivalDate, "Arriving in Krakow in ");
 }
-else if (returnCountdownStartDate > now) {
+else if (returnCountdownStartDate > now)
+{
     document.getElementById("countdownToKrakow").innerHTML = "Flight <i>should</i> have arrived in Krakow!";
     document.getElementById("countdownInfo").innerHTML = "(Countdown will resume 24 hours before departure)"
 }
-else if (krakowToManchesterDepartureDate > now) {
+else if (krakowToManchesterDepartureDate > now)
+{
     countdown(krakowToManchesterDepartureDate, "Departing to Manchester in ");
 }
 
@@ -24,12 +28,14 @@ else {
     countdown(krakowToManchesterArrivalDate, "Arriving to Manchester in ");
 }
 
-function countdown(date, message) {
+function countdown(date, message)
+{
     var countDownDate = date;
     var countDownMessage = message;
 
     // Update the count down every 1 second
-    var x = setInterval(function () {
+    var x = setInterval(function ()
+    {
         // Get today's date and time
         var now = new Date().getTime();
 
@@ -48,7 +54,8 @@ function countdown(date, message) {
             + minutes + " minutes " + seconds + " seconds!!!";
 
         // If the count down is over, write some text 
-        if (distance < 0) {
+        if (distance < 0)
+        {
             clearInterval(x);
             //document.getElementById("countdownToKrakow").innerHTML = "Flight <i>should</i> have departed";
             document.getElementById("flightDetailsContainer").style.display = "none";
