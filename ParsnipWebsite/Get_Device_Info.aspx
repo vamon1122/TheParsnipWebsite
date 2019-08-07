@@ -15,7 +15,7 @@
             <label id="redirectLabel" style ="visibility:hidden">default redirect</label>
         </div>
     </form>
-    <script src="../Javascript/Useful_Functions.js"></script>
+    <script src="../Javascript/UsefulFunctions.js"></script>
     <script>
         var errorLabel = document.getElementById("errorLabel");
         var redirectLabel = document.getElementById("redirectLabel");

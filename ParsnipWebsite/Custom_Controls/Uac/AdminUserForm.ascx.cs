@@ -8,7 +8,7 @@ using ParsnipData;
 using System.Diagnostics;
 using ParsnipData.Accounts;
 
-namespace ParsnipWebsite.CustomControls.UacApi
+namespace ParsnipWebsite.Custom_Controls.Uac
 {
     internal static class PersistentData
     {
@@ -16,6 +16,7 @@ namespace ParsnipWebsite.CustomControls.UacApi
         internal static User _dataSubject;
         internal static User DataSubject { get { return _dataSubject; } set { /*Debug.WriteLine(string.Format("dataSubject (id = \"{0}\") was set in UserForm", value.Id));*/ _dataSubject = value; myUserForm1.UpdateFields(); } }
     }
+
 
     public partial class AdminUserForm : System.Web.UI.UserControl
     {
@@ -171,4 +172,5 @@ namespace ParsnipWebsite.CustomControls.UacApi
             PersistentData.DataSubject.AccountType = accountType.Value;
         }
     }
+    
 }

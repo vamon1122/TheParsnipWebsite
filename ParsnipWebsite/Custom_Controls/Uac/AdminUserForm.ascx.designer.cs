@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ParsnipWebsite.CustomControls.UacApi {
+namespace ParsnipWebsite.Custom_Controls.Uac {
     
     
     public partial class AdminUserForm {

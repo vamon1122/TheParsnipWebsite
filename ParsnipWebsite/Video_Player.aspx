@@ -17,10 +17,10 @@
 
     <!-- BOOTSTRAP END -->
     
-    <script src="../Javascript/Useful_Functions.js"></script>
+    <script src="../Javascript/UsefulFunctions.js"></script>
     <link id="link_style" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="Css/Shared_Style.css" />
-    <script src="../Javascript/Apply_Style.js"></script>
+    <link rel="stylesheet" type="text/css" href="Css/SharedStyle.css" />
+    <script src="../Javascript/ApplyStyle.js"></script>
 
     <title>Video Player</title>
 </head>

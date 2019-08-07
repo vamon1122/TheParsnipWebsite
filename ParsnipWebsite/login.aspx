@@ -11,10 +11,10 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
     <!--<script src="bootstrap-4.1.2-dist/js/bootstrap.js"></script>-->
     
-    <script src="../Javascript/Useful_Functions.js"></script>
+    <script src="../Javascript/UsefulFunctions.js"></script>
     <link id="link_style" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="Css/Shared_Style.css" />
-    <script src="../Javascript/Apply_Style.js"></script>
+    <link rel="stylesheet" type="text/css" href="Css/SharedStyle.css" />
+    <script src="../Javascript/ApplyStyle.js"></script>
 
     <title>Log In</title>
 </head>

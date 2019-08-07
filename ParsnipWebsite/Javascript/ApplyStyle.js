@@ -11,16 +11,16 @@ function ApplyStyle()
 
         if (h > w)
         {
-            link_style.setAttribute("href", "../Css/Mobile_Portrait_Style.css");
+            link_style.setAttribute("href", "../Css/MobilePortraitStyle.css");
         }
         else
         {
-            link_style.setAttribute("href", "../Css/Mobile_Landscape_Style.css");
+            link_style.setAttribute("href", "../Css/MobileLandscapeStyle.css");
         }
     }
     else
     {
-        link_style.setAttribute("href", "../Css/Desktop_Style.css");
+        link_style.setAttribute("href", "../Css/DesktopStyle.css");
     }
 }
 

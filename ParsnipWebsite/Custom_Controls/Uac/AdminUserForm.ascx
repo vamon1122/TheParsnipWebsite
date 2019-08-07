@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AdminUserForm.ascx.cs" Inherits="ParsnipWebsite.CustomControls.UacApi.AdminUserForm" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AdminUserForm.ascx.cs" Inherits="ParsnipWebsite.Custom_Controls.Uac.AdminUserForm" %>
 <!-- Special version of Bootstrap that only affects content wrapped in .bootstrap-iso -->
 <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" /> 
 
@@ -172,3 +172,4 @@
         dobCopy.nodeValue = dobInput.nodeValue;
     }
 </script>
+

@@ -7,11 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ParsnipWebsite.CustomControls
+namespace ParsnipWebsite.Custom_Controls.Admin
 {
 
 
-    public partial class adminMenu
+    public partial class AdminMenu
     {
     }
 }

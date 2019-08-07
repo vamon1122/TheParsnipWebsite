@@ -17,10 +17,10 @@
 
     <!-- BOOTSTRAP END -->
 
-    <script src="../Javascript/Useful_Functions.js"></script>
+    <script src="../Javascript/UsefulFunctions.js"></script>
     <link id="link_style" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="Css/Shared_Style.css" />
-    <script src="../Javascript/Apply_Style.js"></script>
+    <link rel="stylesheet" type="text/css" href="Css/SharedStyle.css" />
+    <script src="../Javascript/ApplyStyle.js"></script>
     <title>Home</title>
 </head>
 <body class="fade0p5" id="body" style="text-align:center">
@@ -48,6 +48,6 @@
     <div runat="server" id="LatestVideo"></div>
 
     <hr class="break" />
-    <script src="../Javascript/Count_Down_To_Krakow.js"></script>
+    <script src="../Javascript/CountDownToKrakow.js"></script>
 </body>
 </html>

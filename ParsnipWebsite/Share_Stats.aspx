@@ -1,7 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Share_Stats.aspx.cs" Inherits="ParsnipWebsite.Share_Stats" %>
 
-<%@ Register Src="~/Custom_Controls/Admin/adminMenu.ascx" TagPrefix="adminControls" TagName="adminMenu" %>
-<%@ Register Src="~/Custom_Controls/Uac_Api/AdminUserForm.ascx" TagPrefix="admin" TagName="AdminUserForm" %>
+<%@ Register Src="~/Custom_Controls/Admin/AdminMenu.ascx" TagPrefix="adminControls" TagName="adminMenu" %>
 
 <!DOCTYPE html>
 
@@ -12,10 +11,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
 
-    <script src="../Javascript/Useful_Functions.js"></script>
+    <script src="../Javascript/UsefulFunctions.js"></script>
     <link id="link_style" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="Css/Shared_Style.css" />
-    <script src="../Javascript/Apply_Style.js"></script>
+    <link rel="stylesheet" type="text/css" href="Css/SharedStyle.css" />
+    <script src="../Javascript/ApplyStyle.js"></script>
 
     <title>Share Stats</title>
 </head>

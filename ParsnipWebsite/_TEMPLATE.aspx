@@ -13,12 +13,12 @@
 
     <!-- BOOTSTRAP END -->
 
-    <script src="../Javascript/Useful_Functions.js"></script>
+    <script src="../Javascript/UsefulFunctions.js"></script>
     <link id="link_style" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="Css/Shared_Style.css" />
-    <script src="../Javascript/Apply_Style.js"></script>
+    <link rel="stylesheet" type="text/css" href="Css/SharedStyle.css" />
+    <script src="../Javascript/ApplyStyle.js"></script>
 
-    <script src="Javascript/Intersection_Observer.js"></script>
+    <script src="Javascript/IntersectionObserver.js"></script>
 
     <title>New Title</title>
 </head>
@@ -32,6 +32,6 @@
 
     
     <script src="../Javascript/Youtube.js"></script>
-    <script src="../Javascript/Focus_Image.js"></script>
+    <script src="../Javascript/FocusImage.js"></script>
 </body>
 </html>

@@ -82,7 +82,7 @@ namespace ParsnipWebsite {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::ParsnipWebsite.CustomControls.adminMenu adminMenu1;
+        protected global::ParsnipWebsite.Custom_Controls.Admin.AdminMenu adminMenu1;
         
         /// <summary>
         /// selectUser control.
@@ -100,7 +100,7 @@ namespace ParsnipWebsite {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::ParsnipWebsite.CustomControls.UacApi.AdminUserForm UserForm;
+        protected global::ParsnipWebsite.Custom_Controls.Uac.AdminUserForm UserForm;
         
         /// <summary>
         /// Button_Action control.
