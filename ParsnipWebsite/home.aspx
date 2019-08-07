@@ -34,8 +34,13 @@
         <asp:Label runat="server" ID="WelcomeLabel"></asp:Label>
         <hr class="break" />
         <h3>*NEW*</h3>
-        - [19/07/19] View tuesday 7s results from the parsnip menu<br />
-        - [24/06/19] Share photos and videos! (Recipient doesn't even need an account to view what you share!!!)<br />
+        - [07/08/19] New <a href="Krakow.aspx">Krakow page!</a> Upload, view & share holiday photos! 
+        <div id="flightDetailsContainer" style="display:inline">
+     View flight details! <label id="countdownToKrakow" style="margin:0"></label>
+        <label id="countdownInfo"></label>
+    </div><br />
+        - [19/07/19] View <a href="https://www.playfootball.net/venues/bury/players-lounge/2886/10389/152">tuesday 7s results</a> from the parsnip menu<br />
+        - [24/06/19] Share <a href="Photos.aspx">photos</a> and <a href="Videos.aspx">videos</a>! (Recipient doesn't even need an account to view what you share!!!)<br />
         - [24/06/19] You can now access the home page without logging in
     </div>
 
@@ -44,5 +49,6 @@
     <div runat="server" id="LatestVideo"></div>
 
     <hr class="break" />
+    <script src="../Javascript/Count_Down_To_Krakow.js"></script>
 </body>
 </html>

@@ -85,6 +85,7 @@
     <Content Include="Home.aspx" />
     <Content Include="Javascript\Apply_Style.js" />
     <Content Include="Javascript\Clipboard.js" />
+    <Content Include="Javascript\Count_Down_To_Krakow.js" />
     <Content Include="Javascript\Focus_Image.js" />
     <Content Include="Javascript\Useful_Functions.js" />
     <Content Include="Javascript\Youtube.js" />
