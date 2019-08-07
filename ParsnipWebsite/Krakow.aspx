@@ -44,8 +44,7 @@
     <hr class="break" />
     <div id="flightDetailsContainer">
     <h4 id="countdownToKrakow"></h4>
-        <label id="countdownInfo"></label>
-
+    <label id="countdownInfo" style="display:none"></label>
 
     <hr class="break" />
         
