@@ -13,26 +13,28 @@
 </div>
 
 <script>
-  // Look for .hamburger
-  var hamburger = document.querySelector(".hamburger");
-  // On click
-  hamburger.addEventListener("click", function() {
-    // Toggle class "is-active"
-      hamburger.classList.toggle("is-active");
+    //Look for .hamburger
+    var hamburger = document.querySelector(".hamburger");
+    // On click
+    hamburger.addEventListener("click", function ()
+    {
+        // Toggle class "is-active"
+        hamburger.classList.toggle("is-active");
 
-      var list = document.getElementById("list");
-    if (list.className === "menHide" || list.className === "menHidden") {
-        list.className = "menVis";
-    }
-    else {
-        //list.style.visibility = "hidden";
-        list.className = "menHide";
-    }
-  });
+        var list = document.getElementById("list");
+        if (list.className === "menHide" || list.className === "menHidden")
+        {
+            list.className = "menVis";
+        }
+        else
+        {
+            //list.style.visibility = "hidden";
+            list.className = "menHide";
+        }
+    });
 </script>
 <script>
-    
-/////Unchanging/////
+    /////Unchanging/////
     var menuDiv = document.getElementById("menuDiv");
     
     var height;
@@ -56,34 +58,29 @@
     var title = "#TheParsnip";
     var titleColor = "white";
 
-
-
     /////Menu List/////
     var fontCol = "white";
 
     /////Mobile / Desktop Variables/////
     if (isMobile() === true)
     {
-        /*height = "112.5px";
-        buttFontSize = "50px";
-    
-        titleFontSize = "87.5px";*/
         var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
         var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
 
         buttonPadding = "10px";
 
-        if (h > w) {
+        if (h > w)
+        {
             dropDownWidth = "50%";
-        
+
         }
-        else {
+        else
+        {
             dropDownWidth = "25%";
         }
-
-    
     }
-    else{
+    else
+    {
         buttonPadding = "10px";
         dropDownWidth = "200px";
     }
@@ -94,38 +91,30 @@
     titleFontSize = "30px";
 
     /////Buttons/////
-    createButton("Home 🏠", "home");
-    
+    createButton("🏠 Home 🏠", "home");
+    createButton("✈😎 KRAKOW <br /> 2K19 😎✈", "krakow");
+    createButton("😂 Memes 😂", "memes");
+    createButton("📹 Videos 📹", "videos");
+    createButton("📷 Photos 📷", "photos");
+    createButton("⚽ Tuesday 7s ⚽", "https://www.playfootball.net/venues/bury/players-lounge/2886/10389/152")
+    createButton("☕ AfternoonT ☕", "https://www.mixcloud.com/afternoontlive/");
+    createButton("💩 Bios 💩", "bios");    
 
-    /*if (getCookie("accountType") === "admin" || getCookie("accountType") === "member")
-    {*/
-        createButton("✈😎KRAKOW 2K19😎✈", "krakow");
-        createButton("Memes 😂", "memes");
-        createButton("Photos 📷", "photos");
-        createButton("Videos 📹", "videos");
-        createButton("AfternoonT ☕", "https://www.mixcloud.com/afternoontlive/");
-        createButton("Tuesday 7s ⚽", "https://www.playfootball.net/venues/bury/players-lounge/2886/10389/152")
-        createButton("Bios 💩", "bios");    
-    //}
-
-    if (getCookie("accountType") === "admin") {
-        createButton("Admin 💪", "admin");
+    if (getCookie("accountType") === "admin")
+    {
+        createButton("💪 Admin 💪", "admin");
     }
 
     if (getCookie("accountType") === "admin" || getCookie("accountType") === "member" || getCookie("accountType") === "user")
     {
-        createButton("Log Out 👋", "logout");
+        createButton("👋 Log Out 👋", "logout");
     }
     else
     {
-        createButton("Log In 🔓", "login");
+        createButton("🔓 Log In 🔓", "login");
     }
-    
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //document.getElementById("body").style.backgroundColor = "white";
-    //document.getElementById("body").style.backgroundImage = "url('../Patterns 2/Black & White/brickwall.png')"; 29/12/2018 this no longer exists
-    //document.getElementById("body").style.color = colDarkest;
 
     menuDiv.style.zIndex = "2147483646";
     menuDiv.style.backgroundColor = colDarkest;
@@ -148,20 +137,26 @@
 
     menuDiv.appendChild(pageTitle);
 
-    function createButton(title, href) {
-        if(document.getElementById("list")){
+    function createButton(title, href)
+    {
+        if (document.getElementById("list"))
+        {
             funcCreateButton(title, href);
         }
-        else{
+        else
+        {
             createList();
             funcCreateButton(title, href);
         }
     }
 
-    if (!document.getElementById("list")) {
+    if (!document.getElementById("list"))
+    {
         createList();
     }
-    function createList() {
+
+    function createList()
+    {
         var list = document.createElement("ul");
         list.style.backgroundColor = colDark;
         list.style.position = "fixed";
@@ -174,13 +169,14 @@
         list.id = "list";
         list.style.zIndex = "2147483646";
         document.getElementById("body").appendChild(list);
-    
     }
 
     var firstButton;
-    function funcCreateButton(title, href) {
+    function funcCreateButton(title, href)
+    {
         var butt = document.createElement("li");
-        if (firstButton === false) {
+        if (firstButton === false)
+        {
             butt.style.textAlign = "center";
         }
 
@@ -200,24 +196,27 @@
         buttAnk.style.fontSize = buttFontSize;
         buttAnk.style.paddingTop = buttonPadding;
         buttAnk.style.paddingBottom = buttonPadding;
-    
+
         butt.appendChild(buttAnk);
         list.appendChild(butt);
         firstButton = false;
     }
 
-    function isMobile() {
+    function isMobile()
+    {
         if (navigator.userAgent.match(/Android/i)
-        || navigator.userAgent.match(/webOS/i)
-        || navigator.userAgent.match(/iPhone/i)
-        || navigator.userAgent.match(/iPad/i)
-        || navigator.userAgent.match(/iPod/i)
-        || navigator.userAgent.match(/BlackBerry/i)
-        || navigator.userAgent.match(/Windows Phone/i)
-        ) {
+            || navigator.userAgent.match(/webOS/i)
+            || navigator.userAgent.match(/iPhone/i)
+            || navigator.userAgent.match(/iPad/i)
+            || navigator.userAgent.match(/iPod/i)
+            || navigator.userAgent.match(/BlackBerry/i)
+            || navigator.userAgent.match(/Windows Phone/i)
+        )
+        {
             return true;
         }
-        else {
+        else
+        {
             return false;
         }
     }
