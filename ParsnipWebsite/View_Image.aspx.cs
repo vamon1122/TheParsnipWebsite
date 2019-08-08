@@ -74,7 +74,7 @@ namespace ParsnipWebsite
             }
 
             //Get the image which the user is trying to access, and display it on the screen.
-            if (string.IsNullOrEmpty(myImage.Directory))
+            if (myImage == null || string.IsNullOrEmpty(myImage.Directory))
             {
                 ShareLinkContainer.Visible = false;
                 Button_ViewAlbum.Visible = false;
