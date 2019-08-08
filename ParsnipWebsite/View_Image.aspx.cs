@@ -141,12 +141,14 @@ namespace ParsnipWebsite
                 case "4B4E450A-2311-4400-AB66-9F7546F44F4E":
                     Debug.WriteLine("Redirecting to photos");
                     Response.Redirect("~/photos?imageid=" + myImage.Id);
-                    
                     break;
-
                 case "5F15861A-689C-482A-8E31-2F13429C36E5":
                     Debug.WriteLine("Redirecting to memes");
                     Response.Redirect("~/memes?imageid=" + myImage.Id);
+                    break;
+                case "FF3127DF-70B2-47EF-B77B-2E086D2EF370":
+                    Debug.WriteLine("Redirecting to Krakow");
+                    Response.Redirect("~/krakow?imageid=" + myImage.Id);
                     break;
                 default:
                     Debug.WriteLine("Album was wrong! Album = " + myImage.AlbumId.ToString());
