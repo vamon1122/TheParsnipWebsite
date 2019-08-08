@@ -38,10 +38,14 @@
       onclick="this.setSelectionRange(0, this.value.length)" />
 
 </div>
-    <div runat="server" class="alert alert-danger alert-dismissible parsnip-alert" Visible="false" id="NotExistError">
+    <div runat="server" class="alert alert-danger alert-dismissible parsnip-alert" Visible="false" id="ShareUserSuspendedError">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        <strong>Error:</strong> Could not access video. The video which you are trying to access has been deleted or 
-        the link which you are using has expired!
+        <strong>Error:</strong> Could not access video. The person who shared this video has been suspended!
+    </div>
+
+    <div runat="server" class="alert alert-danger alert-dismissible parsnip-alert" Visible="false" id="UploadUserSuspendedError">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Error:</strong> Could not access video. The person who uploaded this video has been suspended!
     </div>
     <h2 runat="server" id="VideoTitle"></h2>
     <div class="video-container">

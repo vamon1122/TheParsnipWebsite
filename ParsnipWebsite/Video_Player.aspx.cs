@@ -97,44 +97,61 @@ namespace ParsnipWebsite
                 myAccessToken = new AccessToken(new Guid(Request.QueryString["access_token"]));
                 myAccessToken.Select();
 
-                myAccessToken.TimesUsed++;
-                myAccessToken.Update();
-
-                Debug.WriteLine("Access token media id = " + myAccessToken.MediaId);
-
-                if (Video.Exists(myAccessToken.MediaId))
+                if (myAccessToken.MediaId == Guid.Empty)
                 {
-                    Debug.WriteLine("Getting video with id = " + myAccessToken.MediaId);
-                    myVideo = new Video(myAccessToken.MediaId);
-                    myVideo.Select();
+                    Debug.WriteLine("Media Id was empty");
+                    new LogEntry(DebugLog) { text = string.Format("Someone tried to access access token {0}. Access was denied because the person who created this link has been suspended.", myAccessToken.Id) };
+                    ShareUserSuspendedError.Visible = true;
                 }
                 else
                 {
-                    Debug.WriteLine("Getting youtube video with id = " + myAccessToken.MediaId);
-                    myYoutubeVideo = new YoutubeVideo(myAccessToken.MediaId);
-                    myYoutubeVideo.Select();
+                    myAccessToken.TimesUsed++;
+                    myAccessToken.Update();
+
+                    Debug.WriteLine("Access token media id = " + myAccessToken.MediaId);
+
+                    if (Video.Exists(myAccessToken.MediaId))
+                    {
+                        Debug.WriteLine("Getting video with id = " + myAccessToken.MediaId);
+                        myVideo = new Video(myAccessToken.MediaId);
+                        myVideo.Select();
+                    }
+                    else
+                    {
+                        Debug.WriteLine("Getting youtube video with id = " + myAccessToken.MediaId);
+                        myYoutubeVideo = new YoutubeVideo(myAccessToken.MediaId);
+                        myYoutubeVideo.Select();
+                    }
                 }
             }
         }
 
         void Page_LoadComplete(object sender, EventArgs e)
         {
-            if(myVideo == null)
+            if (myVideo == null && myYoutubeVideo == null)
             {
-                youtube_video_container.Visible = true;
-                VideoTitle.InnerText = myYoutubeVideo.Title;
-                Debug.WriteLine("Retrieved a data-id from Data.dll = " + myYoutubeVideo.DataId);
-                youtube_video.Attributes.Add("data-id", myYoutubeVideo.DataId);
+                ShareLinkContainer.Visible = false;
+                Button_ViewAlbum.Visible = false;
             }
             else
             {
-                video_container.Visible = true;
-                VideoTitle.InnerText = myVideo.Title;
-                VideoSource.Src = myVideo.Directory;
-            }
+                if (myVideo == null)
+                {
+                    youtube_video_container.Visible = true;
+                    VideoTitle.InnerText = myYoutubeVideo.Title;
+                    Debug.WriteLine("Retrieved a data-id from Data.dll = " + myYoutubeVideo.DataId);
+                    youtube_video.Attributes.Add("data-id", myYoutubeVideo.DataId);
+                }
+                else
+                {
+                    video_container.Visible = true;
+                    VideoTitle.InnerText = myVideo.Title;
+                    VideoSource.Src = myVideo.Directory;
+                }
 
-            ShareLink.Value = Request.Url.GetLeftPart(UriPartial.Authority) + "/video_player?access_token=" + 
-                myAccessToken.Id;
+                ShareLink.Value = Request.Url.GetLeftPart(UriPartial.Authority) + "/video_player?access_token=" +
+                    myAccessToken.Id;
+            }
         }
 
         protected void Button_ViewAlbum_Click(object sender, EventArgs e)
