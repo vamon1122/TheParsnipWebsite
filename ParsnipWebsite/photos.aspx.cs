@@ -28,7 +28,10 @@ namespace ParsnipWebsite
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            myUser = Account.SecurePage("photos", this, Data.DeviceType, "member");
+            if (Request.QueryString["imageid"] == null)
+                myUser = Account.SecurePage("photos", this, Data.DeviceType, "member");
+            else
+                myUser = Account.SecurePage("photos?imageid=" + Request.QueryString["imageid"], this, Data.DeviceType, "member");
 
             if (IsPostBack && PhotoUpload.PostedFile != null)
             {
