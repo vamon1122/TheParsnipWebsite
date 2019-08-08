@@ -31,13 +31,13 @@ namespace ParsnipWebsite {
         protected global::ParsnipWebsite.Custom_Controls.Menu.Menu Menu;
         
         /// <summary>
-        /// NotExistError control.
+        /// UploadUserSuspendedError control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl NotExistError;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl UploadUserSuspendedError;
         
         /// <summary>
         /// ShareLinkContainer control.

@@ -13,29 +13,17 @@ using System.Diagnostics;
 
 namespace ParsnipWebsite
 {
-    
-    
-
     public partial class View_Image : System.Web.UI.Page
     {
         User myUser;
-        Log DebugLog = new Log("Debug");
+        static readonly Log DebugLog = new Log("Debug");
         ParsnipData.Media.Image myImage;
         protected void Page_Load(object sender, EventArgs e)
         {
-            //We secure the page using the UacApi. 
-            //This ensures that the user is logged in etc
-            //You only need to change where it says '_NEW TEMPLATE'.
-            //Change this to match your page name without the '.aspx' extension.
-
-            
-
-
             //If there is an access token, get the token & it's data.
             //If there is no access token, check that the user is logged in.
             if (Request.QueryString["access_token"] != null)
             {
-                
                 var myAccessToken = new AccessToken(new Guid(Request.QueryString["access_token"]));
                 try
                 {
@@ -45,20 +33,31 @@ namespace ParsnipWebsite
                 {
                     throw ex;
                 }
-                if(!IsPostBack)
-                    myAccessToken.TimesUsed++;
 
-                User createdBy = new User(myAccessToken.UserId);
-                createdBy.Select();
+                if (myAccessToken.MediaId == Guid.Empty)
+                {
+                    Debug.WriteLine("Media Id was empty");
+                    new LogEntry(DebugLog) { text = string.Format("Someone tried to access access token {0}. Access was denied because the person who created this link has been suspended.", myAccessToken.Id) };
+                    UploadUserSuspendedError.Visible = true;
+                }
+                else
+                {
+                    Debug.WriteLine("Media Id was not empty");
 
-                
+                    if (!IsPostBack)
+                    {
+                        myAccessToken.TimesUsed++;
+                        myAccessToken.Update();
+                    }
 
-                myAccessToken.Update();
+                    User createdBy = new User(myAccessToken.UserId);
+                    createdBy.Select();
 
-                myImage = new ParsnipData.Media.Image(myAccessToken.MediaId);
-                myImage.Select();
+                    myImage = new ParsnipData.Media.Image(myAccessToken.MediaId);
+                    myImage.Select();
 
-                new LogEntry(DebugLog) { text = string.Format("{0}'s link to {1} got another hit! Now up to {2}", createdBy.FullName, myImage.Title, myAccessToken.TimesUsed) };
+                    new LogEntry(DebugLog) { text = string.Format("{0}'s link to {1} got another hit! Now up to {2}", createdBy.FullName, myImage.Title, myAccessToken.TimesUsed) };
+                }
             }
             else
             {
@@ -67,8 +66,6 @@ namespace ParsnipWebsite
                 else
                     myUser = Account.SecurePage("view_image?imageid=" + Request.QueryString["imageid"], this, Data.DeviceType);
 
-                
-
                 if (Request.QueryString["imageid"] == null)
                     Response.Redirect("home");
 
@@ -76,60 +73,64 @@ namespace ParsnipWebsite
                 myImage.Select();
             }
 
-           //Get the image which the user is trying to access, and display it on the screen.
-            
-
-            Debug.WriteLine(string.Format("AlbumId {0}", myImage.AlbumId));
-
-            
-
-            //If the image has been deleted, display a warning.
-            //If the image has not been deleted, display the image.
-            if (myImage.AlbumId == Guid.Empty)
+            //Get the image which the user is trying to access, and display it on the screen.
+            if (myImage == null)
             {
-                Debug.WriteLine(string.Format("AlbumId {0} == {1}", myImage.AlbumId, Guid.Empty));
-                //NotExistError.Visible = true;
+                ShareLinkContainer.Visible = false;
                 Button_ViewAlbum.Visible = false;
             }
             else
             {
-                Debug.WriteLine(string.Format("AlbumId {0} != {1}", myImage.AlbumId, Guid.Empty));
+                Debug.WriteLine(string.Format("AlbumId {0}", myImage.AlbumId));
 
-                /*
-                ImageTitle.InnerText = myImage.Title;
-                Page.Title = myImage.Title;
-                ImagePreview.ImageUrl = myImage.Directory;   
-                */
-            }
-
-            ImageTitle.InnerText = myImage.Title;
-            Page.Title = myImage.Title;
-            ImagePreview.ImageUrl = myImage.Directory;
-
-            //If there was no access token, the user is trying to share the photo.
-            //Generate a shareable link and display it on the screen.
-            if (Request.QueryString["access_token"] == null)
-            {
-                Button_ViewAlbum.Visible = false;
-
-                AccessToken myAccessToken;
-
-                if (AccessToken.TokenExists(myUser.Id, myImage.Id))
+                //If the image has been deleted, display a warning.
+                //If the image has not been deleted, display the image.
+                if (myImage.AlbumId == Guid.Empty)
                 {
-                    myAccessToken = AccessToken.GetToken(myUser.Id, myImage.Id);
+                    Debug.WriteLine(string.Format("AlbumId {0} == {1}", myImage.AlbumId, Guid.Empty));
+                    //NotExistError.Visible = true;
+                    Button_ViewAlbum.Visible = false;
                 }
                 else
                 {
-                    myAccessToken = new AccessToken(myUser.Id, myImage.Id);
-                    myAccessToken.Insert();
+                    Debug.WriteLine(string.Format("AlbumId {0} != {1}", myImage.AlbumId, Guid.Empty));
+
+                    /*
+                    ImageTitle.InnerText = myImage.Title;
+                    Page.Title = myImage.Title;
+                    ImagePreview.ImageUrl = myImage.Directory;   
+                    */
                 }
 
-                //Gets URL without sub pages
-                ShareLink.Value = Request.Url.GetLeftPart(UriPartial.Authority) + myAccessToken.ImageRedirect;
-            }
-            else
-            {
-                ShareLinkContainer.Visible = false;
+                ImageTitle.InnerText = myImage.Title;
+                Page.Title = myImage.Title;
+                ImagePreview.ImageUrl = myImage.Directory;
+
+                //If there was no access token, the user is trying to share the photo.
+                //Generate a shareable link and display it on the screen.
+                if (Request.QueryString["access_token"] == null)
+                {
+                    Button_ViewAlbum.Visible = false;
+
+                    AccessToken myAccessToken;
+
+                    if (AccessToken.TokenExists(myUser.Id, myImage.Id))
+                    {
+                        myAccessToken = AccessToken.GetToken(myUser.Id, myImage.Id);
+                    }
+                    else
+                    {
+                        myAccessToken = new AccessToken(myUser.Id, myImage.Id);
+                        myAccessToken.Insert();
+                    }
+
+                    //Gets URL without sub pages
+                    ShareLink.Value = Request.Url.GetLeftPart(UriPartial.Authority) + myAccessToken.ImageRedirect;
+                }
+                else
+                {
+                    ShareLinkContainer.Visible = false;
+                }
             }
 
         }
