@@ -38,7 +38,7 @@ namespace ParsnipWebsite
                 {
                     Debug.WriteLine("Media Id was empty");
                     new LogEntry(DebugLog) { text = string.Format("Someone tried to access access token {0}. Access was denied because the person who created this link has been suspended.", myAccessToken.Id) };
-                    UploadUserSuspendedError.Visible = true;
+                    ShareUserSuspendedError.Visible = true;
                 }
                 else
                 {
@@ -74,10 +74,14 @@ namespace ParsnipWebsite
             }
 
             //Get the image which the user is trying to access, and display it on the screen.
-            if (myImage == null)
+            if (string.IsNullOrEmpty(myImage.Directory))
             {
                 ShareLinkContainer.Visible = false;
                 Button_ViewAlbum.Visible = false;
+                if(ShareUserSuspendedError.Visible == false)
+                {
+                    UploadUserSuspendedError.Visible = true;
+                }
             }
             else
             {
