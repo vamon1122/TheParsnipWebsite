@@ -18,7 +18,7 @@ namespace ParsnipWebsite
     {
         User myUser;
         Guid selectedUserId;
-        Log DebugLog = new Log("Debug");
+        static readonly Log DebugLog = new Log("Debug");
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -48,7 +48,6 @@ namespace ParsnipWebsite
 
                     //new LogEntry(Debug) { text = "Added new image to the page. Url = " + temp.PhotoSrc };
                 }
-
             }
             else
             {
@@ -56,16 +55,13 @@ namespace ParsnipWebsite
 
                 if (Request.QueryString["userId"] == null)
                     Response.Redirect("manage_photos?userId=" + Guid.Empty.ToString());
-
             }
-
-
         }
 
         protected void BtnDeleteUploads_Click(object sender, EventArgs e)
         {
             selectedUserId = new Guid(Request.QueryString["userId"].ToString());
-            ParsnipData.Media.Image.DeleteImagesByUser(selectedUserId);
+            ParsnipData.Media.Image.DeleteMediaTagPairsByUserId(selectedUserId);
             new LogEntry(DebugLog) { text = "Successfully deleted photos uploaded photos createdbyid = " + 
                 selectedUserId };
         }

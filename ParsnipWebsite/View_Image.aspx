@@ -36,12 +36,12 @@
 
     <div runat="server" class="alert alert-danger alert-dismissible parsnip-alert" Visible="false" id="ShareUserSuspendedError">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        <strong>Error:</strong> Could not access image. The person who shared this image has been suspended!
+        <strong>Error:</strong> Could not access image. The image has been deleted or the person who shared this image has been suspended!
     </div>
 
     <div runat="server" class="alert alert-danger alert-dismissible parsnip-alert" Visible="false" id="UploadUserSuspendedError">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        <strong>Error:</strong> Could not access image. The person who uploaded this image has been suspended!
+        <strong>Error:</strong> Could not access image. The image has been deleted or the person who uploaded the image has been suspended!
     </div>
 
     <div class="center_form">

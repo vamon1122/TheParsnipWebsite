@@ -16,17 +16,12 @@ namespace ParsnipWebsite
     public partial class Edit_Image : System.Web.UI.Page
     {
         User myUser;
-        Log DebugLog = new Log("Debug");
+        static readonly Log DebugLog = new Log("Debug");
         ParsnipData.Media.Image MyImage;
         protected void Page_Load(object sender, EventArgs e)
         {
             //REQUIRED TO VIEW POSTBACK
             form1.Action = Request.RawUrl;
-
-            //We secure the page using the UacApi. 
-            //This ensures that the user is logged in etc
-            //You only need to change where it says '_NEW TEMPLATE'.
-            //Change this to match your page name without the '.aspx' extension.
 
             if (Request.QueryString["imageid"] == null)
                 myUser = Account.SecurePage("edit_image", this, Data.DeviceType);
@@ -45,6 +40,7 @@ namespace ParsnipWebsite
 
                 NewAlbumsDropDown.Items.Clear();
 
+                NewAlbumsDropDown.Items.Add(new ListItem() { Value = Guid.Empty.ToString(), Text = "None" });
                 foreach (Album tempAlbum in Album.GetAllAlbums())
                 {
                     NewAlbumsDropDown.Items.Add(new ListItem() { Value = Convert.ToString(tempAlbum.Id), Text = tempAlbum.Name });
@@ -60,12 +56,12 @@ namespace ParsnipWebsite
                 }
                 else
                 {
-                    NewAlbumsDropDown.Items.Insert(0, new ListItem("(Deleted)", Guid.Empty.ToString()));
+                    NewAlbumsDropDown.SelectedValue = Guid.Empty.ToString();
                 }
 
                 if (Request.QueryString["delete"] != null)
                 {
-                    //I am NOT being deleted
+                    //I am being deleted
                     new LogEntry(DebugLog) { text = "Delete image clicked" };
                     MyImage.Delete();
 
@@ -121,20 +117,21 @@ namespace ParsnipWebsite
 
                     if (newAlbumId != null)
                     {
-                        if (newAlbumId != Guid.Empty.ToString())
+                        if (newAlbumId == Guid.Empty.ToString())
+                        {
+                            MyImage.RemoveFromAllAlbums();
+                        }
+                        else
                         {
                             MyImage.AlbumId = new Guid(newAlbumId);
+                            MyImage.Update();
                         }
                     }
-                    
-                    MyImage.Update();
 
                     string Redirect;
 
                     switch (MyImage.AlbumId.ToString().ToUpper())
                     {
-                        
-
                         case "4B4E450A-2311-4400-AB66-9F7546F44F4E":
                             Redirect = "photos?imageid=" + MyImage.Id.ToString();
                             break;
@@ -172,7 +169,6 @@ namespace ParsnipWebsite
 
                 if (MyImage.CreatedById.ToString() != myUser.Id.ToString())
                 {
-
                     new LogEntry(DebugLog) { text = string.Format("{0} attempted to edit an image which {1} did not own.", myUser.FullName, myUser.SubjectiveGenderPronoun) };
                     if (myUser.AccountType == "admin")
                     {
@@ -186,17 +182,11 @@ namespace ParsnipWebsite
                 }
                 Debug.WriteLine("Setting image directory to: " + MyImage.Directory);
                     ImagePreview.ImageUrl = MyImage.Directory;
-
-                    
-                
-
             }
             else
             {
                 Response.Redirect("home");
             }
-
-            
         }
 
         protected void ButtonSave_Click(object sender, EventArgs e)

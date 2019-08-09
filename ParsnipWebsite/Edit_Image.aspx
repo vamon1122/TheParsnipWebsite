@@ -47,8 +47,6 @@
             <br />
             <br />
 
-            
-
             <!-- Delete / save buttons -->
             <div style="width:100%; padding-left:5%; padding-right:5%;">
                 <asp:Button runat="server" ID="btn_AdminDelete"  CssClass="btn btn-primary float-left" Width="100px" Text="Delete" Visible="false" data-toggle="modal" data-target="#confirmDelete" OnClientClick="return false;" UseSubmitBehavior="false"></asp:Button>
@@ -66,7 +64,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            Are you sure that you want to remove this photo from all albums?
+                            Are you sure that you want to DELETE this photo?
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -108,7 +106,6 @@
             catch (e) { window.location = redirect; }
         }
     </script>
-    
 </body>
 </html>
 
