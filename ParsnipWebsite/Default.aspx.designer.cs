@@ -10,24 +10,15 @@
 namespace ParsnipWebsite {
     
     
-    public partial class Admin {
+    public partial class Default {
         
         /// <summary>
-        /// link_style control.
+        /// form1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlLink link_style;
-        
-        /// <summary>
-        /// adminMenu control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::ParsnipWebsite.Custom_Controls.Admin.AdminMenu adminMenu;
+        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
     }
 }
