@@ -82,6 +82,7 @@
     <Content Include="Custom_Controls\Media\MediaControl.ascx" />
     <Content Include="Custom_Controls\Menu\Menu.ascx" />
     <Content Include="Custom_Controls\Uac\AdminUserForm.ascx" />
+    <Content Include="Default.aspx" />
     <Content Include="Edit_Image.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Get_Device_Info.aspx" />
@@ -118,7 +119,6 @@
   <ItemGroup>
     <Content Include="Css\MobilePortraitStyle.css" />
     <Content Include="Css\DesktopStyle.css" />
-    <Content Include="default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Css\SharedStyle.css" />
     <Content Include="Users.aspx" />
@@ -186,6 +186,13 @@
     <Compile Include="Custom_Controls\Uac\AdminUserForm.ascx.designer.cs">
       <DependentUpon>AdminUserForm.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Edit_Image.aspx.cs">
       <DependentUpon>Edit_Image.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -201,13 +208,6 @@
       <DependentUpon>Get_Device_Info.aspx</DependentUpon>
     </Compile>
     <Compile Include="Data.cs" />
-    <Compile Include="default.aspx.cs">
-      <DependentUpon>default.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="default.aspx.designer.cs">
-      <DependentUpon>default.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
