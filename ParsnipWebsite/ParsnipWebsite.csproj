@@ -165,7 +165,7 @@
     <Compile Include="Custom_Controls\Admin\AdminMenu.ascx.designer.cs">
       <DependentUpon>AdminMenu.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Custom_Controls\App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Custom_Controls\Media\MediaControl.ascx.cs">
       <DependentUpon>MediaControl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
