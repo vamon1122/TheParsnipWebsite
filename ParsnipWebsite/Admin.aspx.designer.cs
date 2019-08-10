@@ -29,5 +29,23 @@ namespace ParsnipWebsite {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::ParsnipWebsite.Custom_Controls.Admin.AdminMenu adminMenu;
+        
+        /// <summary>
+        /// Label_ParsnipWebsiteVersion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label_ParsnipWebsiteVersion;
+        
+        /// <summary>
+        /// Label_ParsnipDataVersion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label_ParsnipDataVersion;
     }
 }

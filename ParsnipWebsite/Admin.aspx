@@ -31,8 +31,11 @@
             <hr class="my-4" />
             <p><adminControls:adminMenu runat="server" id="adminMenu" /></p>
         </div>
-            
+            <asp:Label runat="server" ID="Label_ParsnipWebsiteVersion"></asp:Label>
+            <br />
+            <asp:Label runat="server" ID="Label_ParsnipDataVersion"></asp:Label>
         </div>
+        
     </form>
 </body>
 </html>
