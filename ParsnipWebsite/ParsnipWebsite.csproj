@@ -122,7 +122,6 @@
     <Content Include="Css\DesktopStyle.css" />
     <Content Include="Global.asax" />
     <Content Include="Css\SharedStyle.css" />
-    <Content Include="Users.aspx" />
     <Content Include="Videos.aspx" />
     <Content Include="View_Image.aspx" />
     <Content Include="Web.config">
@@ -289,13 +288,6 @@
     </Compile>
     <Compile Include="Share_Stats.aspx.designer.cs">
       <DependentUpon>Share_Stats.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Users.aspx.cs">
-      <DependentUpon>Users.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Users.aspx.designer.cs">
-      <DependentUpon>Users.aspx</DependentUpon>
     </Compile>
     <Compile Include="Videos.aspx.cs">
       <DependentUpon>Videos.aspx</DependentUpon>
