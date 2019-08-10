@@ -18,6 +18,7 @@ namespace ParsnipWebsite
         User myUser;
         static readonly Log DebugLog = new Log("Debug");
         ParsnipData.Media.Image MyImage;
+        string OriginalAlbumRedirect;
         protected void Page_Load(object sender, EventArgs e)
         {
             //REQUIRED TO VIEW POSTBACK
@@ -38,12 +39,35 @@ namespace ParsnipWebsite
 
                 Debug.WriteLine("----------Image album = " + MyImage.AlbumId);
 
+                switch (MyImage.AlbumId.ToString().ToUpper())
+                {
+                    case "4B4E450A-2311-4400-AB66-9F7546F44F4E":
+                        OriginalAlbumRedirect = "photos?imageid=" + MyImage.Id.ToString();
+                        break;
+                    case "5F15861A-689C-482A-8E31-2F13429C36E5":
+                        OriginalAlbumRedirect = "memes?imageid=" + MyImage.Id.ToString();
+                        break;
+                    case "FF3127DF-70B2-47EF-B77B-2E086D2EF370":
+                        OriginalAlbumRedirect = "krakow?imageid=" + MyImage.Id.ToString();
+                        break;
+                    case "00000000-0000-0000-0000-000000000000":
+                        Debug.WriteLine("Album id is empty guid. Redirecting to manage_photos");
+                        OriginalAlbumRedirect = "manage_photos?imageid=" + MyImage.Id.ToString();
+                        break;
+                    default:
+                        Debug.WriteLine(string.Format("The album id {0} != ff3127df-70b2-47ef-b77b-2e086d2ef370",
+                            MyImage.AlbumId));
+                        OriginalAlbumRedirect = "home?error=noimagealbum4";
+                        break;
+                }
+
                 NewAlbumsDropDown.Items.Clear();
 
                 NewAlbumsDropDown.Items.Add(new ListItem() { Value = Guid.Empty.ToString(), Text = "None" });
                 foreach (Album tempAlbum in Album.GetAllAlbums())
                 {
-                    NewAlbumsDropDown.Items.Add(new ListItem() { Value = Convert.ToString(tempAlbum.Id), Text = tempAlbum.Name });
+                    NewAlbumsDropDown.Items.Add(new ListItem() { Value = Convert.ToString(tempAlbum.Id),
+                        Text = tempAlbum.Name });
                 }
 
                 var AlbumIds = MyImage.AlbumIds();
@@ -134,18 +158,21 @@ namespace ParsnipWebsite
                             Redirect = "krakow?imageid=" + MyImage.Id.ToString();
                             break;
                         case "00000000-0000-0000-0000-000000000000":
-                            Debug.WriteLine("Album id is empty guid. Redirecting to manage_photos");
-                            Redirect = "manage_photos?imageid=" + MyImage.Id.ToString();
+                            Debug.WriteLine("New album id is empty. Redirecting to original album");
+                            //Redirect = "manage_photos?imageid=" + MyImage.Id.ToString();
+                            Redirect = OriginalAlbumRedirect;
                             break;
                         default:
-                            //Debug.WriteLine(string.Format("The album id {0} != ff3127df-70b2-47ef-b77b-2e086d2ef370", MyImage.AlbumId));
+                            Debug.WriteLine(string.Format("The album id {0} != ff3127df-70b2-47ef-b77b-2e086d2ef370", 
+                                MyImage.AlbumId));
                             Redirect = "home?error=noimagealbum3";
                             break;
                     }
                     Response.Redirect(Redirect);
                 }
 
-                if (MyImage.Title != null && !string.IsNullOrEmpty(MyImage.Title) && !string.IsNullOrWhiteSpace(MyImage.Title))
+                if (MyImage.Title != null && !string.IsNullOrEmpty(MyImage.Title) && 
+                    !string.IsNullOrWhiteSpace(MyImage.Title))
                 {
                     Debug.WriteLine("Updating title from image object: " + MyImage.Title);
                     InputTitleTwo.Text = MyImage.Title;
@@ -161,11 +188,13 @@ namespace ParsnipWebsite
 
                 if (MyImage.CreatedById.ToString() != myUser.Id.ToString())
                 {
-                    new LogEntry(DebugLog) { text = string.Format("{0} attempted to edit an image which {1} did not own.", myUser.FullName, myUser.SubjectiveGenderPronoun) };
+                    new LogEntry(DebugLog) { text = string.Format("{0} attempted to edit an image which {1} " +
+                        "did not own.", myUser.FullName, myUser.SubjectiveGenderPronoun) };
                     if (myUser.AccountType == "admin")
                     {
 
-                        new LogEntry(DebugLog) { text = string.Format("{0} was allowed to edit the image anyway because {1} is an admin.", myUser.FullName, myUser.SubjectiveGenderPronoun) };
+                        new LogEntry(DebugLog) { text = string.Format("{0} was allowed to edit the image anyway " +
+                            "because {1} is an admin.", myUser.FullName, myUser.SubjectiveGenderPronoun) };
                     }
                     else
                     {
