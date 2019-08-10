@@ -62,8 +62,8 @@ namespace ParsnipWebsite
                 }
 
                 NewAlbumsDropDown.Items.Clear();
-
-                NewAlbumsDropDown.Items.Add(new ListItem() { Value = Guid.Empty.ToString(), Text = "None" });
+                if (myUser.AccountType == "admin")
+                    NewAlbumsDropDown.Items.Add(new ListItem() { Value = Guid.Empty.ToString(), Text = "None" });
                 foreach (Album tempAlbum in Album.GetAllAlbums())
                 {
                     NewAlbumsDropDown.Items.Add(new ListItem() { Value = Convert.ToString(tempAlbum.Id),
@@ -179,12 +179,8 @@ namespace ParsnipWebsite
                 }
 
                 if (myUser.AccountType == "admin")
-                {
-                    if (AlbumIds.Count() > 0)
                         btn_AdminDelete.Visible = true;
-
-                    //DropDownDiv.Visible = true;
-                }
+                
 
                 if (MyImage.CreatedById.ToString() != myUser.Id.ToString())
                 {
