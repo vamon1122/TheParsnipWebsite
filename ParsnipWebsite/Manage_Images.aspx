@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Manage_Photos.aspx.cs" Inherits="ParsnipWebsite.Manage_Photos" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Manage_Images.aspx.cs" Inherits="ParsnipWebsite.Manage_Images" %>
 <%@ Register Src="~/Custom_Controls/Admin/AdminMenu.ascx" TagPrefix="adminControls" TagName="adminMenu" %>
 
 <!DOCTYPE html>
@@ -19,7 +19,7 @@
     <link rel="stylesheet" type="text/css" href="Css/SharedStyle.css" />
     <script src="../Javascript/ApplyStyle.js"></script>
 
-    <title>Manage Photos</title>
+    <title>Manage Images</title>
     
     <script src="Javascript/IntersectionObserver.js"></script>
     
@@ -28,8 +28,8 @@
     <form id="form1" runat="server">
         <div class="container">
                 <div class="jumbotron">
-                <h1 class="display-4">Photos</h1>
-                <p class="lead">Manage photos which have been uploaded to the site</p>
+                <h1 class="display-4">Images</h1>
+                <p class="lead">Manage images which have been uploaded to the site</p>
                 <hr class="my-4" />
                 <p><adminControls:adminMenu runat="server" id="adminMenu1" /></p>
             </div>  
@@ -105,3 +105,4 @@
     </script>
 </body>
 </html>
+

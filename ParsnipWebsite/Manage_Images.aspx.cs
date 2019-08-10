@@ -14,7 +14,7 @@ using ParsnipWebsite.Custom_Controls.Media;
 
 namespace ParsnipWebsite
 {
-    public partial class Manage_Photos : System.Web.UI.Page
+    public partial class Manage_Images : System.Web.UI.Page
     {
         User myUser;
         Guid selectedUserId;
@@ -22,7 +22,7 @@ namespace ParsnipWebsite
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            myUser = Account.SecurePage("manage_photos", this, Data.DeviceType, "admin");
+            myUser = Account.SecurePage("manage_images", this, Data.DeviceType, "admin");
         }
 
         protected void Page_LoadComplete(object sender, EventArgs e)
@@ -31,9 +31,9 @@ namespace ParsnipWebsite
 
             if (Request.QueryString["userId"] != null && Request.QueryString["userId"].ToString() != "")
             {
-                new LogEntry(DebugLog) { text = "Manage_Photos userId = " + Request.QueryString["userId"].ToString() };
+                new LogEntry(DebugLog) { text = "Manage_Images userId = " + Request.QueryString["userId"].ToString() };
                 selectedUserId = new Guid(Request.QueryString["userId"].ToString());
-                
+
                 SelectUser.SelectedValue = selectedUserId.ToString();
 
                 Debug.WriteLine("---------- posted back with id = " + selectedUserId);
@@ -54,7 +54,7 @@ namespace ParsnipWebsite
                 Debug.WriteLine("---------- not a postback");
 
                 if (Request.QueryString["userId"] == null)
-                    Response.Redirect("manage_photos?userId=" + Guid.Empty.ToString());
+                    Response.Redirect("manage_images?userId=" + Guid.Empty.ToString());
             }
         }
 
@@ -62,15 +62,22 @@ namespace ParsnipWebsite
         {
             selectedUserId = new Guid(Request.QueryString["userId"].ToString());
             ParsnipData.Media.Image.DeleteMediaTagPairsByUserId(selectedUserId);
-            new LogEntry(DebugLog) { text = "Successfully deleted photos uploaded photos createdbyid = " + 
-                selectedUserId };
+            new LogEntry(DebugLog)
+            {
+                text = "Successfully deleted photos uploaded photos createdbyid = " +
+                selectedUserId
+            };
         }
 
         void UpdateUserList()
         {
             var tempUsers = new List<User>();
-            tempUsers.Add(new User(Guid.Empty) { Forename = "None", Surname = "Selected",
-                Username = "No user selected" });
+            tempUsers.Add(new User(Guid.Empty)
+            {
+                Forename = "None",
+                Surname = "Selected",
+                Username = "No user selected"
+            });
 
             tempUsers.AddRange(ParsnipData.Accounts.User.GetAllUsers());
 
@@ -90,7 +97,7 @@ namespace ParsnipWebsite
 
         protected void SelectUser_Changed(object sender, EventArgs e)
         {
-            Response.Redirect("manage_photos?userId=" + SelectUser.SelectedValue);
+            Response.Redirect("manage_images?userId=" + SelectUser.SelectedValue);
         }
     }
 }

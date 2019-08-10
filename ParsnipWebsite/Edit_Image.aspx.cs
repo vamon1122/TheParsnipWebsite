@@ -7,7 +7,6 @@ using System.Web.UI.WebControls;
 using ParsnipData.Accounts;
 using ParsnipData.Media;
 using ParsnipData.Logs;
-using System.Data.SqlClient;
 using ParsnipData;
 using System.Diagnostics;
 
@@ -51,8 +50,8 @@ namespace ParsnipWebsite
                         OriginalAlbumRedirect = "krakow?imageid=" + MyImage.Id.ToString();
                         break;
                     case "00000000-0000-0000-0000-000000000000":
-                        Debug.WriteLine("Album id is empty guid. Redirecting to manage_photos");
-                        OriginalAlbumRedirect = "manage_photos?imageid=" + MyImage.Id.ToString();
+                        Debug.WriteLine("Album id is empty guid. Redirecting to manage_images");
+                        OriginalAlbumRedirect = "manage_images?imageid=" + MyImage.Id.ToString();
                         break;
                     default:
                         Debug.WriteLine(string.Format("The album id {0} != ff3127df-70b2-47ef-b77b-2e086d2ef370",
@@ -104,13 +103,12 @@ namespace ParsnipWebsite
                             break;
                         case "00000000-0000-0000-0000-000000000000":
                             Debug.WriteLine("No album selected. Must be none! Redirecting to manage photos...");
-                            Redirect = "manage_photos";
+                            Redirect = "manage_images";
                             break;
                         default:
                             Redirect = "home?error=noimagealbum2";
                             break;
                     }
-
                     Response.Redirect(Redirect);
                 }
 
@@ -118,10 +116,6 @@ namespace ParsnipWebsite
                 {
                     Debug.WriteLine("I am a postback!!!");
                     new LogEntry(DebugLog) { text = "Delete image NOT clicked" };
-                    /*
-                    new LogEntry(DebugLog) { text = "Posted back title3 = " + Request["InputTitleTwo"].ToString() };
-                    new LogEntry(DebugLog) { text = "Posted back albumid3 = " + Request["NewAlbumsDropDown"].ToString() };
-                    */
 
                     Debug.WriteLine("Getting title from request: " + Request["InputTitleTwo"].ToString());
                     MyImage.Title = Request["InputTitleTwo"].ToString();
@@ -159,7 +153,7 @@ namespace ParsnipWebsite
                             break;
                         case "00000000-0000-0000-0000-000000000000":
                             Debug.WriteLine("New album id is empty. Redirecting to original album");
-                            //Redirect = "manage_photos?imageid=" + MyImage.Id.ToString();
+                            //Redirect = "manage_images?imageid=" + MyImage.Id.ToString();
                             Redirect = OriginalAlbumRedirect;
                             break;
                         default:
@@ -180,7 +174,6 @@ namespace ParsnipWebsite
 
                 if (myUser.AccountType == "admin")
                         btn_AdminDelete.Visible = true;
-                
 
                 if (MyImage.CreatedById.ToString() != myUser.Id.ToString())
                 {
@@ -188,7 +181,6 @@ namespace ParsnipWebsite
                         "did not own.", myUser.FullName, myUser.SubjectiveGenderPronoun) };
                     if (myUser.AccountType == "admin")
                     {
-
                         new LogEntry(DebugLog) { text = string.Format("{0} was allowed to edit the image anyway " +
                             "because {1} is an admin.", myUser.FullName, myUser.SubjectiveGenderPronoun) };
                     }
