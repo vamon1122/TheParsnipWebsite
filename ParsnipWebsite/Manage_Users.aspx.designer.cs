@@ -10,7 +10,7 @@
 namespace ParsnipWebsite {
     
     
-    public partial class Users {
+    public partial class Manage_Users {
         
         /// <summary>
         /// link_style control.

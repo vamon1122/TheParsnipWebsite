@@ -7,7 +7,7 @@
     <a class="nav-link" href="logs">Logs</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="users">Users</a>
+    <a class="nav-link" href="manage_users">Users</a>
   </li>
           <li class="nav-item">
     <a class="nav-link" href="manage_images">Images</a>

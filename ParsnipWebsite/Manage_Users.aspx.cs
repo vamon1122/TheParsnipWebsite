@@ -11,7 +11,7 @@ using ParsnipData.Logs;
 
 namespace ParsnipWebsite
 {
-    public partial class Users : System.Web.UI.Page
+    public partial class Manage_Users : System.Web.UI.Page
     {
         User myUser;
         static Guid selectedUserId;
@@ -19,9 +19,9 @@ namespace ParsnipWebsite
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Request.QueryString["userId"] == null)
-                Response.Redirect("users?userId=" + Guid.Empty.ToString());
+                Response.Redirect("manage_users?userId=" + Guid.Empty.ToString());
 
-            myUser = Account.SecurePage("users", this, Data.DeviceType, "admin");
+            myUser = Account.SecurePage("manage_users", this, Data.DeviceType, "admin");
 
             selectedUserId = new Guid(Request.QueryString["userId"]);
 
@@ -79,7 +79,7 @@ namespace ParsnipWebsite
             int i = 0;
             foreach (User temp in tempUsers)
             {
-                ListItems[i] = new ListItem(String.Format("{0} ({1})", temp.FullName, temp.Username), 
+                ListItems[i] = new ListItem(String.Format("{0} ({1})", temp.FullName, temp.Username),
                     temp.Id.ToString());
 
                 i++;
@@ -99,7 +99,7 @@ namespace ParsnipWebsite
         {
             string rememberSelectedValue = selectUser.SelectedValue;
             Debug.WriteLine("BEN!!!1 " + UserForm.DataSubject.Id.ToString());
-            string temp = string.Format("{0} button was clicked. Selected user id = {1}", Button_Action.Text, 
+            string temp = string.Format("{0} button was clicked. Selected user id = {1}", Button_Action.Text,
                 rememberSelectedValue);
 
             //Debug.WriteLine(temp);
@@ -114,8 +114,11 @@ namespace ParsnipWebsite
             {
                 if (UserForm.DataSubject.Update())
                 {
-                    new LogEntry(Log.Default) { text = String.Format("{0} {1} an account for {2} via the UserForm", 
-                        myUser.FullName, actionPast, UserForm.DataSubject.FullName) };
+                    new LogEntry(Log.Default)
+                    {
+                        text = String.Format("{0} {1} an account for {2} via the UserForm",
+                        myUser.FullName, actionPast, UserForm.DataSubject.FullName)
+                    };
 
                     Response.Redirect(string.Format("users?userId={0}&action=update&success=true", UserForm.DataSubject.Id.ToString()));
                 }
@@ -134,14 +137,14 @@ namespace ParsnipWebsite
                 new LogEntry(Log.Default)
                 {
                     text = String.Format("{0} attempted to {1} an account for {2} via the UserForm, but {3} was not " +
-                    "validated successfully.", myUser.FullName, actionPresent, UserForm.DataSubject.FullName, 
+                    "validated successfully.", myUser.FullName, actionPresent, UserForm.DataSubject.FullName,
                     UserForm.DataSubject.SubjectiveGenderPronoun)
                 };
 
                 Error.Attributes.CssStyle.Add("display", "block");
 
                 string ValidationInfo = string.Format("<strong>Validation Error</strong> {0} could not be updated " +
-                    "because {1} failed to validate: ", UserForm.DataSubject.FullName, 
+                    "because {1} failed to validate: ", UserForm.DataSubject.FullName,
                     UserForm.DataSubject.SubjectiveGenderPronoun);
 
                 foreach (string error in UserForm.DataSubject.ValidationErrors)

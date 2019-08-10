@@ -50,7 +50,7 @@ namespace ParsnipWebsite
 
                 var userCell = new TableCell();
                 userCell.Controls.Add(new LiteralControl(
-                    string.Format("<a href={0}>{1}</a>", "users?userid=" + row[7].ToString(), row[3].ToString())));
+                    string.Format("<a href={0}>{1}</a>", "manage_users?userid=" + row[7].ToString(), row[3].ToString())));
                 myRow.Cells.Add(userCell);
 
                 var timesUsedCell = new TableCell();
