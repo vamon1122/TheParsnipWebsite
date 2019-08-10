@@ -41,14 +41,12 @@
             </asp:DropDownList>
             <br />
             <!--<asp:Button runat="server" ID="btnDelete"  CssClass="btn btn-primary" Text="Delete" Visible="false" data-toggle="modal" data-target="#confirmDelete" OnClientClick="return false;"></asp:Button>-->
-                    <button data-toggle="modal" data-target="#confirmDelete" class="btn btn-danger" onclick="return false" >Delete ALL images</button>
+                    <button data-toggle="modal" data-target="#confirmDelete" class="btn btn-danger" onclick="return false" >Remove ALL images from their albums</button>
             <br />
             <br />
                 <div runat="server" id="DisplayPhotosDiv">
 
                 </div>
-
-
         </div>
         <!-- Modal -->
         <div class="modal fade" id="confirmDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -61,7 +59,8 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        Are you sure that you want to remove all of this user's photos from all albums?
+                        Are you sure that you want to remove all of this user's images from all albums? 
+                        (WARNING: THIS IS PERMANENT AND IRREVERSIBLE)
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
