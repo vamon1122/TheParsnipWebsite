@@ -119,13 +119,14 @@ namespace ParsnipWebsite
                     {
                         if (newAlbumId == Guid.Empty.ToString())
                         {
+                            MyImage.AlbumId = Guid.Empty;
                             MyImage.RemoveFromAllAlbums();
                         }
                         else
                         {
                             MyImage.AlbumId = new Guid(newAlbumId);
-                            MyImage.Update();
                         }
+                        MyImage.Update();
                     }
 
                     string Redirect;
