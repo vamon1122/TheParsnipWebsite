@@ -260,6 +260,7 @@
     <Compile Include="Manage_Users.aspx.designer.cs">
       <DependentUpon>Manage_Users.aspx</DependentUpon>
     </Compile>
+    <Compile Include="MediaManager.cs" />
     <Compile Include="Memes.aspx.cs">
       <DependentUpon>Memes.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

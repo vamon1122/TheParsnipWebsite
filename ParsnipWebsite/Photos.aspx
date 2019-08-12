@@ -63,7 +63,7 @@
                 <asp:FileUpload ID="PhotoUpload" runat="server" class="form-control-file" onchange="this.form.submit()" />
             </label>
         </div>
-        <hr class="break">
+        <hr class="break" />
         <div runat="server" id="DynamicPhotosDiv">
         </div>
     </form>    
