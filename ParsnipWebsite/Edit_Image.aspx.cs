@@ -41,13 +41,13 @@ namespace ParsnipWebsite
                 switch (MyImage.AlbumId.ToString().ToUpper())
                 {
                     case "4B4E450A-2311-4400-AB66-9F7546F44F4E":
-                        OriginalAlbumRedirect = "photos?id=" + MyImage.Id.ToString();
+                        OriginalAlbumRedirect = "photos?focus=" + MyImage.Id.ToString();
                         break;
                     case "5F15861A-689C-482A-8E31-2F13429C36E5":
-                        OriginalAlbumRedirect = "memes?id=" + MyImage.Id.ToString();
+                        OriginalAlbumRedirect = "memes?focus=" + MyImage.Id.ToString();
                         break;
                     case "FF3127DF-70B2-47EF-B77B-2E086D2EF370":
-                        OriginalAlbumRedirect = "krakow?id=" + MyImage.Id.ToString();
+                        OriginalAlbumRedirect = "krakow?focus=" + MyImage.Id.ToString();
                         break;
                     case "00000000-0000-0000-0000-000000000000":
                         Debug.WriteLine("Album id is empty guid. Redirecting to manage_images");
@@ -143,13 +143,13 @@ namespace ParsnipWebsite
                     switch (MyImage.AlbumId.ToString().ToUpper())
                     {
                         case "4B4E450A-2311-4400-AB66-9F7546F44F4E":
-                            Redirect = "photos?id=" + MyImage.Id.ToString();
+                            Redirect = "photos?focus=" + MyImage.Id.ToString();
                             break;
                         case "5F15861A-689C-482A-8E31-2F13429C36E5":
-                            Redirect = "memes?id=" + MyImage.Id.ToString();
+                            Redirect = "memes?focus=" + MyImage.Id.ToString();
                             break;
                         case "FF3127DF-70B2-47EF-B77B-2E086D2EF370":
-                            Redirect = "krakow?id=" + MyImage.Id.ToString();
+                            Redirect = "krakow?focus=" + MyImage.Id.ToString();
                             break;
                         case "00000000-0000-0000-0000-000000000000":
                             Debug.WriteLine("New album id is empty. Redirecting to original album");
