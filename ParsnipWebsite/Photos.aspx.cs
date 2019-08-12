@@ -29,19 +29,16 @@ namespace ParsnipWebsite
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Request.QueryString["imageid"] == null)
-                myUser = Account.SecurePage("photos", this, Data.DeviceType, "member");
+                myUser = Account.SecurePage("photos", this, Data.DeviceType);
             else
-                myUser = Account.SecurePage("photos?imageid=" + Request.QueryString["imageid"], this, Data.DeviceType, "member");
+                myUser = Account.SecurePage("photos?imageid=" + Request.QueryString["imageid"], this, Data.DeviceType);
 
             if (IsPostBack && PhotoUpload.PostedFile != null)
-            {
                 MediaManager.UploadImage(myUser, PhotosAlbum, PhotoUpload);
-            }
 
             if (myUser.AccountType == "admin" || myUser.AccountType == "member")
-            {
                 UploadDiv.Style.Clear();
-            }
+
             Debug.WriteLine("Getting all photos");
             List<ParsnipData.Media.Image> AllPhotos = PhotosAlbum.GetAllImages();
             Debug.WriteLine("Got all photos");
