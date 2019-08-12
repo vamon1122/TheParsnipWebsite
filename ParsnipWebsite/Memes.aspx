@@ -10,7 +10,7 @@
     <link rel="apple-touch-icon" sizes="72×72" href="Resources/Favicons/apple-icon-72x72.png" />
     <link rel="apple-touch-icon" href="Resources/Favicons/apple-icon.png" />
     <!-- BOOTSTRAP START -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
@@ -49,7 +49,7 @@
                     </label>
 
                 </div>
-                <hr class="break">
+                <hr class="break" />
                 <div runat="server" id="DynamicMemesDiv">
 
                 </div>
@@ -57,39 +57,38 @@
 
     <script src="../Javascript/FocusImage.js"></script>
     <script>
-                document.addEventListener("DOMContentLoaded", function ()
+        document.addEventListener("DOMContentLoaded", function ()
+        {
+            var lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
+
+            if ("IntersectionObserver" in window)
+            {
+                let lazyImageObserver = new IntersectionObserver(function (entries, observer)
                 {
-                    var lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
-
-                    if ("IntersectionObserver" in window)
+                    entries.forEach(function (entry)
                     {
-                        let lazyImageObserver = new IntersectionObserver(function (entries, observer)
+                        if (entry.isIntersecting)
                         {
-                            entries.forEach(function (entry)
-                            {
-                                if (entry.isIntersecting)
-                                {
-                                    let lazyImage = entry.target;
-                                    lazyImage.src = lazyImage.dataset.src;
-                                    lazyImage.srcset = lazyImage.dataset.srcset;
-                                    lazyImage.classList.remove("lazy");
-                                    lazyImageObserver.unobserve(lazyImage);
-                                }
-                            });
-                        });
-
-                        lazyImages.forEach(function (lazyImage) {
-                            lazyImageObserver.observe(lazyImage);
-                        });
-                    }
-                    else
-                    {
-                        //I used Javascript/intersection-observer as a fallback
-                    }
+                            let lazyImage = entry.target;
+                            lazyImage.src = lazyImage.dataset.src;
+                            lazyImage.srcset = lazyImage.dataset.srcset;
+                            lazyImage.classList.remove("lazy");
+                            lazyImageObserver.unobserve(lazyImage);
+                        }
+                    });
                 });
 
-       
-            </script>
+                lazyImages.forEach(function (lazyImage)
+                {
+                    lazyImageObserver.observe(lazyImage);
+                });
+            }
+            else
+            {
+                //I used Javascript/intersection-observer as a fallback
+            }
+        });
+    </script>
 
     <script>
         var url_string = window.location.href
@@ -106,6 +105,5 @@
         }
     </script>
 </body>
-
 </html>
 
