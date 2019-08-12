@@ -61,15 +61,15 @@ namespace ParsnipWebsite
             }
             else
             {
-                if (Request.QueryString["imageid"] == null)
+                if (Request.QueryString["id"] == null)
                     myUser = Account.SecurePage("view_image", this, Data.DeviceType);
                 else
-                    myUser = Account.SecurePage("view_image?imageid=" + Request.QueryString["imageid"], this, Data.DeviceType);
+                    myUser = Account.SecurePage("view_image?id=" + Request.QueryString["id"], this, Data.DeviceType);
 
-                if (Request.QueryString["imageid"] == null)
+                if (Request.QueryString["id"] == null)
                     Response.Redirect("home");
 
-                myImage = new ParsnipData.Media.Image(new Guid(Request.QueryString["imageid"]));
+                myImage = new ParsnipData.Media.Image(new Guid(Request.QueryString["id"]));
                 myImage.Select();
             }
 
@@ -145,15 +145,15 @@ namespace ParsnipWebsite
             {
                 case "4B4E450A-2311-4400-AB66-9F7546F44F4E":
                     Debug.WriteLine("Redirecting to photos");
-                    Response.Redirect("~/photos?imageid=" + myImage.Id);
+                    Response.Redirect("~/photos?id=" + myImage.Id);
                     break;
                 case "5F15861A-689C-482A-8E31-2F13429C36E5":
                     Debug.WriteLine("Redirecting to memes");
-                    Response.Redirect("~/memes?imageid=" + myImage.Id);
+                    Response.Redirect("~/memes?id=" + myImage.Id);
                     break;
                 case "FF3127DF-70B2-47EF-B77B-2E086D2EF370":
                     Debug.WriteLine("Redirecting to Krakow");
-                    Response.Redirect("~/krakow?imageid=" + myImage.Id);
+                    Response.Redirect("~/krakow?id=" + myImage.Id);
                     break;
                 default:
                     Debug.WriteLine("Album was wrong! Album = " + myImage.AlbumId.ToString());

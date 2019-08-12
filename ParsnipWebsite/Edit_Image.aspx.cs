@@ -23,17 +23,17 @@ namespace ParsnipWebsite
             //REQUIRED TO VIEW POSTBACK
             form1.Action = Request.RawUrl;
 
-            if (Request.QueryString["imageid"] == null)
+            if (Request.QueryString["id"] == null)
                 myUser = Account.SecurePage("edit_image", this, Data.DeviceType);
             else
-                myUser = Account.SecurePage("edit_image?imageid=" + Request.QueryString["imageid"], this, Data.DeviceType);
+                myUser = Account.SecurePage("edit_image?id=" + Request.QueryString["id"], this, Data.DeviceType);
 
             //myUser = Uac.SecurePage("edit_image", this, Data.DeviceType);
 
-            if (Request.QueryString["imageid"] != null)
+            if (Request.QueryString["id"] != null)
             {
-                MyImage = new ParsnipData.Media.Image(new Guid(Request.QueryString["imageid"]));
-                Debug.WriteLine("Selecting image with id = " + Request.QueryString["imageid"]);
+                MyImage = new ParsnipData.Media.Image(new Guid(Request.QueryString["id"]));
+                Debug.WriteLine("Selecting image with id = " + Request.QueryString["id"]);
                 MyImage.Select();
 
                 Debug.WriteLine("----------Image album = " + MyImage.AlbumId);
@@ -41,17 +41,17 @@ namespace ParsnipWebsite
                 switch (MyImage.AlbumId.ToString().ToUpper())
                 {
                     case "4B4E450A-2311-4400-AB66-9F7546F44F4E":
-                        OriginalAlbumRedirect = "photos?imageid=" + MyImage.Id.ToString();
+                        OriginalAlbumRedirect = "photos?id=" + MyImage.Id.ToString();
                         break;
                     case "5F15861A-689C-482A-8E31-2F13429C36E5":
-                        OriginalAlbumRedirect = "memes?imageid=" + MyImage.Id.ToString();
+                        OriginalAlbumRedirect = "memes?id=" + MyImage.Id.ToString();
                         break;
                     case "FF3127DF-70B2-47EF-B77B-2E086D2EF370":
-                        OriginalAlbumRedirect = "krakow?imageid=" + MyImage.Id.ToString();
+                        OriginalAlbumRedirect = "krakow?id=" + MyImage.Id.ToString();
                         break;
                     case "00000000-0000-0000-0000-000000000000":
                         Debug.WriteLine("Album id is empty guid. Redirecting to manage_images");
-                        OriginalAlbumRedirect = "manage_images?imageid=" + MyImage.Id.ToString();
+                        OriginalAlbumRedirect = "manage_images?id=" + MyImage.Id.ToString();
                         break;
                     default:
                         Debug.WriteLine(string.Format("The album id {0} != ff3127df-70b2-47ef-b77b-2e086d2ef370",
@@ -143,17 +143,17 @@ namespace ParsnipWebsite
                     switch (MyImage.AlbumId.ToString().ToUpper())
                     {
                         case "4B4E450A-2311-4400-AB66-9F7546F44F4E":
-                            Redirect = "photos?imageid=" + MyImage.Id.ToString();
+                            Redirect = "photos?id=" + MyImage.Id.ToString();
                             break;
                         case "5F15861A-689C-482A-8E31-2F13429C36E5":
-                            Redirect = "memes?imageid=" + MyImage.Id.ToString();
+                            Redirect = "memes?id=" + MyImage.Id.ToString();
                             break;
                         case "FF3127DF-70B2-47EF-B77B-2E086D2EF370":
-                            Redirect = "krakow?imageid=" + MyImage.Id.ToString();
+                            Redirect = "krakow?id=" + MyImage.Id.ToString();
                             break;
                         case "00000000-0000-0000-0000-000000000000":
                             Debug.WriteLine("New album id is empty. Redirecting to original album");
-                            //Redirect = "manage_images?imageid=" + MyImage.Id.ToString();
+                            //Redirect = "manage_images?id=" + MyImage.Id.ToString();
                             Redirect = OriginalAlbumRedirect;
                             break;
                         default:

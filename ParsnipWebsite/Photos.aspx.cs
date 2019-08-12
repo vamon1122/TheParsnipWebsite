@@ -28,10 +28,10 @@ namespace ParsnipWebsite
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Request.QueryString["imageid"] == null)
+            if (Request.QueryString["id"] == null)
                 myUser = Account.SecurePage("photos", this, Data.DeviceType);
             else
-                myUser = Account.SecurePage("photos?imageid=" + Request.QueryString["imageid"], this, Data.DeviceType);
+                myUser = Account.SecurePage("photos?id=" + Request.QueryString["id"], this, Data.DeviceType);
 
             if (IsPostBack && PhotoUpload.PostedFile != null)
                 MediaManager.UploadImage(myUser, PhotosAlbum, PhotoUpload);

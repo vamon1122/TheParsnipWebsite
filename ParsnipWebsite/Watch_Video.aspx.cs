@@ -27,21 +27,21 @@ namespace ParsnipWebsite
             {
                 Button_ViewAlbum.Visible = false;
 
-                //We handle data-id since Youtube.js cannot access the video_id
+                //We handle data-id since Youtube.js cannot access the id
                 if (Request.QueryString["data-id"] == null)
                 {
-                    if (Request.QueryString["video_id"] == null)
+                    if (Request.QueryString["id"] == null)
                     {
                         Response.Redirect("videos");
                     }
                     else
                     {
-                        myUser = Account.SecurePage("watch_video?video_id=" + Request.QueryString["video_id"], this,
+                        myUser = Account.SecurePage("watch_video?id=" + Request.QueryString["id"], this,
                         Data.DeviceType);
 
-                        if (Video.Exists(new Guid(Request.QueryString["video_id"])))
+                        if (Video.Exists(new Guid(Request.QueryString["id"])))
                         {
-                            myVideo = new Video(new Guid(Request.QueryString["video_id"]));
+                            myVideo = new Video(new Guid(Request.QueryString["id"]));
                             myVideo.Select();
 
                             if (AccessToken.TokenExists(myUser.Id, myVideo.Id))
@@ -56,7 +56,7 @@ namespace ParsnipWebsite
                         }
                         else
                         {
-                            myYoutubeVideo = new YoutubeVideo(new Guid(Request.QueryString["video_id"]));
+                            myYoutubeVideo = new YoutubeVideo(new Guid(Request.QueryString["id"]));
                             myYoutubeVideo.Select();
 
                             if (AccessToken.TokenExists(myUser.Id, myYoutubeVideo.Id))

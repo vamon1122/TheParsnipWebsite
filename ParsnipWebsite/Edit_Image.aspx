@@ -78,8 +78,8 @@
     </div>
       
     <script>
-        //Uses url parameter "imageid" to delete the image whose Id is 
-        //sepcified in the url parameter "imageid". Fired by delete modal.
+        //Uses url parameter "id" to delete the image whose Id is 
+        //sepcified in the url parameter "id". Fired by delete modal.
         function DeletePhoto()
         {
             var url_string = window.location.href
@@ -90,13 +90,13 @@
             {
                 //More efficient but does not work on older browsers
                 url = new URL(url_string);
-                redirect += "imageid=" + url.searchParams.get("imageid") + "&delete=true";
+                redirect += "id=" + url.searchParams.get("id") + "&delete=true";
             }
             catch (e)
             {
                 //More compatible method
                 url = window.location.href;
-                redirect += "imageid=" + url.split('=')[url.split('=').length - 1] + "&delete=true";
+                redirect += "id=" + url.split('=')[url.split('=').length - 1] + "&delete=true";
             }
 
             //Use window.location.replace if possible because 
