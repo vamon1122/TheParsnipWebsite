@@ -32,8 +32,8 @@ namespace ParsnipWebsite
                 switch (row[6].ToString().ToUpper())
                 {
                     case "73C436A1-893B-4418-8800-821823C18DFE":
-                        mediaRedirect = "video_player?video_id=";
-                        shareRedirect = "video_player?access_token=";
+                        mediaRedirect = "watch_video?video_id=";
+                        shareRedirect = "watch_video?access_token=";
                         break;
                     default:
                         mediaRedirect = "view_image?imageid=";

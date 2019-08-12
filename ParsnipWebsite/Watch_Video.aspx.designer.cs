@@ -10,7 +10,7 @@
 namespace ParsnipWebsite {
     
     
-    public partial class Video_Player {
+    public partial class Watch_Video {
         
         /// <summary>
         /// link_style control.

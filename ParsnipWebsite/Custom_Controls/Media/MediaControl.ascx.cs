@@ -60,8 +60,8 @@ namespace ParsnipWebsite.Custom_Controls.Media
 
 
                 //MyEdit.HRef = string.Format("../../edit_image?imageid={0}", MyVideo.Id);
-                a_play_video.HRef = string.Format("../../video_player?video_id={0}", MyVideo.Id);
-                MyShare.HRef = string.Format("../../video_player?video_id={0}", MyVideo.Id);
+                a_play_video.HRef = string.Format("../../watch_video?video_id={0}", MyVideo.Id);
+                MyShare.HRef = string.Format("../../watch_video?video_id={0}", MyVideo.Id);
             }
         }
         #endregion
@@ -80,7 +80,7 @@ namespace ParsnipWebsite.Custom_Controls.Media
                 YoutubePlayer.Attributes.Add("data-id", MyYoutubeVideo.DataId);
                 MediaContainer.ID = _myYoutubeVideo.Id.ToString();
                 MyTitle.InnerText = MyYoutubeVideo.Title;
-                MyShare.HRef = string.Format("../../video_player?video_id={0}", MyYoutubeVideo.Id);
+                MyShare.HRef = string.Format("../../watch_video?video_id={0}", MyYoutubeVideo.Id);
             }
         }
         #endregion

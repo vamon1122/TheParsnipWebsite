@@ -24,7 +24,7 @@
 
 function labnolThumb(id)
 {
-    return '<a href= "video_player?data-id=' + id + '"><img class="youtube-thumb" src="//i.ytimg.com/vi/' + id + '/hqdefault.jpg"><div class="play-button"></div></a>';
+    return '<a href= "watch_video?data-id=' + id + '"><img class="youtube-thumb" src="//i.ytimg.com/vi/' + id + '/hqdefault.jpg"><div class="play-button"></div></a>';
 }
 
 function labnolIframe()

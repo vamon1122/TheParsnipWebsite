@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Video_Player.aspx.cs" Inherits="ParsnipWebsite.Video_Player" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Watch_Video.aspx.cs" Inherits="ParsnipWebsite.Watch_Video" %>
 <%@ Register Src="~/Custom_Controls/Menu/Menu.ascx" TagPrefix="menuControls" TagName="Menu" %>
 
 <!DOCTYPE html>
@@ -78,3 +78,4 @@
     </script>
 </body>
 </html>
+

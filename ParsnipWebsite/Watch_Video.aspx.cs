@@ -13,7 +13,7 @@ using System.Diagnostics;
 
 namespace ParsnipWebsite
 {
-    public partial class Video_Player : System.Web.UI.Page
+    public partial class Watch_Video : System.Web.UI.Page
     {
         User myUser;
         Log DebugLog = new Log("Debug");
@@ -36,7 +36,7 @@ namespace ParsnipWebsite
                     }
                     else
                     {
-                        myUser = Account.SecurePage("video_player?video_id=" + Request.QueryString["video_id"], this,
+                        myUser = Account.SecurePage("watch_video?video_id=" + Request.QueryString["video_id"], this,
                         Data.DeviceType);
 
                         if (Video.Exists(new Guid(Request.QueryString["video_id"])))
@@ -73,7 +73,7 @@ namespace ParsnipWebsite
                 }
                 else
                 {
-                    myUser = Account.SecurePage("video_player?data-id=" + Request.QueryString["data-id"], this, 
+                    myUser = Account.SecurePage("watch_video?data-id=" + Request.QueryString["data-id"], this,
                         Data.DeviceType);
 
                     Debug.WriteLine("Getting youtube video with data-id = " + Request.QueryString["data-id"]);
@@ -149,7 +149,7 @@ namespace ParsnipWebsite
                     VideoSource.Src = myVideo.Directory;
                 }
 
-                ShareLink.Value = Request.Url.GetLeftPart(UriPartial.Authority) + "/video_player?access_token=" +
+                ShareLink.Value = Request.Url.GetLeftPart(UriPartial.Authority) + "/watch_video?access_token=" +
                     myAccessToken.Id;
             }
         }
