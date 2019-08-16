@@ -28,7 +28,6 @@ namespace ParsnipWebsite.Custom_Controls.Media
                 MyImageHolder.ImageUrl = "../../Resources/Media/Images/Web_Media/placeholder.gif";
                 MyImageHolder.Attributes.Add("data-src", MyImage.Directory);
                 MyImageHolder.Attributes.Add("data-srcset", MyImage.Directory);
-                MyImageHolder.CssClass = "lazy";
                 MyImageHolder.Style.Add("margin-bottom", "8px");
                 MediaContainer.ID = _myImage.Id.ToString();
 
@@ -51,7 +50,10 @@ namespace ParsnipWebsite.Custom_Controls.Media
                 MyEdit.Visible = false;
                 _myVideo = value;
                 MyTitle.InnerHtml = MyVideo.Title;
-                thumbnail.Src = "../../" + MyVideo.Thumbnail;
+                thumbnail.Src = "../../Resources/Media/Images/Web_Media/placeholder.gif";
+                thumbnail.Attributes.Add("data-src", MyVideo.Thumbnail);
+                thumbnail.Attributes.Add("data-srcset", MyVideo.Thumbnail);
+                //thumbnail.Src = "../../" + MyVideo.Thumbnail;
 
                 Debug.WriteLine("Thumbnail = " + MyVideo.Thumbnail);
 
