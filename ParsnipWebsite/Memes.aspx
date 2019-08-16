@@ -48,8 +48,9 @@
                         <asp:FileUpload ID="PhotoUpload" runat="server" class="form-control-file" onchange="this.form.submit()" />
                     </label>
 
+                
+                    <hr class="break" />
                 </div>
-                <hr class="break" />
                 <div runat="server" id="DynamicMemesDiv">
 
                 </div>
