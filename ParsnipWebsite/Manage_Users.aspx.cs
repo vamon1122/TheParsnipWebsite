@@ -92,7 +92,7 @@ namespace ParsnipWebsite
 
         protected void SelectUser_Changed(object sender, EventArgs e)
         {
-            Response.Redirect("users?userId=" + selectUser.SelectedValue);
+            Response.Redirect("manage_users?userId=" + selectUser.SelectedValue);
         }
 
         protected void Button_Action_Click(object sender, EventArgs e)
@@ -120,7 +120,7 @@ namespace ParsnipWebsite
                         myUser.FullName, actionPast, UserForm.DataSubject.FullName)
                     };
 
-                    Response.Redirect(string.Format("users?userId={0}&action=update&success=true", UserForm.DataSubject.Id.ToString()));
+                    Response.Redirect(string.Format("manage_users?userId={0}&action=update&success=true", UserForm.DataSubject.Id.ToString()));
                 }
 
                 else
@@ -175,7 +175,7 @@ namespace ParsnipWebsite
             else
                 success = false;
 
-            Response.Redirect(string.Format("users?userId={0}&action=delete&success={1}", Guid.Empty.ToString(), success));
+            Response.Redirect(string.Format("manage_users?userId={0}&action=delete&success={1}", Guid.Empty.ToString(), success));
         }
 
         protected void Button_Delete_Click(object sender, EventArgs e)
