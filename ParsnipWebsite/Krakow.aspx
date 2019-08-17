@@ -52,9 +52,9 @@
     <hr class="break" />
     </div>
     <form runat="server">
-        
-    <h4>Upload your Krakow photos</h4>
         <div runat="server" id="UploadDiv" class="form-group" style="display:none; ">
+            <h4>Upload your Krakow photos</h4>
+        
             <label class="file-upload btn">                
                 <span><strong>Upload Photo</strong></span>
                 <asp:FileUpload ID="PhotoUpload" runat="server" class="form-control-file" onchange="this.form.submit()" />
