@@ -25,7 +25,7 @@
 </head>
 <body class="fade0p5" id="body" style="text-align:center;"  >
     <menuControls:Menu runat="server" ID="Menu" />
-
+    
     <div class="center_form" style="padding-bottom:5%" >
         <form id="form1" runat="server" >
             <!-- Title -->
@@ -44,7 +44,7 @@
 
             <!-- Image preview -->
             <asp:Image runat="server" ID="ImagePreview" CssClass="image-preview" Width="100%" visible="false" />
-            <div runat="server" id="youtube_video_container" class="large-youtube-container" style="height:30%" visible="false">
+            <div runat="server" id="youtube_video_container" class="youtube-container" style="display:inline-block" visible="false">
                 <div runat="server" id="youtube_video" class="youtube-player" />
             </div>
             
@@ -52,7 +52,7 @@
             <br />
 
             <!-- Delete / save buttons -->
-            <div style="width:100%; padding-left:5%; padding-right:5%;">
+            <div style="width:100%; padding-left:5%; padding-right:5%; display:block;">
                 <asp:Button runat="server" ID="btn_AdminDelete"  CssClass="btn btn-primary float-left" Width="100px" Text="Delete" Visible="false" data-toggle="modal" data-target="#confirmDelete" OnClientClick="return false;" UseSubmitBehavior="false"></asp:Button>
                 <asp:Button runat="server" ID="ButtonSave" class="btn btn-primary float-right" Text="Save" Width="100px" OnClick="ButtonSave_Click"></asp:Button>
             </div>
