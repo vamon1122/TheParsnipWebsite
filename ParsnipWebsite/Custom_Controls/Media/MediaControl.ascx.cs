@@ -10,6 +10,21 @@ namespace ParsnipWebsite.Custom_Controls.Media
 {
     public partial class MediaControl : System.Web.UI.UserControl
     {
+        public DateTime DateTimeMediaCreated {
+            get
+            {
+                if (MyImage != null)
+                    return MyImage.DateCreated;
+
+                if (MyVideo != null)
+                    return MyVideo.DateCreated;
+
+                if (MyYoutubeVideo != null)
+                    return MyYoutubeVideo.DateCreated;
+
+                 return DateTime.MinValue;
+            }
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
 

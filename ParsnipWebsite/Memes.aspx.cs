@@ -38,16 +38,13 @@ namespace ParsnipWebsite
 
             if (myUser.AccountType == "admin" || myUser.AccountType == "member")
                 UploadDiv.Style.Clear();
+        }
 
-            Debug.WriteLine("Getting all photos");
-            List<ParsnipData.Media.Image> AllPhotos = MemesAlbum.GetAllImages();
-            Debug.WriteLine("Got all photos");
-            //new LogEntry(Debug) { text = "Got all photos. There were {0} photo(s) = " + AllPhotos.Count() };
-            foreach (ParsnipData.Media.Image temp in AllPhotos)
+        protected void Page_LoadComplete(object sender, EventArgs e)
+        {
+            foreach (MediaControl mc in MediaManager.GetAlbumAsMediaControls(MemesAlbum))
             {
-                var MyImageControl = (MediaControl)LoadControl("~/Custom_Controls/Media/MediaControl.ascx");
-                MyImageControl.MyImage = temp;
-                DynamicMemesDiv.Controls.Add(MyImageControl);
+                DynamicMediaDiv.Controls.Add(mc);
             }
         }
     }

@@ -7,12 +7,46 @@ using ParsnipData.Logs;
 using ParsnipData.Media;
 using ParsnipData;
 using System.Diagnostics;
+using ParsnipWebsite.Custom_Controls.Media;
+using System.Collections.Generic;
+using System.Web.UI;
 
 namespace ParsnipWebsite
 {
     public static class MediaManager
     {
         static readonly Log DebugLog = new Log("debug");
+
+        public static List<MediaControl> GetAlbumAsMediaControls(Album album)
+        {
+            var mediaControls = new List<MediaControl>();
+            Page httpHandler = (Page)HttpContext.Current.Handler;
+
+            foreach (ParsnipData.Media.Image temp in album.GetAllImages())
+            {
+                MediaControl MyImageControl = (MediaControl)httpHandler.LoadControl("~/Custom_Controls/Media/MediaControl.ascx");
+                MyImageControl.MyImage = temp;
+                mediaControls.Add(MyImageControl);
+            }
+
+            foreach (ParsnipData.Media.Video video in album.GetAllVideos())
+            {
+
+                var MyVideoControl = (MediaControl)httpHandler.LoadControl("~/Custom_Controls/Media/MediaControl.ascx");
+                MyVideoControl.MyVideo = video;
+                mediaControls.Add(MyVideoControl);
+            }
+
+            foreach (ParsnipData.Media.YoutubeVideo youtubeVideo in album.GetAllYoutubeVideos())
+            {
+                var MyVideoControl = (MediaControl)httpHandler.LoadControl("~/Custom_Controls/Media/MediaControl.ascx");
+                MyVideoControl.MyYoutubeVideo = youtubeVideo;
+                mediaControls.Add(MyVideoControl);
+            }
+
+            return mediaControls.OrderByDescending(mc => mc.DateTimeMediaCreated).ToList();
+        }
+
         public static void UploadImage(User uploader, Album album, FileUpload uploadControl)
         {
             new LogEntry(DebugLog) { text = "POSTBACK with image" };

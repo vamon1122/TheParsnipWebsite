@@ -51,7 +51,7 @@
                 
                     <hr class="break" />
                 </div>
-                <div runat="server" id="DynamicMemesDiv">
+                <div runat="server" id="DynamicMediaDiv">
 
                 </div>
             </form>

@@ -31,23 +31,20 @@ namespace ParsnipWebsite
             if (Request.QueryString["focus"] == null)
                 myUser = Account.SecurePage("photos", this, Data.DeviceType);
             else
-                myUser = Account.SecurePage("krakow?focus=" + Request.QueryString["focus"], this, Data.DeviceType);
+                myUser = Account.SecurePage("photos?focus=" + Request.QueryString["focus"], this, Data.DeviceType);
 
             if (IsPostBack && PhotoUpload.PostedFile != null)
                 MediaManager.UploadImage(myUser, PhotosAlbum, PhotoUpload);
 
             if (myUser.AccountType == "admin" || myUser.AccountType == "member")
                 UploadDiv.Style.Clear();
+        }
 
-            Debug.WriteLine("Getting all photos");
-            List<ParsnipData.Media.Image> AllPhotos = PhotosAlbum.GetAllImages();
-            Debug.WriteLine("Got all photos");
-            //new LogEntry(Debug) { text = "Got all photos. There were {0} photo(s) = " + AllPhotos.Count() };
-            foreach (ParsnipData.Media.Image temp in AllPhotos)
+        protected void Page_LoadComplete(object sender, EventArgs e)
+        {
+            foreach (MediaControl mc in MediaManager.GetAlbumAsMediaControls(PhotosAlbum))
             {
-                var MyImageControl = (MediaControl)LoadControl("~/Custom_Controls/Media/MediaControl.ascx");
-                MyImageControl.MyImage = temp;
-                DynamicPhotosDiv.Controls.Add(MyImageControl);
+                DynamicMediaDiv.Controls.Add(mc);
             }
         }
     }

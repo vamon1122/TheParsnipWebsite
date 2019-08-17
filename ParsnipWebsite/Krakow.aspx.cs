@@ -38,16 +38,13 @@ namespace ParsnipWebsite
 
             if (myUser.AccountType == "admin" || myUser.AccountType == "member")
                 UploadDiv.Style.Clear();
+        }
 
-            Debug.WriteLine("Getting all krakow photos");
-            List<ParsnipData.Media.Image> AllPhotos = KrakowAlbum.GetAllImages();
-            Debug.WriteLine("Got all krakow photos");
-            //new LogEntry(Debug) { text = "Got all krakow photos. There were {0} krakow photo(s) = " + AllPhotos.Count() };
-            foreach (ParsnipData.Media.Image temp in AllPhotos)
+        protected void Page_LoadComplete(object sender, EventArgs e)
+        {
+            foreach (MediaControl mc in MediaManager.GetAlbumAsMediaControls(KrakowAlbum))
             {
-                var MyImageControl = (MediaControl)LoadControl("~/Custom_Controls/Media/MediaControl.ascx");
-                MyImageControl.MyImage = temp;
-                DynamicPhotosDiv.Controls.Add(MyImageControl);
+                DynamicMediaDiv.Controls.Add(mc);
             }
         }
     }

@@ -62,7 +62,7 @@
         
         <hr class="break" />
         </div>
-        <div runat="server" id="DynamicPhotosDiv">
+        <div runat="server" id="DynamicMediaDiv">
         </div>
     </form>    
     
