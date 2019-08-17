@@ -83,7 +83,6 @@
     <Content Include="Custom_Controls\Menu\Menu.ascx" />
     <Content Include="Custom_Controls\Uac\AdminUserForm.ascx" />
     <Content Include="Default.aspx" />
-    <Content Include="Edit_Image.aspx" />
     <Content Include="Edit_Media.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Get_Device_Info.aspx" />
@@ -194,13 +193,6 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Edit_Image.aspx.cs">
-      <DependentUpon>Edit_Image.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Edit_Image.aspx.designer.cs">
-      <DependentUpon>Edit_Image.aspx</DependentUpon>
     </Compile>
     <Compile Include="Edit_Media.aspx.cs">
       <DependentUpon>Edit_Media.aspx</DependentUpon>

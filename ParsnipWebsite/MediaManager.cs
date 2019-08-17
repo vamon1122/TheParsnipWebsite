@@ -71,7 +71,7 @@ namespace ParsnipWebsite
                         uploadControl.PostedFile.SaveAs(HttpContext.Current.Server.MapPath("~/" + newDir));
                         ParsnipData.Media.Image temp = new ParsnipData.Media.Image(newDir, uploader, album);
                         temp.Update();
-                        HttpContext.Current.Response.Redirect("edit_image?redirect=photos&id=" + temp.Id);
+                        HttpContext.Current.Response.Redirect("edit_media?redirect=photos&id=" + temp.Id);
                     }
                     else
                     {

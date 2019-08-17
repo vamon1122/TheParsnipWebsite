@@ -89,7 +89,7 @@
         {
             var url_string = window.location.href
             var url;
-            var redirect = "edit_image?"
+            var redirect = "edit_media?"
 
             try
             {
