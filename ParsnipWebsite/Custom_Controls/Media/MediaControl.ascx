@@ -13,8 +13,7 @@
             </div>
         </a>
         <div runat="server" class="youtube-player" id="YoutubePlayer" style="margin-bottom:8px" visible="false"></div>
-        
-        
+
     <a runat="server" id="MyEdit">Edit</a>
         
     <a runat="server" id="MyShare">Share</a>

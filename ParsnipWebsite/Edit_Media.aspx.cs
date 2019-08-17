@@ -65,8 +65,9 @@ namespace ParsnipWebsite
                     MyVideo = new Video(new Guid(Request.QueryString["id"]));
                     Debug.WriteLine("Selecting video with id = " + id);
                     MyVideo.Select();
-                    ImagePreview.ImageUrl = MyVideo.Thumbnail;
-                    ImagePreview.Visible = true;
+                    thumbnail.Src = MyVideo.Thumbnail;
+                    a_play_video.HRef = string.Format("../../watch_video?id={0}", MyVideo.Id);
+                    a_play_video.Visible = true;
                 }
                 else if (YoutubeVideo.Exists(id))
                 {

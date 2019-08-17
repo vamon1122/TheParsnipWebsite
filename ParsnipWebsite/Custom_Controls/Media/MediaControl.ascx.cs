@@ -60,21 +60,16 @@ namespace ParsnipWebsite.Custom_Controls.Media
             set
             {
                 a_play_video.Visible = true;
-                //MyEdit.Visible = false;
                 _myVideo = value;
                 MyTitle.InnerHtml = MyVideo.Title;
                 thumbnail.Src = "../../Resources/Media/Images/Web_Media/placeholder.gif";
                 thumbnail.Attributes.Add("data-src", MyVideo.Thumbnail);
                 thumbnail.Attributes.Add("data-srcset", MyVideo.Thumbnail);
-                //thumbnail.Src = "../../" + MyVideo.Thumbnail;
 
                 Debug.WriteLine("Thumbnail = " + MyVideo.Thumbnail);
 
                 MediaContainer.ID = _myVideo.Id.ToString();
 
-
-
-                //MyEdit.HRef = string.Format("../../edit_media?id={0}", MyVideo.Id);
                 a_play_video.HRef = string.Format("../../watch_video?id={0}", MyVideo.Id);
                 MyShare.HRef = string.Format("../../watch_video?id={0}", MyVideo.Id);
                 MyEdit.HRef = string.Format("../../edit_media?id={0}", MyVideo.Id);

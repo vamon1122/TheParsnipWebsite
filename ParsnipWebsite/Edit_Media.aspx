@@ -44,6 +44,14 @@
 
             <!-- Image preview -->
             <asp:Image runat="server" ID="ImagePreview" CssClass="image-preview" Width="100%" visible="false" />
+            <a runat="server" id="a_play_video" visible="false" >
+                <div class="play-button-div">
+                    <img runat="server" id="thumbnail" class="lazy" style="width:100%" />
+                    <span class="play-button-icon">
+                        <img src="Resources\Media\Images\Web_Media\play_button_2.png" />
+                    </span>
+                </div>
+            </a>
             <div runat="server" id="youtube_video_container" class="youtube-container" style="display:inline-block" visible="false">
                 <div runat="server" id="youtube_video" class="youtube-player" />
             </div>
