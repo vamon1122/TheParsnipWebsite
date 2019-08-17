@@ -68,6 +68,7 @@
     
     <script src="../Javascript/UsefulFunctions.js"></script>
     <script src="../Javascript/FocusImage.js"></script>
+    <script src="../Javascript/Youtube.js"></script>
     <script src="../Javascript/CountDownToKrakow.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function ()

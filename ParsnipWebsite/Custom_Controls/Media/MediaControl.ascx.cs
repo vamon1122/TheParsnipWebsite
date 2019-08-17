@@ -62,7 +62,7 @@ namespace ParsnipWebsite.Custom_Controls.Media
             set
             {
                 a_play_video.Visible = true;
-                MyEdit.Visible = false;
+                //MyEdit.Visible = false;
                 _myVideo = value;
                 MyTitle.InnerHtml = MyVideo.Title;
                 thumbnail.Src = "../../Resources/Media/Images/Web_Media/placeholder.gif";
@@ -79,6 +79,7 @@ namespace ParsnipWebsite.Custom_Controls.Media
                 //MyEdit.HRef = string.Format("../../edit_image?id={0}", MyVideo.Id);
                 a_play_video.HRef = string.Format("../../watch_video?id={0}", MyVideo.Id);
                 MyShare.HRef = string.Format("../../watch_video?id={0}", MyVideo.Id);
+                MyEdit.HRef = string.Format("../../edit_media?id={0}", MyVideo.Id);
             }
         }
         #endregion
@@ -91,13 +92,14 @@ namespace ParsnipWebsite.Custom_Controls.Media
             set
             {
                 YoutubePlayer.Visible = true;
-                MyEdit.Visible = false;
+                //MyEdit.Visible = false;
                 _myYoutubeVideo = value;
                 MyTitle.InnerHtml = MyYoutubeVideo.Title;
                 YoutubePlayer.Attributes.Add("data-id", MyYoutubeVideo.DataId);
                 MediaContainer.ID = _myYoutubeVideo.Id.ToString();
                 MyTitle.InnerText = MyYoutubeVideo.Title;
                 MyShare.HRef = string.Format("../../watch_video?id={0}", MyYoutubeVideo.Id);
+                MyEdit.HRef = string.Format("../../edit_media?id={0}", MyYoutubeVideo.Id);
             }
         }
         #endregion

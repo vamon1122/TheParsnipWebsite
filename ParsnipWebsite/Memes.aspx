@@ -57,6 +57,7 @@
             </form>
 
     <script src="../Javascript/FocusImage.js"></script>
+    <script src="../Javascript/Youtube.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function ()
         {
