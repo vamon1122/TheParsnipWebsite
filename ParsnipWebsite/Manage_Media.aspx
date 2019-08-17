@@ -19,7 +19,7 @@
     <link rel="stylesheet" type="text/css" href="Css/SharedStyle.css" />
     <script src="../Javascript/ApplyStyle.js"></script>
 
-    <title>Manage Images</title>
+    <title>Manage Media</title>
     
     <script src="Javascript/IntersectionObserver.js"></script>
     
@@ -28,20 +28,20 @@
     <form id="form1" runat="server">
         <div class="container">
                 <div class="jumbotron">
-                <h1 class="display-4">Images</h1>
-                <p class="lead">Manage images which have been uploaded to the site</p>
+                <h1 class="display-4">Media</h1>
+                <p class="lead">Manage images and videos which have been uploaded to the site</p>
                 <hr class="my-4" />
                 <p><adminControls:adminMenu runat="server" id="adminMenu1" /></p>
             </div>  
             
             
-            <label>Select whose photos to manage:</label>
+            <label>Select whose media to manage:</label>
             <asp:DropDownList ID="SelectUser" runat="server" AutoPostBack="True" CssClass="form-control" 
                 onselectedindexchanged="SelectUser_Changed">
             </asp:DropDownList>
             <br />
             <!--<asp:Button runat="server" ID="btnDelete"  CssClass="btn btn-primary" Text="Delete" Visible="false" data-toggle="modal" data-target="#confirmDelete" OnClientClick="return false;"></asp:Button>-->
-                    <button data-toggle="modal" data-target="#confirmDelete" class="btn btn-danger" onclick="return false" >Remove ALL images from their albums</button>
+                    <button data-toggle="modal" data-target="#confirmDelete" class="btn btn-danger" onclick="return false" >Remove ALL media from albums</button>
             <br />
             <br />
                 <div runat="server" id="DisplayPhotosDiv">
@@ -59,7 +59,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        Are you sure that you want to remove all of this user's images from all albums? 
+                        Are you sure that you want to remove all of this user's media from all albums? 
                         (WARNING: THIS IS PERMANENT AND IRREVERSIBLE)
                     </div>
                     <div class="modal-footer">

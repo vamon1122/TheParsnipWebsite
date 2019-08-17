@@ -58,9 +58,11 @@ namespace ParsnipWebsite
         {
             selectedUserId = new Guid(Request.QueryString["userId"].ToString());
             ParsnipData.Media.Image.DeleteMediaTagPairsByUserId(selectedUserId);
+            ParsnipData.Media.Video.DeleteMediaTagPairsByUserId(selectedUserId);
+            ParsnipData.Media.YoutubeVideo.DeleteMediaTagPairsByUserId(selectedUserId);
             new LogEntry(DebugLog)
             {
-                text = "Successfully deleted photos uploaded photos createdbyid = " +
+                text = "Successfully deleted photos uploaded media createdbyid = " +
                 selectedUserId
             };
         }

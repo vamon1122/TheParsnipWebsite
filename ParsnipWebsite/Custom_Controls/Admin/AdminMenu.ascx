@@ -10,7 +10,7 @@
     <a class="nav-link" href="manage_users">Users</a>
   </li>
           <li class="nav-item">
-    <a class="nav-link" href="manage_media">Images</a>
+    <a class="nav-link" href="manage_media">Media</a>
   </li>
           <li class="nav-item">
     <a class="nav-link" href="share_stats">Share Stats</a>
