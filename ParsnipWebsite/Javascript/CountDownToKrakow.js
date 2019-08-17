@@ -16,7 +16,7 @@ else if (manchesterToKrakowArrivalDate > now)
 }
 else if (returnCountdownStartDate > now)
 {
-    document.getElementById("countdownToKrakow").innerHTML = "Flight <i>should</i> have arrived in Krakow!";
+    document.getElementById("countdownToKrakow").innerHTML = "Flight has arrived in Krakow!";
     var countdownInfo = document.getElementById("countdownInfo");
     countdownInfo.style.display = "block";
     countdownInfo.innerHTML = "(Countdown will resume 24 hours before departure)";

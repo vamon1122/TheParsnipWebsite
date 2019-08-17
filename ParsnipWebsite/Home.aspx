@@ -38,6 +38,7 @@
         <asp:Label runat="server" ID="WelcomeLabel"></asp:Label>
         <hr class="break" />
         <h3>*NEW*</h3>
+        - [17/08/19] Fixed broken image links on the <a href="Photos.aspx">photos page</a><br />
         - [17/08/19] Fixed slow loading times on the <a href="Videos.aspx">videos page</a><br />
         - [07/08/19] New <a href="Krakow.aspx">Krakow page!</a> Upload, view & share holiday photos! 
         <div id="flightDetailsContainer" style="display:inline">
