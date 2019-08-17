@@ -17,6 +17,36 @@ namespace ParsnipWebsite
     {
         static readonly Log DebugLog = new Log("debug");
 
+        public static List<MediaControl> GetUsersMediaAsMediaControls(Guid userId)
+        {
+            var mediaControls = new List<MediaControl>();
+            Page httpHandler = (Page)HttpContext.Current.Handler;
+
+            foreach (ParsnipData.Media.Image temp in Media.GetImagesByUserId(userId))
+            {
+                MediaControl MyImageControl = (MediaControl)httpHandler.LoadControl("~/Custom_Controls/Media/MediaControl.ascx");
+                MyImageControl.MyImage = temp;
+                mediaControls.Add(MyImageControl);
+            }
+
+            foreach (ParsnipData.Media.Video video in Media.GetVideosByUserId(userId))
+            {
+
+                var MyVideoControl = (MediaControl)httpHandler.LoadControl("~/Custom_Controls/Media/MediaControl.ascx");
+                MyVideoControl.MyVideo = video;
+                mediaControls.Add(MyVideoControl);
+            }
+
+            foreach (ParsnipData.Media.YoutubeVideo youtubeVideo in Media.GetYoutubeVideosByUserId(userId))
+            {
+                var MyVideoControl = (MediaControl)httpHandler.LoadControl("~/Custom_Controls/Media/MediaControl.ascx");
+                MyVideoControl.MyYoutubeVideo = youtubeVideo;
+                mediaControls.Add(MyVideoControl);
+            }
+
+            return mediaControls.OrderByDescending(mc => mc.DateTimeMediaCreated).ToList();
+        }
+
         public static List<MediaControl> GetAlbumAsMediaControls(Album album)
         {
             var mediaControls = new List<MediaControl>();

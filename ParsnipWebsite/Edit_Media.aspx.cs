@@ -101,8 +101,8 @@ namespace ParsnipWebsite
                         OriginalAlbumRedirect = "videos?focus=" + MyMedia.Id.ToString();
                         break;
                     case "00000000-0000-0000-0000-000000000000":
-                        Debug.WriteLine("Album id is empty guid. Redirecting to manage_images");
-                        OriginalAlbumRedirect = "manage_images?" + MyMedia.Id.ToString();
+                        Debug.WriteLine("Album id is empty guid. Redirecting to manage_media");
+                        OriginalAlbumRedirect = "manage_media?" + MyMedia.Id.ToString();
                         break;
                     default:
                         Debug.WriteLine(string.Format("The album id {0} != ff3127df-70b2-47ef-b77b-2e086d2ef370",
@@ -160,7 +160,7 @@ namespace ParsnipWebsite
                             break;
                         case "00000000-0000-0000-0000-000000000000":
                             Debug.WriteLine("No album selected. Must be none! Redirecting to manage photos...");
-                            Redirect = "manage_images";
+                            Redirect = "manage_media";
                             break;
                         default:
                             Redirect = "home?error=nomediaalbum2";

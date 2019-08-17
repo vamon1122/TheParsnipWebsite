@@ -97,7 +97,7 @@
     <Content Include="Krakow.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Logout.aspx" />
-    <Content Include="Manage_Images.aspx" />
+    <Content Include="Manage_Media.aspx" />
     <Content Include="Manage_Users.aspx" />
     <Content Include="Memes.aspx" />
     <Content Include="package.json" />
@@ -247,12 +247,12 @@
     <Compile Include="Logs.aspx.designer.cs">
       <DependentUpon>Logs.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Manage_Images.aspx.cs">
-      <DependentUpon>Manage_Images.aspx</DependentUpon>
+    <Compile Include="Manage_Media.aspx.cs">
+      <DependentUpon>Manage_Media.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Manage_Images.aspx.designer.cs">
-      <DependentUpon>Manage_Images.aspx</DependentUpon>
+    <Compile Include="Manage_Media.aspx.designer.cs">
+      <DependentUpon>Manage_Media.aspx</DependentUpon>
     </Compile>
     <Compile Include="Manage_Users.aspx.cs">
       <DependentUpon>Manage_Users.aspx</DependentUpon>

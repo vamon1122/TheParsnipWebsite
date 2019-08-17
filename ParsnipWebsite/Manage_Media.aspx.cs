@@ -14,7 +14,7 @@ using ParsnipWebsite.Custom_Controls.Media;
 
 namespace ParsnipWebsite
 {
-    public partial class Manage_Images : System.Web.UI.Page
+    public partial class Manage_Media : System.Web.UI.Page
     {
         User myUser;
         Guid selectedUserId;
@@ -22,7 +22,7 @@ namespace ParsnipWebsite
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            myUser = Account.SecurePage("manage_images", this, Data.DeviceType, "admin");
+            myUser = Account.SecurePage("manage_media", this, Data.DeviceType, "admin");
         }
 
         protected void Page_LoadComplete(object sender, EventArgs e)
@@ -31,7 +31,7 @@ namespace ParsnipWebsite
 
             if (Request.QueryString["userId"] != null && Request.QueryString["userId"].ToString() != "")
             {
-                new LogEntry(DebugLog) { text = "Manage_Images userId = " + Request.QueryString["userId"].ToString() };
+                new LogEntry(DebugLog) { text = "Manage_Media userId = " + Request.QueryString["userId"].ToString() };
                 selectedUserId = new Guid(Request.QueryString["userId"].ToString());
 
                 SelectUser.SelectedValue = selectedUserId.ToString();
@@ -40,13 +40,9 @@ namespace ParsnipWebsite
 
                 List<ParsnipData.Media.Image> MyPhotos = ParsnipData.Media.Image.GetImagesByUser(selectedUserId);
                 //new LogEntry(Debug) { text = "Got all photos. There were {0} photo(s) = " + AllPhotos.Count() };
-                foreach (ParsnipData.Media.Image temp in MyPhotos)
+                foreach (MediaControl temp in MediaManager.GetUsersMediaAsMediaControls(selectedUserId))
                 {
-                    var MyImageControl = (MediaControl)LoadControl("~/Custom_Controls/Media/MediaControl.ascx");
-                    MyImageControl.MyImage = temp;
-                    DisplayPhotosDiv.Controls.Add(MyImageControl);
-
-                    //new LogEntry(Debug) { text = "Added new image to the page. Url = " + temp.PhotoSrc };
+                    DisplayPhotosDiv.Controls.Add(temp);
                 }
             }
             else
@@ -54,7 +50,7 @@ namespace ParsnipWebsite
                 Debug.WriteLine("---------- not a postback");
 
                 if (Request.QueryString["userId"] == null)
-                    Response.Redirect("manage_images?userId=" + Guid.Empty.ToString());
+                    Response.Redirect("manage_media?userId=" + Guid.Empty.ToString());
             }
         }
 
@@ -97,7 +93,7 @@ namespace ParsnipWebsite
 
         protected void SelectUser_Changed(object sender, EventArgs e)
         {
-            Response.Redirect("manage_images?userId=" + SelectUser.SelectedValue);
+            Response.Redirect("manage_media?userId=" + SelectUser.SelectedValue);
         }
     }
 }

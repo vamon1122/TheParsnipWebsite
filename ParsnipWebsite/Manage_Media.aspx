@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Manage_Images.aspx.cs" Inherits="ParsnipWebsite.Manage_Images" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Manage_Media.aspx.cs" Inherits="ParsnipWebsite.Manage_Media" %>
 <%@ Register Src="~/Custom_Controls/Admin/AdminMenu.ascx" TagPrefix="adminControls" TagName="adminMenu" %>
 
 <!DOCTYPE html>
@@ -105,4 +105,5 @@
     </script>
 </body>
 </html>
+
 
