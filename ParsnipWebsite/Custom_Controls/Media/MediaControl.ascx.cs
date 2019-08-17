@@ -46,8 +46,6 @@ namespace ParsnipWebsite.Custom_Controls.Media
                 MyImageHolder.Style.Add("margin-bottom", "8px");
                 MediaContainer.ID = _myImage.Id.ToString();
 
-
-
                 MyEdit.HRef = string.Format("../../edit_media?id={0}", MyImage.Id);
                 MyShare.HRef = string.Format("../../view_image?id={0}", MyImage.Id);
             }

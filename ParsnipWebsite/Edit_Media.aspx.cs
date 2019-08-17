@@ -57,6 +57,7 @@ namespace ParsnipWebsite
                     MyImage = new ParsnipData.Media.Image(new Guid(Request.QueryString["id"]));
                     Debug.WriteLine("Selecting image with id = " + id);
                     MyImage.Select();
+                    ImagePreview.ImageUrl = MyImage.Directory;
                     ImagePreview.Visible = true;
                 }
                 else if (Video.Exists(id))
@@ -64,6 +65,7 @@ namespace ParsnipWebsite
                     MyVideo = new Video(new Guid(Request.QueryString["id"]));
                     Debug.WriteLine("Selecting video with id = " + id);
                     MyVideo.Select();
+                    ImagePreview.ImageUrl = MyVideo.Thumbnail;
                     ImagePreview.Visible = true;
                 }
                 else if (YoutubeVideo.Exists(id))
@@ -99,8 +101,8 @@ namespace ParsnipWebsite
                         OriginalAlbumRedirect = "videos?focus=" + MyMedia.Id.ToString();
                         break;
                     case "00000000-0000-0000-0000-000000000000":
-                        Debug.WriteLine("Album id is empty guid. Redirecting to manage_medias");
-                        OriginalAlbumRedirect = "manage_medias?id=" + MyMedia.Id.ToString();
+                        Debug.WriteLine("Album id is empty guid. Redirecting to manage_images");
+                        OriginalAlbumRedirect = "manage_images?" + MyMedia.Id.ToString();
                         break;
                     default:
                         Debug.WriteLine(string.Format("The album id {0} != ff3127df-70b2-47ef-b77b-2e086d2ef370",
@@ -158,7 +160,7 @@ namespace ParsnipWebsite
                             break;
                         case "00000000-0000-0000-0000-000000000000":
                             Debug.WriteLine("No album selected. Must be none! Redirecting to manage photos...");
-                            Redirect = "manage_medias";
+                            Redirect = "manage_images";
                             break;
                         default:
                             Redirect = "home?error=nomediaalbum2";
@@ -250,24 +252,10 @@ namespace ParsnipWebsite
                     }
                     else
                     {
-                        Response.Redirect("photos?error=0");
+                        Response.Redirect(OriginalAlbumRedirect + "&error=0");
                     }
                 }
                 Debug.WriteLine("Setting media directory to: " + MyMedia.Directory);
-
-                if(MyImage != null)
-                {
-                    ImagePreview.ImageUrl = MyImage.Directory;
-                }
-                else if(MyVideo != null)
-                {
-                    ImagePreview.ImageUrl = MyVideo.Thumbnail;
-                }
-                else if(MyYoutubeVideo != null)
-                {
-                    //ImagePreview.ImageUrl = MyYoutubeVideo.Thumbnail;
-                }
-                    
             }
             else
             {

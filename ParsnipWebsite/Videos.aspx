@@ -28,6 +28,15 @@
 <body class="fade0p5" id="body" style="text-align:center">
     <menuControls:Menu runat="server" ID="Menu" />
 
+    <div class="alert alert-warning alert-dismissible parsnip-alert" style="display: none;" id="AccessWarning">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Access Denied</strong> You cannot edit media which other people have uploaded!
+    </div>
+    <div class="alert alert-danger alert-dismissible parsnip-alert" style="display: none;" id="VideoError">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Upload Error</strong> You cannot upload videos yet!
+    </div>
+
     <div class="cens_req padded-text"><label>Certain elements of this page were removed by request. <a href="content_removal">Click here</a> to learn more.</label></div>
 
     <div class="padded-text">
@@ -74,6 +83,22 @@
                 //I used Javascript/intersection-observer as a fallback
             }
         });
+    </script>
+    <script>
+        var url_string = window.location.href
+        var url = new URL(url_string);
+        var error = url.searchParams.get("error");
+        if (error !== "" && error !== null)
+        {
+            if (error === "video")
+            {
+                document.getElementById("VideoError").style = "display:block";
+            }
+            else
+            {
+                document.getElementById("AccessWarning").style = "display:block";
+            }
+        }
     </script>
 </body>
 </html>

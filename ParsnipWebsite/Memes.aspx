@@ -30,11 +30,11 @@
     
     <div class="alert alert-warning alert-dismissible parsnip-alert" style="display: none;" id="AccessWarning">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        <strong>Access Denied</strong> You cannot edit memes which other people have uploaded!
+        <strong>Access Denied</strong> You cannot edit media which other people have uploaded!
     </div>
     <div class="alert alert-danger alert-dismissible parsnip-alert" style="display: none;" id="VideoError">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        <strong>Upload Error</strong> You cannot upload videos to the memes page!
+        <strong>Upload Error</strong> You cannot upload videos yet!
     </div>
 
     <h2>Memes</h2>
@@ -102,6 +102,22 @@
                 document.getElementById("VideoError").style = "display:block";
             }
             else {
+                document.getElementById("AccessWarning").style = "display:block";
+            }
+        }
+    </script>
+    <script>
+        var url_string = window.location.href
+        var url = new URL(url_string);
+        var error = url.searchParams.get("error");
+        if (error !== "" && error !== null)
+        {
+            if (error === "video")
+            {
+                document.getElementById("VideoError").style = "display:block";
+            }
+            else
+            {
                 document.getElementById("AccessWarning").style = "display:block";
             }
         }
