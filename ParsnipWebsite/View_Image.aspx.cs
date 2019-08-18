@@ -141,24 +141,32 @@ namespace ParsnipWebsite
 
         protected void Button_ViewAlbum_Click(object sender, EventArgs e)
         {
+            string redirect;
             switch (myImage.AlbumId.ToString().ToUpper())
             {
                 case "4B4E450A-2311-4400-AB66-9F7546F44F4E":
                     Debug.WriteLine("Redirecting to photos");
-                    Response.Redirect("~/krakow?focus=" + myImage.Id);
+                    redirect = "~/photos?focus=";
                     break;
                 case "5F15861A-689C-482A-8E31-2F13429C36E5":
                     Debug.WriteLine("Redirecting to memes");
-                    Response.Redirect("~/memes?focus=" + myImage.Id);
+                    redirect = "~/memes?focus=";
                     break;
                 case "FF3127DF-70B2-47EF-B77B-2E086D2EF370":
                     Debug.WriteLine("Redirecting to Krakow");
-                    Response.Redirect("~/krakow?focus=" + myImage.Id);
+                    redirect = "~/krakow?focus=";
+                    break;
+                case "73C436A1-893B-4418-8800-821823C18DFE":
+                    Debug.WriteLine("Redirecting to Videos");
+                    redirect = "~/videos?focus=";
                     break;
                 default:
+                    redirect = "photos?error=album_does_not_exist";
                     Debug.WriteLine("Album was wrong! Album = " + myImage.AlbumId.ToString());
                     break;
             }
+
+            Response.Redirect(redirect  + myImage.Id);
         }
     }
 }

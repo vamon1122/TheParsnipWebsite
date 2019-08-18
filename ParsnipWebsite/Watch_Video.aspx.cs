@@ -156,7 +156,35 @@ namespace ParsnipWebsite
 
         protected void Button_ViewAlbum_Click(object sender, EventArgs e)
         {
-            Response.Redirect("videos");
+            string redirect;
+
+            string myAlbum = myVideo == null ? myYoutubeVideo.AlbumId.ToString().ToUpper() : myVideo.AlbumId.ToString().ToUpper();
+
+            switch (myAlbum)
+            {
+                case "4B4E450A-2311-4400-AB66-9F7546F44F4E":
+                    Debug.WriteLine("Redirecting to photos");
+                    redirect = "~/photos?focus=";
+                    break;
+                case "5F15861A-689C-482A-8E31-2F13429C36E5":
+                    Debug.WriteLine("Redirecting to memes");
+                    redirect = "~/memes?focus=";
+                    break;
+                case "FF3127DF-70B2-47EF-B77B-2E086D2EF370":
+                    Debug.WriteLine("Redirecting to Krakow");
+                    redirect = "~/krakow?focus=";
+                    break;
+                case "73C436A1-893B-4418-8800-821823C18DFE":
+                    Debug.WriteLine("Redirecting to Videos");
+                    redirect = "~/videos?focus=";
+                    break;
+                default:
+                    redirect = "photos?error=album_does_not_exist";
+                    Debug.WriteLine("Album was wrong! Album = " + myAlbum);
+                    break;
+            }
+
+            Response.Redirect(redirect + (myVideo == null ? myYoutubeVideo.Id.ToString().ToUpper() : myVideo.Id.ToString().ToUpper()));
         }
     }
 }
