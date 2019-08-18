@@ -20,6 +20,10 @@ body {
     -webkit-text-size-adjust: 100%;
 }
 
+.no-bottom-margin{
+    margin-bottom:0px;
+}
+
 .play-button-div {
     position: relative;
     display: block;
