@@ -5,7 +5,7 @@
         <h3 runat="server" id="MyTitle"></h3>
         <asp:Image runat="server" ID="MyImageHolder" Width="100%" Visible="false" CssClass="lazy no-bottom-margin" />
         <a runat="server" id="a_play_video" visible="false" >
-            <div class="play-button-div">
+            <div class="play-button-div" style="padding-bottom:8px">
                 <img runat="server" id="thumbnail" class="lazy" style="width:100%" />
                 <span class="play-button-icon">
                     <img src="Resources\Media\Images\Web_Media\play_button_2.png" />
