@@ -20,6 +20,10 @@ body {
     -webkit-text-size-adjust: 100%;
 }
 
+.date-cell {
+    width: 122px
+}
+
 .no-bottom-margin{
     margin-bottom:0px;
 }

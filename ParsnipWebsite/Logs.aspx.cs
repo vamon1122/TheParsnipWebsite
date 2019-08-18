@@ -36,7 +36,7 @@ namespace ParsnipWebsite
             {
                 TableRow MyRow = new TableRow();
                 MyRow.Attributes.Add("style", "word-wrap:break-word");
-                MyRow.Cells.Add(new TableCell() { Text = myEntry.date.ToString() });
+                MyRow.Cells.Add(new TableCell() { Text = myEntry.date.ToString(), CssClass = "date-cell" } );
                 MyRow.Cells.Add(new TableCell() { Text = myEntry.text });
                 LogTable.Rows.Add(MyRow);
             }
