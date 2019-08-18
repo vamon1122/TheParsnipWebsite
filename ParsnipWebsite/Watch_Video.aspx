@@ -58,7 +58,7 @@
         <div runat="server" id="youtube_video" class="youtube-player" />
     </div>
     <form id="form1" runat="server">
-        <div style="padding-left:2.5%; padding-right:2.5%">
+        <div style="padding-left:2.5%; padding-right:2.5%; padding-top:10px">
             <asp:Button runat="server" ID="Button_ViewAlbum" class="btn btn-info btn-lg" 
                 Text="CLICK for more like this!" OnClick="Button_ViewAlbum_Click" />
 

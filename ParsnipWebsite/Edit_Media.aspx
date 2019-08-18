@@ -46,21 +46,18 @@
             <asp:Image runat="server" ID="ImagePreview" CssClass="image-preview" Width="100%" visible="false" />
             <a runat="server" id="a_play_video" visible="false" >
                 <div class="play-button-div">
-                    <img runat="server" id="thumbnail" class="lazy" style="width:100%" />
+                    <img runat="server" id="thumbnail" style="width:100%" />
                     <span class="play-button-icon">
                         <img src="Resources\Media\Images\Web_Media\play_button_2.png" />
                     </span>
                 </div>
             </a>
-            <div runat="server" id="youtube_video_container" class="youtube-container" style="display:inline-block" visible="false">
+            <div runat="server" id="youtube_video_container" class="youtube-container" style="display:inline-block; margin-bottom:0px; padding-bottom:0px" visible="false">
                 <div runat="server" id="youtube_video" class="youtube-player" />
             </div>
-            
-            <br />
-            <br />
 
             <!-- Delete / save buttons -->
-            <div style="width:100%; padding-left:5%; padding-right:5%; display:block;">
+            <div style="width:100%; padding-left:5%; padding-right:5%; padding-top:6px; display:block;">
                 <asp:Button runat="server" ID="btn_AdminDelete"  CssClass="btn btn-primary float-left" Width="100px" Text="Delete" Visible="false" data-toggle="modal" data-target="#confirmDelete" OnClientClick="return false;" UseSubmitBehavior="false"></asp:Button>
                 <asp:Button runat="server" ID="ButtonSave" class="btn btn-primary float-right" Text="Save" Width="100px" OnClick="ButtonSave_Click"></asp:Button>
             </div>
