@@ -35,6 +35,7 @@ namespace ParsnipWebsite
             foreach (LogEntry myEntry in LogEntries)
             {
                 TableRow MyRow = new TableRow();
+                MyRow.Attributes.Add("style", "word-wrap:break-word");
                 MyRow.Cells.Add(new TableCell() { Text = myEntry.date.ToString() });
                 MyRow.Cells.Add(new TableCell() { Text = myEntry.text });
                 LogTable.Rows.Add(MyRow);

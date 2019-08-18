@@ -54,8 +54,8 @@
             <div style="padding-bottom : 3%">
                 <button data-toggle="modal" data-target="#confirmClearLogs" class="btn btn-primary" onclick="return false" >Clear</button>
             </div>
-            <div class="table-wrapper-scroll-y table-responsive">
-                <asp:Table runat="server" ID="LogTable" CssClass="table table-bordered table-striped"  />
+            <div class="table-wrapper-scroll-y">
+                <asp:Table runat="server" ID="LogTable" CssClass="table table-bordered table-striped" style="table-layout:fixed"  />
             </div>
         </div>
 
