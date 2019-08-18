@@ -40,14 +40,18 @@
                 onselectedindexchanged="SelectUser_Changed">
             </asp:DropDownList>
             <br />
+            </div>
+        <div style="text-align:center">
             <!--<asp:Button runat="server" ID="btnDelete"  CssClass="btn btn-primary" Text="Delete" Visible="false" data-toggle="modal" data-target="#confirmDelete" OnClientClick="return false;"></asp:Button>-->
                     <button data-toggle="modal" data-target="#confirmDelete" class="btn btn-danger" onclick="return false" >Remove ALL media from albums</button>
             <br />
             <br />
-                <div runat="server" id="DisplayPhotosDiv">
+                
+        
+        <div runat="server" id="DisplayPhotosDiv">
 
                 </div>
-        </div>
+            </div>
         <!-- Modal -->
         <div class="modal fade" id="confirmDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -64,7 +68,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <asp:Button ID="BtnDeleteUploads" runat="server" class="btn btn-danger" OnClick="BtnDeleteUploads_Click" Text="REMOVE 'EM ALL!!!"></asp:Button>
+                        <asp:Button ID="BtnDeleteUploads" runat="server" class="btn btn-danger" OnClick="BtnDeleteUploads_Click" Text="REMOVE ALL"></asp:Button>
                     </div>
                 </div>
             </div>
