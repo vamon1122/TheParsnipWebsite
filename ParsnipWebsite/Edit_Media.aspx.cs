@@ -58,6 +58,7 @@ namespace ParsnipWebsite
                     Debug.WriteLine("Selecting image with id = " + id);
                     MyImage.Select();
                     ImagePreview.ImageUrl = MyImage.Directory;
+                    input_date_media_captured.Value = MyImage.DateTimeMediaCreated.ToString();
                     ImagePreview.Visible = true;
                 }
                 else if (Video.Exists(id))
@@ -66,6 +67,7 @@ namespace ParsnipWebsite
                     Debug.WriteLine("Selecting video with id = " + id);
                     MyVideo.Select();
                     thumbnail.Src = MyVideo.Thumbnail;
+                    input_date_media_captured.Value = MyVideo.DateTimeMediaCreated.ToString();
                     a_play_video.HRef = string.Format("../../watch_video?id={0}", MyVideo.Id);
                     a_play_video.Visible = true;
                 }
@@ -74,6 +76,7 @@ namespace ParsnipWebsite
                     MyYoutubeVideo = new YoutubeVideo(new Guid(Request.QueryString["id"]));
                     Debug.WriteLine("Selecting youtube video with id = " + id);
                     MyYoutubeVideo.Select();
+                    input_date_media_captured.Value = MyYoutubeVideo.DateTimeMediaCreated.ToString();
                     youtube_video.Attributes.Add("data-id", MyYoutubeVideo.DataId);
                     youtube_video_container.Visible = true;
                 }
@@ -177,6 +180,8 @@ namespace ParsnipWebsite
 
                     Debug.WriteLine("Getting title from request: " + Request["InputTitleTwo"].ToString());
                     MyMedia.Title = Request["InputTitleTwo"].ToString();
+
+                    MyMedia.DateTimeMediaCreated = Convert.ToDateTime(Request["input_date_media_captured"]);
 
                     Debug.WriteLine("Getting album from request...");
                     string newAlbumId;

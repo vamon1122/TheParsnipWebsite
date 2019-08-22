@@ -14,13 +14,13 @@ namespace ParsnipWebsite.Custom_Controls.Media
             get
             {
                 if (MyImage != null)
-                    return MyImage.DateCreated;
+                    return MyImage.DateTimeMediaCreated;
 
                 if (MyVideo != null)
-                    return MyVideo.DateCreated;
+                    return MyVideo.DateTimeMediaCreated;
 
                 if (MyYoutubeVideo != null)
-                    return MyYoutubeVideo.DateCreated;
+                    return MyYoutubeVideo.DateTimeMediaCreated;
 
                  return DateTime.MinValue;
             }

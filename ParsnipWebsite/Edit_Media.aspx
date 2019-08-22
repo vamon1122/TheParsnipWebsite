@@ -22,6 +22,15 @@
     <script src="Javascript/IntersectionObserver.js"></script>
 
     <title>Edit Image</title>
+
+    <!-- Special version of Bootstrap that only affects content wrapped in .bootstrap-iso -->
+<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" /> 
+
+<!--Font Awesome (added because you use icons in your prepend/append)-->
+<link rel="stylesheet" href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css" />
+
+<!-- Inline CSS based on choices in "Settings" tab -->
+<style>.bootstrap-iso .formden_header h2, .bootstrap-iso .formden_header p, .bootstrap-iso form{font-family: Arial, Helvetica, sans-serif; color: black}.bootstrap-iso form button, .bootstrap-iso form button:hover{color: white !important;} .asteriskField{color: red;}</style>
 </head>
 <body class="fade0p5" id="body" style="text-align:center;"  >
     <menuControls:Menu runat="server" ID="Menu" />
@@ -40,6 +49,20 @@
                 <asp:DropDownList ID="NewAlbumsDropDown" runat="server" AutoPostBack="False" CssClass="form-control" >
                 </asp:DropDownList>
                 <br />
+            </div>
+
+            <div class="form-group" style="padding-left:5%; padding-right: 5%;">
+                <label>Date Captured</label>
+                <div class="bootstrap-iso">
+                <div class="form-group ">
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        <input runat="server" class="form-control login" id="input_date_media_captured" name="date" placeholder="DD/MM/YYYY" type="text"/>
+                        </div>
+                    </div>        
+                </div>
             </div>
 
             <!-- Image preview -->
@@ -116,6 +139,54 @@
             catch (e) { window.location = redirect; }
         }
     </script>
+        <!-- Extra JavaScript/CSS added manually in "Settings" tab -->
+<!-- Include jQuery -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+<!-- Include Date Range Picker -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+    <script>
+        $(document).ready(function ()
+        {
+            var date_input = $('input[name="date"]'); //our date input has the name "date"
+            var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
+            $("[id$=input_date_media_captured]").datepicker({
+                format: 'dd/mm/yyyy',
+                container: container,
+                todayHighlight: true,
+                autoclose: true,
+            })
+        })
+
+        var dobInput = document.getElementById("input_date_media_captured");
+        /*
+        alert("dobInput = " + dobInput);
+        alert("dobInput = " + dobInput.nodeValue);
+        alert("dobInput = " + dobInput.textContent);
+        alert("dobInput = " + dobInput.innerHTML);
+        alert("dobInput = " + dobInput.innerText);
+        */
+
+        function BenUpdate()
+        {
+            var dobInput = document.getElementById('input_date_media_captured').value;
+            document.getElementById('dobCopy1').value = dobInput;
+        }
+
+        var dobCopy = document.getElementById("dobCopy");
+        dobInput.addEventListener('onchange')
+        {
+            alert("onchange");
+            dobCopy.nodeValue = dobInput.nodeValue;
+        }
+
+        dobInput.addEventListener('onclick')
+        {
+            alert("onchange");
+            dobCopy.nodeValue = dobInput.nodeValue;
+        }
+</script>
 </body>
 </html>
 
