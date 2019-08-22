@@ -96,7 +96,7 @@
     createButton("😂 Memes 😂", "memes");
     createButton("📹 Videos 📹", "videos");
     createButton("📷 Photos 📷", "photos");
-    createButton("⚽ Tuesday 7s ⚽", "https://www.playfootball.net/venues/bury/players-lounge/2886/10389/152")
+    createButton("⚽ Tuesday 7s ⚽", "https://www.playfootball.net/venues/bury/players-lounge/2886/10708/153?venue_id=79")
     createButton("☕ AfternoonT ☕", "https://www.mixcloud.com/afternoontlive/");
     createButton("💩 Bios 💩", "bios");    
 
