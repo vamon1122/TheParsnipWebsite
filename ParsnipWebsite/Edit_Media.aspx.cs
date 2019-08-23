@@ -60,6 +60,7 @@ namespace ParsnipWebsite
                     ImagePreview.ImageUrl = MyImage.Directory;
                     input_date_media_captured.Value = MyImage.DateTimeMediaCreated.ToString();
                     ImagePreview.Visible = true;
+                    Page.Title = "Edit Image";
                 }
                 else if (Video.Exists(id))
                 {
@@ -70,6 +71,7 @@ namespace ParsnipWebsite
                     input_date_media_captured.Value = MyVideo.DateTimeMediaCreated.ToString();
                     a_play_video.HRef = string.Format("../../watch_video?id={0}", MyVideo.Id);
                     a_play_video.Visible = true;
+                    Page.Title = "Edit Video";
                 }
                 else if (YoutubeVideo.Exists(id))
                 {
@@ -79,6 +81,7 @@ namespace ParsnipWebsite
                     input_date_media_captured.Value = MyYoutubeVideo.DateTimeMediaCreated.ToString();
                     youtube_video.Attributes.Add("data-id", MyYoutubeVideo.DataId);
                     youtube_video_container.Visible = true;
+                    Page.Title = "Edit Youtube Video";
                 }
                 else
                 {

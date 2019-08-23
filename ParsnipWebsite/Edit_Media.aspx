@@ -21,7 +21,7 @@
 
     <script src="Javascript/IntersectionObserver.js"></script>
 
-    <title>Edit Image</title>
+    <title>Edit Media</title>
 
     <!-- Special version of Bootstrap that only affects content wrapped in .bootstrap-iso -->
 <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" /> 
