@@ -37,20 +37,10 @@
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         <strong>Upload Error</strong> You cannot upload videos yet!
     </div>
-    
-
 
     <h2>Krakow</h2>
     <hr class="break" />
-    <div id="flightDetailsContainer">
-    <h4 id="countdownToKrakow"></h4>
-    <label id="countdownInfo" style="display:none"></label>
-
-    <hr class="break" />
-        
-    <img src="Resources/Media/Images/Local/Krakow/Krakow%20Flight%20Times.png" class="image-preview" id="flightDetailsImage" />
-    <hr class="break" />
-    </div>
+    
     <form runat="server">
         <div runat="server" id="UploadDiv" class="form-group" style="display:none; ">
             <h4>Upload your Krakow photos</h4>
@@ -69,7 +59,6 @@
     <script src="../Javascript/UsefulFunctions.js"></script>
     <script src="../Javascript/FocusImage.js"></script>
     <script src="../Javascript/Youtube.js"></script>
-    <script src="../Javascript/CountDownToKrakow.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function ()
         {
