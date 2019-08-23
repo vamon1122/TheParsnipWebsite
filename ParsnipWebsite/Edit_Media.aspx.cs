@@ -144,7 +144,19 @@ namespace ParsnipWebsite
                 {
                     //I am being deleted
                     new LogEntry(DebugLog) { text = "Delete media clicked" };
-                    MyMedia.Delete();
+
+                    bool deleteSuccess;
+
+                    if (myUser.AccountType == "admin" || myUser.AccountType == "media")
+                    {
+                        MyMedia.Delete();
+                        deleteSuccess = true;
+                    }
+                    else
+                    {
+                        deleteSuccess = false;
+                    }
+                        
 
                     string Redirect;
 
@@ -170,7 +182,17 @@ namespace ParsnipWebsite
                             Redirect = "home?error=nomediaalbum2";
                             break;
                     }
-                    Response.Redirect(Redirect);
+                    if (deleteSuccess)
+                    {
+                        Response.Redirect(Redirect);
+                    }
+                    else
+                    {
+                        if (Redirect.Contains("?"))
+                            Response.Redirect(Redirect + "&error=access");
+                        else
+                            Response.Redirect(Redirect + "?error=access");
+                    }
                 }
 
                 if (IsPostBack)
@@ -178,57 +200,84 @@ namespace ParsnipWebsite
                     Debug.WriteLine("I am a postback!!!");
                     new LogEntry(DebugLog) { text = "Delete media NOT clicked" };
 
-                    Debug.WriteLine("Getting title from request: " + Request["InputTitleTwo"].ToString());
-                    MyMedia.Title = Request["InputTitleTwo"].ToString();
 
-                    MyMedia.DateTimeMediaCreated = Convert.ToDateTime(Request["input_date_media_captured"]);
+                    bool changesWereSaved;
 
-                    Debug.WriteLine("Getting album from request...");
-                    string newAlbumId;
-                    try
+                    if (myUser.AccountType == "admin" || myUser.AccountType == "media")
                     {
-                        newAlbumId = Request["NewAlbumsDropDown"].ToString();
+                        changesWereSaved = true;
+                        Debug.WriteLine("Getting title from request: " + Request["InputTitleTwo"].ToString());
+                        MyMedia.Title = Request["InputTitleTwo"].ToString();
+
+                        MyMedia.DateTimeMediaCreated = Convert.ToDateTime(Request["input_date_media_captured"]);
+
+                        Debug.WriteLine("Getting album from request...");
+                        string newAlbumId;
+                        try
+                        {
+                            newAlbumId = Request["NewAlbumsDropDown"].ToString();
+                        }
+                        catch
+                        {
+                            Debug.WriteLine("There was no album!");
+                            newAlbumId = null;
+                        }
+
+                        if (newAlbumId != null)
+                        {
+                            MyMedia.AlbumId = new Guid(newAlbumId);
+                            MyMedia.Update();
+                        }
                     }
-                    catch
+                    else
                     {
-                        Debug.WriteLine("There was no album!");
-                        newAlbumId = null;
-                    }
-
-                    if (newAlbumId != null)
-                    {
-                        MyMedia.AlbumId = new Guid(newAlbumId);
-                        MyMedia.Update();
+                        changesWereSaved = false;
+                        new LogEntry(DebugLog)
+                        {
+                            text =
+                            string.Format("{0} is no longer and admin! Their changes to the image will not be saved.",
+                            myUser.FullName)
+                        };
                     }
 
                     string Redirect;
 
-                    switch (MyMedia.AlbumId.ToString().ToUpper())
+                        switch (MyMedia.AlbumId.ToString().ToUpper())
+                        {
+                            case "4B4E450A-2311-4400-AB66-9F7546F44F4E":
+                                Redirect = "photos?focus=" + MyMedia.Id.ToString();
+                                break;
+                            case "5F15861A-689C-482A-8E31-2F13429C36E5":
+                                Redirect = "memes?focus=" + MyMedia.Id.ToString();
+                                break;
+                            case "FF3127DF-70B2-47EF-B77B-2E086D2EF370":
+                                Redirect = "krakow?focus=" + MyMedia.Id.ToString();
+                                break;
+                            case "73C436A1-893B-4418-8800-821823C18DFE":
+                                Redirect = "videos?focus=" + MyMedia.Id.ToString();
+                                break;
+                            case "00000000-0000-0000-0000-000000000000":
+                                Debug.WriteLine("New album id is empty. Redirecting to original album");
+                                //Redirect = "manage_medias?id=" + MyMedia.Id.ToString();
+                                Redirect = OriginalAlbumRedirect;
+                                break;
+                            default:
+                                Debug.WriteLine(string.Format("The album id {0} != ff3127df-70b2-47ef-b77b-2e086d2ef370",
+                                    MyMedia.AlbumId));
+                                Redirect = "home?error=nomediaalbum3";
+                                break;
+                        }
+                    if (changesWereSaved)
                     {
-                        case "4B4E450A-2311-4400-AB66-9F7546F44F4E":
-                            Redirect = "photos?focus=" + MyMedia.Id.ToString();
-                            break;
-                        case "5F15861A-689C-482A-8E31-2F13429C36E5":
-                            Redirect = "memes?focus=" + MyMedia.Id.ToString();
-                            break;
-                        case "FF3127DF-70B2-47EF-B77B-2E086D2EF370":
-                            Redirect = "krakow?focus=" + MyMedia.Id.ToString();
-                            break;
-                        case "73C436A1-893B-4418-8800-821823C18DFE":
-                            Redirect = "videos?focus=" + MyMedia.Id.ToString();
-                            break;
-                        case "00000000-0000-0000-0000-000000000000":
-                            Debug.WriteLine("New album id is empty. Redirecting to original album");
-                            //Redirect = "manage_medias?id=" + MyMedia.Id.ToString();
-                            Redirect = OriginalAlbumRedirect;
-                            break;
-                        default:
-                            Debug.WriteLine(string.Format("The album id {0} != ff3127df-70b2-47ef-b77b-2e086d2ef370",
-                                MyMedia.AlbumId));
-                            Redirect = "home?error=nomediaalbum3";
-                            break;
+                        Response.Redirect(Redirect);
                     }
-                    Response.Redirect(Redirect);
+                    else
+                    {
+                        if (Redirect.Contains("?"))
+                            Response.Redirect(Redirect + "&error=access");
+                        else
+                            Response.Redirect(Redirect + "?error=access");
+                    }
                 }
 
                 if (MyMedia.Title != null && !string.IsNullOrEmpty(MyMedia.Title) &&
@@ -238,8 +287,11 @@ namespace ParsnipWebsite
                     InputTitleTwo.Text = MyMedia.Title;
                 }
 
-                if (myUser.AccountType == "admin")
+                if (myUser.AccountType == "admin" || myUser.AccountType == "media")
+                {
+                    DateCapturedDiv.Visible = true;
                     btn_AdminDelete.Visible = true;
+                }
 
                 if (MyMedia.CreatedById.ToString() != myUser.Id.ToString())
                 {
@@ -248,12 +300,12 @@ namespace ParsnipWebsite
                         text = string.Format("{0} attempted to edit an media which {1} " +
                         "did not own.", myUser.FullName, myUser.SubjectiveGenderPronoun)
                     };
-                    if (myUser.AccountType == "admin")
+                    if (myUser.AccountType == "admin" || myUser.AccountType == "media")
                     {
                         new LogEntry(DebugLog)
                         {
                             text = string.Format("{0} was allowed to edit the media anyway " +
-                            "because {1} is an admin.", myUser.FullName, myUser.SubjectiveGenderPronoun)
+                            "because {1} is an admin or media.", myUser.FullName, myUser.SubjectiveGenderPronoun)
                         };
                     }
                     else

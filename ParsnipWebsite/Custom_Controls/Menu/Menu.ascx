@@ -105,7 +105,7 @@
         createButton("💪 Admin 💪", "admin");
     }
 
-    if (getCookie("accountType") === "admin" || getCookie("accountType") === "member" || getCookie("accountType") === "user")
+    if (getCookie("accountType") === "admin" || getCookie("accountType") === "media" ||getCookie("accountType") === "member" || getCookie("accountType") === "user")
     {
         createButton("👋 Log Out 👋", "logout");
     }

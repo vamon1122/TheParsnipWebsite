@@ -51,7 +51,7 @@
                 <br />
             </div>
 
-            <div class="form-group" style="padding-left:5%; padding-right: 5%;">
+            <div runat="server" id="DateCapturedDiv" class="form-group" style="padding-left:5%; padding-right: 5%;" visible="false">
                 <label>Date Captured</label>
                 <div class="bootstrap-iso">
                 <div class="form-group ">

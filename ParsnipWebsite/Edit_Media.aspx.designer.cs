@@ -67,6 +67,15 @@ namespace ParsnipWebsite {
         protected global::System.Web.UI.WebControls.DropDownList NewAlbumsDropDown;
         
         /// <summary>
+        /// DateCapturedDiv control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl DateCapturedDiv;
+        
+        /// <summary>
         /// input_date_media_captured control.
         /// </summary>
         /// <remarks>

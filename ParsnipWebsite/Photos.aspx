@@ -31,11 +31,11 @@
     
     <div class="alert alert-warning alert-dismissible parsnip-alert" style="display: none;" id="AccessWarning">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        <strong>Access Denied</strong> You cannot edit photos which other people have uploaded!
+        <strong>Access Denied</strong> You do not have permission to edit media which other people have uploaded!
     </div>
     <div class="alert alert-danger alert-dismissible parsnip-alert" style="display: none;" id="VideoError">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        <strong>Upload Error</strong> You cannot upload videos to the photos page!
+        <strong>Upload Error</strong> You cannot upload videos to the website yet (I have to do this manually)
     </div>
 
     <div class="cens_req padded-text"><label>Certain elements of this page were removed by request. <a href="content_removal">Click here</a> to learn more.</label></div>

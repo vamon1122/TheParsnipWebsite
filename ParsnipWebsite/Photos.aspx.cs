@@ -36,7 +36,7 @@ namespace ParsnipWebsite
             if (IsPostBack && PhotoUpload.PostedFile != null)
                 MediaManager.UploadImage(myUser, PhotosAlbum, PhotoUpload);
 
-            if (myUser.AccountType == "admin" || myUser.AccountType == "member")
+            if (myUser.AccountType == "admin" || myUser.AccountType == "media" || myUser.AccountType == "member")
                 UploadDiv.Style.Clear();
         }
 
