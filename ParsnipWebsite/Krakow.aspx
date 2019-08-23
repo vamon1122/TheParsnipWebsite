@@ -44,6 +44,10 @@
     <form runat="server">
         <div runat="server" id="UploadDiv" class="form-group" style="display:none; ">
             <h4>Upload your Krakow photos</h4>
+            Let me know if you want to help improve the captions for our holiday photos. 
+            I appreciate that they're awful at the moment 😂. I can give you editing rights if you're interested :P
+            <br />
+            <br />
         
             <label class="file-upload btn">                
                 <span><strong>Upload Photo</strong></span>
