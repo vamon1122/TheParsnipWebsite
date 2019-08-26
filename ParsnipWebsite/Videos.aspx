@@ -40,8 +40,7 @@
     <div class="cens_req padded-text"><label>Certain elements of this page were removed by request. <a href="content_removal">Click here</a> to learn more.</label></div>
 
     <div class="padded-text">
-        <h2 class="page-title">Videos</h2>  
-        <hr class="break" />
+        <h2>Videos</h2>
         </div>
     
     <form runat="server">
