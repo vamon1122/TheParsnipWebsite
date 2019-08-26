@@ -32,7 +32,7 @@ namespace ParsnipWebsite
                 string.Format("Hiya {0}, welcome back to the parsnip website!", myUser.Forename);
 
             Video latestVideo = Video.GetLatest();
-            LatestVideo.InnerHtml += string.Format("<div><h2>LATEST VIDEO: {0}</h2>", latestVideo.Title);
+            LatestVideo.InnerHtml += string.Format("<div><h2 class=\"section-title\">LATEST VIDEO: {0}</h2>", latestVideo.Title);
             LatestVideo.InnerHtml += string.Format("<a href=\"{0}/watch_video?id={1}\">", 
                 Request.Url.GetLeftPart(UriPartial.Authority), latestVideo.Id, latestVideo.Thumbnail);
 

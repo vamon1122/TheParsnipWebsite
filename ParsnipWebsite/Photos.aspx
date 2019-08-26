@@ -42,7 +42,7 @@
     
 
 
-    <h2>Photos</h2>
+    <h2 class="page-title">Photos</h2>
     <hr class="break" />
     
     <a href ="https://photos.app.goo.gl/GgkSHa8FvichfXRZ7">
@@ -53,7 +53,6 @@
     <div class="padded-text">
         <label>Click <a href="https://photos.app.goo.gl/GgkSHa8FvichfXRZ7">here</a> to view 'The Parsnip Collection' on google photos. This includes many of the photos on this page and was curated by Tom.</label>
     </div>
-    <hr class="break" />
         
     <form runat="server">
         

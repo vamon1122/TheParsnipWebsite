@@ -37,7 +37,7 @@
         <strong>Upload Error</strong> You cannot upload videos yet!
     </div>
 
-    <h2>Memes</h2>
+    <h2 class="page-title">Memes</h2>
     <hr class="break" />
 
     <form runat="server">
