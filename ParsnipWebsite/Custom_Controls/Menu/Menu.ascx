@@ -96,8 +96,8 @@
     createButton("😂 Memes 😂", "memes");
     createButton("📹 Videos 📹", "videos");
     createButton("📷 Photos 📷", "photos");
-    createButton("⚽ Tuesday 7s ⚽", "https://www.playfootball.net/venues/bury/players-lounge/2886/10708/153?venue_id=79")
-    createButton("☕ AfternoonT ☕", "https://www.mixcloud.com/afternoontlive/");
+    createButton("⚽ Tuesday 7s ⚽", "tuesday7s.html")
+    createButton("☕ AfternoonT ☕", "afternoont.html");
     createButton("💩 Bios 💩", "bios");    
 
     if (getCookie("accountType") === "admin")
@@ -128,12 +128,12 @@
     menuDiv.style.width = "100%";
     menuDiv.style.textAlign = "center";
 
-    var pageTitle = document.createElement("label");
+    var pageTitle = document.createElement("h2");
     pageTitle.innerHTML = title;
-    pageTitle.style.fontSize = titleFontSize;
+    //pageTitle.style.fontSize = titleFontSize;
     pageTitle.style.fontWeight = "bold";
     pageTitle.style.color = titleColor;
-    pageTitle.style.top = "-100px";
+    pageTitle.style.marginTop = "3px";
 
     menuDiv.appendChild(pageTitle);
 

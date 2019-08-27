@@ -33,17 +33,17 @@
     
     <menuControls:Menu runat="server" ID="Menu" />
 
-    <h1 class="page-title">Home</h1>
+    <h2 class="page-title"><b>Home</b></h2>
     <div class="padded-text center_div">
         <asp:Label runat="server" ID="WelcomeLabel"></asp:Label>
     </div>
     <div runat="server" id="LatestVideo" style="margin-top:10px"></div>
     <div class="padded-text center_div">
-        <h4 class="section-title">*NEW*</h4>
+        <h3 class="section-title"><b>*NEW*</b></h3>
         - [17/08/19] Fixed broken image links on the <a href="Photos.aspx">photos page</a><br />
         - [17/08/19] Fixed slow loading times on the <a href="Videos.aspx">videos page</a><br />
         - [07/08/19] New <a href="Krakow.aspx">Krakow page!</a> Upload, view & share holiday photos!<br />
-        - [19/07/19] View <a href="https://www.playfootball.net/venues/bury/players-lounge/2886/10708/153?venue_id=79">tuesday 7s results</a> from the parsnip menu<br />
+        - [19/07/19] View <a href="tuesday7s.html">tuesday 7s results</a> from the parsnip menu<br />
         - [24/06/19] Share <a href="Photos.aspx">photos</a> and <a href="Videos.aspx">videos</a>! (Recipient doesn't even need an account to view what you share!!!)<br />
         - [24/06/19] You can now access the home page without logging in
     </div>

@@ -29,8 +29,8 @@
     
     
     <div class="padded-text">
-    <h1 class="page-title">Bios!!!</h1>
-    <h4 class="page-title">All credit goes to Kieron 'Gaz Beadle' Howarth</h4>
+    <h2 class="page-title"><b>Bios!!!</b></h2>
+    <h3 class="page-title"><b>All credit goes to Kieron 'Gaz Beadle' Howarth</b></h3>
     </div>
     <img class="censored" id="kieron" src="http://res.cloudinary.com/lqrrvz3pc/image/upload/v1477059052/Photos/Bios/Fat Kieron.JPG" style="width:300px" />
     <hr class="break" />

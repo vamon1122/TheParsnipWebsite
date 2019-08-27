@@ -38,7 +38,7 @@
 
     <div class="cens_req padded-text"><label>Certain elements of this page were removed by request. <a href="content_removal">Click here</a> to learn more.</label></div>
 
-    <h1>Videos</h1>
+    <h2><b>Videos</b></h2>
     
     <form runat="server">
         <div runat="server" id="links_div">

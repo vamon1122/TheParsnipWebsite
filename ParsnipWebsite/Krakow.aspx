@@ -38,12 +38,12 @@
         <strong>Upload Error</strong> You cannot upload videos yet!
     </div>
 
-    <h1 class="page-title">Krakow</h1>
-    <hr class="break" />
+    <h2 class="page-title"><b>Krakow</b></h2>
     
     <form runat="server">
         <div runat="server" id="UploadDiv" class="form-group" style="display:none; ">
-            <h4 class="section-title">Upload your Krakow photos</h4>
+            <h3 class="section-title"><b>Upload your Krakow photos</b></h3>
+            If you have any videos, send them to me, otherwise, upload any missing photos!
             Let me know if you want to help improve the captions for our holiday photos. 
             I appreciate that they're awful at the moment 😂. I can give you editing rights if you're interested :P
             <br />

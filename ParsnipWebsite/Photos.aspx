@@ -42,7 +42,7 @@
     
 
 
-    <h1 class="page-title">Photos</h1>
+    <h2 class="page-title"><b>Photos</b></h2>
     <hr class="break" />
     
     <a href ="https://photos.app.goo.gl/GgkSHa8FvichfXRZ7">
