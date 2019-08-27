@@ -92,6 +92,7 @@
     <Content Include="Javascript\Clipboard.js" />
     <Content Include="Javascript\CountDownToKrakow.js" />
     <Content Include="Javascript\FocusImage.js" />
+    <Content Include="Javascript\LazyImages.js" />
     <Content Include="Javascript\UsefulFunctions.js" />
     <Content Include="Javascript\Youtube.js" />
     <Content Include="Krakow.aspx" />

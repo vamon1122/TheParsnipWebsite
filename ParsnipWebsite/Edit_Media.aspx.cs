@@ -89,8 +89,6 @@ namespace ParsnipWebsite
                     Response.Redirect("home");
                 }
 
-
-
                 Debug.WriteLine("----------Media album = " + MyMedia.AlbumId);
 
                 switch (MyMedia.AlbumId.ToString().ToUpper())
@@ -150,7 +148,7 @@ namespace ParsnipWebsite
 
                     bool deleteSuccess;
 
-                    if (myUser.AccountType == "admin" || myUser.AccountType == "media")
+                    if (myUser.AccountType == "admin")
                     {
                         MyMedia.Delete();
                         deleteSuccess = true;
@@ -159,7 +157,6 @@ namespace ParsnipWebsite
                     {
                         deleteSuccess = false;
                     }
-                        
 
                     string Redirect;
 
@@ -205,45 +202,59 @@ namespace ParsnipWebsite
 
 
                     bool changesWereSaved;
-
-                    if (myUser.AccountType == "admin" || myUser.AccountType == "media")
+                    try
                     {
-                        changesWereSaved = true;
-                        Debug.WriteLine("Getting title from request: " + Request["InputTitleTwo"].ToString());
-                        MyMedia.Title = Request["InputTitleTwo"].ToString();
-
-                        MyMedia.DateTimeMediaCreated = Convert.ToDateTime(Request["input_date_media_captured"]);
-
-                        Debug.WriteLine("Getting album from request...");
-                        string newAlbumId;
-                        try
+                        if (myUser.AccountType == "admin" || myUser.AccountType == "media" || myUser.Id.ToString() == MyMedia.CreatedById.ToString())
                         {
-                            newAlbumId = Request["NewAlbumsDropDown"].ToString();
+                            changesWereSaved = true;
+                            Debug.WriteLine("Getting title from request: " + Request["InputTitleTwo"].ToString());
+                            MyMedia.Title = Request["InputTitleTwo"].ToString();
+
+                            if (myUser.AccountType == "admin")
+                            {
+                                try
+                                {
+                                    MyMedia.DateTimeMediaCreated = Convert.ToDateTime(Request["input_date_media_captured"]);
+                                }
+                                catch (Exception ex)
+                                {
+                                    input_date_media_captured.Value = Request["input_date_media_captured"];
+                                    input_date_media_captured.Attributes.Add("class", "form-control is-invalid login");
+                                    InputTitleTwo.CssClass = "form-control is-invalid login";
+                                    throw ex;
+                                }
+                            }
+
+                            Debug.WriteLine("Getting album from request...");
+                            string newAlbumId;
+                            try
+                            {
+                                newAlbumId = Request["NewAlbumsDropDown"].ToString();
+                            }
+                            catch
+                            {
+                                Debug.WriteLine("There was no album!");
+                                newAlbumId = null;
+                            }
+
+                            if (newAlbumId != null)
+                            {
+                                MyMedia.AlbumId = new Guid(newAlbumId);
+                                MyMedia.Update();
+                            }
                         }
-                        catch
+                        else
                         {
-                            Debug.WriteLine("There was no album!");
-                            newAlbumId = null;
+                            changesWereSaved = false;
+                            new LogEntry(DebugLog)
+                            {
+                                text =
+                                string.Format("{0} is no longer and admin! Their changes to the image will not be saved.",
+                                myUser.FullName)
+                            };
                         }
 
-                        if (newAlbumId != null)
-                        {
-                            MyMedia.AlbumId = new Guid(newAlbumId);
-                            MyMedia.Update();
-                        }
-                    }
-                    else
-                    {
-                        changesWereSaved = false;
-                        new LogEntry(DebugLog)
-                        {
-                            text =
-                            string.Format("{0} is no longer and admin! Their changes to the image will not be saved.",
-                            myUser.FullName)
-                        };
-                    }
-
-                    string Redirect;
+                        string Redirect;
 
                         switch (MyMedia.AlbumId.ToString().ToUpper())
                         {
@@ -270,16 +281,21 @@ namespace ParsnipWebsite
                                 Redirect = "home?error=nomediaalbum3";
                                 break;
                         }
-                    if (changesWereSaved)
-                    {
-                        Response.Redirect(Redirect);
-                    }
-                    else
-                    {
-                        if (Redirect.Contains("?"))
-                            Response.Redirect(Redirect + "&error=access");
+                        if (changesWereSaved)
+                        {
+                            Response.Redirect(Redirect);
+                        }
                         else
-                            Response.Redirect(Redirect + "?error=access");
+                        {
+                            if (Redirect.Contains("?"))
+                                Response.Redirect(Redirect + "&error=access");
+                            else
+                                Response.Redirect(Redirect + "?error=access");
+                        }
+                    }
+                    catch
+                    {
+
                     }
                 }
 
@@ -290,7 +306,7 @@ namespace ParsnipWebsite
                     InputTitleTwo.Text = MyMedia.Title;
                 }
 
-                if (myUser.AccountType == "admin" || myUser.AccountType == "media")
+                if (myUser.AccountType == "admin")
                 {
                     DateCapturedDiv.Visible = true;
                     btn_AdminDelete.Visible = true;

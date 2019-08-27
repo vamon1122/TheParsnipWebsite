@@ -38,7 +38,7 @@
         <strong>Upload Error</strong> You cannot upload videos yet!
     </div>
 
-    <h2 class="page-title">Krakow</h2>
+    <h1 class="page-title">Krakow</h1>
     <hr class="break" />
     
     <form runat="server">
@@ -61,38 +61,7 @@
     <script src="../Javascript/UsefulFunctions.js"></script>
     <script src="../Javascript/FocusImage.js"></script>
     <script src="../Javascript/Youtube.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function ()
-        {
-            var lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
-
-            if ("IntersectionObserver" in window)
-            {
-                let lazyImageObserver = new IntersectionObserver(function (entries, observer)
-                {
-                    entries.forEach(function (entry)
-                    {
-                        if (entry.isIntersecting)
-                        {
-                            let lazyImage = entry.target;
-                            lazyImage.src = lazyImage.dataset.src;
-                            lazyImage.srcset = lazyImage.dataset.srcset;
-                            lazyImage.classList.remove("lazy");
-                            lazyImageObserver.unobserve(lazyImage);
-                        }
-                    });
-                });
-                lazyImages.forEach(function (lazyImage)
-                {
-                    lazyImageObserver.observe(lazyImage);
-                });
-            }
-            else
-            {
-                //I used Javascript/intersection-observer as a fallback
-            }
-        });
-    </script>
+    <script src="Javascript/LazyImages.js"></script>
     <script>
         var url_string = window.location.href
         var url = new URL(url_string);

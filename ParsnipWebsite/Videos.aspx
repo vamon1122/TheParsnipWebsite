@@ -1,7 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Videos.aspx.cs" Inherits="ParsnipWebsite.Videos" %>
 <%@ Register Src="~/Custom_Controls/Menu/Menu.ascx" TagPrefix="menuControls" TagName="Menu" %>
 
-
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -39,9 +38,7 @@
 
     <div class="cens_req padded-text"><label>Certain elements of this page were removed by request. <a href="content_removal">Click here</a> to learn more.</label></div>
 
-    <div class="padded-text">
-        <h2>Videos</h2>
-        </div>
+    <h1>Videos</h1>
     
     <form runat="server">
         <div runat="server" id="links_div">
@@ -51,38 +48,7 @@
     <!--SCRIPTS-->
     <script src="../Javascript/FocusImage.js"></script>
     <script src="../Javascript/Youtube.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function ()
-        {
-            var lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
-
-            if ("IntersectionObserver" in window)
-            {
-                let lazyImageObserver = new IntersectionObserver(function (entries, observer)
-                {
-                    entries.forEach(function (entry)
-                    {
-                        if (entry.isIntersecting)
-                        {
-                            let lazyImage = entry.target;
-                            lazyImage.src = lazyImage.dataset.src;
-                            lazyImage.srcset = lazyImage.dataset.srcset;
-                            lazyImage.classList.remove("lazy");
-                            lazyImageObserver.unobserve(lazyImage);
-                        }
-                    });
-                });
-                lazyImages.forEach(function (lazyImage)
-                {
-                    lazyImageObserver.observe(lazyImage);
-                });
-            }
-            else
-            {
-                //I used Javascript/intersection-observer as a fallback
-            }
-        });
-    </script>
+    <script src="Javascript/LazyImages.js"></script>
     <script>
         var url_string = window.location.href
         var url = new URL(url_string);

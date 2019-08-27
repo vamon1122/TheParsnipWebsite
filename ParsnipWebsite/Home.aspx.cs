@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using ParsnipData.Accounts;
 using ParsnipData.Media;
 using ParsnipData.Logs;
+using ParsnipWebsite.Custom_Controls.Media;
 
 namespace ParsnipWebsite
 {
@@ -32,18 +33,10 @@ namespace ParsnipWebsite
                 string.Format("Hiya {0}, welcome back to the parsnip website!", myUser.Forename);
 
             Video latestVideo = Video.GetLatest();
-            LatestVideo.InnerHtml += string.Format("<div><h2 class=\"section-title\">LATEST VIDEO: {0}</h2>", latestVideo.Title);
-            LatestVideo.InnerHtml += string.Format("<a href=\"{0}/watch_video?id={1}\">", 
-                Request.Url.GetLeftPart(UriPartial.Authority), latestVideo.Id, latestVideo.Thumbnail);
-
-            LatestVideo.InnerHtml += "<div class=\"play-button-div\">";
-            LatestVideo.InnerHtml += string.Format("<img src=\"{2}\" class=\"thumbnail\" />", 
-                Request.Url.GetLeftPart(UriPartial.Authority), latestVideo.Id, latestVideo.Thumbnail);
-
-            LatestVideo.InnerHtml += "<span class=\"play-button-icon\">" +
-                "<img src=\"Resources\\Media\\Images\\Web_Media\\play_button_2.png\" /></span>";
-            LatestVideo.InnerHtml += "</div></a></div>";
-
+            latestVideo.Title = "LATEST VIDEO: " + latestVideo.Title;
+            var MyVideoControl = (MediaControl)Page.LoadControl("~/Custom_Controls/Media/MediaControl.ascx");
+            MyVideoControl.MyVideo = latestVideo;
+            LatestVideo.Controls.Add(MyVideoControl);
         }
     }
 }

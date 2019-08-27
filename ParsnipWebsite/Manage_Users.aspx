@@ -20,7 +20,7 @@
     <link rel="stylesheet" type="text/css" href="Css/SharedStyle.css" />
     <script src="../Javascript/ApplyStyle.js"></script>
 
-    <title>Create User</title>
+    <title>Manage Users</title>
 </head>
 <body style="padding-bottom:2.5%; padding-top:4%">
     <form runat="server">
