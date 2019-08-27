@@ -67,6 +67,15 @@ namespace ParsnipWebsite {
         protected global::System.Web.UI.HtmlControls.HtmlInputText ShareLink;
         
         /// <summary>
+        /// MediaContainer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl MediaContainer;
+        
+        /// <summary>
         /// ImageTitle control.
         /// </summary>
         /// <remarks>
@@ -76,6 +85,15 @@ namespace ParsnipWebsite {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl ImageTitle;
         
         /// <summary>
+        /// ImagePreview control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlImage ImagePreview;
+        
+        /// <summary>
         /// form1 control.
         /// </summary>
         /// <remarks>
@@ -83,15 +101,6 @@ namespace ParsnipWebsite {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
-        
-        /// <summary>
-        /// ImagePreview control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image ImagePreview;
         
         /// <summary>
         /// Button_ViewAlbum control.

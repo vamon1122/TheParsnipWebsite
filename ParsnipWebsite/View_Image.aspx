@@ -20,14 +20,7 @@
     <link id="link_style" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="Css/SharedStyle.css" />
     <script src="../Javascript/ApplyStyle.js"></script>
-
     <script src="Javascript/IntersectionObserver.js"></script>
-
-    <style>
-        .width100{
-            width:100%;
-        }
-    </style>
 
     <title>View Image</title>
 </head>
@@ -46,37 +39,23 @@
 
     <div class="center_form">
         <div runat="server" id="ShareLinkContainer" class="input-group mb-3" style="padding-left:5%; padding-right:5%">
-  <div class="input-group-prepend">
-    <span class="input-group-text" id="inputGroup-sizing-default">Link</span>
-  </div>
-  <input runat="server" type="text" id="ShareLink" class="form-control" onclick="this.setSelectionRange(0, this.value.length)" />
-</div>
-    <h2 runat="server" id="ImageTitle"></h2>
-
-    <form id="form1" runat="server" style="width:100%; margin-bottom:5%">
-        <asp:Image runat="server" ID="ImagePreview" CssClass="width100" />
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-default">Link</span>
+            </div>
+            <input runat="server" type="text" id="ShareLink" class="form-control" onclick="this.setSelectionRange(0, this.value.length)" />
+        </div>
+        <div runat="server" id="MediaContainer" class="meme" style="background-color:#f2f2f2; display:inline-block; padding-top:8px; padding-bottom:5px">
+            <h3><b runat="server" id="ImageTitle"></b></h3>
+            <img runat="server" id="ImagePreview" style="width:100%" />
+        </div>
+        <form id="form1" runat="server" style="width:100%; margin-bottom:5%">
         <br />
         <br />
         <div style="padding-left:2.5%; padding-right:2.5%">
-        <asp:Button runat="server" ID="Button_ViewAlbum" class="btn btn-info btn-lg btn-block" Text="CLICK for more like this!" OnClick="Button_ViewAlbum_Click"></asp:Button>
-            </div>
-    </form>
-
-        
-    
+            <asp:Button runat="server" ID="Button_ViewAlbum" class="btn btn-info btn-lg btn-block" Text="CLICK for more like this!" OnClick="Button_ViewAlbum_Click"></asp:Button>
         </div>
-        <script>
-            /*
-            var url_string = window.location.href
-            url = new URL(url_string);
-            document.getElementById("ImageTitle").innerHTML = url.searchParams.get("title");
-
-            document.getElementById("ShareLink").value = "https://www.theparsnip.co.uk/krakow?focus=" + url.searchParams.get("id");
-            */
-    </script>
-
-    
-    
+        </form>
+    </div>
 </body>
 </html>
 

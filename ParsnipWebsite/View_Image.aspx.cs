@@ -108,7 +108,7 @@ namespace ParsnipWebsite
 
                 ImageTitle.InnerText = myImage.Title;
                 Page.Title = myImage.Title;
-                ImagePreview.ImageUrl = myImage.Directory;
+                ImagePreview.Src = myImage.Directory;
 
                 //If there was no access token, the user is trying to share the photo.
                 //Generate a shareable link and display it on the screen.
