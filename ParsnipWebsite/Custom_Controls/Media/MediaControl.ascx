@@ -14,7 +14,7 @@
         </a>
         <div runat="server" class="youtube-player" id="YoutubePlayer" style="margin-bottom:5px" visible="false"></div>
         <a runat="server" id="MyEdit" >
-            <img src="../../Resources/Media/Images/Web_Media/Edit (2).svg" style="height:25px" /></a>
+            <img src="../../Resources/Media/Images/Web_Media/Edit.svg" style="height:25px" /></a>
         <div style="display:inline-block; width:28px"></div>
         <a runat="server" id="MyShare" >
             <img src="../../Resources/Media/Images/Web_Media/Share.svg" style="height:30px" /></a>
