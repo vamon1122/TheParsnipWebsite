@@ -24,25 +24,35 @@
 <!-- Modal -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Share Link</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div runat="server" id="ShareLinkContainer" class="input-group mb-3" style="padding-left:5%; padding-right:5%">
+      <div class="modal-content" style="margin:0px; padding:0px">
+      <div runat="server" id="ShareLinkContainer" class="input-group" style="margin:0px; padding:0px">
         <div class="input-group-prepend">
             <span class="input-group-text" id="inputGroup-sizing-default">Link</span>
         </div>
         <input runat="server" type="text" id="ShareLink" class="form-control" 
             onclick="this.setSelectionRange(0, this.value.length)" />
     </div>
+          </div>
+
+<!--
+    <div class="modal-content">
+        
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Share Link</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+        
+      <div class="modal-body">
+        
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
       </div>
+
+        
     </div>
+    -->
   </div>
 </div>
