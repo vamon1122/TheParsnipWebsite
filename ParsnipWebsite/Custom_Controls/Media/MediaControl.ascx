@@ -16,7 +16,7 @@
         <a runat="server" id="MyEdit" >
             <img src="../../Resources/Media/Images/Web_Media/Edit.svg" style="height:25px" /></a>
         <div style="display:inline-block; width:28px"></div>
-        <button type="button" class="btn btn-link" data-toggle="modal" data-target="#exampleModalCenter">
+        <button type="button" class="btn btn-link" data-toggle="modal" data-target="#exampleModalCenter" style="padding:0px">
             <img src="../../Resources/Media/Images/Web_Media/Share.svg" style="height:30px" /></button>
     </div>
 </div>
@@ -31,28 +31,7 @@
         </div>
         <input runat="server" type="text" id="ShareLink" class="form-control" 
             onclick="this.setSelectionRange(0, this.value.length)" />
+        </div>
     </div>
-          </div>
-
-<!--
-    <div class="modal-content">
-        
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Share Link</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-        
-      <div class="modal-body">
-        
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-      </div>
-
-        
-    </div>
-    -->
   </div>
 </div>

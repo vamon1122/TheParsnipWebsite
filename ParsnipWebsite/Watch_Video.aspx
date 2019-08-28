@@ -57,7 +57,7 @@
         <a runat="server" id="MyEdit" >
             <img src="../../Resources/Media/Images/Web_Media/Edit.svg" style="height:25px" /></a>
         <div style="display:inline-block; width:28px"></div>
-        <button type="button" class="btn btn-link" data-toggle="modal" data-target="#exampleModalCenter">
+        <button type="button" class="btn btn-link" data-toggle="modal" data-target="#exampleModalCenter" style="padding:0px">
             <img src="../../Resources/Media/Images/Web_Media/Share.svg" style="height:30px" /></button>
     </div>
     <form id="form1" runat="server">
