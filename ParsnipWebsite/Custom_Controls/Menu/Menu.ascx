@@ -76,7 +76,7 @@
         }
         else
         {
-            dropDownWidth = "25%";
+            dropDownWidth = "200px";
         }
     }
     else
