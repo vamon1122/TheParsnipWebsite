@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Diagnostics;
+using ParsnipData.Media;
 
 namespace ParsnipWebsite.Custom_Controls.Media
 {
@@ -47,7 +48,22 @@ namespace ParsnipWebsite.Custom_Controls.Media
                 MediaContainer.ID = _myImage.Id.ToString();
 
                 MyEdit.HRef = string.Format("../../edit_media?id={0}", MyImage.Id);
-                MyShare.HRef = string.Format("../../view_image?id={0}", MyImage.Id);
+                //MyShare.HRef = string.Format("../../view_image?id={0}", MyImage.Id);
+
+                AccessToken myAccessToken;
+                Guid loggedInUserId = ParsnipData.Accounts.User.GetLoggedInUser().Id;
+                if (AccessToken.TokenExists(loggedInUserId, _myImage.Id))
+                {
+                    myAccessToken = AccessToken.GetToken(loggedInUserId, _myImage.Id);
+                }
+                else
+                {
+                    myAccessToken = new AccessToken(loggedInUserId, _myImage.Id);
+                    myAccessToken.Insert();
+                }
+
+                ShareLink.Value = Request.Url.GetLeftPart(UriPartial.Authority) + "/view_image?access_token=" +
+                    myAccessToken.Id;
             }
         }
         #endregion
@@ -71,8 +87,23 @@ namespace ParsnipWebsite.Custom_Controls.Media
                 MediaContainer.ID = _myVideo.Id.ToString();
 
                 a_play_video.HRef = string.Format("../../watch_video?id={0}", MyVideo.Id);
-                MyShare.HRef = string.Format("../../watch_video?id={0}", MyVideo.Id);
+                //MyShare.HRef = string.Format("../../watch_video?id={0}", MyVideo.Id);
                 MyEdit.HRef = string.Format("../../edit_media?id={0}", MyVideo.Id);
+
+                AccessToken myAccessToken;
+                Guid loggedInUserId = ParsnipData.Accounts.User.GetLoggedInUser().Id;
+                if (AccessToken.TokenExists(loggedInUserId, _myVideo.Id))
+                {
+                    myAccessToken = AccessToken.GetToken(loggedInUserId, _myVideo.Id);
+                }
+                else
+                {
+                    myAccessToken = new AccessToken(loggedInUserId, _myVideo.Id);
+                    myAccessToken.Insert();
+                }
+
+                ShareLink.Value = Request.Url.GetLeftPart(UriPartial.Authority) + "/watch_video?access_token=" +
+                    myAccessToken.Id;
             }
         }
         #endregion
@@ -91,8 +122,23 @@ namespace ParsnipWebsite.Custom_Controls.Media
                 YoutubePlayer.Attributes.Add("data-id", MyYoutubeVideo.DataId);
                 MediaContainer.ID = _myYoutubeVideo.Id.ToString();
                 MyTitle.InnerText = MyYoutubeVideo.Title;
-                MyShare.HRef = string.Format("../../watch_video?id={0}", MyYoutubeVideo.Id);
+                //MyShare.HRef = string.Format("../../watch_video?id={0}", MyYoutubeVideo.Id);
                 MyEdit.HRef = string.Format("../../edit_media?id={0}", MyYoutubeVideo.Id);
+
+                AccessToken myAccessToken;
+                Guid loggedInUserId = ParsnipData.Accounts.User.GetLoggedInUser().Id;
+                if (AccessToken.TokenExists(loggedInUserId, _myYoutubeVideo.Id))
+                {
+                    myAccessToken = AccessToken.GetToken(loggedInUserId, _myYoutubeVideo.Id);
+                }
+                else
+                {
+                    myAccessToken = new AccessToken(loggedInUserId, _myYoutubeVideo.Id);
+                    myAccessToken.Insert();
+                }
+
+                ShareLink.Value = Request.Url.GetLeftPart(UriPartial.Authority) + "/watch_video?access_token=" +
+                    myAccessToken.Id;
             }
         }
         #endregion
