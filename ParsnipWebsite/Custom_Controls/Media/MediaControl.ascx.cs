@@ -38,12 +38,29 @@ namespace ParsnipWebsite.Custom_Controls.Media
         {
             get
             {
-
                 if (MyImage != null)
                     return MyImage;
                 else if (MyVideo != null)
                     return MyVideo;
                 else return MyYoutubeVideo;
+            }
+        }
+
+        public string ShareLink
+        {
+            get
+            {
+                if (MyMedia.MyAccessToken == null || MyMedia.MyAccessToken.Id.ToString() == Guid.Empty.ToString())
+                {
+                    return "You must log in to share youtube videos";
+                }
+                else
+                {
+                    if(MyImage == null)
+                        return Request.Url.GetLeftPart(UriPartial.Authority) + "/watch_video?access_token=" + MyMedia.MyAccessToken.Id;
+                    else
+                        return Request.Url.GetLeftPart(UriPartial.Authority) + "/view_image?access_token=" + MyMedia.MyAccessToken.Id;
+                };
             }
         }
 
@@ -61,34 +78,9 @@ namespace ParsnipWebsite.Custom_Controls.Media
                 MyImageHolder.Attributes.Add("data-srcset", MyImage.Directory);
                 MyImageHolder.Style.Add("margin-bottom", "8px");
                 MediaContainer.ID = _myImage.Id.ToString();
-
                 MyEdit.HRef = string.Format("../../edit_media?id={0}", MyImage.Id);
-                //MyShare.HRef = string.Format("../../view_image?id={0}", MyImage.Id);
 
-                
-
-                Guid tempGuid = Guid.NewGuid();
-                //ShareButton.Attributes.Add("data-target", "#ct109_share" + tempGuid);
-                //exampleModalCenter.ID = "share" + tempGuid;
-
-                string shareLink;
-
-                Debug.WriteLine("Getting share link for media item " + MyImage.Title);
-                if (value.MyAccessToken == null || value.MyAccessToken.Id.ToString() == Guid.Empty.ToString())
-                {
-                    shareLink = "You must log in to share images";
-                }
-                else
-                {
-                    shareLink = Request.Url.GetLeftPart(UriPartial.Authority) + "/view_image?access_token=" +
-                        value.MyAccessToken.Id;
-
-                    Debug.WriteLine("Share link value = " + shareLink);
-                }
-                
-
-                modalDiv.InnerHtml = "<div class='modal fade' id='share" + tempGuid + "' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true'><div class='modal-dialog modal-dialog-centered' role='document'><div class='modal-content' style='margin:0px; padding:0px'><div runat='server' id='ShareLinkContainer' class='input-group' style='margin:0px; padding:0px'><div class='input-group-prepend'><span class='input-group-text' id='inputGroup-sizing-default'>Link</span></div><input runat='server' type='text' id='ShareLink' class='form-control' onclick='this.setSelectionRange(0, this.value.length)' value = '" + shareLink + "' /></div></div></div></div>";
-                ShareButton.Attributes.Add("data-target", "#share" + tempGuid);
+                GenerateShareButton();
             }
         }
         #endregion
@@ -106,39 +98,11 @@ namespace ParsnipWebsite.Custom_Controls.Media
                 thumbnail.Src = "../../Resources/Media/Images/Web_Media/placeholder.gif";
                 thumbnail.Attributes.Add("data-src", MyVideo.Thumbnail);
                 thumbnail.Attributes.Add("data-srcset", MyVideo.Thumbnail);
-
-                Debug.WriteLine("Thumbnail = " + MyVideo.Thumbnail);
-
                 MediaContainer.ID = _myVideo.Id.ToString();
-
                 a_play_video.HRef = string.Format("../../watch_video?id={0}", MyVideo.Id);
-                //MyShare.HRef = string.Format("../../watch_video?id={0}", MyVideo.Id);
                 MyEdit.HRef = string.Format("../../edit_media?id={0}", MyVideo.Id);
 
-
-
-
-                //ShareButton.Attributes.Add("data-target", "#share" + tempGuid);
-                //exampleModalCenter.ID = "ctshare" + tempGuid;
-
-                string shareLink;
-                Debug.WriteLine("Getting share link for media item " + MyVideo.Title);
-                if (value.MyAccessToken == null || value.MyAccessToken.Id.ToString() == Guid.Empty.ToString())
-                {
-                    shareLink = "You must log in to share videos";
-                }
-                else
-                {
-                    shareLink = Request.Url.GetLeftPart(UriPartial.Authority) + "/watch_video?access_token=" +
-                        value.MyAccessToken.Id;
-
-                    Debug.WriteLine("Share link value = " + shareLink);
-                }
-                
-
-                Guid tempGuid = Guid.NewGuid();
-                modalDiv.InnerHtml = "<div class='modal fade' id='share" + tempGuid + "' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true'><div class='modal-dialog modal-dialog-centered' role='document'><div class='modal-content' style='margin:0px; padding:0px'><div runat='server' id='ShareLinkContainer' class='input-group' style='margin:0px; padding:0px'><div class='input-group-prepend'><span class='input-group-text' id='inputGroup-sizing-default'>Link</span></div><input runat='server' type='text' id='ShareLink' class='form-control' onclick='this.setSelectionRange(0, this.value.length)' value = '" + shareLink +"' /></div></div></div></div>";
-                ShareButton.Attributes.Add("data-target", "#share" + tempGuid);
+                GenerateShareButton();
             }
         }
         #endregion
@@ -151,38 +115,23 @@ namespace ParsnipWebsite.Custom_Controls.Media
             set
             {
                 YoutubePlayer.Visible = true;
-                //MyEdit.Visible = false;
                 _myYoutubeVideo = value;
                 MyTitle.InnerHtml = MyYoutubeVideo.Title;
                 YoutubePlayer.Attributes.Add("data-id", MyYoutubeVideo.DataId);
                 MediaContainer.ID = _myYoutubeVideo.Id.ToString();
                 MyTitle.InnerText = MyYoutubeVideo.Title;
-                //MyShare.HRef = string.Format("../../watch_video?id={0}", MyYoutubeVideo.Id);
                 MyEdit.HRef = string.Format("../../edit_media?id={0}", MyYoutubeVideo.Id);
 
-                Guid tempGuid = Guid.NewGuid();
-
-
-                string shareLink;
-
-                Debug.WriteLine("Getting share link for media item " + MyYoutubeVideo.Title);
-                if (value.MyAccessToken == null || value.MyAccessToken.Id.ToString() == Guid.Empty.ToString())
-                {
-                    shareLink = "You must log in to share youtube videos";
-                }
-                else
-                {
-                    shareLink = Request.Url.GetLeftPart(UriPartial.Authority) + "/watch_video?access_token=" +
-                        value.MyAccessToken.Id;
-
-                    Debug.WriteLine("Share link value = " + shareLink);
-                }
-                
-                modalDiv.InnerHtml = "<div class='modal fade' id='share" + tempGuid + "' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true'><div class='modal-dialog modal-dialog-centered' role='document'><div class='modal-content' style='margin:0px; padding:0px'><div runat='server' id='ShareLinkContainer' class='input-group' style='margin:0px; padding:0px'><div class='input-group-prepend'><span class='input-group-text' id='inputGroup-sizing-default'>Link</span></div><input runat='server' type='text' id='ShareLink' class='form-control' onclick='this.setSelectionRange(0, this.value.length)' value = '" + shareLink + "' /></div></div></div></div>";
-                ShareButton.Attributes.Add("data-target", "#share" + tempGuid);
-
+                GenerateShareButton();
             }
         }
         #endregion
+
+        private void GenerateShareButton()
+        {
+            Guid tempGuid = Guid.NewGuid();
+            modalDiv.InnerHtml = string.Format("<div class='modal fade' id='share{0}' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true'><div class='modal-dialog modal-dialog-centered' role='document'><div class='modal-content' style='margin:0px; padding:0px'><div runat='server' id='ShareLinkContainer' class='input-group' style='margin:0px; padding:0px'><div class='input-group-prepend'><span class='input-group-text' id='inputGroup-sizing-default'>Share</span></div><input runat='server' type='text' id='ShareLink' class='form-control' onclick='this.setSelectionRange(0, this.value.length)' value = '{1}' /></div></div></div></div>",tempGuid, ShareLink);
+            ShareButton.Attributes.Add("data-target", "#share" + tempGuid);
+        }
     }
 }
