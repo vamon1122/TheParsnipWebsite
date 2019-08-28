@@ -76,7 +76,7 @@ namespace ParsnipWebsite
             //Get the image which the user is trying to access, and display it on the screen.
             if (myImage == null || string.IsNullOrEmpty(myImage.Directory))
             {
-                ShareLinkContainer.Visible = false;
+                //ShareLinkContainer.Visible = false;
                 Button_ViewAlbum.Visible = false;
                 if(ShareUserSuspendedError.Visible == false)
                 {
@@ -129,11 +129,11 @@ namespace ParsnipWebsite
                     }
 
                     //Gets URL without sub pages
-                    ShareLink.Value = Request.Url.GetLeftPart(UriPartial.Authority) + myAccessToken.ImageRedirect;
+                    //ShareLink.Value = Request.Url.GetLeftPart(UriPartial.Authority) + myAccessToken.ImageRedirect;
                 }
                 else
                 {
-                    ShareLinkContainer.Visible = false;
+                    //ShareLinkContainer.Visible = false;
                 }
             }
 

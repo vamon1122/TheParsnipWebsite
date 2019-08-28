@@ -31,24 +31,6 @@ namespace ParsnipWebsite {
         protected global::ParsnipWebsite.Custom_Controls.Menu.Menu Menu;
         
         /// <summary>
-        /// ShareLinkContainer control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ShareLinkContainer;
-        
-        /// <summary>
-        /// ShareLink control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText ShareLink;
-        
-        /// <summary>
         /// ShareUserSuspendedError control.
         /// </summary>
         /// <remarks>
@@ -74,6 +56,15 @@ namespace ParsnipWebsite {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl MediaContainer;
+        
+        /// <summary>
+        /// VideoContainer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl VideoContainer;
         
         /// <summary>
         /// VideoTitle control.
@@ -121,6 +112,15 @@ namespace ParsnipWebsite {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl youtube_video;
         
         /// <summary>
+        /// MyEdit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor MyEdit;
+        
+        /// <summary>
         /// form1 control.
         /// </summary>
         /// <remarks>
@@ -137,5 +137,23 @@ namespace ParsnipWebsite {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button Button_ViewAlbum;
+        
+        /// <summary>
+        /// ShareLinkContainer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ShareLinkContainer;
+        
+        /// <summary>
+        /// ShareLink control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText ShareLink;
     }
 }

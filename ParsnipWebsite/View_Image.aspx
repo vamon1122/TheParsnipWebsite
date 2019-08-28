@@ -38,12 +38,6 @@
     </div>
 
     <div class="center_form">
-        <div runat="server" id="ShareLinkContainer" class="input-group mb-3" style="padding-left:5%; padding-right:5%">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="inputGroup-sizing-default">Link</span>
-            </div>
-            <input runat="server" type="text" id="ShareLink" class="form-control" onclick="this.setSelectionRange(0, this.value.length)" />
-        </div>
         <div runat="server" id="MediaContainer" class="meme" style="background-color:#f2f2f2; display:inline-block; padding-top:8px; padding-bottom:5px">
             <h3><b runat="server" id="ImageTitle"></b></h3>
             <img runat="server" id="ImagePreview" style="width:100%" />

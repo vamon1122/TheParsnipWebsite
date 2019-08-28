@@ -52,18 +52,26 @@ namespace ParsnipWebsite.Custom_Controls.Media
 
                 AccessToken myAccessToken;
                 Guid loggedInUserId = ParsnipData.Accounts.User.GetLoggedInUser().Id;
-                if (AccessToken.TokenExists(loggedInUserId, _myImage.Id))
+
+                if (loggedInUserId.ToString() == Guid.Empty.ToString())
                 {
-                    myAccessToken = AccessToken.GetToken(loggedInUserId, _myImage.Id);
+                    ShareLink.Value = "You must log in to share images";
                 }
                 else
                 {
-                    myAccessToken = new AccessToken(loggedInUserId, _myImage.Id);
-                    myAccessToken.Insert();
-                }
+                    if (AccessToken.TokenExists(loggedInUserId, _myImage.Id))
+                    {
+                        myAccessToken = AccessToken.GetToken(loggedInUserId, _myImage.Id);
+                    }
+                    else
+                    {
+                        myAccessToken = new AccessToken(loggedInUserId, _myImage.Id);
+                        myAccessToken.Insert();
+                    }
 
-                ShareLink.Value = Request.Url.GetLeftPart(UriPartial.Authority) + "/view_image?access_token=" +
-                    myAccessToken.Id;
+                    ShareLink.Value = Request.Url.GetLeftPart(UriPartial.Authority) + "/view_image?access_token=" +
+                        myAccessToken.Id;
+                }
             }
         }
         #endregion
@@ -92,18 +100,26 @@ namespace ParsnipWebsite.Custom_Controls.Media
 
                 AccessToken myAccessToken;
                 Guid loggedInUserId = ParsnipData.Accounts.User.GetLoggedInUser().Id;
-                if (AccessToken.TokenExists(loggedInUserId, _myVideo.Id))
+
+                if (loggedInUserId.ToString() == Guid.Empty.ToString())
                 {
-                    myAccessToken = AccessToken.GetToken(loggedInUserId, _myVideo.Id);
+                    ShareLink.Value = "You must log in to share videos";
                 }
                 else
                 {
-                    myAccessToken = new AccessToken(loggedInUserId, _myVideo.Id);
-                    myAccessToken.Insert();
-                }
+                    if (AccessToken.TokenExists(loggedInUserId, _myVideo.Id))
+                    {
+                        myAccessToken = AccessToken.GetToken(loggedInUserId, _myVideo.Id);
+                    }
+                    else
+                    {
+                        myAccessToken = new AccessToken(loggedInUserId, _myVideo.Id);
+                        myAccessToken.Insert();
+                    }
 
-                ShareLink.Value = Request.Url.GetLeftPart(UriPartial.Authority) + "/watch_video?access_token=" +
-                    myAccessToken.Id;
+                    ShareLink.Value = Request.Url.GetLeftPart(UriPartial.Authority) + "/watch_video?access_token=" +
+                        myAccessToken.Id;
+                }
             }
         }
         #endregion
@@ -126,19 +142,29 @@ namespace ParsnipWebsite.Custom_Controls.Media
                 MyEdit.HRef = string.Format("../../edit_media?id={0}", MyYoutubeVideo.Id);
 
                 AccessToken myAccessToken;
+
+                Debug.WriteLine("Getting logged in user...");
                 Guid loggedInUserId = ParsnipData.Accounts.User.GetLoggedInUser().Id;
-                if (AccessToken.TokenExists(loggedInUserId, _myYoutubeVideo.Id))
+                if(loggedInUserId.ToString() == Guid.Empty.ToString())
                 {
-                    myAccessToken = AccessToken.GetToken(loggedInUserId, _myYoutubeVideo.Id);
+                    ShareLink.Value = "You must log in to share youtube videos";
                 }
                 else
                 {
-                    myAccessToken = new AccessToken(loggedInUserId, _myYoutubeVideo.Id);
-                    myAccessToken.Insert();
-                }
+                    Debug.WriteLine(string.Format("----------loggedInUserId.ToString() !- Guid.Empty.ToString(). {0} != {1}", loggedInUserId.ToString(), Guid.Empty.ToString()));
+                    if (AccessToken.TokenExists(loggedInUserId, _myYoutubeVideo.Id))
+                    {
+                        myAccessToken = AccessToken.GetToken(loggedInUserId, _myYoutubeVideo.Id);
+                    }
+                    else
+                    {
+                        myAccessToken = new AccessToken(loggedInUserId, _myYoutubeVideo.Id);
+                        myAccessToken.Insert();
+                    }
 
-                ShareLink.Value = Request.Url.GetLeftPart(UriPartial.Authority) + "/watch_video?access_token=" +
-                    myAccessToken.Id;
+                    ShareLink.Value = Request.Url.GetLeftPart(UriPartial.Authority) + "/watch_video?access_token=" +
+                        myAccessToken.Id;
+                }
             }
         }
         #endregion

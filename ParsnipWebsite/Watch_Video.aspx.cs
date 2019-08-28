@@ -130,7 +130,6 @@ namespace ParsnipWebsite
         {
             if (myVideo == null && myYoutubeVideo == null)
             {
-                ShareLinkContainer.Visible = false;
                 Button_ViewAlbum.Visible = false;
             }
             else
@@ -141,12 +140,14 @@ namespace ParsnipWebsite
                     VideoTitle.InnerText = myYoutubeVideo.Title;
                     Debug.WriteLine("Retrieved a data-id from Data.dll = " + myYoutubeVideo.DataId);
                     youtube_video.Attributes.Add("data-id", myYoutubeVideo.DataId);
+                    MyEdit.HRef = string.Format("../../edit_media?id={0}", myYoutubeVideo.Id);
                 }
                 else
                 {
                     video_container.Visible = true;
                     VideoTitle.InnerText = myVideo.Title;
                     VideoSource.Src = myVideo.Directory;
+                    MyEdit.HRef = string.Format("../../edit_media?id={0}", myVideo.Id);
                 }
 
                 ShareLink.Value = Request.Url.GetLeftPart(UriPartial.Authority) + "/watch_video?access_token=" +
