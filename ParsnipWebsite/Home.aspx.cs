@@ -32,7 +32,7 @@ namespace ParsnipWebsite
                 "Hiya stranger. Welcome to the parsnip website!" : 
                 string.Format("Hiya {0}, welcome back to the parsnip website!", myUser.Forename);
 
-            Video latestVideo = Video.GetLatest();
+            Video latestVideo = Video.GetLatest(myUser.Id);
             latestVideo.Title = "LATEST VIDEO: " + latestVideo.Title;
             var MyVideoControl = (MediaControl)Page.LoadControl("~/Custom_Controls/Media/MediaControl.ascx");
             MyVideoControl.MyVideo = latestVideo;

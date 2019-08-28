@@ -16,22 +16,10 @@
         <a runat="server" id="MyEdit" >
             <img src="../../Resources/Media/Images/Web_Media/Edit.svg" style="height:25px" /></a>
         <div style="display:inline-block; width:28px"></div>
-        <button type="button" class="btn btn-link" data-toggle="modal" data-target="#exampleModalCenter" style="padding:0px">
+        <button runat="server" id="ShareButton" type="button" class="btn btn-link" data-toggle="modal" style="padding:0px">
             <img src="../../Resources/Media/Images/Web_Media/Share.svg" style="height:30px" /></button>
     </div>
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content" style="margin:0px; padding:0px">
-      <div runat="server" id="ShareLinkContainer" class="input-group" style="margin:0px; padding:0px">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="inputGroup-sizing-default">Link</span>
-        </div>
-        <input runat="server" type="text" id="ShareLink" class="form-control" 
-            onclick="this.setSelectionRange(0, this.value.length)" />
-        </div>
-    </div>
-  </div>
-</div>
+<div runat="server" id="modalDiv"></div>

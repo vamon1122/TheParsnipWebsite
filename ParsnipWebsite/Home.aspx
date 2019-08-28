@@ -37,7 +37,10 @@
     <div class="padded-text center_div">
         <asp:Label runat="server" ID="WelcomeLabel"></asp:Label>
     </div>
-    <div runat="server" id="LatestVideo" style="margin-top:10px"></div>
+    <form runat="server">
+        <div runat="server" id="LatestVideo" style="margin-top:10px"></div>
+    </form>
+    
     <div class="padded-text center_div">
         <h3 class="section-title"><b>*NEW*</b></h3>
         - [17/08/19] Fixed broken image links on the <a href="Photos.aspx">photos page</a><br />

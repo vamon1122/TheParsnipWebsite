@@ -21,6 +21,7 @@ namespace ParsnipWebsite
         {
             var mediaControls = new List<MediaControl>();
             Page httpHandler = (Page)HttpContext.Current.Handler;
+            Guid loggedInUserId = ParsnipData.Accounts.User.GetLoggedInUser().Id;
 
             foreach (ParsnipData.Media.Image temp in Media.GetImagesByUserId(userId))
             {
@@ -51,15 +52,16 @@ namespace ParsnipWebsite
         {
             var mediaControls = new List<MediaControl>();
             Page httpHandler = (Page)HttpContext.Current.Handler;
+            Guid loggedInUserId = ParsnipData.Accounts.User.GetLoggedInUser().Id;
 
-            foreach (ParsnipData.Media.Image temp in album.GetAllImages())
+            foreach (ParsnipData.Media.Image temp in album.GetAllImages(loggedInUserId))
             {
                 MediaControl MyImageControl = (MediaControl)httpHandler.LoadControl("~/Custom_Controls/Media/MediaControl.ascx");
                 MyImageControl.MyImage = temp;
                 mediaControls.Add(MyImageControl);
             }
 
-            foreach (ParsnipData.Media.Video video in album.GetAllVideos())
+            foreach (ParsnipData.Media.Video video in album.GetAllVideos(loggedInUserId))
             {
 
                 var MyVideoControl = (MediaControl)httpHandler.LoadControl("~/Custom_Controls/Media/MediaControl.ascx");
@@ -67,7 +69,7 @@ namespace ParsnipWebsite
                 mediaControls.Add(MyVideoControl);
             }
 
-            foreach (ParsnipData.Media.YoutubeVideo youtubeVideo in album.GetAllYoutubeVideos())
+            foreach (ParsnipData.Media.YoutubeVideo youtubeVideo in album.GetAllYoutubeVideos(loggedInUserId))
             {
                 var MyVideoControl = (MediaControl)httpHandler.LoadControl("~/Custom_Controls/Media/MediaControl.ascx");
                 MyVideoControl.MyYoutubeVideo = youtubeVideo;

@@ -56,7 +56,7 @@ namespace ParsnipWebsite
                 {
                     MyImage = new ParsnipData.Media.Image(new Guid(Request.QueryString["id"]));
                     Debug.WriteLine("Selecting image with id = " + id);
-                    MyImage.Select();
+                    MyImage.Select(myUser.Id);
                     ImagePreview.ImageUrl = MyImage.Directory;
                     input_date_media_captured.Value = MyImage.DateTimeMediaCreated.ToString();
                     ImagePreview.Visible = true;
@@ -66,7 +66,7 @@ namespace ParsnipWebsite
                 {
                     MyVideo = new Video(new Guid(Request.QueryString["id"]));
                     Debug.WriteLine("Selecting video with id = " + id);
-                    MyVideo.Select();
+                    MyVideo.Select(myUser.Id);
                     thumbnail.Src = MyVideo.Thumbnail;
                     input_date_media_captured.Value = MyVideo.DateTimeMediaCreated.ToString();
                     a_play_video.HRef = string.Format("../../watch_video?id={0}", MyVideo.Id);
@@ -77,7 +77,7 @@ namespace ParsnipWebsite
                 {
                     MyYoutubeVideo = new YoutubeVideo(new Guid(Request.QueryString["id"]));
                     Debug.WriteLine("Selecting youtube video with id = " + id);
-                    MyYoutubeVideo.Select();
+                    MyYoutubeVideo.Select(myUser.Id);
                     input_date_media_captured.Value = MyYoutubeVideo.DateTimeMediaCreated.ToString();
                     youtube_video.Attributes.Add("data-id", MyYoutubeVideo.DataId);
                     youtube_video_container.Visible = true;

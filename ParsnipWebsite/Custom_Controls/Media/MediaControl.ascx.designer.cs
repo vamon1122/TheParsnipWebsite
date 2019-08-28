@@ -76,21 +76,21 @@ namespace ParsnipWebsite.Custom_Controls.Media {
         protected global::System.Web.UI.HtmlControls.HtmlAnchor MyEdit;
         
         /// <summary>
-        /// ShareLinkContainer control.
+        /// ShareButton control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ShareLinkContainer;
+        protected global::System.Web.UI.HtmlControls.HtmlButton ShareButton;
         
         /// <summary>
-        /// ShareLink control.
+        /// modalDiv control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText ShareLink;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl modalDiv;
     }
 }
