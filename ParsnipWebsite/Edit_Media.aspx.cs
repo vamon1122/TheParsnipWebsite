@@ -15,7 +15,7 @@ namespace ParsnipWebsite
     public partial class Edit_Media : System.Web.UI.Page
     {
         User myUser;
-        static readonly Log DebugLog = new Log("Debug");
+        static readonly Log GeneralLog = new Log("General");
         private ParsnipData.Media.Image MyImage;
         private Video MyVideo;
         private YoutubeVideo MyYoutubeVideo;
@@ -85,7 +85,7 @@ namespace ParsnipWebsite
                 }
                 else
                 {
-                    new LogEntry(DebugLog) { text = "There was no media. Redirecting to home" };
+                    Debug.WriteLine ("There was no media. Redirecting to home");
                     Response.Redirect("home");
                 }
 
@@ -133,7 +133,7 @@ namespace ParsnipWebsite
 
                 if (NumberOfAlbums > 0)
                 {
-                    new LogEntry(DebugLog) { text = "First album guid = " + AlbumIds.First().ToString() };
+                    Debug.WriteLine("First album guid = " + AlbumIds.First().ToString());
                     NewAlbumsDropDown.SelectedValue = AlbumIds.First().ToString();
                 }
                 else
@@ -144,7 +144,7 @@ namespace ParsnipWebsite
                 if (Request.QueryString["delete"] != null)
                 {
                     //I am being deleted
-                    new LogEntry(DebugLog) { text = "Delete media clicked" };
+                    Debug.WriteLine("Delete media clicked");
 
                     bool deleteSuccess;
 
@@ -155,6 +155,12 @@ namespace ParsnipWebsite
                     }
                     else
                     {
+                        new LogEntry(GeneralLog)
+                        {
+                            text = string.Format("{0} tried to delete media called \"{1}\", but {2} was not allowed " +
+                            "because {2} is not an admin", myUser.FullName, MyMedia.Title, 
+                            myUser.SubjectiveGenderPronoun)
+                        };
                         deleteSuccess = false;
                     }
 
@@ -184,6 +190,8 @@ namespace ParsnipWebsite
                     }
                     if (deleteSuccess)
                     {
+                        new LogEntry(GeneralLog) { text = string.Format("{0} deleted media called \"{1}\"", 
+                            myUser.FullName, MyMedia.Title) };
                         Response.Redirect(Redirect);
                     }
                     else
@@ -198,7 +206,7 @@ namespace ParsnipWebsite
                 if (IsPostBack)
                 {
                     Debug.WriteLine("I am a postback!!!");
-                    new LogEntry(DebugLog) { text = "Delete media NOT clicked" };
+                    Debug.WriteLine("Delete media NOT clicked");
 
 
                     bool changesWereSaved;
@@ -240,17 +248,44 @@ namespace ParsnipWebsite
                             if (newAlbumId != null)
                             {
                                 MyMedia.AlbumId = new Guid(newAlbumId);
-                                MyMedia.Update();
                             }
+
+                            MyMedia.Update();
+
+                            if (myUser.Id.ToString() == MyMedia.CreatedById.ToString())
+                            {
+                                new LogEntry(GeneralLog)
+                                {
+                                    text = string.Format("{0} saved changes to {1} media called \"{2}\"",
+                                    myUser.FullName, myUser.PosessivePronoun, MyMedia.Title)
+                                };
+                            }
+                            else
+                            {
+                                string accountType = myUser.AccountType == "admin" ? "admin" : "approved media editor";
+
+                                new LogEntry(GeneralLog)
+                                {
+                                    text = string.Format("{0} saved changes to media called \"{1}\". {3} does not own " +
+                                    "the media but {2} is allowed since {2} is an {4}" , myUser.FullName, 
+                                    MyMedia.Title, myUser.SubjectiveGenderPronoun, 
+                                    myUser.SubjectiveGenderPronoun.First().ToString().ToUpper() +
+                                    myUser.SubjectiveGenderPronoun.Substring(1), accountType)
+                                };
+                            }
+                            
                         }
                         else
                         {
                             changesWereSaved = false;
-                            new LogEntry(DebugLog)
+                            new LogEntry(GeneralLog)
                             {
                                 text =
-                                string.Format("{0} is no longer and admin! Their changes to the image will not be saved.",
-                                myUser.FullName)
+                                string.Format("{0} tried to save changes to media called \"{1}\" which {2} did not own. {3} is not " +
+                                "an admin or an approved media editor so {4} changes were not saved",
+                                myUser.FullName, MyMedia.Title, myUser.SubjectiveGenderPronoun, 
+                                myUser.SubjectiveGenderPronoun.First().ToString().ToUpper() +
+                                myUser.SubjectiveGenderPronoun.Substring(1), myUser.PosessivePronoun)
                             };
                         }
 
@@ -314,21 +349,26 @@ namespace ParsnipWebsite
 
                 if (MyMedia.CreatedById.ToString() != myUser.Id.ToString())
                 {
-                    new LogEntry(DebugLog)
-                    {
-                        text = string.Format("{0} attempted to edit an media which {1} " +
-                        "did not own.", myUser.FullName, myUser.SubjectiveGenderPronoun)
-                    };
+                    
                     if (myUser.AccountType == "admin" || myUser.AccountType == "media")
                     {
-                        new LogEntry(DebugLog)
+                        string accountType = myUser.AccountType == "admin" ? "admin" : "approved media editor";
+                        new LogEntry(GeneralLog)
                         {
-                            text = string.Format("{0} was allowed to edit the media anyway " +
-                            "because {1} is an admin or media.", myUser.FullName, myUser.SubjectiveGenderPronoun)
+                            text = string.Format("{0} started editing media called \"{1}\". {2} does not own the " +
+                            "media but {3} is allowed since {3} is an {4}", myUser.FullName, MyMedia.Title, 
+                            myUser.SubjectiveGenderPronoun.First().ToString().ToUpper() + 
+                            myUser.SubjectiveGenderPronoun.Substring(1), myUser.SubjectiveGenderPronoun, accountType)
                         };
                     }
                     else
                     {
+                        new LogEntry(GeneralLog)
+                        {
+                            text = string.Format("{0} attempted to edit media called \"{1}\" which {2} " +
+                        "did not own. Access was DENIED!", myUser.FullName, MyMedia.Title, myUser.SubjectiveGenderPronoun)
+                        };
+
                         Response.Redirect(OriginalAlbumRedirect + "&error=0");
                     }
                 }
@@ -342,7 +382,7 @@ namespace ParsnipWebsite
 
         protected void ButtonSave_Click(object sender, EventArgs e)
         {
-            new LogEntry(DebugLog) { text = "Save button clicked. Saving changes..." };
+            Debug.WriteLine("Save button clicked. Saving changes...");
         }
     }
 }

@@ -20,6 +20,17 @@ namespace ParsnipWebsite
         ParsnipData.Media.Video myVideo;
         ParsnipData.Media.YoutubeVideo myYoutubeVideo;
         AccessToken myAccessToken;
+        public Media MyMedia
+        {
+            get
+            {
+                if (myVideo == null)
+                    return myYoutubeVideo;
+                else
+                    return myVideo;
+
+            }
+        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -153,6 +164,24 @@ namespace ParsnipWebsite
                 ShareLink.Value = Request.Url.GetLeftPart(UriPartial.Authority) + "/watch_video?access_token=" +
                     myAccessToken.Id;
             }
+
+            if(myAccessToken != null)
+            {
+                myUser = ParsnipData.Accounts.User.GetLoggedInUser();
+                User sharedBy = new User(myAccessToken.UserId);
+                sharedBy.Select();
+                string personFullName = myUser == null ? "A stranger" : myUser.FullName;
+
+                new LogEntry(new Log("General")) { text = string.Format("{0} started watching video called \"{1}\" " +
+                    "using {2}'s access token. This token has now been used {3} times!", personFullName, MyMedia.Title, 
+                    sharedBy.FullName, myAccessToken.TimesUsed) };
+            }
+            else
+            {
+                new LogEntry(new Log("General")) { text = string.Format("{0} started watching video called \"{1}\"", myUser.FullName, MyMedia.Title) };
+            }
+
+            
         }
 
         protected void Button_ViewAlbum_Click(object sender, EventArgs e)
