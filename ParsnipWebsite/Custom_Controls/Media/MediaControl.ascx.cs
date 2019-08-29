@@ -130,8 +130,34 @@ namespace ParsnipWebsite.Custom_Controls.Media
         private void GenerateShareButton()
         {
             Guid tempGuid = Guid.NewGuid();
-            modalDiv.InnerHtml = string.Format("<div class='modal fade' id='share{0}' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true'><div class='modal-dialog modal-dialog-centered' role='document'><div class='modal-content' style='margin:0px; padding:0px'><div runat='server' id='ShareLinkContainer' class='input-group' style='margin:0px; padding:0px'><div class='input-group-prepend'><span class='input-group-text' id='inputGroup-sizing-default'>Share</span></div><input runat='server' type='text' id='ShareLink' class='form-control' onclick='this.setSelectionRange(0, this.value.length)' value = '{1}' /></div></div></div></div>",tempGuid, ShareLink);
             ShareButton.Attributes.Add("data-target", "#share" + tempGuid);
+
+            /* 
+             * This is an ugly fix to a problem which I was struggling to work out. The HTML which is generated below
+             * is for the modal which contains the media share link. Originally, this was contained in the ascx page of
+             * this user control, however, this did not work because the top modal was always triggered, regardless of 
+             * which media item was clicked. To fix this, the id of the modal (and therfore data-target of the share 
+             * button) had to be unique. So, I tried generating unique ids in javascript. However, js isn't executed in 
+             * user-controls without some extra code which I didn't understand. So then I tried running the modal div 
+             * at the server so that I could set the id from the code behind. However, for whatever reason, I 
+             * discovered that the modal would never be triggered if it was run at the server. So finally, I came up 
+             * with this. Just generating the modal HTML in a string and then inserting it into the user-control. Not 
+             * pretty, but it works :P.
+             */
+            modalDiv.InnerHtml = string.Format(
+                "\n" +
+                "   <div class=\"modal fade\" id=\"share{0}\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"shareMediaLink\" aria-hidden=\"true\">\n" +
+                "       <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\n" +
+                "           <div class=\"modal-content\" style=\"margin:0px; padding:0px\">\n" +
+                "               <div class=\"input-group\" style=\"margin:0px; padding:0px\">\n" +
+                "                   <div class=\"input-group-prepend\">" +
+                "                       <span class=\"input-group-text\" id=\"inputGroup-sizing-default\">Share</span>\n" +
+                "                  </div>\n" +
+                "                  <input runat=\"server\" type=\"text\" id=\"ShareLink\" class=\"form-control\" onclick=\"this.setSelectionRange(0, this.value.length)\" value = \"{1}\" />\n" +
+                "               </div>\n" +
+                "           </div>\n" +
+                "      </div>\n" +
+                "   </div>\n",tempGuid, ShareLink);
         }
     }
 }
