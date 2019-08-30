@@ -52,7 +52,7 @@ namespace ParsnipWebsite.Custom_Controls.Media
             {
                 if (MyMedia.MyAccessToken == null || MyMedia.MyAccessToken.Id.ToString() == Guid.Empty.ToString())
                 {
-                    return "You must log in to share youtube videos";
+                    return "You must log in to share media";
                 }
                 else
                 {
