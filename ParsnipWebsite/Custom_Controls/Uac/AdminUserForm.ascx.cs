@@ -68,6 +68,11 @@ namespace ParsnipWebsite.Custom_Controls.Uac
             //Debug.WriteLine("----------username = " + username.Text);
             //Debug.WriteLine("----------dataSubject.username = " + dataSubject.username);
             //Debug.WriteLine("----------dataSubject.id = " + dataSubject.id);
+
+            TextBox_LastLoggedIn.Text = PersistentData.DataSubject.LastLogIn == DateTime.MinValue ? "Never" : PersistentData.DataSubject.LastLogIn.ToString();
+            
+            
+
             username.Text = PersistentData.DataSubject.Username;
 
             email.Text = PersistentData.DataSubject.Email;

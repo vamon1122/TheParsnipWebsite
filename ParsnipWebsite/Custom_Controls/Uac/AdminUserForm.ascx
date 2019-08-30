@@ -7,9 +7,10 @@
 
 <!-- Inline CSS based on choices in "Settings" tab -->
 <style>.bootstrap-iso .formden_header h2, .bootstrap-iso .formden_header p, .bootstrap-iso form{font-family: Arial, Helvetica, sans-serif; color: black}.bootstrap-iso form button, .bootstrap-iso form button:hover{color: white !important;} .asteriskField{color: red;}</style>
-
-
-        
+        <div class="form-group" style="margin-top:15px">
+            <label>Last Logged In</label>
+            <asp:TextBox runat="server" ReadOnly="true" CssClass="form-control" ID="TextBox_LastLoggedIn" MaxLength="50" />
+        </div>
 
         <div class="form-group">
             <label>Username</label>
