@@ -31,7 +31,8 @@ namespace ParsnipWebsite
                 string.Format("Hiya {0} to the parsnip website!", myUser == null ?
                 "stranger, welcome" : myUser.Forename + ", welcome back");
 
-            Video latestVideo = Video.GetLatest(myUser.Id);
+            Guid userId = myUser == null ? Guid.Empty : myUser.Id;
+            Video latestVideo = Video.GetLatest(userId);
             latestVideo.Title = "LATEST VIDEO: " + latestVideo.Title;
             var MyVideoControl = (MediaControl)Page.LoadControl("~/Custom_Controls/Media/MediaControl.ascx");
             MyVideoControl.MyVideo = latestVideo;
