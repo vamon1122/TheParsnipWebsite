@@ -165,23 +165,24 @@ namespace ParsnipWebsite
                     myAccessToken.Id;
             }
 
-            if(myAccessToken != null)
+            if (Request.QueryString["access_token"] == null)
+            {
+                new LogEntry(new Log("General")) { text = string.Format("{0} started watching video called \"{1}\"", myUser.FullName, MyMedia.Title) };
+            }
+            else
             {
                 myUser = ParsnipData.Accounts.User.GetLoggedInUser();
                 User sharedBy = new User(myAccessToken.UserId);
                 sharedBy.Select();
                 string personFullName = myUser == null ? "A stranger" : myUser.FullName;
 
-                new LogEntry(new Log("General")) { text = string.Format("{0} started watching video called \"{1}\" " +
-                    "using {2}'s access token. This token has now been used {3} times!", personFullName, MyMedia.Title, 
-                    sharedBy.FullName, myAccessToken.TimesUsed) };
+                new LogEntry(new Log("General"))
+                {
+                    text = string.Format("{0} started watching video called \"{1}\" " +
+                    "using {2}'s access token. This token has now been used {3} times!", personFullName, MyMedia.Title,
+                    sharedBy.FullName, myAccessToken.TimesUsed)
+                };
             }
-            else
-            {
-                new LogEntry(new Log("General")) { text = string.Format("{0} started watching video called \"{1}\"", myUser.FullName, MyMedia.Title) };
-            }
-
-            
         }
 
         protected void Button_ViewAlbum_Click(object sender, EventArgs e)
