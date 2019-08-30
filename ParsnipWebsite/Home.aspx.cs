@@ -24,13 +24,12 @@ namespace ParsnipWebsite
             }
 
             new LogEntry(DebugLog) { text = string.Format("The home page was accessed by {0} from {1} {2} device.", 
-                string.IsNullOrEmpty(myUser.Forename) ? "someone who was not logged in" : myUser.Forename, 
-                string.IsNullOrEmpty(myUser.PosessivePronoun) ? "their" : myUser.PosessivePronoun, Data.DeviceType) };
+                myUser == null ? "someone who was not logged in" : myUser.Forename, 
+                myUser == null ? "their" : myUser.PosessivePronoun, Data.DeviceType) };
 
             WelcomeLabel.Text = 
-                string.IsNullOrEmpty(myUser.Forename) ? 
-                "Hiya stranger. Welcome to the parsnip website!" : 
-                string.Format("Hiya {0}, welcome back to the parsnip website!", myUser.Forename);
+                string.Format("Hiya {0} to the parsnip website!", myUser == null ?
+                "stranger, welcome" : myUser.Forename + ", welcome back");
 
             Video latestVideo = Video.GetLatest(myUser.Id);
             latestVideo.Title = "LATEST VIDEO: " + latestVideo.Title;
