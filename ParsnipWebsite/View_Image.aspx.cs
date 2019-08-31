@@ -110,7 +110,7 @@ namespace ParsnipWebsite
                 Page.Title = myImage.Title;
                 ImagePreview.Src = myImage.Directory;
                 Page.Header.Controls.Add(new LiteralControl(string.Format("<meta property=\"og:title\" content=\"{0}\" />", myImage.Title)));
-                Page.Header.Controls.Add(new LiteralControl(string.Format("<meta property=\"og:image\" content=\"{0}/{1}\" />", Request.Url.GetLeftPart(UriPartial.Authority), myImage.Directory.Replace(" ", "%20"))));
+                Page.Header.Controls.Add(new LiteralControl(string.Format("<meta property=\"og:image\" content=\"{0}\" />", myImage.Directory.Contains("https://lh3.googleusercontent.com") ? myImage.Directory : string.Format("{0}/{1}", Request.Url.GetLeftPart(UriPartial.Authority), myImage.Directory.Replace(" ", "%20")))));
                 Page.Header.Controls.Add(new LiteralControl("<meta property=\"og:type\" content=\"website\" />"));
                 Page.Header.Controls.Add(new LiteralControl(string.Format("<meta property=\"og:url\" content=\"{0}\" />", Request.Url.ToString())));
                 Page.Header.Controls.Add(new LiteralControl(string.Format("<meta property=\"og:description\" content=\"{0}\" />", myImage.Description)));
