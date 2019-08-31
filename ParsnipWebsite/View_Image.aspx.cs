@@ -109,6 +109,12 @@ namespace ParsnipWebsite
                 ImageTitle.InnerText = myImage.Title;
                 Page.Title = myImage.Title;
                 ImagePreview.Src = myImage.Directory;
+                Page.Header.Controls.Add(new LiteralControl(string.Format("<meta property=\"og:title\" content=\"{0}\" />", myImage.Title)));
+                Page.Header.Controls.Add(new LiteralControl(string.Format("<meta property=\"og:image\" content=\"{0}/{1}\" />", Request.Url.GetLeftPart(UriPartial.Authority), myImage.Directory.Replace(" ", "%20"))));
+                Page.Header.Controls.Add(new LiteralControl("<meta property=\"og:type\" content=\"website\" />"));
+                Page.Header.Controls.Add(new LiteralControl(string.Format("<meta property=\"og:url\" content=\"{0}\" />", Request.Url.ToString())));
+                Page.Header.Controls.Add(new LiteralControl(string.Format("<meta property=\"og:description\" content=\"{0}\" />", myImage.Description)));
+                Page.Header.Controls.Add(new LiteralControl("<meta property=\"fb:app_id\" content=\"521313871968697\" />"));
 
                 //If there was no access token, the user is trying to share the photo.
                 //Generate a shareable link and display it on the screen.

@@ -135,6 +135,13 @@ namespace ParsnipWebsite
                     }
                 }
             }
+            
+            Page.Header.Controls.Add(new LiteralControl(string.Format("<meta property=\"og:title\" content=\"{0}\" />", myVideo == null ? myYoutubeVideo.Title : myVideo.Title)));
+            Page.Header.Controls.Add(new LiteralControl(string.Format("<meta property=\"og:image\" content=\"{0}/{1}\" />", Request.Url.GetLeftPart(UriPartial.Authority), myVideo == null ? string.Format("//i.ytimg.com/vi/'{0}'/hqdefault.jpg", myYoutubeVideo.DataId) : myVideo.Thumbnail.Replace(" ", "%20"))));
+            Page.Header.Controls.Add(new LiteralControl("<meta property=\"og:type\" content=\"website\" />"));
+            Page.Header.Controls.Add(new LiteralControl(string.Format("<meta property=\"og:url\" content=\"{0}\" />", Request.Url.ToString())));
+            Page.Header.Controls.Add(new LiteralControl(string.Format("<meta property=\"og:description\" content=\"{0}\" />", myVideo == null ? myYoutubeVideo.Description : myVideo.Description)));
+            Page.Header.Controls.Add(new LiteralControl("<meta property=\"fb:app_id\" content=\"521313871968697\" />"));
         }
 
         void Page_LoadComplete(object sender, EventArgs e)
