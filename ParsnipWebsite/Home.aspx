@@ -51,6 +51,23 @@
         - [24/06/19] You can now access the home page without logging in
     </div>
     
+    <script src="../Javascript/Youtube.js"></script>
     <script src="Javascript/LazyImages.js"></script>
+    <script>
+        var url_string = window.location.href
+        var url = new URL(url_string);
+        var error = url.searchParams.get("error");
+        if (error !== "" && error !== null)
+        {
+            if (error === "video")
+            {
+                document.getElementById("VideoError").style = "display:block";
+            }
+            else
+            {
+                document.getElementById("AccessWarning").style = "display:block";
+            }
+        }
+    </script>
 </body>
 </html>

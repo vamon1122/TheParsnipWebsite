@@ -117,6 +117,7 @@ namespace ParsnipWebsite.Custom_Controls.Media
                 YoutubePlayer.Visible = true;
                 _myYoutubeVideo = value;
                 MyTitle.InnerHtml = MyYoutubeVideo.Title;
+                Debug.WriteLine("DataId = " + MyYoutubeVideo.DataId);
                 YoutubePlayer.Attributes.Add("data-id", MyYoutubeVideo.DataId);
                 MediaContainer.ID = _myYoutubeVideo.Id.ToString();
                 MyTitle.InnerText = MyYoutubeVideo.Title;

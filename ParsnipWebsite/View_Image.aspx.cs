@@ -54,7 +54,7 @@ namespace ParsnipWebsite
                     createdBy.Select();
 
                     myImage = new ParsnipData.Media.Image(myAccessToken.MediaId);
-                    myImage.Select(Guid.Empty);
+                    myImage.Select();
 
                     new LogEntry(DebugLog) { text = string.Format("{0}'s link to {1} got another hit! Now up to {2}", createdBy.FullName, myImage.Title, myAccessToken.TimesUsed) };
                 }
@@ -70,7 +70,7 @@ namespace ParsnipWebsite
                     Response.Redirect("home");
 
                 myImage = new ParsnipData.Media.Image(new Guid(Request.QueryString["id"]));
-                myImage.Select(myUser.Id);
+                myImage.Select();
             }
 
             //Get the image which the user is trying to access, and display it on the screen.

@@ -32,10 +32,21 @@ namespace ParsnipWebsite
                 "stranger, welcome" : myUser.Forename + ", welcome back");
 
             Guid userId = myUser == null ? Guid.Empty : myUser.Id;
-            Video latestVideo = Video.GetLatest(userId);
-            latestVideo.Title = "LATEST VIDEO: " + latestVideo.Title;
+            Video latestVideo = Video.GetLatest();
+            YoutubeVideo latestYoutubeVideo = YoutubeVideo.GetLatest();
             var MyVideoControl = (MediaControl)Page.LoadControl("~/Custom_Controls/Media/MediaControl.ascx");
-            MyVideoControl.MyVideo = latestVideo;
+
+            if (latestVideo.DateTimeMediaCreated > latestYoutubeVideo.DateTimeMediaCreated)
+            {
+                latestVideo.Title = "LATEST VIDEO: " + latestVideo.Title;
+                MyVideoControl.MyVideo = latestVideo;
+            }
+            else
+            {
+                latestYoutubeVideo.Title = "LATEST VIDEO: " + latestYoutubeVideo.Title;
+                MyVideoControl.MyYoutubeVideo = latestYoutubeVideo;
+            }
+            
             LatestVideo.Controls.Add(MyVideoControl);
         }
     }

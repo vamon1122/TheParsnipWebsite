@@ -53,7 +53,7 @@ namespace ParsnipWebsite
                         if (Video.Exists(new Guid(Request.QueryString["id"])))
                         {
                             myVideo = new Video(new Guid(Request.QueryString["id"]));
-                            myVideo.Select(myUser.Id);
+                            myVideo.Select();
 
                             if (AccessToken.TokenExists(myUser.Id, myVideo.Id))
                             {
@@ -68,7 +68,7 @@ namespace ParsnipWebsite
                         else
                         {
                             myYoutubeVideo = new YoutubeVideo(new Guid(Request.QueryString["id"]));
-                            myYoutubeVideo.Select(myUser.Id);
+                            myYoutubeVideo.Select();
 
                             if (AccessToken.TokenExists(myUser.Id, myYoutubeVideo.Id))
                             {
@@ -89,7 +89,7 @@ namespace ParsnipWebsite
 
                     Debug.WriteLine("Getting youtube video with data-id = " + Request.QueryString["data-id"]);
                     myYoutubeVideo = new YoutubeVideo(Request.QueryString["data-id"]);
-                    myYoutubeVideo.Select(myUser.Id);
+                    myYoutubeVideo.Select();
 
                     if (AccessToken.TokenExists(myUser.Id, myYoutubeVideo.Id))
                     {
@@ -125,13 +125,13 @@ namespace ParsnipWebsite
                     {
                         Debug.WriteLine("Getting video with id = " + myAccessToken.MediaId);
                         myVideo = new Video(myAccessToken.MediaId);
-                        myVideo.Select(Guid.Empty);
+                        myVideo.Select();
                     }
                     else
                     {
                         Debug.WriteLine("Getting youtube video with id = " + myAccessToken.MediaId);
                         myYoutubeVideo = new YoutubeVideo(myAccessToken.MediaId);
-                        myYoutubeVideo.Select(Guid.Empty);
+                        myYoutubeVideo.Select();
                     }
                 }
             }
