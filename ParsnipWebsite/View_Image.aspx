@@ -38,7 +38,7 @@
     </div>
 
     <div class="center_form">
-        <div runat="server" id="MediaContainer" class="meme" style="background-color:#f2f2f2; display:inline-block; padding-top:8px; padding-bottom:5px">
+        <div runat="server" id="MediaContainer" class="meme background-lightest" style="display:inline-block; padding-top:8px; padding-bottom:5px">
             <h3><b runat="server" id="ImageTitle"></b></h3>
             <img runat="server" id="ImagePreview" style="width:100%" />
         </div>

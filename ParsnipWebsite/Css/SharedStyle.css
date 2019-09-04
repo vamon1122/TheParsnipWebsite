@@ -1,5 +1,18 @@
-﻿html {
-    
+﻿.background-lightest {
+    background-color: #f2f2f2;
+}
+
+.background-dark 
+{
+    background-color: grey;
+}
+
+.background-darkest 
+{
+    background-color: dimgrey;
+}
+
+html {
     overflow-y: scroll;
     min-width: 0px;
 }

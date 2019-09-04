@@ -45,11 +45,13 @@
     var buttonPadding;
 
     /////Color Scheme/////
+    /*
     var colLightest = "#E2FFFE";
     var colLighter = "#A5D0D6";
     var colLight = "#6DA9B1";
     var colDark = "grey";
     var colDarkest = "dimgrey";
+    */
 
     /////Font/////
     var font = "Verdana";
@@ -117,7 +119,8 @@
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     menuDiv.style.zIndex = "2147483646";
-    menuDiv.style.backgroundColor = colDarkest;
+    //menuDiv.style.backgroundColor = colDarkest;
+    menuDiv.className = "background-darkest"
     menuDiv.style.display = "inline-block";
     menuDiv.style.height = height;
     menuDiv.style.listStyle = "none";
@@ -158,7 +161,8 @@
     function createList()
     {
         var list = document.createElement("ul");
-        list.style.backgroundColor = colDark;
+        //list.style.backgroundColor = colDark;
+        list.className = "background-dark"
         list.style.position = "fixed";
         list.style.top = height;
         list.style.width = dropDownWidth;
@@ -182,7 +186,8 @@
 
         butt.style.width = "100%";
         butt.zIndex = "2147483646";
-        butt.style.backgroundColor = colDark;
+        //butt.style.backgroundColor = colDark;
+        butt.className = "background-dark";
 
         var buttAnk = document.createElement("a");
         buttAnk.style.color = fontCol;
