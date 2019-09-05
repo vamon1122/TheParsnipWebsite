@@ -228,7 +228,6 @@ namespace ParsnipWebsite
                                 {
                                     input_date_media_captured.Value = Request["input_date_media_captured"];
                                     input_date_media_captured.Attributes.Add("class", "form-control is-invalid login");
-                                    InputTitleTwo.CssClass = "form-control is-invalid login";
                                     throw ex;
                                 }
                             }
