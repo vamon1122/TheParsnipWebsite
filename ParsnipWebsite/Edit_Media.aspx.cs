@@ -105,12 +105,18 @@ namespace ParsnipWebsite
                     case "73C436A1-893B-4418-8800-821823C18DFE":
                         OriginalAlbumRedirect = "videos?focus=" + MyMedia.Id.ToString();
                         break;
+                    case "D8B344BF-9D6A-4A6F-87B2-C4DA3EB875BE":
+                        OriginalAlbumRedirect = "portugal?focus=" + MyMedia.Id.ToString();
+                        break;
+                    case "72C0E515-D821-4EBC-ACEC-D6D4CA782718":
+                        OriginalAlbumRedirect = "amsterdam?focus=" + MyMedia.Id.ToString();
+                        break;
                     case "00000000-0000-0000-0000-000000000000":
                         Debug.WriteLine("Album id is empty guid. Redirecting to manage_media");
                         OriginalAlbumRedirect = "manage_media?" + MyMedia.Id.ToString();
                         break;
                     default:
-                        Debug.WriteLine(string.Format("The album id {0} != ff3127df-70b2-47ef-b77b-2e086d2ef370",
+                        Debug.WriteLine(string.Format("The album id {0} was not recognised!",
                             MyMedia.AlbumId));
                         OriginalAlbumRedirect = "home?error=nomediaalbum4";
                         break;
@@ -179,6 +185,12 @@ namespace ParsnipWebsite
                             break;
                         case "73C436A1-893B-4418-8800-821823C18DFE":
                             Redirect = "videos";
+                            break;
+                        case "D8B344BF-9D6A-4A6F-87B2-C4DA3EB875BE":
+                            Redirect = "portugal";
+                            break;
+                        case "72C0E515-D821-4EBC-ACEC-D6D4CA782718":
+                            Redirect = "amsterdam";
                             break;
                         case "00000000-0000-0000-0000-000000000000":
                             Debug.WriteLine("No album selected. Must be none! Redirecting to manage photos...");
@@ -304,14 +316,20 @@ namespace ParsnipWebsite
                             case "73C436A1-893B-4418-8800-821823C18DFE":
                                 Redirect = "videos?focus=" + MyMedia.Id.ToString();
                                 break;
+                            case "D8B344BF-9D6A-4A6F-87B2-C4DA3EB875BE":
+                                Redirect = "portugal?focus=" + MyMedia.ToString();
+                                break;
+                            case "72C0E515-D821-4EBC-ACEC-D6D4CA782718":
+                                Redirect = "amsterdam?focus=" + MyMedia.ToString();
+                                break;
                             case "00000000-0000-0000-0000-000000000000":
                                 Debug.WriteLine("New album id is empty. Redirecting to original album");
                                 //Redirect = "manage_medias?id=" + MyMedia.Id.ToString();
                                 Redirect = OriginalAlbumRedirect;
                                 break;
                             default:
-                                Debug.WriteLine(string.Format("The album id {0} != ff3127df-70b2-47ef-b77b-2e086d2ef370",
-                                    MyMedia.AlbumId));
+                                Debug.WriteLine(string.Format("The album id {0} was not recognised!",
+                                    MyMedia.AlbumId.ToString().ToUpper()));
                                 Redirect = "home?error=nomediaalbum3";
                                 break;
                         }
