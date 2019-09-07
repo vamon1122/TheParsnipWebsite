@@ -317,10 +317,10 @@ namespace ParsnipWebsite
                                 Redirect = "videos?focus=" + MyMedia.Id.ToString();
                                 break;
                             case "D8B344BF-9D6A-4A6F-87B2-C4DA3EB875BE":
-                                Redirect = "portugal?focus=" + MyMedia.ToString();
+                                Redirect = "portugal?focus=" + MyMedia.Id.ToString();
                                 break;
                             case "72C0E515-D821-4EBC-ACEC-D6D4CA782718":
-                                Redirect = "amsterdam?focus=" + MyMedia.ToString();
+                                Redirect = "amsterdam?focus=" + MyMedia.Id.ToString();
                                 break;
                             case "00000000-0000-0000-0000-000000000000":
                                 Debug.WriteLine("New album id is empty. Redirecting to original album");

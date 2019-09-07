@@ -29,9 +29,9 @@ namespace ParsnipWebsite
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Request.QueryString["focus"] == null)
-                myUser = Account.SecurePage("portugal", this, Data.DeviceType);
+                myUser = Account.SecurePage("portugal", this, Data.DeviceType, "media");
             else
-                myUser = Account.SecurePage("portugal?focus=" + Request.QueryString["focus"], this, Data.DeviceType);
+                myUser = Account.SecurePage("portugal?focus=" + Request.QueryString["focus"], this, Data.DeviceType, "media");
 
             if (IsPostBack && PhotoUpload.PostedFile != null)
                 MediaManager.UploadImage(myUser, MemesAlbum, PhotoUpload);
