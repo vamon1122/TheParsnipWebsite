@@ -126,6 +126,7 @@
     <Content Include="Css\DesktopStyle.css" />
     <Content Include="Global.asax" />
     <Content Include="Css\SharedStyle.css" />
+    <Content Include="sitemap.xml" />
     <Content Include="Tuesday7s.html" />
     <Content Include="Videos.aspx" />
     <Content Include="View_Image.aspx" />

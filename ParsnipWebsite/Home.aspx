@@ -42,7 +42,12 @@
     </form>
     
     <div class="padded-text center_div">
+    <h3 class="section-title"><b>YOUR WEBSITE NEEDS YOU!</b></h3>
+    - I have loads of photos & videos from Amsterdam & Portugal which I to make available here. If anyone is interested in looking at some nostalgic photos & videos and making some thumbnails & captions for the website whilst you're at it (literally just a good screenshot of the video) that would be super helpful!<br />
+    - If someone could upload everything from the crystal parsnip, that would be great!
+    
         <h3 class="section-title"><b>*NEW*</b></h3>
+        - [15/09/19] Time machine! View the website as it was in <a href="original.theparsnip.co.uk">2015</a> when it was first conceived and in <a href="2016.theparsnip.co.uk">2016</a> when it had it's first major visual overhaul!
         - [17/08/19] Fixed broken image links on the <a href="Photos.aspx">photos page</a><br />
         - [17/08/19] Fixed slow loading times on the <a href="Videos.aspx">videos page</a><br />
         - [07/08/19] New <a href="Krakow.aspx">Krakow page!</a> Upload, view & share holiday photos!<br />
