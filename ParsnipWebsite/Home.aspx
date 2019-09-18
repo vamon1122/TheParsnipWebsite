@@ -10,7 +10,7 @@
     <link rel="apple-touch-icon" sizes="72×72" href="Resources/Favicons/apple-icon-72x72.png" />
     <link rel="apple-touch-icon" href="Resources/Favicons/apple-icon.png" />
     <!-- BOOTSTRAP START -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" 
         integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous" />
 
@@ -41,7 +41,7 @@
         <div runat="server" id="LatestVideo" style="margin-top:10px"></div>
     </form>
     
-    <div class="padded-text center_div">
+    <div class="padded-text center_div" style="max-width:1000px">
     <h3 class="section-title"><b>YOUR WEBSITE NEEDS YOU!</b></h3>
     - I have loads of photos & videos from Amsterdam & Portugal which I to make available here. If anyone is interested in looking at some nostalgic photos & videos and making some thumbnails & captions for the website whilst you're at it (literally just a good screenshot of the video) that would be super helpful!<br />
     - If someone could upload everything from the crystal parsnip, that would be great!
