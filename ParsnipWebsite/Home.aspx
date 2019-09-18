@@ -47,7 +47,7 @@
     - If someone could upload everything from the crystal parsnip, that would be great!
     
         <h3 class="section-title"><b>*NEW*</b></h3>
-        - [15/09/19] Time machine! View the website as it was in <a href="http://original.theparsnip.co.uk">2015</a> when it was first conceived and in <a href="http://2016.theparsnip.co.uk">2016</a> when it had it's first major visual overhaul!
+        - [15/09/19] Time machine! View the website as it was in <a href="http://original.theparsnip.co.uk">2015</a> when it was first conceived and in <a href="http://2016.theparsnip.co.uk">2016</a> when it had it's first major visual overhaul!<br />
         - [17/08/19] Fixed broken image links on the <a href="Photos.aspx">photos page</a><br />
         - [17/08/19] Fixed slow loading times on the <a href="Videos.aspx">videos page</a><br />
         - [07/08/19] New <a href="Krakow.aspx">Krakow page!</a> Upload, view & share holiday photos!<br />
