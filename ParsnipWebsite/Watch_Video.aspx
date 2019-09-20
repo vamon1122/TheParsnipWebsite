@@ -85,7 +85,20 @@
             var v = document.getElementsByClassName("youtube-player");
             var p = document.getElementById("youtube_video");
             var iframe = document.createElement("iframe");
-            iframe.setAttribute("src", "//www.youtube.com/embed/" + v[0].dataset.id + "?autoplay=1&autohide=2&border=0&wmode=opaque&enablejsapi=1&controls=0&showinfo=0");
+
+            var playbackParameters;
+
+            if (false)
+            {
+                playbackParameters = "?controls=0";
+            }
+            else
+            {
+                playbackParameters = "?autoplay=1&mute=1&controls=1";
+            }
+            playbackParameters += "&autohide=2&border=0&wmode=opaque&enablejsapi=1"
+
+            iframe.setAttribute("src", "//www.youtube.com/embed/" + v[0].dataset.id + playbackParameters);
             iframe.setAttribute("frameborder", "0");
             iframe.setAttribute("id", "youtube-iframe");
             p.appendChild(iframe);
