@@ -30,7 +30,21 @@ function labnolThumb(id)
 function labnolIframe()
 {
     var iframe = document.createElement("iframe");
-    iframe.setAttribute("src", "//www.youtube.com/embed/" + this.parentNode.dataset.id + "?autoplay=1&autohide=2&border=0&wmode=opaque&enablejsapi=1&controls=0&showinfo=0");
+    //Added &mute=1 attrubute to re-enable autoplay
+    var source = "//www.youtube.com/embed/" + this.parentNode.dataset.id;
+
+    if (isMobile)
+    {
+        source += "?";
+    }
+    else
+    {
+        source += "?autoplay=1&mute=1&";
+    }
+
+    source += "autohide=2&border=0&wmode=opaque&enablejsapi=1&controls=1";
+    
+    iframe.setAttribute("src", source);
     iframe.setAttribute("frameborder", "0");
     iframe.setAttribute("id", "youtube-iframe");
     this.parentNode.replaceChild(iframe, this);
