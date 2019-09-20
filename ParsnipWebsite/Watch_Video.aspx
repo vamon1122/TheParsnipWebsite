@@ -45,7 +45,7 @@
         
         <h3><b runat="server" id="VideoTitle"></b></h3>
         <div style="width:100%">
-            <video runat="server" id="video_container" controls="controls" style="width:100%" preload="none" autoplay="autoplay" visible="false">
+            <video runat="server" id="video_container" controls="controls" style="width:100%" preload="none" visible="false">
                 <source runat="server" id="VideoSource" type="video/mp4" />
                 Your browser does not support HTML5 video.
             </video>

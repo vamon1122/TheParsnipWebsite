@@ -162,6 +162,10 @@ namespace ParsnipWebsite
                 }
                 else
                 {
+                    if (!Data.IsMobile)
+                        video_container.Attributes.Add("autoplay", "autoplay");
+
+                    video_container.Poster = myVideo.Thumbnail;
                     video_container.Visible = true;
                     VideoTitle.InnerText = myVideo.Title;
                     VideoSource.Src = myVideo.Directory;
