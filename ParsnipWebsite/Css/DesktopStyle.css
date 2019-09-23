@@ -1,59 +1,56 @@
-.video-container {
-    display: block;
-    margin: auto;
-    width: 80%;
-}
 
-/*Youtube CSS*/
-.large-youtube-container {
-    display: block;
-    margin: auto;
-    width: 80%;
-}
-
-/*Youtube CSS*/
-.youtube-container {
-    display: block;
-    margin: auto;
-    width: 40%;
-    min-width: 400px;
-    max-width: 550px;
-    height: 300px;
-}
-
-.center_form {
-    width: 30%;
-    display: inline-block;
-}
-
-.meme {
-    width: 40%;
-    min-width: 400px;
-    max-width: 550px;
-}
-
-.image-preview {
-    width: 30%;
-}
-
-@keyframes menVis {
-    from {
-        left: -300px;
+    .video-container {
+        display: block;
+        margin: auto;
+        width: 80%;
     }
 
-    to {
-        left: 0px;
-        visibility: visible;
-    }
-}
-
-@keyframes menHide {
-    from {
-        left: 0px;
+    /*Youtube CSS*/
+    .large-youtube-container {
+        display: block;
+        margin: auto;
+        width: 80%;
     }
 
-    to {
-        left: -300px;
-        visibility: hidden;
+    /*Youtube CSS*/
+    .youtube-container {
+        display: block;
+        margin: auto;
+        width: 40%;
+        min-width: 400px;
+        max-width: 550px;
+        height: 300px;
     }
-}
+
+    .center_form {
+        width: 30%;
+        display: inline-block;
+    }
+
+
+
+    .image-preview {
+        width: 30%;
+    }
+
+    @keyframes menVis {
+        from {
+            left: -300px;
+        }
+
+        to {
+            left: 0px;
+            visibility: visible;
+        }
+    }
+
+    @keyframes menHide {
+        from {
+            left: 0px;
+        }
+
+        to {
+            left: -300px;
+            visibility: hidden;
+        }
+    }

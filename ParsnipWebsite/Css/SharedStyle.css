@@ -1,4 +1,65 @@
-﻿.background-lightest {
+﻿@media only screen and (min-width: 0px) {
+    .large-media-landscape {
+        width: 100%;
+        min-width: 300px;
+        max-width: 900px
+    }
+}
+
+@media only screen and (min-width: 900px) {
+    .large-media-landscape {
+        width: 70%;
+        min-width: 900px;
+        max-width: none;
+    }
+}
+
+@media only screen and (orientation: portrait) {
+    @media only screen and (min-width: 0px) {
+
+        .meme {
+            width: 100%;
+            min-width: 300px;
+            max-width: 550px;
+        }
+    }
+}
+
+@media only screen and (orientation: landscape) {
+    @media only screen and (min-width: 0px) {
+        .meme {
+            width: 100%;
+            min-width: 300px;
+            max-width: 550px;
+        }
+    }
+
+    /*I am bigger than 720p*/
+    @media only screen and (min-width: 1280px) {
+        .meme {
+            width: 43.5%;
+            max-width: 600px;
+        }
+    }
+
+    /*I am bigger than 1080p*/
+    @media only screen and (min-width: 1920px) {
+        .meme {
+            width: 31.5%;
+            max-width: 650px;
+        }
+    }
+
+    /*I am bigger than 1440p*/
+    @media only screen and (min-width: 2560px) {
+        .meme {
+            width: 25.75%;
+            max-width: 700px;
+        }
+    }
+}
+
+.background-lightest {
     background-color: #f2f2f2;
 }
 

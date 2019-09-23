@@ -38,11 +38,13 @@
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         <strong>Error:</strong> Could not access video. The person who uploaded this video has been suspended!
     </div>
-    <div runat="server" id="MediaContainer" class="meme background-lightest" style="display:inline-block; padding-top:8px; padding-bottom:5px">
+    <div runat="server" id="MediaContainer" class="large-media-landscape background-lightest" style="display:inline-block; padding-top:8px; padding-bottom:5px; ">
+        <!--
         <div runat="server" id="VideoContainer">
 
         </div>
-        
+        -->
+
         <h3><b runat="server" id="VideoTitle"></b></h3>
         <div style="width:100%">
             <video runat="server" id="video_container" controls="controls" style="width:100%" preload="none" visible="false">

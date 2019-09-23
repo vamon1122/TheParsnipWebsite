@@ -73,19 +73,20 @@
 
         if (h > w)
         {
-            dropDownWidth = "50%";
+            //dropDownWidth = "50%";
 
         }
         else
         {
-            dropDownWidth = "200px";
+            //dropDownWidth = "200px";
         }
     }
     else
     {
         buttonPadding = "10px";
-        dropDownWidth = "200px";
+        //dropDownWidth = "200px";
     }
+    dropDownWidth = "200px";
 
     height = "45px";
     buttFontSize = "17px";

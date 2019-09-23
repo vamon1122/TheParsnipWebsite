@@ -1,3 +1,7 @@
+.large-media-landscape {
+    width: 80%;
+}
+
 .video-container {
     display: block;
     margin: auto;
@@ -23,10 +27,6 @@
 .center_form {
     width: 50%;
     display: inline-block;
-}
-
-.meme {
-    width: 50%;
 }
 
 .image-preview {
