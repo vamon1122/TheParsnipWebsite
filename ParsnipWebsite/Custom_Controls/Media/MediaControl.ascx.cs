@@ -73,9 +73,14 @@ namespace ParsnipWebsite.Custom_Controls.Media
                 MyImageHolder.Visible = true;
                 _myImage = value;
                 MyTitle.InnerHtml = MyImage.Title;
-                MyImageHolder.ImageUrl = "../../Resources/Media/Images/Web_Media/placeholder.gif";
+                Debug.WriteLine("Setting url");
+                MyImageHolder.ImageUrl = Request.Url.GetLeftPart(UriPartial.Authority) + "/" + MyImage.Placeholder;
+                Debug.WriteLine("Url = " + MyImageHolder.ImageUrl);
+
                 MyImageHolder.Attributes.Add("data-src", MyImage.Directory);
                 MyImageHolder.Attributes.Add("data-srcset", MyImage.Directory);
+                
+
                 MyImageHolder.Style.Add("margin-bottom", "8px");
                 MediaContainer.ID = _myImage.Id.ToString();
                 MyEdit.HRef = string.Format("../../edit_media?id={0}", MyImage.Id);
