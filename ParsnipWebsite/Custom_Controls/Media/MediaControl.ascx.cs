@@ -74,7 +74,8 @@ namespace ParsnipWebsite.Custom_Controls.Media
                 _myImage = value;
                 MyTitle.InnerHtml = MyImage.Title;
                 Debug.WriteLine("Setting url");
-                MyImageHolder.ImageUrl = Request.Url.GetLeftPart(UriPartial.Authority) + "/" + MyImage.Placeholder;
+                
+                MyImageHolder.ImageUrl = MyImage.Placeholder.Contains("http://") || MyImage.Placeholder.Contains("https://") ? MyImage.Placeholder : Request.Url.GetLeftPart(UriPartial.Authority) + "/" + MyImage.Placeholder;
                 Debug.WriteLine("Url = " + MyImageHolder.ImageUrl);
 
                 MyImageHolder.Attributes.Add("data-src", MyImage.Directory);
