@@ -95,13 +95,12 @@
 
     /////Buttons/////
     createButton("🏠 Home 🏠", "home");
-    createButton("✈😎 KRAKOW <br /> 2K19 😎✈", "krakow");
     createButton("😂 Memes 😂", "memes");
     createButton("📹 Videos 📹", "videos");
     createButton("📷 Photos 📷", "photos");
-    createButton("⚽ Tuesday 7s ⚽", "tuesday7s.html")
     createButton("☕ AfternoonT ☕", "afternoont.html");
     createButton("💩 Bios 💩", "bios");    
+    createButton("✈😎 KRAKOW <br /> 2K19 😎✈", "krakow");
 
     if (getCookie("accountType") === "admin")
     {
