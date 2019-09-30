@@ -90,27 +90,53 @@ namespace ParsnipWebsite
                     new LogEntry(DebugLog) { text = "Attempting to upload the photo" };
 
                     string[] fileDir = uploadControl.PostedFile.FileName.Split('\\');
-                    string myFileName = fileDir.Last();
-                    string myFileExtension = myFileName.Split('.').Last().ToLower();
+                    string originalFileName = fileDir.Last();
+                    string myFileExtension = originalFileName.Split('.').Last().ToLower();
 
                     if (ParsnipData.Media.Image.IsValidFileExtension(myFileExtension))
                     {
 
                         string uploadsDir = string.Format("Resources/Media/Images/Uploads/");
-                        string originalFileName = string.Format("{0}{1}_{2}_{3}_{4}",
+                        string newFileName = string.Format("{0}{1}_{2}_{3}_{4}.jpg",
                             uploader.Forename, uploader.Surname, Guid.NewGuid(),
-                            Parsnip.AdjustedTime.ToString("dd-MM-yyyy"), myFileName);
-
-                        string thumbnailFileName = originalFileName.Substring(0, originalFileName.LastIndexOf('.')) + ".jpg";
+                            Parsnip.AdjustedTime.ToString("dd-MM-yyyy"), originalFileName.Substring(0, originalFileName.LastIndexOf('.')));
 
                         Debug.WriteLine("Newdir = " + uploadsDir);
-                        uploadControl.PostedFile.SaveAs(HttpContext.Current.Server.MapPath("~/" + uploadsDir + originalFileName));
+                        uploadControl.PostedFile.SaveAs(HttpContext.Current.Server.MapPath("~/" + uploadsDir + newFileName));
 
-                        Bitmap newBitMap = new System.Drawing.Bitmap(uploadControl.PostedFile.InputStream);
-                        Bitmap thumbnail = ResizeBitmap(newBitMap, (int)(newBitMap.Width * 0.05), (int)(newBitMap.Height * 0.05));
-                        thumbnail.Save(HttpContext.Current.Server.MapPath(uploadsDir + "5_percent_thumbnails/" + thumbnailFileName));
-                        ParsnipData.Media.Image temp = new ParsnipData.Media.Image(uploadsDir + originalFileName, uploader, album);
-                        temp.Placeholder = uploadsDir + "5_percent_thumbnails/" + thumbnailFileName;
+                        Bitmap original = new System.Drawing.Bitmap(uploadControl.PostedFile.InputStream);
+                        
+
+                        Bitmap thumbnail = ResizeBitmap(original, (int)(original.Width * 0.05), (int)(original.Height * 0.05));
+
+
+                        if (original.PropertyIdList.Contains(0x112)) //0x112 = Orientation
+                        {
+                            var prop = original.GetPropertyItem(0x112);
+                            if (prop.Type == 3 && prop.Len == 2)
+                            {
+                                UInt16 orientationExif = BitConverter.ToUInt16(original.GetPropertyItem(0x112).Value, 0);
+                                if (orientationExif == 8)
+                                {
+                                    thumbnail.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                                }
+                                else if (orientationExif == 3)
+                                {
+                                    thumbnail.RotateFlip(RotateFlipType.Rotate180FlipNone);
+                                }
+                                else if (orientationExif == 6)
+                                {
+                                    thumbnail.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                                }
+                            }
+                        }
+
+                        original.Save(HttpContext.Current.Server.MapPath(uploadsDir + newFileName));
+                        thumbnail.Save(HttpContext.Current.Server.MapPath(uploadsDir + "5_percent_thumbnails/" + newFileName));
+
+
+                        ParsnipData.Media.Image temp = new ParsnipData.Media.Image(uploadsDir + newFileName, uploader, album);
+                        temp.Placeholder = uploadsDir + "5_percent_thumbnails/" + newFileName;
                         temp.Update();
                         HttpContext.Current.Response.Redirect("edit_media?id=" + temp.Id);
                     }
