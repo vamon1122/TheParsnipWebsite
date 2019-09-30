@@ -10,6 +10,8 @@ using System.Diagnostics;
 using ParsnipWebsite.Custom_Controls.Media;
 using System.Collections.Generic;
 using System.Web.UI;
+using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace ParsnipWebsite
 {
@@ -94,18 +96,27 @@ namespace ParsnipWebsite
                     if (ParsnipData.Media.Image.IsValidFileExtension(myFileExtension))
                     {
 
-                        string newDir = string.Format("Resources/Media/Images/Uploads/{0}{1}_{2}_{3}_{4}",
+                        string uploadsDir = string.Format("Resources/Media/Images/Uploads/");
+                        string originalFileName = string.Format("{0}{1}_{2}_{3}_{4}",
                             uploader.Forename, uploader.Surname, Guid.NewGuid(),
                             Parsnip.AdjustedTime.ToString("dd-MM-yyyy"), myFileName);
 
-                        Debug.WriteLine("Newdir = " + newDir);
-                        uploadControl.PostedFile.SaveAs(HttpContext.Current.Server.MapPath("~/" + newDir));
-                        ParsnipData.Media.Image temp = new ParsnipData.Media.Image(newDir, uploader, album);
+                        string thumbnailFileName = originalFileName.Substring(0, originalFileName.LastIndexOf('.')) + ".jpg";
+
+                        Debug.WriteLine("Newdir = " + uploadsDir);
+                        uploadControl.PostedFile.SaveAs(HttpContext.Current.Server.MapPath("~/" + uploadsDir + originalFileName));
+
+                        Bitmap newBitMap = new System.Drawing.Bitmap(uploadControl.PostedFile.InputStream);
+                        Bitmap thumbnail = ResizeBitmap(newBitMap, (int)(newBitMap.Width * 0.05), (int)(newBitMap.Height * 0.05));
+                        thumbnail.Save(HttpContext.Current.Server.MapPath(uploadsDir + "5_percent_thumbnails/" + thumbnailFileName));
+                        ParsnipData.Media.Image temp = new ParsnipData.Media.Image(uploadsDir + originalFileName, uploader, album);
+                        temp.Placeholder = uploadsDir + "5_percent_thumbnails/" + thumbnailFileName;
                         temp.Update();
-                        HttpContext.Current.Response.Redirect("edit_media?redirect=photos&id=" + temp.Id);
+                        HttpContext.Current.Response.Redirect("edit_media?id=" + temp.Id);
                     }
                     else
                     {
+                        //Really, this should redirect to the corresponding album page
                         HttpContext.Current.Response.Redirect("photos?error=video");
                     }
                 }
@@ -113,6 +124,17 @@ namespace ParsnipWebsite
                 {
                     new LogEntry(DebugLog) { text = "There was an exception whilst uploading the photo: " + err };
                 }
+            }
+
+            Bitmap ResizeBitmap(Bitmap bmp, int width, int height)
+            {
+                Bitmap result = new Bitmap(width, height);
+                using (Graphics g = Graphics.FromImage(result))
+                {
+                    g.DrawImage(bmp, 0, 0, width, height);
+                }
+
+                return result;
             }
         }
     }
