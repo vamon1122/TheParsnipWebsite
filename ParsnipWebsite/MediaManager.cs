@@ -64,7 +64,6 @@ namespace ParsnipWebsite
 
             foreach (ParsnipData.Media.Video video in album.GetAllVideos())
             {
-
                 var MyVideoControl = (MediaControl)httpHandler.LoadControl("~/Custom_Controls/Media/MediaControl.ascx");
                 MyVideoControl.MyVideo = video;
                 mediaControls.Add(MyVideoControl);
@@ -97,17 +96,26 @@ namespace ParsnipWebsite
                     {
 
                         string uploadsDir = string.Format("Resources/Media/Images/Uploads/");
+
+                        /*
                         string newFileName = string.Format("{0}{1}_{2}_{3}_{4}.jpg",
                             uploader.Forename, uploader.Surname, Guid.NewGuid(),
                             Parsnip.AdjustedTime.ToString("dd-MM-yyyy"), originalFileName.Substring(0, originalFileName.LastIndexOf('.')));
+                        */
 
+                        string newFileName = "NewImage.jpg";
                         Debug.WriteLine("Newdir = " + uploadsDir);
                         uploadControl.PostedFile.SaveAs(HttpContext.Current.Server.MapPath("~/" + uploadsDir + newFileName));
 
                         Bitmap original = new System.Drawing.Bitmap(uploadControl.PostedFile.InputStream);
                         
 
-                        Bitmap thumbnail = ResizeBitmap(original, (int)(original.Width * 0.05), (int)(original.Height * 0.05));
+                        Bitmap halfThumbnail = ResizeBitmap(original, (int)(original.Width * 0.05), (int)(original.Height * 0.05));
+                        Bitmap quaterThumbnail = ResizeBitmap(original, (int)(original.Width * 0.025), (int)(original.Height * 0.025));
+
+                        //One of the numbers must be a double in order for the result to be double
+                        Bitmap hundredWidthThumbnail = ResizeBitmap(original, (int)100, (int)(original.Height * (100d / original.Width)));
+                        Bitmap hundredHeightThumbnail = ResizeBitmap(original, (int)(original.Width * (100d / original.Height)), (int)100);
 
 
                         if (original.PropertyIdList.Contains(0x112)) //0x112 = Orientation
@@ -118,24 +126,120 @@ namespace ParsnipWebsite
                                 UInt16 orientationExif = BitConverter.ToUInt16(original.GetPropertyItem(0x112).Value, 0);
                                 if (orientationExif == 8)
                                 {
-                                    thumbnail.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                                    halfThumbnail.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                                    quaterThumbnail.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                                    hundredWidthThumbnail.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                                    hundredHeightThumbnail.RotateFlip(RotateFlipType.Rotate270FlipNone);
                                 }
                                 else if (orientationExif == 3)
                                 {
-                                    thumbnail.RotateFlip(RotateFlipType.Rotate180FlipNone);
+                                    halfThumbnail.RotateFlip(RotateFlipType.Rotate180FlipNone);
+                                    quaterThumbnail.RotateFlip(RotateFlipType.Rotate180FlipNone);
+                                    hundredWidthThumbnail.RotateFlip(RotateFlipType.Rotate180FlipNone);
+                                    hundredHeightThumbnail.RotateFlip(RotateFlipType.Rotate180FlipNone);
                                 }
                                 else if (orientationExif == 6)
                                 {
-                                    thumbnail.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                                    halfThumbnail.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                                    quaterThumbnail.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                                    hundredWidthThumbnail.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                                    hundredHeightThumbnail.RotateFlip(RotateFlipType.Rotate90FlipNone);
                                 }
                             }
                         }
 
-                        original.Save(HttpContext.Current.Server.MapPath(uploadsDir + newFileName));
-                        thumbnail.Save(HttpContext.Current.Server.MapPath(uploadsDir + "5_percent_thumbnails/" + newFileName));
 
+                        //Change quality
+                        //https://docs.microsoft.com/en-us/dotnet/api/system.drawing.image.save?view=netframework-4.8
+
+                        ImageCodecInfo myImageCodecInfo;
+                        Encoder myEncoder;
+                        EncoderParameter myEncoderParameter;
+                        EncoderParameters myEncoderParameters;
+
+                        // Get an ImageCodecInfo object that represents the JPEG codec.
+                        myImageCodecInfo = GetEncoderInfo("image/jpeg");
+
+                        // Create an Encoder object based on the GUID
+                        // for the Quality parameter category.
+                        myEncoder = Encoder.Quality;
+
+                        // Create an EncoderParameters object.
+                        // An EncoderParameters object has an array of EncoderParameter
+                        // objects. In this case, there is only one
+
+                        // EncoderParameter object in the array.
+                        myEncoderParameters = new EncoderParameters(1);
+
+                        /*
+                        // Save the bitmap as a JPEG file with quality level 25 (max 100).
+                        myEncoderParameter = new EncoderParameter(myEncoder, 25L);
+                        myEncoderParameters.Param[0] = myEncoderParameter;
+                        myBitmap.Save("Shapes025.jpg", myImageCodecInfo, myEncoderParameters);
+                        */
+
+                        //original.Save(HttpContext.Current.Server.MapPath(uploadsDir + newFileName));
+
+                        
+
+                        myEncoderParameter = new EncoderParameter(myEncoder, 100L);
+                        myEncoderParameters.Param[0] = myEncoderParameter;
+                        original.Save(HttpContext.Current.Server.MapPath(uploadsDir + "JPG_FULL_100" + newFileName), myImageCodecInfo, myEncoderParameters);
+                        halfThumbnail.Save(HttpContext.Current.Server.MapPath(uploadsDir + "JPG_HALF_100" + newFileName), myImageCodecInfo, myEncoderParameters);
+                        quaterThumbnail.Save(HttpContext.Current.Server.MapPath(uploadsDir + "JPG_QUATER_100" + newFileName), myImageCodecInfo, myEncoderParameters);
+                        hundredWidthThumbnail.Save(HttpContext.Current.Server.MapPath(uploadsDir + "JPG_W100_100" + newFileName), myImageCodecInfo, myEncoderParameters);
+                        hundredHeightThumbnail.Save(HttpContext.Current.Server.MapPath(uploadsDir + "JPG_H100_100" + newFileName), myImageCodecInfo, myEncoderParameters);
+
+                        myEncoderParameter = new EncoderParameter(myEncoder, 75L);
+                        original.Save(HttpContext.Current.Server.MapPath(uploadsDir + "JPG_FULL_75" + newFileName), myImageCodecInfo, myEncoderParameters);
+                        halfThumbnail.Save(HttpContext.Current.Server.MapPath(uploadsDir + "JPG_HALF_75" + newFileName), myImageCodecInfo, myEncoderParameters);
+                        quaterThumbnail.Save(HttpContext.Current.Server.MapPath(uploadsDir + "JPG_QUATER_75" + newFileName), myImageCodecInfo, myEncoderParameters);
+                        hundredWidthThumbnail.Save(HttpContext.Current.Server.MapPath(uploadsDir + "JPG_W100_75" + newFileName), myImageCodecInfo, myEncoderParameters);
+                        hundredHeightThumbnail.Save(HttpContext.Current.Server.MapPath(uploadsDir + "JPG_H100_75" + newFileName), myImageCodecInfo, myEncoderParameters);
+
+                        myEncoderParameter = new EncoderParameter(myEncoder, 50L);
+                        myEncoderParameters.Param[0] = myEncoderParameter;
+                        original.Save(HttpContext.Current.Server.MapPath(uploadsDir + "JPG_FULL_50" + newFileName), myImageCodecInfo, myEncoderParameters);
+                        halfThumbnail.Save(HttpContext.Current.Server.MapPath(uploadsDir + "JPG_HALF_50" + newFileName), myImageCodecInfo, myEncoderParameters);
+                        quaterThumbnail.Save(HttpContext.Current.Server.MapPath(uploadsDir + "JPG_QUATER_50" + newFileName), myImageCodecInfo, myEncoderParameters);
+                        hundredWidthThumbnail.Save(HttpContext.Current.Server.MapPath(uploadsDir + "JPG_W100_50" + newFileName), myImageCodecInfo, myEncoderParameters);
+                        hundredHeightThumbnail.Save(HttpContext.Current.Server.MapPath(uploadsDir + "JPG_H100_50" + newFileName), myImageCodecInfo, myEncoderParameters);
+
+
+                        myEncoderParameter = new EncoderParameter(myEncoder, 25L);
+                        myEncoderParameters.Param[0] = myEncoderParameter;
+                        original.Save(HttpContext.Current.Server.MapPath(uploadsDir + "JPG_FULL_25" + newFileName), myImageCodecInfo, myEncoderParameters);
+                        halfThumbnail.Save(HttpContext.Current.Server.MapPath(uploadsDir + "JPG_HALF_25" + newFileName), myImageCodecInfo, myEncoderParameters);
+                        quaterThumbnail.Save(HttpContext.Current.Server.MapPath(uploadsDir + "JPG_QUATER_25" + newFileName), myImageCodecInfo, myEncoderParameters);
+                        hundredWidthThumbnail.Save(HttpContext.Current.Server.MapPath(uploadsDir + "JPG_W100_25" + newFileName), myImageCodecInfo, myEncoderParameters);
+                        hundredHeightThumbnail.Save(HttpContext.Current.Server.MapPath(uploadsDir + "JPG_H100_25" + newFileName), myImageCodecInfo, myEncoderParameters);
+
+                        myEncoderParameter = new EncoderParameter(myEncoder, 10L);
+                        myEncoderParameters.Param[0] = myEncoderParameter;
+                        original.Save(HttpContext.Current.Server.MapPath(uploadsDir + "JPG_FULL_10" + newFileName), myImageCodecInfo, myEncoderParameters);
+                        halfThumbnail.Save(HttpContext.Current.Server.MapPath(uploadsDir + "JPG_HALF_10" + newFileName), myImageCodecInfo, myEncoderParameters);
+                        quaterThumbnail.Save(HttpContext.Current.Server.MapPath(uploadsDir + "JPG_QUATER_10" + newFileName), myImageCodecInfo, myEncoderParameters);
+                        hundredWidthThumbnail.Save(HttpContext.Current.Server.MapPath(uploadsDir + "JPG_W100_10" + newFileName), myImageCodecInfo, myEncoderParameters);
+                        hundredHeightThumbnail.Save(HttpContext.Current.Server.MapPath(uploadsDir + "JPG_H100_10" + newFileName), myImageCodecInfo, myEncoderParameters);
+
+                        myEncoderParameter = new EncoderParameter(myEncoder, 5L);
+                        myEncoderParameters.Param[0] = myEncoderParameter;
+                        original.Save(HttpContext.Current.Server.MapPath(uploadsDir + "JPG_FULL_5" + newFileName), myImageCodecInfo, myEncoderParameters);
+                        halfThumbnail.Save(HttpContext.Current.Server.MapPath(uploadsDir + "JPG_HALF_5" + newFileName), myImageCodecInfo, myEncoderParameters);
+                        quaterThumbnail.Save(HttpContext.Current.Server.MapPath(uploadsDir + "JPG_QUATER_5" + newFileName), myImageCodecInfo, myEncoderParameters);
+                        hundredWidthThumbnail.Save(HttpContext.Current.Server.MapPath(uploadsDir + "JPG_W100_5" + newFileName), myImageCodecInfo, myEncoderParameters);
+                        hundredHeightThumbnail.Save(HttpContext.Current.Server.MapPath(uploadsDir + "JPG_H100_5" + newFileName), myImageCodecInfo, myEncoderParameters);
+
+                        myEncoderParameter = new EncoderParameter(myEncoder, 1L);
+                        myEncoderParameters.Param[0] = myEncoderParameter;
+                        original.Save(HttpContext.Current.Server.MapPath(uploadsDir + "JPG_FULL_1" + newFileName), myImageCodecInfo, myEncoderParameters);
+                        halfThumbnail.Save(HttpContext.Current.Server.MapPath(uploadsDir + "JPG_HALF_1" + newFileName), myImageCodecInfo, myEncoderParameters);
+                        quaterThumbnail.Save(HttpContext.Current.Server.MapPath(uploadsDir + "JPG_QUATER_1" + newFileName), myImageCodecInfo, myEncoderParameters);
+                        hundredWidthThumbnail.Save(HttpContext.Current.Server.MapPath(uploadsDir + "JPG_W100_1" + newFileName), myImageCodecInfo, myEncoderParameters);
+                        hundredHeightThumbnail.Save(HttpContext.Current.Server.MapPath(uploadsDir + "JPG_H100_1" + newFileName), myImageCodecInfo, myEncoderParameters);
 
                         ParsnipData.Media.Image temp = new ParsnipData.Media.Image(uploadsDir + newFileName, uploader, album);
+
                         temp.Placeholder = uploadsDir + "5_percent_thumbnails/" + newFileName;
                         temp.Update();
                         HttpContext.Current.Response.Redirect("edit_media?id=" + temp.Id);
@@ -154,6 +258,9 @@ namespace ParsnipWebsite
 
             Bitmap ResizeBitmap(Bitmap bmp, int width, int height)
             {
+                Debug.WriteLine("Width = " + width);
+                Debug.WriteLine("Height = " + height);
+
                 Bitmap result = new Bitmap(width, height);
                 using (Graphics g = Graphics.FromImage(result))
                 {
@@ -161,6 +268,20 @@ namespace ParsnipWebsite
                 }
 
                 return result;
+            }
+
+
+            ImageCodecInfo GetEncoderInfo(String mimeType)
+            {
+                int j;
+                ImageCodecInfo[] encoders;
+                encoders = ImageCodecInfo.GetImageEncoders();
+                for (j = 0; j < encoders.Length; ++j)
+                {
+                    if (encoders[j].MimeType == mimeType)
+                        return encoders[j];
+                }
+                return null;
             }
         }
     }
