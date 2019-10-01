@@ -161,9 +161,12 @@ namespace ParsnipWebsite
                         myEncoderParameters.Param[0] = myEncoderParameter;
                         original.Save(HttpContext.Current.Server.MapPath(uploadsDir + generatedFileName + newFileExtension), myImageCodecInfo, myEncoderParameters);
 
-                        myEncoderParameter = new EncoderParameter(myEncoder, 25L);
+                        myEncoderParameter = new EncoderParameter(myEncoder, 15L);
                         myEncoderParameters.Param[0] = myEncoderParameter;
                         thumbnail.Save(HttpContext.Current.Server.MapPath(uploadsDir + "Thumbnails/" + generatedFileName + newFileExtension), myImageCodecInfo, myEncoderParameters);
+
+         
+
 
 
 
