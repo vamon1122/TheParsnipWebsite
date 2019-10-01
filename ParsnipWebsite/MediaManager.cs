@@ -110,7 +110,7 @@ namespace ParsnipWebsite
                         Bitmap original = new System.Drawing.Bitmap(uploadControl.PostedFile.InputStream);
 
                         //One of the numbers must be a double in order for the result to be double
-                        Bitmap thumbnail = ResizeBitmap(original, (int)100, (int)(original.Height * (100d / original.Width)));
+                        Bitmap thumbnail = ResizeBitmap(original, (int)(original.Width * (250d / original.Height)), 250);
 
 
                         if (original.PropertyIdList.Contains(0x112)) //0x112 = Orientation
@@ -165,7 +165,7 @@ namespace ParsnipWebsite
                         myEncoderParameters.Param[0] = myEncoderParameter;
                         thumbnail.Save(HttpContext.Current.Server.MapPath(uploadsDir + "Thumbnails/" + generatedFileName + newFileExtension), myImageCodecInfo, myEncoderParameters);
 
-                    
+
 
                         ParsnipData.Media.Image temp = new ParsnipData.Media.Image(uploadsDir + generatedFileName + newFileExtension, uploader, album);
 
@@ -188,15 +188,12 @@ namespace ParsnipWebsite
                 }
             }
 
-            Bitmap ResizeBitmap(Bitmap bmp, int width, int height)
+            Bitmap ResizeBitmap(Bitmap bmp, int longSide, int shortSide)
             {
-                Debug.WriteLine("Width = " + width);
-                Debug.WriteLine("Height = " + height);
-
-                Bitmap result = new Bitmap(width, height);
+                Bitmap result = new Bitmap(longSide, shortSide);
                 using (Graphics g = Graphics.FromImage(result))
                 {
-                    g.DrawImage(bmp, 0, 0, width, height);
+                    g.DrawImage(bmp, 0, 0, longSide, shortSide);
                 }
 
                 return result;
