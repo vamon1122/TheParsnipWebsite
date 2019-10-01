@@ -109,6 +109,16 @@ namespace ParsnipWebsite
 
                         Bitmap original = new System.Drawing.Bitmap(uploadControl.PostedFile.InputStream);
 
+                        //No resize is done here but image needs to go through the process so that it displays properly on PC's
+                        //If we use the 'original' bitmap, the image will display fine on mobile browser, fine on Windows
+                        //File Explorer, but will be rotated in desktop browsers. However, I noticed that the thumbnail
+                        //was displayed correctly at all times. So, I sumply put the original image through the same process,
+                        //and called the new image 'compressedImage' (since it gets compressed later on).
+                        //*NOTE* we also need to rotate the new image (as we do with the thumbnail), as they loose their
+                        //rotation properties when they are processed using the 'ResizeBitmap' function. This is done 
+                        //after the resize.
+                        Bitmap compressedImage = ResizeBitmap(original, (int)original.Width, (int)original.Height);
+
                         //One of the numbers must be a double in order for the result to be double
                         Bitmap thumbnail = ResizeBitmap(original, (int)(original.Width * (250d / original.Height)), 250);
 
@@ -121,14 +131,17 @@ namespace ParsnipWebsite
                                 UInt16 orientationExif = BitConverter.ToUInt16(original.GetPropertyItem(0x112).Value, 0);
                                 if (orientationExif == 8)
                                 {
+                                    compressedImage.RotateFlip(RotateFlipType.Rotate270FlipNone);
                                     thumbnail.RotateFlip(RotateFlipType.Rotate270FlipNone);
                                 }
                                 else if (orientationExif == 3)
                                 {
+                                    compressedImage.RotateFlip(RotateFlipType.Rotate180FlipNone);
                                     thumbnail.RotateFlip(RotateFlipType.Rotate180FlipNone);
                                 }
                                 else if (orientationExif == 6)
                                 {
+                                    compressedImage.RotateFlip(RotateFlipType.Rotate90FlipNone);
                                     thumbnail.RotateFlip(RotateFlipType.Rotate90FlipNone);
                                 }
                             }
@@ -159,7 +172,7 @@ namespace ParsnipWebsite
 
                         myEncoderParameter = new EncoderParameter(myEncoder, 50L);
                         myEncoderParameters.Param[0] = myEncoderParameter;
-                        original.Save(HttpContext.Current.Server.MapPath(uploadsDir + generatedFileName + newFileExtension), myImageCodecInfo, myEncoderParameters);
+                        compressedImage.Save(HttpContext.Current.Server.MapPath(uploadsDir + generatedFileName + newFileExtension), myImageCodecInfo, myEncoderParameters);
 
                         myEncoderParameter = new EncoderParameter(myEncoder, 15L);
                         myEncoderParameters.Param[0] = myEncoderParameter;

@@ -53,7 +53,7 @@
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="ParsnipData">
-      <HintPath>..\..\ParsnipData.dll</HintPath>
+      <HintPath>..\..\TheParsnipData\ParsnipData\bin\Release\ParsnipData.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.DynamicData" />
