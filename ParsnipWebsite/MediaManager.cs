@@ -94,34 +94,30 @@ namespace ParsnipWebsite
 
                     if (ParsnipData.Media.Image.IsValidFileExtension(originalFileExtension.Substring(1, originalFileExtension.Length - 1).ToLower()))
                     {
-
                         string uploadsDir = string.Format("Resources/Media/Images/Uploads/");
-
                         
                         string generatedFileName = string.Format("{0}{1}_{2}_{3}_{4}",
                             uploader.Forename, uploader.Surname,
                             Parsnip.AdjustedTime.ToString("dd-MM-yyyy_HH.mm.ss"), originalFileName.Substring(0, originalFileName.LastIndexOf('.')), Guid.NewGuid());
-
-                        
 
                         Debug.WriteLine("Original image saved as = " + uploadsDir);
                         uploadControl.PostedFile.SaveAs(HttpContext.Current.Server.MapPath("~/" + uploadsDir + "Originals/" + generatedFileName + originalFileExtension));
 
                         Bitmap original = new System.Drawing.Bitmap(uploadControl.PostedFile.InputStream);
 
-                        //No resize is done here but image needs to go through the process so that it displays properly on PC's
-                        //If we use the 'original' bitmap, the image will display fine on mobile browser, fine on Windows
-                        //File Explorer, but will be rotated in desktop browsers. However, I noticed that the thumbnail
-                        //was displayed correctly at all times. So, I sumply put the original image through the same process,
-                        //and called the new image 'compressedImage' (since it gets compressed later on).
-                        //*NOTE* we also need to rotate the new image (as we do with the thumbnail), as they loose their
-                        //rotation properties when they are processed using the 'ResizeBitmap' function. This is done 
-                        //after the resize.
+                        //No resize is done here but image needs to go through the process so that it displays properly 
+                        //on PC's. If we use the 'original' bitmap, the image will display fine on mobile browser, fine 
+                        //on Windows File Explorer, but will be rotated in desktop browsers. However, I noticed that 
+                        //the thumbnail was displayed correctly at all times. So, I sumply put the original image 
+                        //through the same process, and called the new image 'compressedImage' (since it gets 
+                        //compressed later on). *NOTE* we also need to rotate the new image (as we do with the 
+                        //thumbnail), as they loose their rotation properties when they are processed using the 
+                        //'ResizeBitmap' function. This is done after the resize.
                         Bitmap compressedImage = ResizeBitmap(original, (int)original.Width, (int)original.Height);
 
                         //One of the numbers must be a double in order for the result to be double
-                        Bitmap thumbnail = ResizeBitmap(original, (int)(original.Width * (250d / original.Height)), 250);
-
+                        //Shortest side should be 250px
+                        Bitmap thumbnail = original.Width > original.Height ? ResizeBitmap(original, (int)(original.Width * (250d / original.Height)), 250) : ResizeBitmap(original, 250, (int)(original.Height * (250d / original.Width)));
 
                         if (original.PropertyIdList.Contains(0x112)) //0x112 = Orientation
                         {
@@ -147,10 +143,8 @@ namespace ParsnipWebsite
                             }
                         }
 
-
-                        //Change quality
+                        //Change image quality
                         //https://docs.microsoft.com/en-us/dotnet/api/system.drawing.image.save?view=netframework-4.8
-
                         ImageCodecInfo myImageCodecInfo;
                         Encoder myEncoder;
                         EncoderParameter myEncoderParameter;
@@ -170,6 +164,8 @@ namespace ParsnipWebsite
                         // EncoderParameter object in the array.
                         myEncoderParameters = new EncoderParameters(1);
 
+                        //L value (e.g. 50L sets compression quality. 0 = min quality / smaller size, 
+                        //100 = max quality / larger size
                         myEncoderParameter = new EncoderParameter(myEncoder, 50L);
                         myEncoderParameters.Param[0] = myEncoderParameter;
                         compressedImage.Save(HttpContext.Current.Server.MapPath(uploadsDir + generatedFileName + newFileExtension), myImageCodecInfo, myEncoderParameters);
@@ -178,19 +174,14 @@ namespace ParsnipWebsite
                         myEncoderParameters.Param[0] = myEncoderParameter;
                         thumbnail.Save(HttpContext.Current.Server.MapPath(uploadsDir + "Thumbnails/" + generatedFileName + newFileExtension), myImageCodecInfo, myEncoderParameters);
 
-         
-
-
-
-
-                        ParsnipData.Media.Image temp = new ParsnipData.Media.Image(uploadsDir + generatedFileName + newFileExtension, uploader, album);
+                        ParsnipData.Media.Image image = new ParsnipData.Media.Image(uploadsDir + generatedFileName + newFileExtension, uploader, album);
 
                         //FULL (Use 50 compression)
                         //Thumbnail W100 / 25 compression
 
-                        temp.Placeholder = uploadsDir + "Thumbnails/" + generatedFileName + newFileExtension;
-                        temp.Update();
-                        HttpContext.Current.Response.Redirect("edit_media?id=" + temp.Id);
+                        image.Placeholder = uploadsDir + "Thumbnails/" + generatedFileName + newFileExtension;
+                        image.Update();
+                        HttpContext.Current.Response.Redirect("edit_media?id=" + image.Id);
                     }
                     else
                     {
@@ -204,19 +195,20 @@ namespace ParsnipWebsite
                 }
             }
 
-            Bitmap ResizeBitmap(Bitmap bmp, int longSide, int shortSide)
+            Bitmap ResizeBitmap(Bitmap bmp, int width, int height)
             {
-                Bitmap result = new Bitmap(longSide, shortSide);
+                Bitmap result = new Bitmap(width, height);
                 using (Graphics g = Graphics.FromImage(result))
                 {
-                    g.DrawImage(bmp, 0, 0, longSide, shortSide);
+                    g.DrawImage(bmp, 0, 0, width, height);
                 }
 
                 return result;
             }
 
-
-            ImageCodecInfo GetEncoderInfo(String mimeType)
+            //Change image quality
+            //https://docs.microsoft.com/en-us/dotnet/api/system.drawing.image.save?view=netframework-4.8
+            ImageCodecInfo GetEncoderInfo(string mimeType)
             {
                 int j;
                 ImageCodecInfo[] encoders;
