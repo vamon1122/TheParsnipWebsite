@@ -102,8 +102,8 @@ namespace ParsnipWebsite.Custom_Controls.Media
                 _myVideo = value;
                 MyTitle.InnerHtml = MyVideo.Title;
                 thumbnail.Src = "../../Resources/Media/Images/Web_Media/placeholder.gif";
-                thumbnail.Attributes.Add("data-src", MyVideo.Thumbnail);
-                thumbnail.Attributes.Add("data-srcset", MyVideo.Thumbnail);
+                thumbnail.Attributes.Add("data-src", MyVideo.Thumbnail.Compressed);
+                thumbnail.Attributes.Add("data-srcset", MyVideo.Thumbnail.Compressed);
                 MediaContainer.ID = _myVideo.Id.ToString();
                 a_play_video.HRef = string.Format("../../watch_video?id={0}", MyVideo.Id);
                 MyEdit.HRef = string.Format("../../edit_media?id={0}", MyVideo.Id);

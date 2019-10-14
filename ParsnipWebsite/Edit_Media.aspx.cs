@@ -67,7 +67,7 @@ namespace ParsnipWebsite
                     MyVideo = new Video(new Guid(Request.QueryString["id"]));
                     Debug.WriteLine("Selecting video with id = " + id);
                     MyVideo.Select();
-                    thumbnail.Src = MyVideo.Thumbnail;
+                    thumbnail.Src = MyVideo.Thumbnail.Compressed;
                     input_date_media_captured.Value = MyVideo.DateTimeMediaCreated.ToString();
                     a_play_video.HRef = string.Format("../../watch_video?id={0}", MyVideo.Id);
                     a_play_video.Visible = true;
