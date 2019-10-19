@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ParsnipWebsite.Custom_Controls.Media {
-    
-    
-    public partial class MediaControl {
-        
+namespace ParsnipWebsite.Custom_Controls.Media
+{
+
+
+    public partial class MediaControl
+    {
+
         /// <summary>
         /// MediaContainer control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace ParsnipWebsite.Custom_Controls.Media {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl MediaContainer;
-        
+
         /// <summary>
         /// MyTitle control.
         /// </summary>
@@ -29,7 +31,16 @@ namespace ParsnipWebsite.Custom_Controls.Media {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl MyTitle;
-        
+
+        /// <summary>
+        /// inner_container control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl inner_container;
+
         /// <summary>
         /// MyImageHolder control.
         /// </summary>
@@ -38,7 +49,7 @@ namespace ParsnipWebsite.Custom_Controls.Media {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Image MyImageHolder;
-        
+
         /// <summary>
         /// a_play_video control.
         /// </summary>
@@ -47,7 +58,7 @@ namespace ParsnipWebsite.Custom_Controls.Media {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor a_play_video;
-        
+
         /// <summary>
         /// thumbnail control.
         /// </summary>
@@ -56,7 +67,7 @@ namespace ParsnipWebsite.Custom_Controls.Media {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlImage thumbnail;
-        
+
         /// <summary>
         /// YoutubePlayer control.
         /// </summary>
@@ -65,7 +76,7 @@ namespace ParsnipWebsite.Custom_Controls.Media {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl YoutubePlayer;
-        
+
         /// <summary>
         /// MyEdit control.
         /// </summary>
@@ -74,7 +85,7 @@ namespace ParsnipWebsite.Custom_Controls.Media {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor MyEdit;
-        
+
         /// <summary>
         /// ShareButton control.
         /// </summary>
@@ -83,7 +94,7 @@ namespace ParsnipWebsite.Custom_Controls.Media {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlButton ShareButton;
-        
+
         /// <summary>
         /// modalDiv control.
         /// </summary>

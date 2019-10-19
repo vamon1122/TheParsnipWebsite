@@ -1,9 +1,16 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="MediaControl.ascx.cs" Inherits="ParsnipWebsite.Custom_Controls.Media.MediaControl" %>
 <div class="center_div" style="margin-bottom:20px" >
     <div runat="server" id="MediaContainer" class="meme background-lightest" style="display:inline-block; padding-top:8px; padding-bottom:5px">
-
         <h3 runat="server"><b runat="server" id="MyTitle"></b></h3>
-        <asp:Image runat="server" ID="MyImageHolder" Width="100%" Visible="false" CssClass="lazy no-bottom-margin" />
+
+        <div runat="server" id="inner_container" 
+            style="
+            background-color: red;
+            position: relative;
+            width: 100%;">
+        
+        <asp:Image runat="server" ID="MyImageHolder" Width="100%" Visible="false" CssClass="lazy image_aspect no-bottom-margin" />
+            </div>
         <a runat="server" id="a_play_video" visible="false" >
             <div class="play-button-div" style="padding-bottom:5px">
                 <img runat="server" id="thumbnail" class="lazy" style="width:100%" />

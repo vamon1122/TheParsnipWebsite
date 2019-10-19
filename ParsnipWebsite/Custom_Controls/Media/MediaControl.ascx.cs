@@ -70,21 +70,35 @@ namespace ParsnipWebsite.Custom_Controls.Media
             get { return _myImage; }
             set
             {
-                MyImageHolder.Visible = true;
                 _myImage = value;
-                MyTitle.InnerHtml = MyImage.Title;
-                Debug.WriteLine("Setting url");
                 
-                MyImageHolder.ImageUrl = MyImage.Placeholder.Contains("http://") || MyImage.Placeholder.Contains("https://") ? MyImage.Placeholder : Request.Url.GetLeftPart(UriPartial.Authority) + "/" + MyImage.Placeholder;
+                //If there is an aspect ratio, scale the media control accordingly
+                if (value.XScale != default || value.YScale != default)
+                {
+                    //Debug.WriteLine(string.Format("100 * (YScale ({0}) / XScale ({1})) = {2}", value.YScale, value.XScale, 100 * (value.YScale / value.XScale)));
+                    //inner_container.Style.Add("padding-top", 100 * (value.YScale / value.XScale) + "%");
+                    //MyImageHolder.Style.Value = string.Format("padding-top:{0}%", 100 * (value.YScale / value.XScale));
+                }
+
+                MyImageHolder.Visible = true;
+                
+                MyTitle.InnerHtml = value.Title;
+                Debug.WriteLine("Setting url");
+
+                
+                MyImageHolder.ImageUrl = value.Placeholder.Contains("http://") || value.Placeholder.Contains("https://") ? value.Placeholder : Request.Url.GetLeftPart(UriPartial.Authority) + "/" + value.Placeholder;
                 Debug.WriteLine("Url = " + MyImageHolder.ImageUrl);
 
-                MyImageHolder.Attributes.Add("data-src", MyImage.Directory);
-                MyImageHolder.Attributes.Add("data-srcset", MyImage.Directory);
+                MyImageHolder.Attributes.Add("data-src", value.Directory);
+                MyImageHolder.Attributes.Add("data-srcset", value.Directory);
                 
 
+
+
+
                 MyImageHolder.Style.Add("margin-bottom", "8px");
-                MediaContainer.ID = _myImage.Id.ToString();
-                MyEdit.HRef = string.Format("../../edit_media?id={0}", MyImage.Id);
+                MediaContainer.ID = value.Id.ToString();
+                MyEdit.HRef = string.Format("../../edit_media?id={0}", value.Id);
 
                 GenerateShareButton();
             }
