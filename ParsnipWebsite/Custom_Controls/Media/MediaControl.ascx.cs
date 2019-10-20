@@ -65,19 +65,35 @@ namespace ParsnipWebsite.Custom_Controls.Media
         }
 
         private ParsnipData.Media.Image _myImage;
+
+        double width;
+        double min_width;
+
+        private void SetWidth()
+        {
+            width = Data.IsMobile ? 100 : 30;
+            min_width = Data.IsMobile ? 0 : 480;
+
+            MediaContainer.Style.Add("width", string.Format("{0}vw", width));
+            MediaContainer.Style.Add("min-width", string.Format("{0}px", min_width));
+        }
+
         public ParsnipData.Media.Image MyImage
         {
             get { return _myImage; }
             set
             {
                 _myImage = value;
-                
+
                 //If there is an aspect ratio, scale the media control accordingly
+
+                SetWidth();
+
+                //MyImageHolder.Style.Add("width", "100%");
                 if (value.XScale != default || value.YScale != default)
                 {
-                    //Debug.WriteLine(string.Format("100 * (YScale ({0}) / XScale ({1})) = {2}", value.YScale, value.XScale, 100 * (value.YScale / value.XScale)));
-                    //inner_container.Style.Add("padding-top", 100 * (value.YScale / value.XScale) + "%");
-                    //MyImageHolder.Style.Value = string.Format("padding-top:{0}%", 100 * (value.YScale / value.XScale));
+                    MyImageHolder.Style.Add("height", string.Format("{0}vw", width * (value.YScale / value.XScale)));
+                    MyImageHolder.Style.Add("min-height", string.Format("{0}px", min_width * (value.YScale / value.XScale)));
                 }
 
                 MyImageHolder.Visible = true;
@@ -112,6 +128,14 @@ namespace ParsnipWebsite.Custom_Controls.Media
             get { return _myVideo; }
             set
             {
+                //If there is an aspect ratio, scale the media control accordingly
+                SetWidth();
+                if (value.XScale != default || value.YScale != default)
+                {
+                    thumbnail.Style.Add("height", string.Format("{0}vw", width * (value.YScale / value.XScale)));
+                    thumbnail.Style.Add("min-height", string.Format("{0}px", min_width * (value.YScale / value.XScale)));
+                }
+
                 a_play_video.Visible = true;
                 _myVideo = value;
                 MyTitle.InnerHtml = MyVideo.Title;
@@ -134,6 +158,8 @@ namespace ParsnipWebsite.Custom_Controls.Media
             get { return _myYoutubeVideo; }
             set
             {
+                SetWidth();
+
                 YoutubePlayer.Visible = true;
                 _myYoutubeVideo = value;
                 MyTitle.InnerHtml = MyYoutubeVideo.Title;

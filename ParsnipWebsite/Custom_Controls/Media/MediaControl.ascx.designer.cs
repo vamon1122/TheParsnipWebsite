@@ -33,15 +33,6 @@ namespace ParsnipWebsite.Custom_Controls.Media
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl MyTitle;
 
         /// <summary>
-        /// inner_container control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl inner_container;
-
-        /// <summary>
         /// MyImageHolder control.
         /// </summary>
         /// <remarks>
