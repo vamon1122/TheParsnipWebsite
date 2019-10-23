@@ -84,7 +84,7 @@ namespace ParsnipWebsite
             try
             {
                 Debug.WriteLine("Generating image object");
-                ParsnipData.Media.Image myImage = new ParsnipData.Media.Image(uploader, album, uploadControl);
+                ParsnipData.Media.Image myImage = new ParsnipData.Media.Image(uploader, album, uploadControl.PostedFile);
                 Debug.WriteLine("Updating image object");
                 myImage.Update();
                 Debug.WriteLine("Redirecting to edit_media?id=" + myImage.Id);

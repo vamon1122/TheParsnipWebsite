@@ -90,7 +90,7 @@ namespace ParsnipWebsite.Custom_Controls.Media
                 SetWidth();
 
                 //MyImageHolder.Style.Add("width", "100%");
-                if (value.XScale != default || value.YScale != default)
+                if (value.XScale != default(double) || value.YScale != default(double))
                 {
                     MyImageHolder.Style.Add("height", string.Format("{0}vw", width * (value.YScale / value.XScale)));
                     MyImageHolder.Style.Add("min-height", string.Format("{0}px", min_width * (value.YScale / value.XScale)));
@@ -130,7 +130,7 @@ namespace ParsnipWebsite.Custom_Controls.Media
             {
                 //If there is an aspect ratio, scale the media control accordingly
                 SetWidth();
-                if (value.XScale != default || value.YScale != default)
+                if (value.XScale != default(double) || value.YScale != default(double))
                 {
                     thumbnail.Style.Add("height", string.Format("{0}vw", width * (value.YScale / value.XScale)));
                     thumbnail.Style.Add("min-height", string.Format("{0}px", min_width * (value.YScale / value.XScale)));
