@@ -69,7 +69,7 @@ namespace ParsnipWebsite.Custom_Controls.Media
         double width;
         double min_width;
 
-        private void SetWidth()
+        private void SetContainerWidth()
         {
             width = Data.IsMobile ? 100 : 30;
             min_width = Data.IsMobile ? 0 : 480;
@@ -87,7 +87,7 @@ namespace ParsnipWebsite.Custom_Controls.Media
 
                 //If there is an aspect ratio, scale the media control accordingly
 
-                SetWidth();
+                SetContainerWidth();
 
                 //MyImageHolder.Style.Add("width", "100%");
                 if (value.XScale != default(double) || value.YScale != default(double))
@@ -129,11 +129,11 @@ namespace ParsnipWebsite.Custom_Controls.Media
             set
             {
                 //If there is an aspect ratio, scale the media control accordingly
-                SetWidth();
-                if (value.XScale != default(double) || value.YScale != default(double))
+                SetContainerWidth();
+                if (value.Thumbnail.XScale != default(double) || value.Thumbnail.YScale != default(double))
                 {
-                    thumbnail.Style.Add("height", string.Format("{0}vw", width * (value.YScale / value.XScale)));
-                    thumbnail.Style.Add("min-height", string.Format("{0}px", min_width * (value.YScale / value.XScale)));
+                    thumbnail.Style.Add("height", string.Format("{0}vw", width * (value.Thumbnail.YScale / value.Thumbnail.XScale)));
+                    thumbnail.Style.Add("min-height", string.Format("{0}px", min_width * (value.Thumbnail.YScale / value.Thumbnail.XScale)));
                 }
 
                 a_play_video.Visible = true;
@@ -158,7 +158,7 @@ namespace ParsnipWebsite.Custom_Controls.Media
             get { return _myYoutubeVideo; }
             set
             {
-                SetWidth();
+                SetContainerWidth();
 
                 YoutubePlayer.Visible = true;
                 _myYoutubeVideo = value;
