@@ -1,4 +1,13 @@
-﻿@media only screen and (min-width: 0px) {
+﻿.media-control {
+    /*
+    width = Data.IsMobile ? 100 : 30;
+    min_width = Data.IsMobile ? 0 : 480;
+    MediaContainer .Style.Add("width", string.Format("{0}vw", width));
+    MediaContainer .Style.Add("min-width", string.Format("{0}px", min_width));
+        */
+}
+
+@media only screen and (min-width: 0px) {
     .large-media-landscape {
         width: 100%;
         min-width: 300px;
@@ -16,6 +25,11 @@
 
 
 @media only screen and (orientation: portrait) {
+    .media-control{
+        width: 100vw;
+        max-width: 480px;
+    }
+
     @media only screen and (min-width: 0px) {
 
         .meme {
@@ -26,6 +40,11 @@
 
 @media only screen and (orientation: landscape) {
     @media only screen and (min-width: 0px) {
+        .media-control {
+            width: 480px;
+            min-width: 480px;
+            max-width: 480px;
+        }
         .meme {
             width: 100vw;
         }
@@ -40,6 +59,7 @@
 
     /*I am bigger than 1080p*/
     @media only screen and (min-width: 1920px) {
+
         .meme {
             width: 31.5vw;
         }
@@ -131,8 +151,7 @@ html {
 html, body {
     padding: 0px;
     margin: 0px;
-    font-family: Verdana;
-
+    font-family: 'Nunito', sans-serif;
 }
 
 body {
@@ -140,7 +159,6 @@ body {
     width: 100%;
     padding-top: 55px;
     padding-bottom: 55px;
-    font-family: Verdana;
     -webkit-text-size-adjust: 100%;
 }
 

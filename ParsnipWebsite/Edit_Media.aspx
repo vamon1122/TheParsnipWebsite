@@ -3,6 +3,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
+    <!-- GOOGLE FONTS: Nunito -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
     <!-- iPhone FAVICONS -->
     <link rel="apple-touch-icon" sizes="114×114" href="Resources/Favicons/apple-icon-114×114.png" />
     <link rel="apple-touch-icon" sizes="72×72" href="Resources/Favicons/apple-icon-72x72.png" />

@@ -5,6 +5,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
+    <link href="https://fonts.googleapis.com/css?family=Nunito|Pacifico&display=swap" rel="stylesheet">
     <!-- iPhone FAVICONS -->
     <link rel="apple-touch-icon" sizes="114×114" href="Resources/Favicons/apple-icon-114×114.png" />
     <link rel="apple-touch-icon" sizes="72×72" href="Resources/Favicons/apple-icon-72x72.png" />
@@ -32,29 +33,37 @@
     <label class="censored" id="pageId">home.html</label>
     
     <menuControls:Menu runat="server" ID="Menu" />
-
-    <h2 class="page-title"><b>Home</b></h2>
+    <div class="center_div media-control" style="font-family: 'Pacifico', cursive; color:red; font-size:40px; padding-bottom:10px">
+            "Devout discipels of Gaz Beadle's penis"
+        </div>
     <div class="padded-text center_div">
+
+        
+
         <asp:Label runat="server" ID="WelcomeLabel"></asp:Label>
     </div>
     <form runat="server">
         <div runat="server" id="LatestVideo" style="margin-top:10px"></div>
     </form>
-    
-    <div class="padded-text center_div" style="max-width:1000px">
+    <div class="">
+    <div class="center_div media-control">
     <h3 class="section-title"><b>YOUR WEBSITE NEEDS YOU!</b></h3>
-    - I have loads of photos & videos from Amsterdam & Portugal which I to make available here. If anyone is interested in looking at some nostalgic photos & videos and making some thumbnails & captions for the website whilst you're at it (literally just a good screenshot of the video) that would be super helpful!<br />
-    - If someone could upload everything from the crystal parsnip, that would be great!
+    If someone could upload everything from the crystal parsnip, that would be awesome!
     
         <h3 class="section-title"><b>*NEW*</b></h3>
-        - [20/09/19] Fixed bug where video player would take ages to load<br />
-        - [15/09/19] Added time machine! View the website as it was in <a href="http://original.theparsnip.co.uk">2015</a> when it was first conceived and in <a href="http://2016.theparsnip.co.uk">2016</a> when it had it's first major visual overhaul!<br />
-        - [17/08/19] Fixed broken image links on the <a href="Photos.aspx">photos page</a><br />
-        - [17/08/19] Fixed slow loading times on the <a href="Videos.aspx">videos page</a><br />
-        - [07/08/19] New <a href="Krakow.aspx">Krakow page!</a> Upload, view & share holiday photos!<br />
-        - [24/06/19] Share <a href="Photos.aspx">photos</a> and <a href="Videos.aspx">videos</a>! (Recipient doesn't even need an account to view what you share!!!)<br />
-        - [24/06/19] You can now access the home page without logging in
+        <ol style="list-style-type: square; text-align: left; padding-left:18px">
+            <li style="text-align: left">[28/10/19] Fixed bug where page would 'jump around' whilst content was loading</li>
+            <li style="text-align: left">[20/09/19] Fixed bug where video player would take ages to load</li>
+            <li style="text-align: left">[15/09/19] Added time machine! View the website as it was in <a href="http://original.theparsnip.co.uk">2015</a> when it was first conceived and in <a href="http://2016.theparsnip.co.uk">2016</a> when it had it's first major visual overhaul!</li>
+            <li style="text-align: left">[17/08/19] Fixed broken image links on the <a href="Photos.aspx">photos page</a></li>
+            <li style="text-align: left">[17/08/19] Fixed slow loading times on the <a href="Videos.aspx">videos page</a></li>
+            <li style="text-align: left">[07/08/19] New <a href="Krakow.aspx">Krakow page!</a> Upload, view & share holiday photos!</li>
+            <li style="text-align: left">[24/06/19] Share <a href="Photos.aspx">photos</a> and <a href="Videos.aspx">videos</a>! (Recipient doesn't even need an account to view what you share!!!)</li>
+            <li style="text-align: left">[24/06/19] You can now access the home page without logging in</li>
+        </ol>
+        
     </div>
+        </div>
     
     <script src="../Javascript/Youtube.js"></script>
     <script src="Javascript/LazyImages.js"></script>

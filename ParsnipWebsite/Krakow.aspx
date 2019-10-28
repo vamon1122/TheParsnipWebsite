@@ -5,6 +5,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
+    <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
     <!-- iPhone FAVICONS -->
     <link rel="apple-touch-icon" sizes="114×114" href="Resources/Favicons/apple-icon-114×114.png" />
     <link rel="apple-touch-icon" sizes="72×72" href="Resources/Favicons/apple-icon-72x72.png" />
@@ -43,10 +44,11 @@
     <form runat="server">
         <div runat="server" id="UploadDiv" class="form-group" style="display:none; ">
             <h3 class="section-title"><b>Upload your Krakow photos</b></h3>
+            <div class="center_div media-control">
             If you have any videos, send them to me, otherwise, upload any missing photos!
             Let me know if you want to help improve the captions for our holiday photos. 
             I appreciate that they're awful at the moment 😂. I can give you editing rights if you're interested :P
-            <br />
+                </div>
             <br />
         
             <label class="file-upload btn">                

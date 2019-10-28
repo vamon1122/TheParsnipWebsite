@@ -53,9 +53,6 @@
     var colDarkest = "dimgrey";
     */
 
-    /////Font/////
-    var font = "Verdana";
-
     /////Title/////
     var title = "#TheParsnip";
     var titleColor = "white";
@@ -90,8 +87,6 @@
 
     height = "45px";
     buttFontSize = "17px";
-
-    titleFontSize = "30px";
 
     /////Buttons/////
     createButton("🏠 Home 🏠", "home");
@@ -133,10 +128,9 @@
 
     var pageTitle = document.createElement("h2");
     pageTitle.innerHTML = title;
-    //pageTitle.style.fontSize = titleFontSize;
     pageTitle.style.fontWeight = "bold";
     pageTitle.style.color = titleColor;
-    pageTitle.style.marginTop = "3px";
+    pageTitle.style.marginTop = "5px";
 
     menuDiv.appendChild(pageTitle);
 

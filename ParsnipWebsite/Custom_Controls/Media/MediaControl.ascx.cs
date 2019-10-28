@@ -71,11 +71,13 @@ namespace ParsnipWebsite.Custom_Controls.Media
 
         private void SetContainerWidth()
         {
+            /*
             width = Data.IsMobile ? 100 : 30;
             min_width = Data.IsMobile ? 0 : 480;
 
             MediaContainer.Style.Add("width", string.Format("{0}vw", width));
             MediaContainer.Style.Add("min-width", string.Format("{0}px", min_width));
+            */
         }
 
         public ParsnipData.Media.Image MyImage

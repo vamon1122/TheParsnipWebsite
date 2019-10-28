@@ -46,7 +46,7 @@ namespace ParsnipWebsite
                 latestYoutubeVideo.Title = "LATEST VIDEO: " + latestYoutubeVideo.Title;
                 MyVideoControl.MyYoutubeVideo = latestYoutubeVideo;
             }
-            
+
             LatestVideo.Controls.Add(MyVideoControl);
         }
     }
