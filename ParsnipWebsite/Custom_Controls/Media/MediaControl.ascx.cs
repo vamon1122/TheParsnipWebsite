@@ -67,17 +67,20 @@ namespace ParsnipWebsite.Custom_Controls.Media
         private ParsnipData.Media.Image _myImage;
 
         double width;
-        double min_width;
+        double maxWidth = 480;
 
         private void SetContainerWidth()
         {
-            /*
-            width = Data.IsMobile ? 100 : 30;
-            min_width = Data.IsMobile ? 0 : 480;
+            width = 100;
+            //width = Data.IsMobile ? 100 : 30;
+            //min_width = Data.IsMobile ? 0 : 480;
+            
+            
+            
+            MediaContainer.Style.Add("width", string.Format("{0}vmin", width));
+            MediaContainer.Style.Add("max-width", string.Format("{0}px", maxWidth));
+            //MediaContainer.Style.Add("min-width", string.Format("{0}px", min_width));
 
-            MediaContainer.Style.Add("width", string.Format("{0}vw", width));
-            MediaContainer.Style.Add("min-width", string.Format("{0}px", min_width));
-            */
         }
 
         public ParsnipData.Media.Image MyImage
@@ -94,8 +97,8 @@ namespace ParsnipWebsite.Custom_Controls.Media
                 //MyImageHolder.Style.Add("width", "100%");
                 if (value.XScale != default(double) || value.YScale != default(double))
                 {
-                    MyImageHolder.Style.Add("height", string.Format("{0}vw", width * (value.YScale / value.XScale)));
-                    MyImageHolder.Style.Add("min-height", string.Format("{0}px", min_width * (value.YScale / value.XScale)));
+                    MyImageHolder.Style.Add("height", string.Format("{0}vmin", width * (value.YScale / value.XScale)));
+                    MyImageHolder.Style.Add("max-height", string.Format("{0}px", maxWidth * (value.YScale / value.XScale)));
                 }
 
                 MyImageHolder.Visible = true;
@@ -103,13 +106,13 @@ namespace ParsnipWebsite.Custom_Controls.Media
                 MyTitle.InnerHtml = value.Title;
                 Debug.WriteLine("Setting url");
 
-                
+
                 MyImageHolder.ImageUrl = value.Placeholder.Contains("http://") || value.Placeholder.Contains("https://") ? value.Placeholder : Request.Url.GetLeftPart(UriPartial.Authority) + "/" + value.Placeholder;
                 Debug.WriteLine("Url = " + MyImageHolder.ImageUrl);
 
-                MyImageHolder.Attributes.Add("data-src", value.Directory);
-                MyImageHolder.Attributes.Add("data-srcset", value.Directory);
-                
+                MyImageHolder.Attributes.Add("data-src", value.Directory.Contains("http://") || value.Directory.Contains("https://") ? value.Directory : Request.Url.GetLeftPart(UriPartial.Authority) + "/" + value.Directory);
+                MyImageHolder.Attributes.Add("data-srcset", value.Directory.Contains("http://") || value.Directory.Contains("https://") ? value.Directory : Request.Url.GetLeftPart(UriPartial.Authority) + "/" + value.Directory);
+
 
 
 
@@ -134,16 +137,16 @@ namespace ParsnipWebsite.Custom_Controls.Media
                 SetContainerWidth();
                 if (value.Thumbnail.XScale != default(double) || value.Thumbnail.YScale != default(double))
                 {
-                    thumbnail.Style.Add("height", string.Format("{0}vw", width * (value.Thumbnail.YScale / value.Thumbnail.XScale)));
-                    thumbnail.Style.Add("min-height", string.Format("{0}px", min_width * (value.Thumbnail.YScale / value.Thumbnail.XScale)));
+                    thumbnail.Style.Add("height", string.Format("{0}vmin", width * (value.Thumbnail.YScale / value.Thumbnail.XScale)));
+                    thumbnail.Style.Add("max-height", string.Format("{0}px", maxWidth * (value.Thumbnail.YScale / value.Thumbnail.XScale)));
                 }
 
                 a_play_video.Visible = true;
                 _myVideo = value;
                 MyTitle.InnerHtml = MyVideo.Title;
-                thumbnail.Src = MyVideo.Thumbnail.Placeholder;
-                thumbnail.Attributes.Add("data-src", MyVideo.Thumbnail.Original);
-                thumbnail.Attributes.Add("data-srcset", MyVideo.Thumbnail.Original);
+                thumbnail.Src = Request.Url.GetLeftPart(UriPartial.Authority) + "/" + MyVideo.Thumbnail.Placeholder;
+                thumbnail.Attributes.Add("data-src", Request.Url.GetLeftPart(UriPartial.Authority) + "/" + MyVideo.Thumbnail.Compressed);
+                thumbnail.Attributes.Add("data-srcset", Request.Url.GetLeftPart(UriPartial.Authority) + "/" + MyVideo.Thumbnail.Compressed);
                 MediaContainer.ID = _myVideo.Id.ToString();
                 a_play_video.HRef = string.Format("../../watch_video?id={0}", MyVideo.Id);
                 MyEdit.HRef = string.Format("../../edit_media?id={0}", MyVideo.Id);

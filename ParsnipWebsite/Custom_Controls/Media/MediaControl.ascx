@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="MediaControl.ascx.cs" Inherits="ParsnipWebsite.Custom_Controls.Media.MediaControl" %>
 <div class="center_div" style="margin-bottom:20px" >
-    <div runat="server" id="MediaContainer" class="background-lightest media-control" style="display:inline-block; padding-top:10px; padding-bottom:5px">
+    <div runat="server" id="MediaContainer" class="background-lightest" style="display:inline-block; padding-top:10px; padding-bottom:5px">
         <h3 runat="server" style="word-wrap:break-word"><b runat="server" id="MyTitle"></b></h3>
         
         <asp:Image runat="server" ID="MyImageHolder" Visible="false" Width="100%" CssClass="lazy block no-bottom-margin" />

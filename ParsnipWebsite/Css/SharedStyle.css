@@ -1,10 +1,6 @@
 ﻿.media-control {
-    /*
-    width = Data.IsMobile ? 100 : 30;
-    min_width = Data.IsMobile ? 0 : 480;
-    MediaContainer .Style.Add("width", string.Format("{0}vw", width));
-    MediaContainer .Style.Add("min-width", string.Format("{0}px", min_width));
-        */
+    width: 100vmin;
+    max-width: 480px;
 }
 
 @media only screen and (min-width: 0px) {
@@ -25,10 +21,6 @@
 
 
 @media only screen and (orientation: portrait) {
-    .media-control{
-        width: 100vw;
-        max-width: 480px;
-    }
 
     @media only screen and (min-width: 0px) {
 
@@ -40,11 +32,6 @@
 
 @media only screen and (orientation: landscape) {
     @media only screen and (min-width: 0px) {
-        .media-control {
-            width: 480px;
-            min-width: 480px;
-            max-width: 480px;
-        }
         .meme {
             width: 100vw;
         }

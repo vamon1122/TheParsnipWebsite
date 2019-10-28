@@ -44,7 +44,7 @@
     <form runat="server">
         <div runat="server" id="UploadDiv" class="form-group" style="display:none; ">
             <h3 class="section-title"><b>Upload your Krakow photos</b></h3>
-            <div class="center_div media-control">
+            <div class="media-control" style="margin: auto; padding-left: 10px; padding-right:10px">
             If you have any videos, send them to me, otherwise, upload any missing photos!
             Let me know if you want to help improve the captions for our holiday photos. 
             I appreciate that they're awful at the moment 😂. I can give you editing rights if you're interested :P
