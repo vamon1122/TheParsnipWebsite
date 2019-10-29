@@ -40,30 +40,27 @@
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         <strong>Error:</strong> Could not access video. The person who uploaded this video has been suspended!
     </div>
-    <div runat="server" id="MediaContainer" class="background-lightest" style="display:inline-block; padding-top:8px; padding-bottom:5px; ">
         <!--
         <div runat="server" id="VideoContainer">
 
         </div>
         -->
-
-        <h3><b runat="server" id="VideoTitle"></b></h3>
-        <div style="width:100%">
-            <video runat="server" id="video_container" controls="controls" style="max-height:70vh; max-width:100vw" preload="none" visible="false">
+        
+        <button type="button" class="btn btn-link" data-toggle="modal" data-target="#exampleModalCenter" style="padding:0px; position:fixed; top: 1px; right: 3px; z-index:2147483646">
+            <img src="../../Resources/Media/Images/Web_Media/Share_White.svg" style="height:40px" /></button>
+        <h2><b runat="server" id="VideoTitle"></b></h2>
+        <!--
+        <a runat="server" id="MyEdit" >
+            <img src="../../Resources/Media/Images/Web_Media/Edit.svg" style="height:50px" /></a>
+        <div style="display:inline-block; width:28px"></div>
+        -->
+            <video runat="server" id="video_container" controls="controls" class="video-player" style="object-fit:contain; margin-bottom:0px" preload="none" visible="false" >
                 <source runat="server" id="VideoSource" type="video/mp4" />
                 Your browser does not support HTML5 video.
             </video>
-            </div>
         <div runat="server" id="youtube_video_container" style="margin-bottom:6px; width:100%" visible="false">
             <div runat="server" id="youtube_video" class="youtube-player" />
         </div>
-        
-        <a runat="server" id="MyEdit" >
-            <img src="../../Resources/Media/Images/Web_Media/Edit.svg" style="height:25px" /></a>
-        <div style="display:inline-block; width:28px"></div>
-        <button type="button" class="btn btn-link" data-toggle="modal" data-target="#exampleModalCenter" style="padding:0px">
-            <img src="../../Resources/Media/Images/Web_Media/Share.svg" style="height:30px" /></button>
-    </div>
     <form id="form1" runat="server">
         <div style="padding-left:2.5%; padding-right:2.5%; padding-top:10px">
             <asp:Button runat="server" ID="Button_ViewAlbum" class="btn btn-info btn-lg" 

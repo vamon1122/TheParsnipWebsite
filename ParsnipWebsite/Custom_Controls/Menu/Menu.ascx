@@ -4,7 +4,7 @@
 <div id="titleAndMenu"></div>
 <div id="menuDiv"></div>
 
-<div style="position:fixed; top:-4px; left: -5px; z-index:2147483647">
+<div style="position:fixed; top:-5px; left: -5px; z-index:2147483647">
     <button class="hamburger hamburger--squeeze" type="button" style="outline:none;">
         <span class="hamburger-box">
             <span class="hamburger-inner"></span>
@@ -113,7 +113,7 @@
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    menuDiv.style.zIndex = "2147483646";
+    menuDiv.style.zIndex = "2147483645";
     //menuDiv.style.backgroundColor = colDarkest;
     menuDiv.className = "background-darkest"
     menuDiv.style.display = "inline-block";
