@@ -8,7 +8,7 @@
             <div class="play-button-div" style="padding-bottom:5px">
                 <img runat="server" id="thumbnail" class="lazy" style="width:100%" />
                 <span class="play-button-icon">
-                    <img src="Resources\Media\Images\Web_Media\play_button_2.png" />
+                    <img src="../../Resources/Media/Images/Web_Media/play-button-3.svg" style="width:60px; height:60px" />
                 </span>
             </div>
         </a>
