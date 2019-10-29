@@ -467,6 +467,24 @@ button {
     position: relative;
     text-align: center !important;
     vertical-align: middle;
+    
+}
+
+.file-upload-menu-container {
+    padding: 0px;
+    position: fixed;
+    top: 2px;
+    right: -45px;
+    z-index: 2147483646;
+    background-color: none;
+}
+
+.file-upload-menu-button {
+    height:40px;
+
+}
+
+.file-upload-btn {
     /* Cosmetics */
     border: 1px solid #fff;
     background: #D5D5D5;

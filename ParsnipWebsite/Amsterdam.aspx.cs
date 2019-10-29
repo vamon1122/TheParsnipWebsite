@@ -19,11 +19,11 @@ namespace ParsnipWebsite
     {
         private User myUser;
         static readonly Log DebugLog = new Log("debug");
-        static readonly Album MemesAlbum = new Album(new Guid("72c0e515-d821-4ebc-acec-d6d4ca782718"));
+        static readonly Album AmsterdamAlbum = new Album(new Guid("72c0e515-d821-4ebc-acec-d6d4ca782718"));
 
         public Amsterdam()
         {
-            MemesAlbum.Select();
+            AmsterdamAlbum.Select();
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -33,8 +33,14 @@ namespace ParsnipWebsite
             else
                 myUser = Account.SecurePage("amsterdam?focus=" + Request.QueryString["focus"], this, Data.DeviceType, "media");
 
-            if (IsPostBack && PhotoUpload.PostedFile != null)
-                MediaManager.UploadImage(myUser, MemesAlbum, PhotoUpload);
+            if (IsPostBack)
+            {
+                if (PhotoUpload.PostedFile.ContentLength > 0)
+                    MediaManager.UploadImage(myUser, AmsterdamAlbum, PhotoUpload);
+
+                if (PhotoUpload2.PostedFile.ContentLength > 0)
+                    MediaManager.UploadImage(myUser, AmsterdamAlbum, PhotoUpload2);
+            }
 
             if (myUser.AccountType == "admin" || myUser.AccountType == "member")
                 UploadDiv.Style.Clear();
@@ -42,7 +48,7 @@ namespace ParsnipWebsite
 
         protected void Page_LoadComplete(object sender, EventArgs e)
         {
-            foreach (MediaControl mc in MediaManager.GetAlbumAsMediaControls(MemesAlbum))
+            foreach (MediaControl mc in MediaManager.GetAlbumAsMediaControls(AmsterdamAlbum))
             {
                 DynamicMediaDiv.Controls.Add(mc);
             }

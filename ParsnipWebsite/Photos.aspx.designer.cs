@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ParsnipWebsite {
-    
-    
-    public partial class Photos {
-        
+namespace ParsnipWebsite
+{
+
+
+    public partial class Photos
+    {
+
         /// <summary>
         /// link_style control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace ParsnipWebsite {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlLink link_style;
-        
+
         /// <summary>
         /// Menu control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace ParsnipWebsite {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::ParsnipWebsite.Custom_Controls.Menu.Menu Menu;
-        
+
         /// <summary>
         /// UploadDiv control.
         /// </summary>
@@ -38,7 +40,16 @@ namespace ParsnipWebsite {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl UploadDiv;
-        
+
+        /// <summary>
+        /// PhotoUpload2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload PhotoUpload2;
+
         /// <summary>
         /// PhotoUpload control.
         /// </summary>
@@ -47,7 +58,7 @@ namespace ParsnipWebsite {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.FileUpload PhotoUpload;
-        
+
         /// <summary>
         /// DynamicMediaDiv control.
         /// </summary>

@@ -41,8 +41,12 @@
 
     <h2><b>Memes</b></h2>
     <form runat="server">
+        <label class="file-upload file-upload-menu-container">                
+                <img src="../../Resources/Media/Images/Web_Media/upload-cloud.svg" class="file-upload-menu-button" />
+                <asp:FileUpload ID="PhotoUpload2" runat="server" class="form-control-file" onchange="this.form.submit()" />
+            </label>
         <div runat="server" id="UploadDiv" class="form-group" style="display:none">
-            <label class="file-upload">            
+            <label class="file-upload file-upload-btn btn">            
                 <span><strong>Upload Meme</strong></span>
                 <asp:FileUpload ID="PhotoUpload" runat="server" class="form-control-file" onchange="this.form.submit()" />
             </label>

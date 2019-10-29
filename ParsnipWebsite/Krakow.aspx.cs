@@ -33,8 +33,14 @@ namespace ParsnipWebsite
             else
                 myUser = Account.SecurePage("krakow?focus=" + Request.QueryString["focus"], this, Data.DeviceType);
 
-            if (IsPostBack && PhotoUpload.PostedFile != null)
-                MediaManager.UploadImage(myUser, KrakowAlbum, PhotoUpload);
+            if (IsPostBack)
+            {
+                if (PhotoUpload.PostedFile.ContentLength > 0)
+                    MediaManager.UploadImage(myUser, KrakowAlbum, PhotoUpload);
+
+                if (PhotoUpload2.PostedFile.ContentLength > 0)
+                    MediaManager.UploadImage(myUser, KrakowAlbum, PhotoUpload2);
+            }
 
             if (myUser.AccountType == "admin" || myUser.AccountType == "member")
                 UploadDiv.Style.Clear();
