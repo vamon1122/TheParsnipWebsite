@@ -52,7 +52,7 @@
     </a>
 
     <br />
-    <div class="media-control" style="margin: auto; padding-left: 10px; padding-right:10px">
+    <div class="media-control-text" style="margin: auto">
         <label>Click <a href="https://photos.app.goo.gl/GgkSHa8FvichfXRZ7">here</a> to view 'The Parsnip Collection' on google photos. This includes many of the photos on this page and was curated by Tom.</label>
     </div>
         

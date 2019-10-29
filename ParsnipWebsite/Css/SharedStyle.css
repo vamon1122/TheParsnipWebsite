@@ -1,6 +1,8 @@
-﻿.media-control {
+﻿.media-control-text {
     width: 100vmin;
     max-width: 480px;
+    padding-left: 10px;
+    padding-right: 10px
 }
 
 @media only screen and (min-width: 0px) {

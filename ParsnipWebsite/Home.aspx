@@ -33,7 +33,7 @@
     <label class="censored" id="pageId">home.html</label>
     
     <menuControls:Menu runat="server" ID="Menu" />
-    <div class="media-control" style="margin: auto; font-family: 'Pacifico', cursive; color:red; font-size:40px; padding-bottom:10px; padding-left: 10px; padding-right:10px">
+    <div class="media-control-text" style="margin: auto; font-family: 'Pacifico', cursive; color:red; font-size:40px; padding-bottom:10px">
             "Devout discipels of Gaz Beadle's penis"
         </div>
     <div class="padded-text center_div">
@@ -46,7 +46,7 @@
         <div runat="server" id="LatestVideo" style="margin-top:10px"></div>
     </form>
     <div class="">
-    <div class="media-control" style="margin: auto; padding-left: 10px; padding-right:10px">
+    <div class="media-control-text" style="margin: auto">
     <h3 class="section-title"><b>YOUR WEBSITE NEEDS YOU!</b></h3>
     If someone could upload everything from the crystal parsnip, that would be awesome!
     
