@@ -40,7 +40,7 @@
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         <strong>Error:</strong> Could not access video. The person who uploaded this video has been suspended!
     </div>
-    <div runat="server" id="MediaContainer" class="large-media-landscape background-lightest" style="display:inline-block; padding-top:8px; padding-bottom:5px; ">
+    <div runat="server" id="MediaContainer" class="background-lightest" style="display:inline-block; padding-top:8px; padding-bottom:5px; ">
         <!--
         <div runat="server" id="VideoContainer">
 
@@ -49,7 +49,7 @@
 
         <h3><b runat="server" id="VideoTitle"></b></h3>
         <div style="width:100%">
-            <video runat="server" id="video_container" controls="controls" style="width:100%" preload="none" visible="false">
+            <video runat="server" id="video_container" controls="controls" style="max-height:70vh; max-width:100vw" preload="none" visible="false">
                 <source runat="server" id="VideoSource" type="video/mp4" />
                 Your browser does not support HTML5 video.
             </video>
