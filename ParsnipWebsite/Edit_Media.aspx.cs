@@ -19,6 +19,7 @@ namespace ParsnipWebsite
         private ParsnipData.Media.Image MyImage;
         private Video MyVideo;
         private YoutubeVideo MyYoutubeVideo;
+        private AccessToken myAccessToken;
 
         public Media MyMedia
         {
@@ -57,6 +58,17 @@ namespace ParsnipWebsite
                     MyImage = new ParsnipData.Media.Image(new Guid(Request.QueryString["id"]));
                     Debug.WriteLine("Selecting image with id = " + id);
                     MyImage.Select();
+                    if (AccessToken.TokenExists(myUser.Id, MyImage.Id))
+                    {
+                        myAccessToken = AccessToken.GetToken(myUser.Id, MyImage.Id);
+                    }
+                    else
+                    {
+                        myAccessToken = new AccessToken(myUser.Id, MyImage.Id);
+                        myAccessToken.Insert();
+                    }
+                    ShareLink.Value = Request.Url.GetLeftPart(UriPartial.Authority) + "/view_image?access_token=" +
+                    myAccessToken.Id;
                     ImagePreview.ImageUrl = MyImage.Directory;
                     input_date_media_captured.Value = MyImage.DateTimeMediaCreated.ToString();
                     ImagePreview.Visible = true;
@@ -67,6 +79,17 @@ namespace ParsnipWebsite
                     MyVideo = new Video(new Guid(Request.QueryString["id"]));
                     Debug.WriteLine("Selecting video with id = " + id);
                     MyVideo.Select();
+                    if (AccessToken.TokenExists(myUser.Id, MyVideo.Id))
+                    {
+                        myAccessToken = AccessToken.GetToken(myUser.Id, MyVideo.Id);
+                    }
+                    else
+                    {
+                        myAccessToken = new AccessToken(myUser.Id, MyVideo.Id);
+                        myAccessToken.Insert();
+                    }
+                    ShareLink.Value = Request.Url.GetLeftPart(UriPartial.Authority) + "/watch_video?access_token=" +
+                    myAccessToken.Id;
                     thumbnail.Src = MyVideo.Thumbnail.Original;
                     input_date_media_captured.Value = MyVideo.DateTimeMediaCreated.ToString();
                     a_play_video.HRef = string.Format("../../watch_video?id={0}", MyVideo.Id);
@@ -78,6 +101,17 @@ namespace ParsnipWebsite
                     MyYoutubeVideo = new YoutubeVideo(new Guid(Request.QueryString["id"]));
                     Debug.WriteLine("Selecting youtube video with id = " + id);
                     MyYoutubeVideo.Select();
+                    if (AccessToken.TokenExists(myUser.Id, MyYoutubeVideo.Id))
+                    {
+                        myAccessToken = AccessToken.GetToken(myUser.Id, MyYoutubeVideo.Id);
+                    }
+                    else
+                    {
+                        myAccessToken = new AccessToken(myUser.Id, MyYoutubeVideo.Id);
+                        myAccessToken.Insert();
+                    }
+                    ShareLink.Value = Request.Url.GetLeftPart(UriPartial.Authority) + "/watch_video?access_token=" +
+                    myAccessToken.Id;
                     input_date_media_captured.Value = MyYoutubeVideo.DateTimeMediaCreated.ToString();
                     youtube_video.Attributes.Add("data-id", MyYoutubeVideo.DataId);
                     youtube_video_container.Visible = true;

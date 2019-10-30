@@ -11,5 +11,5 @@
 
 function labnolThumb(id)
 {
-    return '<a href= "watch_video?data-id=' + id + '"><img class="youtube-thumb" src="//i.ytimg.com/vi/' + id + '/hqdefault.jpg"><div class="play-button"></div></a>';
+    return '<a href= "watch_video?data-id=' + id + '"><img class="youtube-thumb" src="//i.ytimg.com/vi/' + id + '/hqdefault.jpg"><img class="youtube-play-button play-button" src="Resources/Media/Images/Web_Media/play-button-3.svg" /></a>';
 }

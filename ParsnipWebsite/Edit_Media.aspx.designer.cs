@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ParsnipWebsite {
-    
-    
-    public partial class Edit_Media {
-        
+namespace ParsnipWebsite
+{
+
+
+    public partial class Edit_Media
+    {
+
         /// <summary>
         /// link_style control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace ParsnipWebsite {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlLink link_style;
-        
+
         /// <summary>
         /// Menu control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace ParsnipWebsite {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::ParsnipWebsite.Custom_Controls.Menu.Menu Menu;
-        
+
         /// <summary>
         /// form1 control.
         /// </summary>
@@ -38,7 +40,7 @@ namespace ParsnipWebsite {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
-        
+
         /// <summary>
         /// InputTitleTwo control.
         /// </summary>
@@ -47,7 +49,7 @@ namespace ParsnipWebsite {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox InputTitleTwo;
-        
+
         /// <summary>
         /// DropDownDiv control.
         /// </summary>
@@ -56,7 +58,7 @@ namespace ParsnipWebsite {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl DropDownDiv;
-        
+
         /// <summary>
         /// NewAlbumsDropDown control.
         /// </summary>
@@ -65,7 +67,7 @@ namespace ParsnipWebsite {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList NewAlbumsDropDown;
-        
+
         /// <summary>
         /// DateCapturedDiv control.
         /// </summary>
@@ -74,7 +76,7 @@ namespace ParsnipWebsite {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl DateCapturedDiv;
-        
+
         /// <summary>
         /// input_date_media_captured control.
         /// </summary>
@@ -83,7 +85,7 @@ namespace ParsnipWebsite {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText input_date_media_captured;
-        
+
         /// <summary>
         /// ImagePreview control.
         /// </summary>
@@ -92,7 +94,7 @@ namespace ParsnipWebsite {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Image ImagePreview;
-        
+
         /// <summary>
         /// a_play_video control.
         /// </summary>
@@ -101,7 +103,7 @@ namespace ParsnipWebsite {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor a_play_video;
-        
+
         /// <summary>
         /// thumbnail control.
         /// </summary>
@@ -110,7 +112,7 @@ namespace ParsnipWebsite {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlImage thumbnail;
-        
+
         /// <summary>
         /// youtube_video_container control.
         /// </summary>
@@ -119,7 +121,7 @@ namespace ParsnipWebsite {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl youtube_video_container;
-        
+
         /// <summary>
         /// youtube_video control.
         /// </summary>
@@ -128,7 +130,7 @@ namespace ParsnipWebsite {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl youtube_video;
-        
+
         /// <summary>
         /// btn_AdminDelete control.
         /// </summary>
@@ -137,7 +139,7 @@ namespace ParsnipWebsite {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btn_AdminDelete;
-        
+
         /// <summary>
         /// ButtonSave control.
         /// </summary>
@@ -146,5 +148,23 @@ namespace ParsnipWebsite {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ButtonSave;
+
+        /// <summary>
+        /// ShareLinkContainer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ShareLinkContainer;
+
+        /// <summary>
+        /// ShareLink control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText ShareLink;
     }
 }

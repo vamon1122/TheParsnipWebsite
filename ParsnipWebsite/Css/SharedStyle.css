@@ -539,15 +539,18 @@ button {
         }
 /* FILE UPLOAD END */
 
-div.play-button {
-    height: 72px;
-    width: 72px;
+.play-button{
+    width: 60px;
+    height: 60px
+}
+
+img.youtube-play-button {
     left: 50%;
     top: 50%;
     margin-left: -36px;
     margin-top: -36px;
     position: absolute;
-    background: url("../Resources/Media/Images/Web_Media/play_button_2.png") no-repeat;
+    /*background: url("../Resources/Media/Images/Web_Media/play-button-3.svg") no-repeat;*/
 }
 
 #youtube-iframe {

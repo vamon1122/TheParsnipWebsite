@@ -36,6 +36,9 @@
 </head>
 <body class="fade0p5" id="body" style="text-align:center;"  >
     <menuControls:Menu runat="server" ID="Menu" />
+
+    <button type="button" class="btn btn-link" data-toggle="modal" data-target="#exampleModalCenter" style="padding:0px; position:fixed; top: 1px; right: 3px; z-index:2147483646">
+            <img src="../../Resources/Media/Images/Web_Media/Share_White.svg" style="height:40px" /></button>
     
     <div class="center_form" style="padding-bottom:5%" >
         <form id="form1" runat="server" >
@@ -106,6 +109,20 @@
             </div>
         </form>
     </div>
+
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content" style="margin:0px; padding:0px">
+      <div runat="server" id="ShareLinkContainer" class="input-group" style="margin:0px; padding:0px">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default">Link</span>
+        </div>
+        <input runat="server" type="text" id="ShareLink" class="form-control" 
+            onclick="this.setSelectionRange(0, this.value.length)" />
+    </div>
+          </div>
+  </div>
+</div>
       
     <script src="../Javascript/Youtube.js"></script>
     <script>
