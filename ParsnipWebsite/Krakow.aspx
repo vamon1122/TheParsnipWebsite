@@ -42,11 +42,11 @@
     <h2 class="page-title"><b>Krakow</b></h2>
     
     <form runat="server">
-        <label class="file-upload file-upload-menu-container">                
+        <div runat="server" id="UploadDiv" class="form-group" style="display:none; ">
+            <label class="file-upload file-upload-menu-container">                
                 <img src="../../Resources/Media/Images/Web_Media/upload-cloud.svg" class="file-upload-menu-button" />
                 <asp:FileUpload ID="PhotoUpload2" runat="server" class="form-control-file" onchange="this.form.submit()" />
             </label>
-        <div runat="server" id="UploadDiv" class="form-group" style="display:none; ">
             <h3 class="section-title"><b>Upload your Krakow photos</b></h3>
             <div class="media-control-text" style="margin: auto">
             If you have any videos, send them to me, otherwise, upload any missing photos!

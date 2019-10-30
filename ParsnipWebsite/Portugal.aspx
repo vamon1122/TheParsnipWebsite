@@ -41,11 +41,11 @@
 
     <h2><b>Portugal</b></h2>
     <form id="form1" runat="server">
-        <label class="file-upload file-upload-menu-container">                
+        <div runat="server" id="UploadDiv" class="form-group" style="display:none">
+            <label class="file-upload file-upload-menu-container">                
                 <img src="../../Resources/Media/Images/Web_Media/upload-cloud.svg" class="file-upload-menu-button" />
                 <asp:FileUpload ID="PhotoUpload2" runat="server" class="form-control-file" onchange="this.form.submit()" />
             </label>
-        <div runat="server" id="UploadDiv" class="form-group" style="display:none">
             <label class="file-upload">            
                 <span><strong>Upload Photo</strong></span>
                 <asp:FileUpload ID="PhotoUpload" runat="server" class="form-control-file" onchange="this.form.submit()" />
