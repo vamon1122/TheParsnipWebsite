@@ -11,7 +11,7 @@ namespace ParsnipWebsite
 {
 
 
-    public partial class Watch_Video
+    public partial class View
     {
 
         /// <summary>
@@ -51,67 +51,31 @@ namespace ParsnipWebsite
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl UploadUserSuspendedError;
 
         /// <summary>
-        /// VideoContainer control.
+        /// MediaContainer control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl VideoContainer;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl MediaContainer;
 
         /// <summary>
-        /// VideoTitle control.
+        /// ImageTitle control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl VideoTitle;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ImageTitle;
 
         /// <summary>
-        /// MyEdit control.
+        /// ImagePreview control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor MyEdit;
-
-        /// <summary>
-        /// video_container control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlVideo video_container;
-
-        /// <summary>
-        /// VideoSource control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlSource VideoSource;
-
-        /// <summary>
-        /// youtube_video_container control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl youtube_video_container;
-
-        /// <summary>
-        /// youtube_video control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl youtube_video;
+        protected global::System.Web.UI.HtmlControls.HtmlImage ImagePreview;
 
         /// <summary>
         /// form1 control.
@@ -130,23 +94,5 @@ namespace ParsnipWebsite
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button Button_ViewAlbum;
-
-        /// <summary>
-        /// ShareLinkContainer control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ShareLinkContainer;
-
-        /// <summary>
-        /// ShareLink control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText ShareLink;
     }
 }

@@ -17,82 +17,53 @@ namespace ParsnipWebsite
 {
     public static class MediaManager
     {
-        static readonly Log DebugLog = new Log("debug");
+        static readonly Log DebugLog = Log.Select(3);
 
-        public static List<MediaControl> GetUsersMediaAsMediaControls(Guid userId)
+        public static List<MediaControl> GetUserMediaAsMediaControls(int userId, int loggedInUserId)
         {
             var mediaControls = new List<MediaControl>();
             Page httpHandler = (Page)HttpContext.Current.Handler;
 
-            foreach (ParsnipData.Media.Image temp in Media.GetImagesByUserId(userId))
+            foreach (ParsnipData.Media.Media temp in Media.SelectByUserId(userId, loggedInUserId))
             {
-                MediaControl MyImageControl = (MediaControl)httpHandler.LoadControl("~/Custom_Controls/Media/MediaControl.ascx");
-                MyImageControl.MyImage = temp;
-                mediaControls.Add(MyImageControl);
+                MediaControl myMediaControl = (MediaControl)httpHandler.LoadControl("~/Custom_Controls/Media/MediaControl.ascx");
+                myMediaControl.MyMedia = temp;
+                mediaControls.Add(myMediaControl);
             }
 
-            foreach (ParsnipData.Media.Video video in Media.GetVideosByUserId(userId))
-            {
-
-                var MyVideoControl = (MediaControl)httpHandler.LoadControl("~/Custom_Controls/Media/MediaControl.ascx");
-                MyVideoControl.MyVideo = video;
-                mediaControls.Add(MyVideoControl);
-            }
-
-            foreach (ParsnipData.Media.YoutubeVideo youtubeVideo in Media.GetYoutubeVideosByUserId(userId))
-            {
-                var MyVideoControl = (MediaControl)httpHandler.LoadControl("~/Custom_Controls/Media/MediaControl.ascx");
-                MyVideoControl.MyYoutubeVideo = youtubeVideo;
-                mediaControls.Add(MyVideoControl);
-            }
-
-            return mediaControls.OrderByDescending(mc => mc.DateTimeMediaCreated).ToList();
+            return mediaControls.OrderByDescending(mediaControl => mediaControl.MyMedia.DateTimeCaptured).ToList();
         }
 
-        public static List<MediaControl> GetAlbumAsMediaControls(Album album)
+        public static List<MediaControl> GetAlbumAsMediaControls(MediaTag mediaTag)
         {
             var mediaControls = new List<MediaControl>();
             Page httpHandler = (Page)HttpContext.Current.Handler;
-            Guid loggedInUserId = ParsnipData.Accounts.User.GetLoggedInUser().Id;
+            int loggedInUserId = ParsnipData.Accounts.User.LogIn().Id;
 
-            foreach (ParsnipData.Media.Image temp in album.GetAllImages())
+            foreach (ParsnipData.Media.Media temp in mediaTag.GetAllMedia(loggedInUserId))
             {
-                MediaControl MyImageControl = (MediaControl)httpHandler.LoadControl("~/Custom_Controls/Media/MediaControl.ascx");
-                MyImageControl.MyImage = temp;
-                mediaControls.Add(MyImageControl);
+                MediaControl myMediaControl = (MediaControl)httpHandler.LoadControl("~/Custom_Controls/Media/MediaControl.ascx");
+                myMediaControl.MyMedia = temp;
+                mediaControls.Add(myMediaControl);
             }
 
-            foreach (ParsnipData.Media.Video video in album.GetAllVideos())
-            {
-                var MyVideoControl = (MediaControl)httpHandler.LoadControl("~/Custom_Controls/Media/MediaControl.ascx");
-                MyVideoControl.MyVideo = video;
-                mediaControls.Add(MyVideoControl);
-            }
-
-            foreach (ParsnipData.Media.YoutubeVideo youtubeVideo in album.GetAllYoutubeVideos())
-            {
-                var MyVideoControl = (MediaControl)httpHandler.LoadControl("~/Custom_Controls/Media/MediaControl.ascx");
-                MyVideoControl.MyYoutubeVideo = youtubeVideo;
-                mediaControls.Add(MyVideoControl);
-            }
-
-            return mediaControls.OrderByDescending(mc => mc.DateTimeMediaCreated).ToList();
+            return mediaControls.OrderByDescending(mediaControl => mediaControl.MyMedia.DateTimeCaptured).ToList();
         }
 
-        public static void UploadImage(User uploader, Album album, FileUpload uploadControl)
+        public static void UploadImage(User uploader, MediaTag mediaTag, FileUpload uploadControl)
         {
             try
             {
-                Debug.WriteLine("Generating image object");
-                ParsnipData.Media.Image myImage = new ParsnipData.Media.Image(uploader, album, uploadControl.PostedFile);
-                Debug.WriteLine("Updating image object");
+                ParsnipData.Media.Image myImage = new ParsnipData.Media.Image(uploader, mediaTag, uploadControl.PostedFile);
+                myImage.Insert();
                 myImage.Update();
-                Debug.WriteLine("Redirecting to edit_media?id=" + myImage.Id);
                 HttpContext.Current.Response.Redirect("edit_media?id=" + myImage.Id, false);
             }
             catch(Exception ex)
             {
-                Debug.WriteLine("Exception whilst uploading image: " + ex);
+                var e = "Exception whilst uploading image: " + ex;
+                new LogEntry(DebugLog) { text = e };
+                Debug.WriteLine(e);
                 HttpContext.Current.Response.Redirect("photos?error=video");
             }
         }

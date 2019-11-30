@@ -17,8 +17,8 @@ namespace ParsnipWebsite
     public partial class Manage_Media : System.Web.UI.Page
     {
         User myUser;
-        Guid selectedUserId;
-        static readonly Log DebugLog = new Log("Debug");
+        int selectedUserId;
+        static readonly Log DebugLog = Log.Select(3);
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -29,48 +29,36 @@ namespace ParsnipWebsite
         {
             UpdateUserList();
 
-            if (Request.QueryString["userId"] != null && Request.QueryString["userId"].ToString() != "")
+            if (Request.QueryString["id"] != null && Request.QueryString["id"].ToString() != "")
             {
-                new LogEntry(DebugLog) { text = "Manage_Media userId = " + Request.QueryString["userId"].ToString() };
-                selectedUserId = new Guid(Request.QueryString["userId"].ToString());
+                new LogEntry(DebugLog) { text = "Manage_Media userId = " + Request.QueryString["id"].ToString() };
+                selectedUserId = Convert.ToInt16(Request.QueryString["id"]);
 
                 SelectUser.SelectedValue = selectedUserId.ToString();
 
-                Debug.WriteLine("---------- posted back with id = " + selectedUserId);
 
-                List<ParsnipData.Media.Image> MyPhotos = ParsnipData.Media.Image.GetImagesByUser(selectedUserId);
-                //new LogEntry(Debug) { text = "Got all photos. There were {0} photo(s) = " + AllPhotos.Count() };
-                foreach (MediaControl temp in MediaManager.GetUsersMediaAsMediaControls(selectedUserId))
+                foreach (MediaControl temp in MediaManager.GetUserMediaAsMediaControls(selectedUserId, myUser.Id))
                 {
                     DisplayPhotosDiv.Controls.Add(temp);
                 }
             }
             else
             {
-                Debug.WriteLine("---------- not a postback");
 
-                if (Request.QueryString["userId"] == null)
-                    Response.Redirect("manage_media?userId=" + Guid.Empty.ToString());
+                if (Request.QueryString["id"] == null)
+                    Response.Redirect("manage_media?id=0");
             }
         }
 
         protected void BtnDeleteUploads_Click(object sender, EventArgs e)
         {
-            selectedUserId = new Guid(Request.QueryString["userId"].ToString());
-            ParsnipData.Media.Image.DeleteMediaTagPairsByUserId(selectedUserId);
-            ParsnipData.Media.Video.DeleteMediaTagPairsByUserId(selectedUserId);
-            ParsnipData.Media.YoutubeVideo.DeleteMediaTagPairsByUserId(selectedUserId);
-            new LogEntry(DebugLog)
-            {
-                text = "Successfully deleted photos uploaded media createdbyid = " +
-                selectedUserId
-            };
+
         }
 
         void UpdateUserList()
         {
             var tempUsers = new List<User>();
-            tempUsers.Add(new User(Guid.Empty)
+            tempUsers.Add(new User()
             {
                 Forename = "None",
                 Surname = "Selected",
@@ -95,7 +83,7 @@ namespace ParsnipWebsite
 
         protected void SelectUser_Changed(object sender, EventArgs e)
         {
-            Response.Redirect("manage_media?userId=" + SelectUser.SelectedValue);
+            Response.Redirect("manage_media?id=" + SelectUser.SelectedValue);
         }
     }
 }

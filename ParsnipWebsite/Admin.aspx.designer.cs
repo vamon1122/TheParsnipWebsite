@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ParsnipWebsite {
-    
-    
-    public partial class Admin {
-        
+namespace ParsnipWebsite
+{
+
+
+    public partial class Admin
+    {
+
         /// <summary>
         /// link_style control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace ParsnipWebsite {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlLink link_style;
-        
+
         /// <summary>
         /// adminMenu control.
         /// </summary>
@@ -29,7 +31,25 @@ namespace ParsnipWebsite {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::ParsnipWebsite.Custom_Controls.Admin.AdminMenu adminMenu;
-        
+
+        /// <summary>
+        /// TextBox_MOTD control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBox_MOTD;
+
+        /// <summary>
+        /// Button_SaveMOTD control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button_SaveMOTD;
+
         /// <summary>
         /// Label_ParsnipWebsiteVersion control.
         /// </summary>
@@ -38,7 +58,7 @@ namespace ParsnipWebsite {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label_ParsnipWebsiteVersion;
-        
+
         /// <summary>
         /// Label_ParsnipDataVersion control.
         /// </summary>

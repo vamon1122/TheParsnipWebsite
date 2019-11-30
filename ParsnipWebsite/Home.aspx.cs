@@ -8,16 +8,19 @@ using ParsnipData.Accounts;
 using ParsnipData.Media;
 using ParsnipData.Logs;
 using ParsnipWebsite.Custom_Controls.Media;
+using System.Configuration;
 
 namespace ParsnipWebsite
 {
     public partial class Home : System.Web.UI.Page
     {
-        public static readonly Log DebugLog = new Log("Debug");
+        public static readonly Log DebugLog = Log.Select(3);
         private User myUser;
         protected void Page_Load(object sender, EventArgs e)
         {
-            myUser = ParsnipData.Accounts.User.GetLoggedInUser();
+            MOTD_div.InnerHtml = ConfigurationManager.AppSettings["MOTD"];
+
+            myUser = ParsnipData.Accounts.User.LogIn();
             if (string.IsNullOrEmpty(Data.DeviceType))
             {
                 Response.Redirect("get_device_info?url=home");
@@ -31,21 +34,13 @@ namespace ParsnipWebsite
                 string.Format("Hiya {0} to the parsnip website!", myUser == null ?
                 "stranger, welcome" : myUser.Forename + ", welcome back");
 
-            Guid userId = myUser == null ? Guid.Empty : myUser.Id;
-            Video latestVideo = Video.GetLatest();
-            YoutubeVideo latestYoutubeVideo = YoutubeVideo.GetLatest();
+            int userId = myUser == null ? 0 : myUser.Id;
+            Media latestVideo = Media.SelectLatestVideo(userId);
             var MyVideoControl = (MediaControl)Page.LoadControl("~/Custom_Controls/Media/MediaControl.ascx");
 
-            if (latestVideo.DateTimeMediaCreated > latestYoutubeVideo.DateTimeMediaCreated)
-            {
+           
                 latestVideo.Title = "LATEST VIDEO: " + latestVideo.Title;
-                MyVideoControl.MyVideo = latestVideo;
-            }
-            else
-            {
-                latestYoutubeVideo.Title = "LATEST VIDEO: " + latestYoutubeVideo.Title;
-                MyVideoControl.MyYoutubeVideo = latestYoutubeVideo;
-            }
+                MyVideoControl.MyMedia = latestVideo;
 
             LatestVideo.Controls.Add(MyVideoControl);
         }

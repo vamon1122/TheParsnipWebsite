@@ -18,12 +18,13 @@ namespace ParsnipWebsite
     public partial class Krakow : System.Web.UI.Page
     {
         private User myUser;
-        static readonly Log DebugLog = new Log("debug");
-        static readonly Album KrakowAlbum = new Album(new Guid("ff3127df-70b2-47ef-b77b-2e086d2ef370"));
+        static readonly Log DebugLog = Log.Select(3);
+        static readonly MediaTag KrakowMediaTag = new MediaTag(6);
 
         public Krakow()
         {
-            KrakowAlbum.Select();
+            //Retrieves wrong album ID and overwrites
+            //KrakowAlbum.Select();
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -36,10 +37,10 @@ namespace ParsnipWebsite
             if (IsPostBack)
             {
                 if (PhotoUpload.PostedFile.ContentLength > 0)
-                    MediaManager.UploadImage(myUser, KrakowAlbum, PhotoUpload);
+                    MediaManager.UploadImage(myUser, KrakowMediaTag, PhotoUpload);
 
                 if (PhotoUpload2.PostedFile.ContentLength > 0)
-                    MediaManager.UploadImage(myUser, KrakowAlbum, PhotoUpload2);
+                    MediaManager.UploadImage(myUser, KrakowMediaTag, PhotoUpload2);
             }
 
             if (myUser.AccountType == "admin" || myUser.AccountType == "member")
@@ -48,7 +49,7 @@ namespace ParsnipWebsite
 
         protected void Page_LoadComplete(object sender, EventArgs e)
         {
-            foreach (MediaControl mc in MediaManager.GetAlbumAsMediaControls(KrakowAlbum))
+            foreach (MediaControl mc in MediaManager.GetAlbumAsMediaControls(KrakowMediaTag))
             {
                 DynamicMediaDiv.Controls.Add(mc);
             }

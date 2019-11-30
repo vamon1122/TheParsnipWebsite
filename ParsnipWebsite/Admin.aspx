@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
+    <link href="https://fonts.googleapis.com/css?family=Nunito|Pacifico&display=swap" rel="stylesheet">
     <!-- iPhone FAVICONS -->
     <link rel="apple-touch-icon" sizes="114×114" href="Resources/Favicons/apple-icon-114×114.png" />
     <link rel="apple-touch-icon" sizes="72×72" href="Resources/Favicons/apple-icon-72x72.png" />
@@ -25,17 +26,23 @@
 <body style="padding-bottom:2.5%; padding-top:4%">
     <form runat="server">
         <div class="container">
-        <div class="jumbotron">
-            <h1 class="display-4">Admin</h1>
-            <p class="lead">Manage theparsnip.co.uk</p>
-            <hr class="my-4" />
-            <p><adminControls:adminMenu runat="server" id="adminMenu" /></p>
-        </div>
+            <div class="jumbotron">
+                <h1 class="display-4">Admin</h1>
+                <p class="lead">Manage theparsnip.co.uk</p>
+                <hr class="my-4" />
+                <p><adminControls:adminMenu runat="server" id="adminMenu" /></p>
+            </div>
+            <div class="input-group">
+                <asp:TextBox runat="server"  CssClass="form-control" ID="TextBox_MOTD"></asp:TextBox>
+                <span class="input-group-btn">
+                    <asp:Button runat="server" ID="Button_SaveMOTD"  CssClass="btn btn-primary" Text="Save" OnClick="Button_UploadDataId_Click" />
+                </span>
+            </div>
+            <br />
             <asp:Label runat="server" ID="Label_ParsnipWebsiteVersion"></asp:Label>
             <br />
             <asp:Label runat="server" ID="Label_ParsnipDataVersion"></asp:Label>
         </div>
-        
     </form>
 </body>
 </html>

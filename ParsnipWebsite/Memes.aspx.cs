@@ -18,12 +18,13 @@ namespace ParsnipWebsite
     public partial class Memes : System.Web.UI.Page
     {
         private User myUser;
-        static readonly Log DebugLog = new Log("debug");
-        static readonly Album MemesAlbum = new Album(new Guid("5F15861A-689C-482A-8E31-2F13429C36E5"));
+        static readonly Log DebugLog = Log.Select(3);
+        static readonly MediaTag MemesMediaTag = new MediaTag(3);
 
         public Memes()
         {
-            MemesAlbum.Select();
+            //Retrieves wrong album ID and overwrites
+            //MemesAlbum.Select();
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -36,10 +37,10 @@ namespace ParsnipWebsite
             if (IsPostBack)
             {
                 if (PhotoUpload.PostedFile.ContentLength > 0)
-                    MediaManager.UploadImage(myUser, MemesAlbum, PhotoUpload);
+                    MediaManager.UploadImage(myUser, MemesMediaTag, PhotoUpload);
 
                 if (PhotoUpload2.PostedFile.ContentLength > 0)
-                    MediaManager.UploadImage(myUser, MemesAlbum, PhotoUpload2);
+                    MediaManager.UploadImage(myUser, MemesMediaTag, PhotoUpload2);
             }
 
             if (myUser.AccountType == "admin" || myUser.AccountType == "member")
@@ -48,7 +49,7 @@ namespace ParsnipWebsite
 
         protected void Page_LoadComplete(object sender, EventArgs e)
         {
-            foreach (MediaControl mc in MediaManager.GetAlbumAsMediaControls(MemesAlbum))
+            foreach (MediaControl mc in MediaManager.GetAlbumAsMediaControls(MemesMediaTag))
             {
                 DynamicMediaDiv.Controls.Add(mc);
             }

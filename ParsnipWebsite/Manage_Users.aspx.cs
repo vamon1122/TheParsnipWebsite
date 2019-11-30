@@ -14,18 +14,19 @@ namespace ParsnipWebsite
     public partial class Manage_Users : System.Web.UI.Page
     {
         User myUser;
-        static Guid selectedUserId;
+        int selectedUserId;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Request.QueryString["userId"] == null)
-                Response.Redirect("manage_users?userId=" + Guid.Empty.ToString());
+            selectedUserId = Convert.ToInt32(Request.QueryString["id"]);
+            
+            //if (selectedUserId == null)
+            //    Response.Redirect("manage_users?id=0");
+                
 
             myUser = Account.SecurePage("manage_users", this, Data.DeviceType, "admin");
 
-            selectedUserId = new Guid(Request.QueryString["userId"]);
-
-            if (selectedUserId.ToString() == Guid.Empty.ToString())
+            if (selectedUserId == default)
             {
                 Button_Action.Text = "Insert";
                 Button_Delete.Visible = false;
@@ -60,7 +61,7 @@ namespace ParsnipWebsite
 
             UserForm.UpdateDateCreated();
             UpdateUserList();
-            if (selectedUserId.ToString() != Guid.Empty.ToString())
+            if (selectedUserId != default)
                 selectUser.SelectedValue = selectedUserId.ToString();
 
             UserForm.UpdateDataSubject(selectedUserId);
@@ -71,7 +72,7 @@ namespace ParsnipWebsite
         void UpdateUserList()
         {
             var tempUsers = new List<User>();
-            tempUsers.Add(new User(Guid.Empty) { Forename = "New", Surname = "User", Username = "Create a new user" });
+            tempUsers.Add(new User() { Forename = "New", Surname = "User", Username = "Create a new user" });
             tempUsers.AddRange(ParsnipData.Accounts.User.GetAllUsers());
 
             ListItem[] ListItems = new ListItem[tempUsers.Count];
@@ -92,7 +93,7 @@ namespace ParsnipWebsite
 
         protected void SelectUser_Changed(object sender, EventArgs e)
         {
-            Response.Redirect("manage_users?userId=" + selectUser.SelectedValue);
+            Response.Redirect("manage_users?id=" + selectUser.SelectedValue);
         }
 
         protected void Button_Action_Click(object sender, EventArgs e)
@@ -107,27 +108,50 @@ namespace ParsnipWebsite
 
             UserForm.UpdateDataSubject();
 
-            string actionPast = UserForm.DataSubject.ExistsOnDb() ? "edited" : "created";
-            string actionPresent = UserForm.DataSubject.ExistsOnDb() ? "edit" : "create";
+            string actionPast = ParsnipData.Accounts.User.Exists(UserForm.DataSubject.Id) ? "edited" : "created";
+            string actionPresent = ParsnipData.Accounts.User.Exists(UserForm.DataSubject.Id) ? "edit" : "create";
 
             if (UserForm.DataSubject.Validate())
             {
-                if (UserForm.DataSubject.Update())
+                if (UserForm.DataSubject.Exists())
                 {
-                    new LogEntry(Log.Default)
+                    if (UserForm.DataSubject.Update())
                     {
-                        text = String.Format("{0} {1} an account for {2} via the UserForm",
-                        myUser.FullName, actionPast, UserForm.DataSubject.FullName)
-                    };
+                        new LogEntry(Log.Default)
+                        {
+                            text = String.Format("{0} {1} an account for {2} via the UserForm",
+                            myUser.FullName, actionPast, UserForm.DataSubject.FullName)
+                        };
 
-                    Response.Redirect(string.Format("manage_users?userId={0}&action=update&success=true", UserForm.DataSubject.Id.ToString()));
+                        Response.Redirect(string.Format("manage_users?id={0}&action=update&success=true", UserForm.DataSubject.Id.ToString()));
+                    }
+
+                    else
+                    {
+                        new LogEntry(Log.Default) { text = String.Format("{0} tried to {1} an account for {2} via the UserForm, but there was an error whilst updating the database", myUser.FullName, actionPresent, UserForm.DataSubject.FullName) };
+                        ErrorText.Text = string.Format("<strong>Database Error</strong> There was an error whilst updating {0} on the database.", UserForm.DataSubject.FullName);
+                    }
                 }
-
                 else
                 {
-                    new LogEntry(Log.Default) { text = String.Format("{0} tried to {1} an account for {2} via the UserForm, but there was an error whilst updating the database", myUser.FullName, actionPresent, UserForm.DataSubject.FullName) };
-                    ErrorText.Text = string.Format("<strong>Database Error</strong> There was an error whilst updating {0} on the database.", UserForm.DataSubject.FullName);
+                    if (UserForm.DataSubject.Insert())
+                    {
+                        new LogEntry(Log.Default)
+                        {
+                            text = String.Format("{0} {1} an account for {2} via the UserForm",
+                            myUser.FullName, actionPast, UserForm.DataSubject.FullName)
+                        };
+
+                        Response.Redirect(string.Format("manage_users?id={0}&action=update&success=true", UserForm.DataSubject.Id.ToString()));
+                    }
+
+                    else
+                    {
+                        new LogEntry(Log.Default) { text = String.Format("{0} tried to {1} an account for {2} via the UserForm, but there was an error whilst updating the database", myUser.FullName, actionPresent, UserForm.DataSubject.FullName) };
+                        ErrorText.Text = string.Format("<strong>Database Error</strong> There was an error whilst updating {0} on the database.", UserForm.DataSubject.FullName);
+                    }
                 }
+                
 
 
             }
@@ -168,14 +192,14 @@ namespace ParsnipWebsite
 
             bool success;
 
-            if (UserForm.DataSubject.ExistsOnDb())
+            if (ParsnipData.Accounts.User.Exists(UserForm.DataSubject.Id))
             {
                 success = UserForm.DataSubject.Delete();
             }
             else
                 success = false;
 
-            Response.Redirect(string.Format("manage_users?userId={0}&action=delete&success={1}", Guid.Empty.ToString(), success));
+            Response.Redirect($"manage_users?id=0&action=delete&success={success}");
         }
 
         protected void Button_Delete_Click(object sender, EventArgs e)

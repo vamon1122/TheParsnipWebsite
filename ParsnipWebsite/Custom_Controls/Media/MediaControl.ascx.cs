@@ -11,55 +11,89 @@ namespace ParsnipWebsite.Custom_Controls.Media
 {
     public partial class MediaControl : System.Web.UI.UserControl
     {
-        public DateTime DateTimeMediaCreated {
-            get
-            {
-                if (MyImage != null)
-                    return MyImage.DateTimeMediaCreated;
-
-                if (MyVideo != null)
-                    return MyVideo.DateTimeMediaCreated;
-
-                if (MyYoutubeVideo != null)
-                    return MyYoutubeVideo.DateTimeMediaCreated;
-
-                 return DateTime.MinValue;
-            }
-        }
         protected void Page_Load(object sender, EventArgs e)
         {
 
         }
-        
 
-        #region image
-
+        ParsnipData.Media.Media _myMedia;
         public ParsnipData.Media.Media MyMedia
         {
             get
             {
-                if (MyImage != null)
-                    return MyImage;
-                else if (MyVideo != null)
-                    return MyVideo;
-                else return MyYoutubeVideo;
+                return _myMedia;
             }
+            set {
+                _myMedia = value;
+                SetContainerWidth();
+                MyTitle.InnerHtml = value.Title;
+                MediaContainer.ID = value.Id.ToString();
+                MyEdit.HRef = string.Format("../../edit_media?id={0}", value.Id);
+
+                if (value.Type == "image")
+                {
+                    if (value.XScale != default || value.YScale != default)
+                    {
+                        MyImageHolder.Style.Add("height", string.Format("{0}vmin", MyImageHolder.Width.Value * (value.YScale / value.XScale)));
+                        MyImageHolder.Style.Add("max-height", string.Format("{0}px", maxWidth * (value.YScale / value.XScale)));
+                    }
+
+                    MyImageHolder.Visible = true;
+                    MyImageHolder.Style.Add("margin-bottom", "8px");
+                    MyImageHolder.ImageUrl = value.Placeholder.Contains("http://") || value.Placeholder.Contains("https://") ? value.Placeholder : Request.Url.GetLeftPart(UriPartial.Authority) + "/" + value.Placeholder;
+                    MyImageHolder.Attributes.Add("data-src", value.Compressed.Contains("http://") || value.Compressed.Contains("https://") ? value.Compressed : Request.Url.GetLeftPart(UriPartial.Authority) + "/" + value.Compressed);
+                    MyImageHolder.Attributes.Add("data-srcset", value.Compressed.Contains("http://") || value.Compressed.Contains("https://") ? value.Compressed : Request.Url.GetLeftPart(UriPartial.Authority) + "/" + value.Compressed);
+                    
+                }
+                else if(_myMedia.Type == "video" || _myMedia.Type == "youtube")
+                {
+                    if (value.XScale != default || value.YScale != default)
+                    {
+                        thumbnail.Style.Add("height", string.Format("{0}vmin", width * (value.YScale / value.XScale)));
+                        thumbnail.Style.Add("max-height", string.Format("{0}px", maxWidth * (value.YScale / value.XScale)));
+                    }
+
+                    a_play_video.Visible = true;
+                    a_play_video.HRef = string.Format("../../view?id={0}", value.Id);
+
+                    if(_myMedia.Type == "video")
+                    {
+                        thumbnail.Src = Request.Url.GetLeftPart(UriPartial.Authority) + "/" + value.Placeholder;
+                        thumbnail.Attributes.Add("data-src", Request.Url.GetLeftPart(UriPartial.Authority) + "/" + value.Compressed);
+                        thumbnail.Attributes.Add("data-srcset", Request.Url.GetLeftPart(UriPartial.Authority) + "/" + value.Compressed);
+                    }
+                    else //YoutubeVideo
+                    {
+                        thumbnail.Src = value.Placeholder.Contains("https://") ? value.Placeholder : $"{Request.Url.GetLeftPart(UriPartial.Authority)}/{value.Placeholder}";
+                        thumbnail.Attributes.Add("data-src", value.Compressed.Contains("https://") ? value.Compressed : $"{Request.Url.GetLeftPart(UriPartial.Authority)}/{value.Compressed}");
+                        thumbnail.Attributes.Add("data-srcset", value.Compressed.Contains("https://") ? value.Compressed : $"{Request.Url.GetLeftPart(UriPartial.Authority)}/{value.Compressed}");
+                    }
+                    
+                }
+
+                GenerateShareButton();
+            }
+
         }
 
         public string ShareLink
         {
             get
             {
-                if (MyMedia.MyAccessToken == null || MyMedia.MyAccessToken.Id.ToString() == Guid.Empty.ToString())
+                if (MyMedia.MyMediaShare == null || MyMedia.MyMediaShare.Id.ToString() == default)
                 {
                     return "You must log in to share media";
                 }
                 else
                 {
-                    if(MyImage == null)
-                        return Request.Url.GetLeftPart(UriPartial.Authority) + "/watch_video?access_token=" + MyMedia.MyAccessToken.Id;
+                    return Request.Url.GetLeftPart(UriPartial.Authority) + "/view?share=" + MyMedia.MyMediaShare.Id;
+                    /*
+                    if(MyMedia.Type == "image")
+                        return Request.Url.GetLeftPart(UriPartial.Authority) + "/view?share=" + MyMedia.MyMediaShare.Id;
                     else
-                        return Request.Url.GetLeftPart(UriPartial.Authority) + "/view_image?access_token=" + MyMedia.MyAccessToken.Id;
+                        return Request.Url.GetLeftPart(UriPartial.Authority) + "/watch?share=" + MyMedia.MyMediaShare.Id;
+                        */
+
                 };
             }
         }
@@ -82,102 +116,6 @@ namespace ParsnipWebsite.Custom_Controls.Media
             //MediaContainer.Style.Add("min-width", string.Format("{0}px", min_width));
 
         }
-
-        public ParsnipData.Media.Image MyImage
-        {
-            get { return _myImage; }
-            set
-            {
-                _myImage = value;
-
-                //If there is an aspect ratio, scale the media control accordingly
-
-                SetContainerWidth();
-
-                //MyImageHolder.Style.Add("width", "100%");
-                if (value.XScale != default(double) || value.YScale != default(double))
-                {
-                    MyImageHolder.Style.Add("height", string.Format("{0}vmin", width * (value.YScale / value.XScale)));
-                    MyImageHolder.Style.Add("max-height", string.Format("{0}px", maxWidth * (value.YScale / value.XScale)));
-                }
-
-                MyImageHolder.Visible = true;
-                
-                MyTitle.InnerHtml = value.Title;
-                Debug.WriteLine("Setting url");
-
-
-                MyImageHolder.ImageUrl = value.Placeholder.Contains("http://") || value.Placeholder.Contains("https://") ? value.Placeholder : Request.Url.GetLeftPart(UriPartial.Authority) + "/" + value.Placeholder;
-                Debug.WriteLine("Url = " + MyImageHolder.ImageUrl);
-
-                MyImageHolder.Attributes.Add("data-src", value.Directory.Contains("http://") || value.Directory.Contains("https://") ? value.Directory : Request.Url.GetLeftPart(UriPartial.Authority) + "/" + value.Directory);
-                MyImageHolder.Attributes.Add("data-srcset", value.Directory.Contains("http://") || value.Directory.Contains("https://") ? value.Directory : Request.Url.GetLeftPart(UriPartial.Authority) + "/" + value.Directory);
-
-
-
-
-
-                MyImageHolder.Style.Add("margin-bottom", "8px");
-                MediaContainer.ID = value.Id.ToString();
-                MyEdit.HRef = string.Format("../../edit_media?id={0}", value.Id);
-
-                GenerateShareButton();
-            }
-        }
-        #endregion
-
-        #region video
-        private ParsnipData.Media.Video _myVideo;
-        public ParsnipData.Media.Video MyVideo
-        {
-            get { return _myVideo; }
-            set
-            {
-                //If there is an aspect ratio, scale the media control accordingly
-                SetContainerWidth();
-                if (value.Thumbnail.XScale != default(double) || value.Thumbnail.YScale != default(double))
-                {
-                    thumbnail.Style.Add("height", string.Format("{0}vmin", width * (value.Thumbnail.YScale / value.Thumbnail.XScale)));
-                    thumbnail.Style.Add("max-height", string.Format("{0}px", maxWidth * (value.Thumbnail.YScale / value.Thumbnail.XScale)));
-                }
-
-                a_play_video.Visible = true;
-                _myVideo = value;
-                MyTitle.InnerHtml = MyVideo.Title;
-                thumbnail.Src = Request.Url.GetLeftPart(UriPartial.Authority) + "/" + MyVideo.Thumbnail.Placeholder;
-                thumbnail.Attributes.Add("data-src", Request.Url.GetLeftPart(UriPartial.Authority) + "/" + MyVideo.Thumbnail.Compressed);
-                thumbnail.Attributes.Add("data-srcset", Request.Url.GetLeftPart(UriPartial.Authority) + "/" + MyVideo.Thumbnail.Compressed);
-                MediaContainer.ID = _myVideo.Id.ToString();
-                a_play_video.HRef = string.Format("../../watch_video?id={0}", MyVideo.Id);
-                MyEdit.HRef = string.Format("../../edit_media?id={0}", MyVideo.Id);
-
-                GenerateShareButton();
-            }
-        }
-        #endregion
-
-        #region Youtube video
-        private ParsnipData.Media.YoutubeVideo _myYoutubeVideo;
-        public ParsnipData.Media.YoutubeVideo MyYoutubeVideo
-        {
-            get { return _myYoutubeVideo; }
-            set
-            {
-                SetContainerWidth();
-
-                YoutubePlayer.Visible = true;
-                _myYoutubeVideo = value;
-                MyTitle.InnerHtml = MyYoutubeVideo.Title;
-                Debug.WriteLine("DataId = " + MyYoutubeVideo.DataId);
-                YoutubePlayer.Attributes.Add("data-id", MyYoutubeVideo.DataId);
-                MediaContainer.ID = _myYoutubeVideo.Id.ToString();
-                MyTitle.InnerText = MyYoutubeVideo.Title;
-                MyEdit.HRef = string.Format("../../edit_media?id={0}", MyYoutubeVideo.Id);
-
-                GenerateShareButton();
-            }
-        }
-        #endregion
 
         private void GenerateShareButton()
         {

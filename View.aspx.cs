@@ -13,31 +13,34 @@ using System.Diagnostics;
 
 namespace ParsnipWebsite
 {
-    public partial class View_Image : System.Web.UI.Page
+
+    public partial class View : System.Web.UI.Page
     {
         User myUser;
-        static readonly Log DebugLog = new Log("Debug");
+        static readonly Log DebugLog = Log.Select(3);
         ParsnipData.Media.Image myImage;
         protected void Page_Load(object sender, EventArgs e)
         {
             //If there is an access token, get the token & it's data.
             //If there is no access token, check that the user is logged in.
-            if (Request.QueryString["access_token"] != null)
+            var accessToken = Request.QueryString["share"];
+
+            if (Request.QueryString["share"] != null)
             {
-                var myAccessToken = new AccessToken(new Guid(Request.QueryString["access_token"]));
+                var myMediaShare = new MediaShare(new MediaShareId(Request.QueryString["share"].ToString()));
                 try
                 {
-                    myAccessToken.Select();
+                    myMediaShare.Select();
                 }
                 catch (Exception ex)
                 {
                     throw ex;
                 }
 
-                if (myAccessToken.MediaId == Guid.Empty)
+                if (string.IsNullOrEmpty(myMediaShare.MediaId.ToString()))
                 {
                     Debug.WriteLine("Media Id was empty");
-                    new LogEntry(DebugLog) { text = string.Format("Someone tried to access access token {0}. Access was denied because the person who created this link has been suspended.", myAccessToken.Id) };
+                    new LogEntry(DebugLog) { text = string.Format("Someone tried to access access token {0}. Access was denied because the person who created this link has been suspended.", myMediaShare.Id) };
                     ShareUserSuspendedError.Visible = true;
                 }
                 else
@@ -46,35 +49,31 @@ namespace ParsnipWebsite
 
                     if (!IsPostBack)
                     {
-                        myAccessToken.TimesUsed++;
-                        myAccessToken.Update();
+                        myMediaShare.TimesUsed++;
+                        myMediaShare.Update();
                     }
 
-                    User createdBy = new User(myAccessToken.UserId);
-                    createdBy.Select();
+                    User createdBy = ParsnipData.Accounts.User.Select(myMediaShare.UserId);
+                    myImage = ParsnipData.Media.Image.Select(myMediaShare.MediaId, myUser == null ? default : myUser.Id);
 
-                    myImage = new ParsnipData.Media.Image(myAccessToken.MediaId);
-                    myImage.Select();
-
-                    new LogEntry(DebugLog) { text = string.Format("{0}'s link to {1} got another hit! Now up to {2}", createdBy.FullName, myImage.Title, myAccessToken.TimesUsed) };
+                    new LogEntry(DebugLog) { text = string.Format("{0}'s link to {1} got another hit! Now up to {2}", createdBy.FullName, myImage.Title, myMediaShare.TimesUsed) };
                 }
             }
             else
             {
                 if (Request.QueryString["id"] == null)
-                    myUser = Account.SecurePage("view_image", this, Data.DeviceType);
+                    myUser = Account.SecurePage("view", this, Data.DeviceType);
                 else
-                    myUser = Account.SecurePage("view_image?id=" + Request.QueryString["id"], this, Data.DeviceType);
+                    myUser = Account.SecurePage("view?id=" + Request.QueryString["id"], this, Data.DeviceType);
 
                 if (Request.QueryString["id"] == null)
                     Response.Redirect("home");
 
-                myImage = new ParsnipData.Media.Image(new Guid(Request.QueryString["id"]));
-                myImage.Select();
+                myImage = ParsnipData.Media.Image.Select(new MediaId(Request.QueryString["id"]), myUser.Id);
             }
 
             //Get the image which the user is trying to access, and display it on the screen.
-            if (myImage == null || string.IsNullOrEmpty(myImage.Directory))
+            if (myImage == null || string.IsNullOrEmpty(myImage.Compressed))
             {
                 //ShareLinkContainer.Visible = false;
                 Button_ViewAlbum.Visible = false;
@@ -89,15 +88,15 @@ namespace ParsnipWebsite
 
                 //If the image has been deleted, display a warning.
                 //If the image has not been deleted, display the image.
-                if (myImage.AlbumId == Guid.Empty)
+                if (myImage.AlbumId == 0)
                 {
-                    Debug.WriteLine(string.Format("AlbumId {0} == {1}", myImage.AlbumId, Guid.Empty));
+                    Debug.WriteLine(string.Format("AlbumId {0} == {1}", myImage.AlbumId, default(int)));
                     //NotExistError.Visible = true;
                     Button_ViewAlbum.Visible = false;
                 }
                 else
                 {
-                    Debug.WriteLine(string.Format("AlbumId {0} != {1}", myImage.AlbumId, Guid.Empty));
+                    Debug.WriteLine(string.Format("AlbumId {0} != {1}", myImage.AlbumId, default(int)));
 
                     /*
                     ImageTitle.InnerText = myImage.Title;
@@ -108,9 +107,9 @@ namespace ParsnipWebsite
 
                 ImageTitle.InnerText = myImage.Title;
                 Page.Title = myImage.Title;
-                ImagePreview.Src = myImage.Directory;
+                ImagePreview.Src = myImage.Compressed;
                 Page.Header.Controls.Add(new LiteralControl(string.Format("<meta property=\"og:title\" content=\"{0}\" />", myImage.Title)));
-                Page.Header.Controls.Add(new LiteralControl(string.Format("<meta property=\"og:image\" content=\"{0}\" />", myImage.Directory.Contains("https://lh3.googleusercontent.com") ? myImage.Directory : string.Format("{0}/{1}", Request.Url.GetLeftPart(UriPartial.Authority), myImage.Directory.Replace(" ", "%20")))));
+                Page.Header.Controls.Add(new LiteralControl(string.Format("<meta property=\"og:image\" content=\"{0}\" />", myImage.Compressed.Contains("https://lh3.googleusercontent.com") ? myImage.Compressed : string.Format("{0}/{1}", Request.Url.GetLeftPart(UriPartial.Authority), myImage.Compressed.Replace(" ", "%20")))));
                 Page.Header.Controls.Add(new LiteralControl("<meta property=\"og:type\" content=\"website\" />"));
                 Page.Header.Controls.Add(new LiteralControl(string.Format("<meta property=\"og:url\" content=\"{0}\" />", Request.Url.ToString())));
                 Page.Header.Controls.Add(new LiteralControl(string.Format("<meta property=\"og:description\" content=\"{0}\" />", myImage.Description)));
@@ -118,24 +117,22 @@ namespace ParsnipWebsite
 
                 //If there was no access token, the user is trying to share the photo.
                 //Generate a shareable link and display it on the screen.
-                if (Request.QueryString["access_token"] == null)
+                if (Request.QueryString["share"] == null)
                 {
                     Button_ViewAlbum.Visible = false;
 
-                    AccessToken myAccessToken;
+                    MediaShare myMediaShare;
 
-                    if (AccessToken.TokenExists(myUser.Id, myImage.Id))
+                   
+                        myMediaShare = myImage.MyMediaShare;
+                    if(myMediaShare == null)
                     {
-                        myAccessToken = AccessToken.GetToken(myUser.Id, myImage.Id);
-                    }
-                    else
-                    {
-                        myAccessToken = new AccessToken(myUser.Id, myImage.Id);
-                        myAccessToken.Insert();
+                        myMediaShare = new MediaShare(myImage.Id, myUser.Id);
+                        myMediaShare.Insert();
                     }
 
                     //Gets URL without sub pages
-                    //ShareLink.Value = Request.Url.GetLeftPart(UriPartial.Authority) + myAccessToken.ImageRedirect;
+                    //ShareLink.Value = Request.Url.GetLeftPart(UriPartial.Authority) + myMediaShare.ImageRedirect;
                 }
                 else
                 {

@@ -18,12 +18,13 @@ namespace ParsnipWebsite
     public partial class Photos : System.Web.UI.Page
     {
         private User myUser;
-        static readonly Log DebugLog = new Log("debug");
-        static readonly Album PhotosAlbum = new Album(new Guid("4b4e450a-2311-4400-ab66-9f7546f44f4e"));
+        static readonly Log DebugLog = Log.Select(3);
+        static readonly MediaTag PhotosMediaTag = new MediaTag(1);
 
         public Photos()
         {
-            PhotosAlbum.Select();
+            //Retrieves wrong album ID and overwrites
+            //PhotosAlbum.Select();
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -36,10 +37,10 @@ namespace ParsnipWebsite
             if (IsPostBack)
             {
                 if(PhotoUpload.PostedFile.ContentLength > 0 )
-                    MediaManager.UploadImage(myUser, PhotosAlbum, PhotoUpload);
+                    MediaManager.UploadImage(myUser, PhotosMediaTag, PhotoUpload);
 
                 if (PhotoUpload2.PostedFile.ContentLength > 0)
-                    MediaManager.UploadImage(myUser, PhotosAlbum, PhotoUpload2);
+                    MediaManager.UploadImage(myUser, PhotosMediaTag, PhotoUpload2);
             }
                 
 
@@ -49,9 +50,9 @@ namespace ParsnipWebsite
 
         protected void Page_LoadComplete(object sender, EventArgs e)
         {
-            foreach (MediaControl mc in MediaManager.GetAlbumAsMediaControls(PhotosAlbum))
+            foreach (MediaControl mediaControl in MediaManager.GetAlbumAsMediaControls(PhotosMediaTag))
             {
-                DynamicMediaDiv.Controls.Add(mc);
+                DynamicMediaDiv.Controls.Add(mediaControl);
             }
         }
     }

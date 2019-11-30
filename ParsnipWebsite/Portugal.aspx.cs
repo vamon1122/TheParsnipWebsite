@@ -18,12 +18,13 @@ namespace ParsnipWebsite
     public partial class Portugal : System.Web.UI.Page
     {
         private User myUser;
-        static readonly Log DebugLog = new Log("debug");
-        static readonly Album PortugalAlbum = new Album(new Guid("d8b344bf-9d6a-4a6f-87b2-c4da3eb875be"));
+        static readonly Log DebugLog = Log.Select(3);
+        static readonly MediaTag PortugalMediaTag = new MediaTag(5);
 
         public Portugal()
         {
-            PortugalAlbum.Select();
+            //Retrieves wrong album ID and overwrites
+            //PortugalAlbum.Select();
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -36,10 +37,10 @@ namespace ParsnipWebsite
             if (IsPostBack)
             {
                 if (PhotoUpload.PostedFile.ContentLength > 0)
-                    MediaManager.UploadImage(myUser, PortugalAlbum, PhotoUpload);
+                    MediaManager.UploadImage(myUser, PortugalMediaTag, PhotoUpload);
 
                 if (PhotoUpload2.PostedFile.ContentLength > 0)
-                    MediaManager.UploadImage(myUser, PortugalAlbum, PhotoUpload2);
+                    MediaManager.UploadImage(myUser, PortugalMediaTag, PhotoUpload2);
             }
 
             if (myUser.AccountType == "admin" || myUser.AccountType == "member")
@@ -48,7 +49,7 @@ namespace ParsnipWebsite
 
         protected void Page_LoadComplete(object sender, EventArgs e)
         {
-            foreach (MediaControl mc in MediaManager.GetAlbumAsMediaControls(PortugalAlbum))
+            foreach (MediaControl mc in MediaManager.GetAlbumAsMediaControls(PortugalMediaTag))
             {
                 DynamicMediaDiv.Controls.Add(mc);
             }

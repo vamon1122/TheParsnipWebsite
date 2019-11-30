@@ -52,10 +52,6 @@
       <HintPath>..\packages\Microsoft.AspNet.FriendlyUrls.Core.1.0.2\lib\net45\Microsoft.AspNet.FriendlyUrls.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="ParsnipData, Version=0.0.8.3, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\TheParsnipData\ParsnipData\bin\Release\ParsnipData.dll</HintPath>
-    </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -128,8 +124,7 @@
     <Content Include="Css\SharedStyle.css" />
     <Content Include="sitemap.xml" />
     <Content Include="Videos.aspx" />
-    <Content Include="View_Image.aspx" />
-    <Content Include="Watch_Video.aspx" />
+    <Content Include="View.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -310,19 +305,12 @@
     <Compile Include="Videos.aspx.designer.cs">
       <DependentUpon>Videos.aspx</DependentUpon>
     </Compile>
-    <Compile Include="View_Image.aspx.cs">
-      <DependentUpon>View_Image.aspx</DependentUpon>
+    <Compile Include="View.aspx.cs">
+      <DependentUpon>View.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="View_Image.aspx.designer.cs">
-      <DependentUpon>View_Image.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Watch_Video.aspx.cs">
-      <DependentUpon>Watch_Video.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Watch_Video.aspx.designer.cs">
-      <DependentUpon>Watch_Video.aspx</DependentUpon>
+    <Compile Include="View.aspx.designer.cs">
+      <DependentUpon>View.aspx</DependentUpon>
     </Compile>
     <Compile Include="_TEMPLATE.aspx.cs">
       <DependentUpon>_TEMPLATE.aspx</DependentUpon>
@@ -331,6 +319,12 @@
     <Compile Include="_TEMPLATE.aspx.designer.cs">
       <DependentUpon>_TEMPLATE.aspx</DependentUpon>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\TheParsnipData\ParsnipData\ParsnipData.csproj">
+      <Project>{f0504054-eed6-4f6f-b35c-c684381181d3}</Project>
+      <Name>ParsnipData</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -23,21 +23,21 @@ namespace ParsnipWebsite
 
         void Page_LoadComplete(object sender, EventArgs e)
         {
-            DataTable allStats = AccessToken.GetStats();
+            DataTable allStats = MediaShare.GetStats();
 
             foreach(DataRow row in allStats.Rows)
             {
                 string mediaRedirect;
                 string shareRedirect;
-                switch (row[6].ToString().ToUpper())
+                switch (row[6].ToString().Trim())
                 {
-                    case "73C436A1-893B-4418-8800-821823C18DFE":
-                        mediaRedirect = "watch_video?id=";
-                        shareRedirect = "watch_video?access_token=";
+                    case "image":
+                        mediaRedirect = "view?id=";
+                        shareRedirect = "view?share=";
                         break;
                     default:
-                        mediaRedirect = "view_image?id=";
-                        shareRedirect = "view_image?access_token=";
+                        mediaRedirect = "view?id=";
+                        shareRedirect = "view?share=";
                         break;
                 }
                 var myRow = new TableRow();
@@ -50,7 +50,7 @@ namespace ParsnipWebsite
 
                 var userCell = new TableCell();
                 userCell.Controls.Add(new LiteralControl(
-                    string.Format("<a href={0}>{1}</a>", "manage_users?userid=" + row[7].ToString(), row[3].ToString())));
+                    string.Format("<a href={0}>{1}</a>", "manage_users?id=" + row[7].ToString(), row[3].ToString())));
                 myRow.Cells.Add(userCell);
 
                 var timesUsedCell = new TableCell();

@@ -14,7 +14,7 @@ namespace ParsnipWebsite.Custom_Controls.Uac
     {
         internal static AdminUserForm myUserForm1;
         internal static User _dataSubject;
-        internal static User DataSubject { get { return _dataSubject; } set { /*Debug.WriteLine(string.Format("dataSubject (id = \"{0}\") was set in UserForm", value.Id));*/ _dataSubject = value; myUserForm1.UpdateFields(); } }
+        internal static User DataSubject { get { return _dataSubject; } set { /*Debug.WriteLine(string.Format("dataSubject (id = \"{0}\") was set in UserForm", value.Id));*/ _dataSubject = value; if (value != null) { myUserForm1.UpdateFields(); } } }
     }
 
 
@@ -22,12 +22,9 @@ namespace ParsnipWebsite.Custom_Controls.Uac
     {
         public User DataSubject { get { return PersistentData.DataSubject; } }
 
-        public void UpdateDataSubject(Guid pId)
+        public void UpdateDataSubject(int pId)
         {
-            Debug.WriteLine("Searching for Id " + pId);
-            User mySubject = new User(pId);
-            mySubject.Select();
-            Debug.WriteLine("Success? " + mySubject.FullName);
+            User mySubject = User.Select(pId);
             PersistentData.DataSubject = mySubject;
         }
 
@@ -41,9 +38,7 @@ namespace ParsnipWebsite.Custom_Controls.Uac
             PersistentData.myUserForm1 = this;
             if (PersistentData._dataSubject == null)
             {
-                Debug.WriteLine("----------UserForm1 was initialised without a dataSubject");
-
-                PersistentData._dataSubject = new User(Guid.Empty);
+                PersistentData._dataSubject = new User();
             }
             else
             {
@@ -58,20 +53,7 @@ namespace ParsnipWebsite.Custom_Controls.Uac
 
         public void UpdateFields()
         {
-            Debug.WriteLine(string.Format("----------Userform fields are being updated. Name: {0} Id: {1}", PersistentData.DataSubject.FullName, PersistentData.DataSubject.Id));
-
-            Debug.WriteLine(string.Format("----------{0} != {1}", PersistentData.DataSubject.Id.ToString(), Guid.Empty.ToString()));
-
-
-
-            //Debug.WriteLine("----------UpdateForm()");
-            //Debug.WriteLine("----------username = " + username.Text);
-            //Debug.WriteLine("----------dataSubject.username = " + dataSubject.username);
-            //Debug.WriteLine("----------dataSubject.id = " + dataSubject.id);
-
             TextBox_LastLoggedIn.Text = PersistentData.DataSubject.LastLogIn == DateTime.MinValue ? "Never" : PersistentData.DataSubject.LastLogIn.ToString();
-            
-            
 
             username.Text = PersistentData.DataSubject.Username;
 
@@ -124,16 +106,9 @@ namespace ParsnipWebsite.Custom_Controls.Uac
                 accountStatus.Value = PersistentData.DataSubject.AccountStatus;
 
             if (PersistentData.DataSubject.DateTimeCreated.ToString("dd/MM/yyyy") == "01/01/0001")
-            {
-                //Debug.WriteLine(string.Format("{0}'s datetimecreated {1} == 01/01/0001", dataSubject.fullName, dataSubject.dateTimeCreated.ToString("dd/MM/yyyy")));
                 dateTimeCreated.Value = Parsnip.AdjustedTime.ToString("dd/MM/yyyy");
-            }
             else
-            {
-                //Debug.WriteLine(string.Format("{0}'s dob {1} != 01/01/0001",dataSubject.fullName, dataSubject.dateTimeCreated.ToString("dd/MM/yyyy")));
                 dateTimeCreated.Value = PersistentData.DataSubject.DateTimeCreated.ToString("dd/MM/yyyy");
-            }
-
         }
 
         public void UpdateDataSubject()
@@ -143,24 +118,13 @@ namespace ParsnipWebsite.Custom_Controls.Uac
                 Debug.WriteLine("My dataSubject is null. Adding new dataSubject");
                 PersistentData.DataSubject = new User("UpdateDataSubject (UserForm1)");
             }
-            /*
-            Debug.WriteLine(string.Format("username.Text = {0}", username.Text));
-            Debug.WriteLine(string.Format("forename.Text = {0}", forename.Text));
-            Debug.WriteLine(string.Format("mobilePhone.Text = {0}", mobilePhone.Text));
-            Debug.WriteLine(string.Format("homePhone.Text = {0}", homePhone.Text));
-            Debug.WriteLine(string.Format("workPhone.Text = {0}", workPhone.Text));
-            */
             PersistentData.DataSubject.Username = username.Text;
-            //Debug.WriteLine(string.Format("dataSubject.Username = username.Text ({0})", username.Text));
-
             PersistentData.DataSubject.Email = email.Text;
             PersistentData.DataSubject.Password = password.Text;
             PersistentData.DataSubject.Forename = forename.Text;
             PersistentData.DataSubject.Surname = surname.Text;
             PersistentData.DataSubject.GenderUpper = gender.Value.Substring(0, 1);
-            //Debug.WriteLine("DOB = " + dobInput.Value);
-
-
+            
             if (DateTime.TryParse(dobInput.Value, out DateTime result))
                 PersistentData.DataSubject.Dob = Convert.ToDateTime(dobInput.Value);
 

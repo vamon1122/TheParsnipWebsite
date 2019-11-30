@@ -14,7 +14,7 @@ namespace ParsnipWebsite
     public partial class Videos : System.Web.UI.Page
     {
         private User myUser;
-        static readonly Album VideosAlbum = new Album(new Guid("73C436A1-893B-4418-8800-821823C18DFE"));
+        static readonly MediaTag VideoMediaTag = new MediaTag(2);
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -23,10 +23,21 @@ namespace ParsnipWebsite
 
         protected void Page_LoadComplete(object sender, EventArgs e)
         {
-            foreach (MediaControl mc in MediaManager.GetAlbumAsMediaControls(VideosAlbum))
+            foreach (MediaControl mc in MediaManager.GetAlbumAsMediaControls(VideoMediaTag))
             {
                 links_div.Controls.Add(mc);
             }
+        }
+
+        protected void Button_UploadDataId_Click(object sender, EventArgs e)
+        {
+            var rawDataId = TextBox_UploadDataId.Text;
+            var dataId = TextBox_UploadDataId.Text.Substring(rawDataId.Length - 11, 11);
+            Youtube myYoutube = new Youtube(dataId, myUser, VideoMediaTag);
+            myYoutube.Scrape();
+            myYoutube.Insert();
+
+            Response.Redirect($"edit_media?id={myYoutube.Id}");
         }
     }
 }

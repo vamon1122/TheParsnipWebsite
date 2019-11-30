@@ -15,24 +15,28 @@ namespace ParsnipWebsite
     public partial class Edit_Media : System.Web.UI.Page
     {
         User myUser;
-        static readonly Log GeneralLog = new Log("General");
+        static readonly Log GeneralLog = Log.Select(4);
         private ParsnipData.Media.Image MyImage;
         private Video MyVideo;
-        private YoutubeVideo MyYoutubeVideo;
-        private AccessToken myAccessToken;
+        private Youtube MyYoutubeVideo;
+        private MediaShare myMediaShare;
 
         public Media MyMedia
         {
             get
             {
-                if (MyImage != null)
-                    return MyImage;
+                if (MyYoutubeVideo != null)
+                    return MyYoutubeVideo;
 
                 if (MyVideo != null)
                     return MyVideo;
 
-                if (MyYoutubeVideo != null)
-                    return MyYoutubeVideo;
+                if (MyImage != null)
+                    return MyImage;
+
+                
+
+                
 
                 return null;
             }
@@ -48,105 +52,93 @@ namespace ParsnipWebsite
             else
                 myUser = Account.SecurePage("edit_media?id=" + Request.QueryString["id"], this, Data.DeviceType);
 
-            //myUser = Uac.SecurePage("edit_media", this, Data.DeviceType);
-
             if (Request.QueryString["id"] != null)
             {
-                Guid id = new Guid(Request.QueryString["id"]);
-                if (ParsnipData.Media.Image.Exists(id))
+                string id = Request.QueryString["id"];
+
+                MyYoutubeVideo = ParsnipData.Media.Youtube.Select(new MediaId(Request.QueryString["id"]), myUser.Id);
+                if(MyYoutubeVideo == null)
+                    MyVideo = ParsnipData.Media.Video.Select(new MediaId(Request.QueryString["id"]), myUser.Id);
+
+                if(MyYoutubeVideo == null && MyVideo == null)
+                    MyImage = ParsnipData.Media.Image.Select(new MediaId(Request.QueryString["id"]), myUser.Id);
+
+                if (MyYoutubeVideo != null)
                 {
-                    MyImage = new ParsnipData.Media.Image(new Guid(Request.QueryString["id"]));
-                    Debug.WriteLine("Selecting image with id = " + id);
-                    MyImage.Select();
-                    if (AccessToken.TokenExists(myUser.Id, MyImage.Id))
+                    MyYoutubeVideo = Youtube.Select(new MediaId(Request.QueryString["id"]), myUser.Id);
+                    MediaShare myMediaShare = MyYoutubeVideo.MyMediaShare;
+                    if (myMediaShare == null)
                     {
-                        myAccessToken = AccessToken.GetToken(myUser.Id, MyImage.Id);
+                        myMediaShare = new MediaShare(MyYoutubeVideo.Id, myUser.Id);
+                        myMediaShare.Insert();
                     }
-                    else
-                    {
-                        myAccessToken = new AccessToken(myUser.Id, MyImage.Id);
-                        myAccessToken.Insert();
-                    }
-                    ShareLink.Value = Request.Url.GetLeftPart(UriPartial.Authority) + "/view_image?access_token=" +
-                    myAccessToken.Id;
-                    ImagePreview.ImageUrl = MyImage.Directory;
-                    input_date_media_captured.Value = MyImage.DateTimeMediaCreated.ToString();
-                    ImagePreview.Visible = true;
-                    Page.Title = "Edit Image";
-                }
-                else if (Video.Exists(id))
-                {
-                    MyVideo = new Video(new Guid(Request.QueryString["id"]));
-                    Debug.WriteLine("Selecting video with id = " + id);
-                    MyVideo.Select();
-                    if (AccessToken.TokenExists(myUser.Id, MyVideo.Id))
-                    {
-                        myAccessToken = AccessToken.GetToken(myUser.Id, MyVideo.Id);
-                    }
-                    else
-                    {
-                        myAccessToken = new AccessToken(myUser.Id, MyVideo.Id);
-                        myAccessToken.Insert();
-                    }
-                    ShareLink.Value = Request.Url.GetLeftPart(UriPartial.Authority) + "/watch_video?access_token=" +
-                    myAccessToken.Id;
-                    thumbnail.Src = MyVideo.Thumbnail.Original;
-                    input_date_media_captured.Value = MyVideo.DateTimeMediaCreated.ToString();
-                    a_play_video.HRef = string.Format("../../watch_video?id={0}", MyVideo.Id);
-                    a_play_video.Visible = true;
-                    Page.Title = "Edit Video";
-                }
-                else if (YoutubeVideo.Exists(id))
-                {
-                    MyYoutubeVideo = new YoutubeVideo(new Guid(Request.QueryString["id"]));
-                    Debug.WriteLine("Selecting youtube video with id = " + id);
-                    MyYoutubeVideo.Select();
-                    if (AccessToken.TokenExists(myUser.Id, MyYoutubeVideo.Id))
-                    {
-                        myAccessToken = AccessToken.GetToken(myUser.Id, MyYoutubeVideo.Id);
-                    }
-                    else
-                    {
-                        myAccessToken = new AccessToken(myUser.Id, MyYoutubeVideo.Id);
-                        myAccessToken.Insert();
-                    }
-                    ShareLink.Value = Request.Url.GetLeftPart(UriPartial.Authority) + "/watch_video?access_token=" +
-                    myAccessToken.Id;
-                    input_date_media_captured.Value = MyYoutubeVideo.DateTimeMediaCreated.ToString();
+                    ShareLink.Value = Request.Url.GetLeftPart(UriPartial.Authority) + "/view?share=" +
+                    myMediaShare.Id;
+                    input_date_media_captured.Value = MyYoutubeVideo.DateTimeCaptured.ToString();
                     youtube_video.Attributes.Add("data-id", MyYoutubeVideo.DataId);
                     youtube_video_container.Visible = true;
                     Page.Title = "Edit Youtube Video";
                 }
+                else if (MyVideo != null)
+                {
+                    MyVideo = Video.Select(new MediaId(Request.QueryString["id"]), myUser.Id);
+                    MediaShare myMediaShare = MyVideo.MyMediaShare;
+                    if(myMediaShare == null)
+                    {
+                        myMediaShare = new MediaShare(MyVideo.Id, myUser.Id);
+                        myMediaShare.Insert();
+                    }
+                    ShareLink.Value = Request.Url.GetLeftPart(UriPartial.Authority) + "/view?share=" +
+                    myMediaShare.Id;
+                    thumbnail.Src = MyVideo.Thumbnail.Original;
+                    input_date_media_captured.Value = MyVideo.DateTimeCaptured.ToString();
+                    a_play_video.HRef = string.Format("../../view?id={0}", MyVideo.Id);
+                    a_play_video.Visible = true;
+                    Page.Title = "Edit Video";
+                }
+                else if (MyImage != null)
+                {
+
+                    myMediaShare = MyImage.MyMediaShare;
+                    if (myMediaShare == null)
+                    {
+                        myMediaShare = new MediaShare(MyImage.Id, myUser.Id);
+                        myMediaShare.Insert();
+                    }
+                    ShareLink.Value = Request.Url.GetLeftPart(UriPartial.Authority) + "/view?share=" +
+                    myMediaShare.Id;
+                    ImagePreview.ImageUrl = MyImage.Compressed;
+                    input_date_media_captured.Value = MyImage.DateTimeCaptured.ToString();
+                    ImagePreview.Visible = true;
+                    Page.Title = "Edit Image";
+                }
                 else
                 {
-                    Debug.WriteLine ("There was no media. Redirecting to home");
                     Response.Redirect("home");
                 }
 
-                Debug.WriteLine("----------Media album = " + MyMedia.AlbumId);
-
-                switch (MyMedia.AlbumId.ToString().ToUpper())
+                switch (MyMedia.AlbumId)
                 {
-                    case "4B4E450A-2311-4400-AB66-9F7546F44F4E":
+                    case 4:
                         OriginalAlbumRedirect = "photos?focus=" + MyMedia.Id.ToString();
                         break;
-                    case "5F15861A-689C-482A-8E31-2F13429C36E5":
+                    case 3:
                         OriginalAlbumRedirect = "memes?focus=" + MyMedia.Id.ToString();
                         break;
-                    case "FF3127DF-70B2-47EF-B77B-2E086D2EF370":
+                    case 2:
                         OriginalAlbumRedirect = "krakow?focus=" + MyMedia.Id.ToString();
                         break;
-                    case "73C436A1-893B-4418-8800-821823C18DFE":
+                    case 6:
                         OriginalAlbumRedirect = "videos?focus=" + MyMedia.Id.ToString();
                         break;
-                    case "D8B344BF-9D6A-4A6F-87B2-C4DA3EB875BE":
+                    case 5:
                         OriginalAlbumRedirect = "portugal?focus=" + MyMedia.Id.ToString();
                         break;
-                    case "72C0E515-D821-4EBC-ACEC-D6D4CA782718":
+                    case 1:
                         OriginalAlbumRedirect = "amsterdam?focus=" + MyMedia.Id.ToString();
                         break;
-                    case "00000000-0000-0000-0000-000000000000":
-                        Debug.WriteLine("Album id is empty guid. Redirecting to manage_media");
+                    case default(int):
+                        Debug.WriteLine("Album id is empty. Redirecting to manage_media");
                         OriginalAlbumRedirect = "manage_media?" + MyMedia.Id.ToString();
                         break;
                     default:
@@ -158,34 +150,30 @@ namespace ParsnipWebsite
 
                 NewAlbumsDropDown.Items.Clear();
                 if (myUser.AccountType == "admin")
-                    NewAlbumsDropDown.Items.Add(new ListItem() { Value = Guid.Empty.ToString(), Text = "None" });
-                foreach (Album tempAlbum in Album.GetAllAlbums())
+                    NewAlbumsDropDown.Items.Add(new ListItem() { Value = "0", Text = "None" });
+                foreach (MediaTag tempMediaTag in MediaTag.GetAllTags())
                 {
                     NewAlbumsDropDown.Items.Add(new ListItem()
                     {
-                        Value = Convert.ToString(tempAlbum.Id),
-                        Text = tempAlbum.Name
+                        Value = Convert.ToString(tempMediaTag.Id),
+                        Text = tempMediaTag.Name
                     });
                 }
 
-                var AlbumIds = MyMedia.AlbumIds();
+                var AlbumIds = MyMedia.SelectMediaTagIds();
                 int NumberOfAlbums = AlbumIds.Count();
 
                 if (NumberOfAlbums > 0)
                 {
-                    Debug.WriteLine("First album guid = " + AlbumIds.First().ToString());
                     NewAlbumsDropDown.SelectedValue = AlbumIds.First().ToString();
                 }
                 else
                 {
-                    NewAlbumsDropDown.SelectedValue = Guid.Empty.ToString();
+                    NewAlbumsDropDown.SelectedValue = "0";
                 }
 
                 if (Request.QueryString["delete"] != null)
                 {
-                    //I am being deleted
-                    Debug.WriteLine("Delete media clicked");
-
                     bool deleteSuccess;
 
                     if (myUser.AccountType == "admin")
@@ -208,25 +196,25 @@ namespace ParsnipWebsite
 
                     switch (NewAlbumsDropDown.SelectedValue.ToString().ToUpper())
                     {
-                        case "4B4E450A-2311-4400-AB66-9F7546F44F4E":
-                            Redirect = "photos";
-                            break;
-                        case "5F15861A-689C-482A-8E31-2F13429C36E5":
-                            Redirect = "memes";
-                            break;
-                        case "FF3127DF-70B2-47EF-B77B-2E086D2EF370":
-                            Redirect = "krakow";
-                            break;
-                        case "73C436A1-893B-4418-8800-821823C18DFE":
-                            Redirect = "videos";
-                            break;
-                        case "D8B344BF-9D6A-4A6F-87B2-C4DA3EB875BE":
-                            Redirect = "portugal";
-                            break;
-                        case "72C0E515-D821-4EBC-ACEC-D6D4CA782718":
+                        case "1":
                             Redirect = "amsterdam";
                             break;
-                        case "00000000-0000-0000-0000-000000000000":
+                        case "2":
+                            Redirect = "krakow";
+                            break;
+                        case "3":
+                            Redirect = "memes";
+                            break;
+                        case "4":
+                            Redirect = "photos";
+                            break;
+                        case "5":
+                            Redirect = "portugal";
+                            break;
+                        case "6":
+                            Redirect = "videos";
+                            break;
+                        case "0":
                             Debug.WriteLine("No album selected. Must be none! Redirecting to manage photos...");
                             Redirect = "manage_media";
                             break;
@@ -251,24 +239,19 @@ namespace ParsnipWebsite
 
                 if (IsPostBack)
                 {
-                    Debug.WriteLine("I am a postback!!!");
-                    Debug.WriteLine("Delete media NOT clicked");
-
-
                     bool changesWereSaved;
                     try
                     {
                         if (myUser.AccountType == "admin" || myUser.AccountType == "media" || myUser.Id.ToString() == MyMedia.CreatedById.ToString())
                         {
                             changesWereSaved = true;
-                            Debug.WriteLine("Getting title from request: " + Request["InputTitleTwo"].ToString());
                             MyMedia.Title = Request["InputTitleTwo"].ToString();
 
                             if (myUser.AccountType == "admin")
                             {
                                 try
                                 {
-                                    MyMedia.DateTimeMediaCreated = Convert.ToDateTime(Request["input_date_media_captured"]);
+                                    MyMedia.DateTimeCaptured = Convert.ToDateTime(Request["input_date_media_captured"]);
                                 }
                                 catch (Exception ex)
                                 {
@@ -278,21 +261,19 @@ namespace ParsnipWebsite
                                 }
                             }
 
-                            Debug.WriteLine("Getting album from request...");
-                            string newAlbumId;
+                            int newAlbumId = default;
                             try
                             {
-                                newAlbumId = Request["NewAlbumsDropDown"].ToString();
+                                newAlbumId = Convert.ToInt16(Request["NewAlbumsDropDown"]);
                             }
                             catch
                             {
                                 Debug.WriteLine("There was no album!");
-                                newAlbumId = null;
                             }
 
-                            if (newAlbumId != null)
+                            if (newAlbumId != default)
                             {
-                                MyMedia.AlbumId = new Guid(newAlbumId);
+                                MyMedia.AlbumId = newAlbumId;
                             }
 
                             MyMedia.Update();
@@ -336,33 +317,33 @@ namespace ParsnipWebsite
 
                         string Redirect;
 
-                        switch (MyMedia.AlbumId.ToString().ToUpper())
+                        switch (MyMedia.AlbumId)
                         {
-                            case "4B4E450A-2311-4400-AB66-9F7546F44F4E":
+                            case 4:
                                 Redirect = "photos?focus=" + MyMedia.Id.ToString();
                                 break;
-                            case "5F15861A-689C-482A-8E31-2F13429C36E5":
+                            case 3:
                                 Redirect = "memes?focus=" + MyMedia.Id.ToString();
                                 break;
-                            case "FF3127DF-70B2-47EF-B77B-2E086D2EF370":
+                            case 2:
                                 Redirect = "krakow?focus=" + MyMedia.Id.ToString();
                                 break;
-                            case "73C436A1-893B-4418-8800-821823C18DFE":
+                            case 6:
                                 Redirect = "videos?focus=" + MyMedia.Id.ToString();
                                 break;
-                            case "D8B344BF-9D6A-4A6F-87B2-C4DA3EB875BE":
+                            case 5:
                                 Redirect = "portugal?focus=" + MyMedia.Id.ToString();
                                 break;
-                            case "72C0E515-D821-4EBC-ACEC-D6D4CA782718":
+                            case 1:
                                 Redirect = "amsterdam?focus=" + MyMedia.Id.ToString();
                                 break;
-                            case "00000000-0000-0000-0000-000000000000":
+                            case default(int):
                                 Debug.WriteLine("New album id is empty. Redirecting to original album");
                                 //Redirect = "manage_medias?id=" + MyMedia.Id.ToString();
                                 Redirect = OriginalAlbumRedirect;
                                 break;
                             default:
-                                Debug.WriteLine(string.Format("The album id {0} was not recognised!",
+                                Debug.WriteLine(string.Format("Edit_Media: The album id {0} was not recognised!",
                                     MyMedia.AlbumId.ToString().ToUpper()));
                                 Redirect = "home?error=nomediaalbum3";
                                 break;
@@ -423,7 +404,7 @@ namespace ParsnipWebsite
                         Response.Redirect(OriginalAlbumRedirect + "&error=0");
                     }
                 }
-                Debug.WriteLine("Setting media directory to: " + MyMedia.Directory);
+                Debug.WriteLine("Setting media directory to: " + MyMedia.Compressed);
             }
             else
             {

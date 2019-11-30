@@ -17,8 +17,8 @@ namespace ParsnipWebsite
                 Response.Redirect("get_device_info?url=logout");
 
             User myUser = new User("logout get name");
-            myUser.LogIn();
-            new LogEntry(new Log("login/out")) { text = String.Format("{0} logged out from {1} {2} device.", myUser.FullName, myUser.PosessivePronoun, Data.DeviceType) };
+            ParsnipData.Accounts.User.LogIn();
+            new LogEntry(Log.Select(5)) { text = String.Format("{0} logged out from {1} {2} device.", myUser.FullName, myUser.PosessivePronoun, Data.DeviceType) };
             ParsnipData.Accounts.User.LogOut();
             Response.Redirect("login");
         }

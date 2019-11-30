@@ -12,23 +12,23 @@ namespace ParsnipWebsite
     public partial class Logs : System.Web.UI.Page
     {
         User myUser;
-        Guid selectedLogId;
+        int selectedLogId;
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Request.QueryString["logId"] == null)
-                Response.Redirect("logs?logId=" + Guid.Empty);
+            if (Request.QueryString["id"] == null)
+                Response.Redirect("logs?id=0");
 
             myUser = Account.SecurePage("logs", this, Data.DeviceType, "admin");
 
-            selectedLogId = new Guid(Request.QueryString["logId"]);
+            selectedLogId = Convert.ToInt16(Request.QueryString["id"]);
 
             List<LogEntry> LogEntries;
 
-            if (selectedLogId.ToString() == Guid.Empty.ToString())
+            if (selectedLogId == default)
                 LogEntries = ParsnipData.Logs.Data.GetAllLogEntries().OrderByDescending(x => x.date).ToList();
             else
             {
-                Log temp = new Log(selectedLogId);
+                Log temp = Log.Select(selectedLogId);
                 LogEntries = temp.GetLogEntries().OrderByDescending(x => x.date).ToList();
             }
 
@@ -73,7 +73,7 @@ namespace ParsnipWebsite
 
         protected void SelectLog_Changed(object sender, EventArgs e)
         {
-            Response.Redirect("logs?logId=" + SelectLog.SelectedValue);
+            Response.Redirect("logs?id=" + SelectLog.SelectedValue);
         }
 
         protected void btnClearLogsConfirm_Click(object sender, EventArgs e)
@@ -82,7 +82,7 @@ namespace ParsnipWebsite
 
             new LogEntry(Log.Default) { text = string.Format("Logs were cleared by {0}!", myUser.FullName) };
 
-            Response.Redirect(string.Format("logs?logId={0}&action=delete&success=true", Guid.Empty.ToString()));
+            Response.Redirect("logs?id=0&action=delete&success=true");
         }
 
         void UpdateLogList()
@@ -92,7 +92,7 @@ namespace ParsnipWebsite
 
             ListItem[] ListItems = new ListItem[logs.Count + 1];
 
-            ListItems[0] = new ListItem("all", Guid.Empty.ToString());
+            ListItems[0] = new ListItem("all", "0");
 
             int i = 1;
             foreach (Log temp in logs)
