@@ -119,22 +119,22 @@ namespace ParsnipWebsite
 
                 switch (MyMedia.AlbumId)
                 {
-                    case 4:
+                    case MediaTagIds.Photos:
                         OriginalAlbumRedirect = "photos?focus=" + MyMedia.Id.ToString();
                         break;
-                    case 3:
+                    case MediaTagIds.Memes:
                         OriginalAlbumRedirect = "memes?focus=" + MyMedia.Id.ToString();
                         break;
-                    case 2:
+                    case MediaTagIds.Krakow:
                         OriginalAlbumRedirect = "krakow?focus=" + MyMedia.Id.ToString();
                         break;
-                    case 6:
+                    case MediaTagIds.Videos:
                         OriginalAlbumRedirect = "videos?focus=" + MyMedia.Id.ToString();
                         break;
-                    case 5:
+                    case MediaTagIds.Portugal:
                         OriginalAlbumRedirect = "portugal?focus=" + MyMedia.Id.ToString();
                         break;
-                    case 1:
+                    case MediaTagIds.Amsterdam:
                         OriginalAlbumRedirect = "amsterdam?focus=" + MyMedia.Id.ToString();
                         break;
                     case default(int):
@@ -271,10 +271,7 @@ namespace ParsnipWebsite
                                 Debug.WriteLine("There was no album!");
                             }
 
-                            if (newAlbumId != default)
-                            {
-                                MyMedia.AlbumId = newAlbumId;
-                            }
+                            MyMedia.AlbumId = newAlbumId;
 
                             MyMedia.Update();
 
