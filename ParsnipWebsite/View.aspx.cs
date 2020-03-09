@@ -186,7 +186,7 @@ namespace ParsnipWebsite
                     if (!Data.IsMobile)
                         video_container.Attributes.Add("autoplay", "autoplay");
 
-                    video_container.Poster = myVideo.Thumbnail.Original;
+                    video_container.Poster = myVideo.Compressed;
                     video_container.Visible = true;
                     ImageTitle.InnerText = myVideo.Title;
                     VideoSource.Src = myVideo.Compressed;

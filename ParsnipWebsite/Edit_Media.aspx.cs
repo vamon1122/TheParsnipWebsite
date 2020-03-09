@@ -90,7 +90,7 @@ namespace ParsnipWebsite
                     }
                     ShareLink.Value = Request.Url.GetLeftPart(UriPartial.Authority) + "/view?share=" +
                     myMediaShare.Id;
-                    thumbnail.Src = MyVideo.Thumbnail.Original;
+                    thumbnail.Src = MyVideo.Compressed;
                     input_date_media_captured.Value = MyVideo.DateTimeCaptured.ToString();
                     a_play_video.HRef = string.Format("../../view?id={0}", MyVideo.Id);
                     a_play_video.Visible = true;
@@ -194,27 +194,27 @@ namespace ParsnipWebsite
 
                     string Redirect;
 
-                    switch (NewAlbumsDropDown.SelectedValue.ToString().ToUpper())
+                    switch (Convert.ToInt16(NewAlbumsDropDown.SelectedValue))
                     {
-                        case "1":
+                        case MediaTagIds.Amsterdam:
                             Redirect = "amsterdam";
                             break;
-                        case "2":
+                        case MediaTagIds.Krakow:
                             Redirect = "krakow";
                             break;
-                        case "3":
+                        case MediaTagIds.Memes:
                             Redirect = "memes";
                             break;
-                        case "4":
+                        case MediaTagIds.Photos:
                             Redirect = "photos";
                             break;
-                        case "5":
+                        case MediaTagIds.Portugal:
                             Redirect = "portugal";
                             break;
-                        case "6":
+                        case MediaTagIds.Videos:
                             Redirect = "videos";
                             break;
-                        case "0":
+                        case 0:
                             Debug.WriteLine("No album selected. Must be none! Redirecting to manage photos...");
                             Redirect = "manage_media";
                             break;
@@ -319,22 +319,22 @@ namespace ParsnipWebsite
 
                         switch (MyMedia.AlbumId)
                         {
-                            case 4:
+                            case MediaTagIds.Photos:
                                 Redirect = "photos?focus=" + MyMedia.Id.ToString();
                                 break;
-                            case 3:
+                            case MediaTagIds.Memes:
                                 Redirect = "memes?focus=" + MyMedia.Id.ToString();
                                 break;
-                            case 2:
+                            case MediaTagIds.Krakow:
                                 Redirect = "krakow?focus=" + MyMedia.Id.ToString();
                                 break;
-                            case 6:
+                            case MediaTagIds.Videos:
                                 Redirect = "videos?focus=" + MyMedia.Id.ToString();
                                 break;
-                            case 5:
+                            case MediaTagIds.Portugal:
                                 Redirect = "portugal?focus=" + MyMedia.Id.ToString();
                                 break;
-                            case 1:
+                            case MediaTagIds.Amsterdam:
                                 Redirect = "amsterdam?focus=" + MyMedia.Id.ToString();
                                 break;
                             case default(int):
