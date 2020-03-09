@@ -189,7 +189,7 @@ namespace ParsnipWebsite
                     video_container.Poster = myVideo.Compressed;
                     video_container.Visible = true;
                     ImageTitle.InnerText = myVideo.Title;
-                    VideoSource.Src = myVideo.Compressed;
+                    VideoSource.Src = myVideo.VideoData.Compressed;
                     ImagePreview.Visible = false;
                     youtube_video_container.Visible = false;
                     //MyEdit.HRef = string.Format("../../edit_media?id={0}", myVideo.Id);
