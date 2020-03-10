@@ -100,7 +100,7 @@
     <Content Include="Manage_Users.aspx" />
     <Content Include="Memes.aspx" />
     <Content Include="package.json" />
-    <Content Include="Local_connections.config" />
+    <Content Include="Dev_connections.config" />
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\Publish To Folder.pubxml" />
     <None Include="Properties\PublishProfiles\Publish To Live.pubxml" />
