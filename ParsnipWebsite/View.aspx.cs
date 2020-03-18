@@ -227,24 +227,24 @@ namespace ParsnipWebsite
         {
             string redirect;
 
-            switch (myImage.AlbumId)
+            switch (MyMedia.AlbumId)
             {
-                case 1:
+                case MediaTagIds.Amsterdam:
                     redirect = "~/amsterdam?focus=";
                     break;
-                case 2:
+                case MediaTagIds.Krakow:
                     redirect = "~/krakow?focus=";
                     break;
-                case 3:
+                case MediaTagIds.Memes:
                     redirect = "~/memes?focus=";
                     break;
-                case 4:
+                case MediaTagIds.Photos:
                     redirect = "~/photos?focus=";
                     break;
-                case 5:
+                case MediaTagIds.Portugal:
                     redirect = "~/portugal?focus=";
                     break;
-                case 6:
+                case MediaTagIds.Videos:
                     redirect = "~/videos?focus=";
                     break;
                 default:
@@ -252,7 +252,7 @@ namespace ParsnipWebsite
                     break;
             }
 
-            Response.Redirect(redirect + myImage.Id);
+            Response.Redirect(redirect + MyMedia.Id);
         }
     }
 }

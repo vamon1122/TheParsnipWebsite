@@ -18,7 +18,10 @@ namespace ParsnipWebsite
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            myUser = Account.SecurePage("videos", this, Data.DeviceType);
+            if (Request.QueryString["focus"] == null)
+                myUser = Account.SecurePage("videos", this, Data.DeviceType);
+            else
+                myUser = Account.SecurePage("videos?focus=" + Request.QueryString["focus"], this, Data.DeviceType);
         }
 
         protected void Page_LoadComplete(object sender, EventArgs e)
