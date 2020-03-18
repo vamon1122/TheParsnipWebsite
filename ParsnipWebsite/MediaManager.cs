@@ -31,7 +31,7 @@ namespace ParsnipWebsite
                 mediaControls.Add(myMediaControl);
             }
 
-            return mediaControls.OrderByDescending(mediaControl => mediaControl.MyMedia.DateTimeCaptured).ToList();
+            return mediaControls;
         }
 
         public static List<MediaControl> GetAlbumAsMediaControls(MediaTag mediaTag)
