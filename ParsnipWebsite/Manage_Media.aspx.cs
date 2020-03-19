@@ -23,6 +23,28 @@ namespace ParsnipWebsite
         protected void Page_Load(object sender, EventArgs e)
         {
             myUser = Account.SecurePage("manage_media", this, Data.DeviceType, "admin");
+
+            //UpdateUserList();
+
+            //if (Request.QueryString["id"] != null && Request.QueryString["id"].ToString() != "")
+            //{
+            //    new LogEntry(DebugLog) { text = "Manage_Media userId = " + Request.QueryString["id"].ToString() };
+            //    selectedUserId = Convert.ToInt16(Request.QueryString["id"]);
+
+            //    SelectUser.SelectedValue = selectedUserId.ToString();
+
+
+            //    foreach (MediaControl temp in MediaManager.GetUserMediaAsMediaControls(selectedUserId, myUser.Id))
+            //    {
+            //        DisplayPhotosDiv.Controls.Add(temp);
+            //    }
+            //}
+            //else
+            //{
+
+            //    if (Request.QueryString["id"] == null)
+            //        Response.Redirect("manage_media?id=0");
+            //}
         }
 
         protected void Page_LoadComplete(object sender, EventArgs e)
@@ -52,7 +74,12 @@ namespace ParsnipWebsite
 
         protected void BtnDeleteUploads_Click(object sender, EventArgs e)
         {
-
+            //if(selectedUserId != 0)
+            //MediaTag.DeleteCreatedByUser(selectedUserId);
+            
+            if((Convert.ToInt32(SelectUser.SelectedValue) != 0))
+                MediaTag.DeleteCreatedByUser(Convert.ToInt32(SelectUser.SelectedValue));
+            
         }
 
         void UpdateUserList()
