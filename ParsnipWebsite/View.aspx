@@ -37,14 +37,13 @@
     <button type="button" class="btn btn-link" data-toggle="modal" data-target="#exampleModalCenter" style="padding:0px; position:fixed; top: 1px; right: 3px; z-index:2147483646">
             <img src="../../Resources/Media/Images/Web_Media/Share_White.svg" style="height:40px" />
     </button>
-    <div class="center_form">
-        <div runat="server" id="MediaContainer" class="background-lightest" style="padding-top:8px; padding-bottom:5px">
+        <div runat="server" id="MediaContainer" class="background-lightest" style="display:inline-block; padding-top:8px; padding-bottom:5px">
             <h3><b runat="server" id="ImageTitle"></b></h3>
-            <img runat="server" id="ImagePreview" style="width:100%" />
-            <div runat="server" id="youtube_video_container" style="margin-bottom:6px; width:100%" visible="false">
+            <img runat="server" id="ImagePreview" class="video-player" />
+            <div runat="server" id="youtube_video_container" style="margin-bottom:6px; width:80vw;" visible="false">
                 <div runat="server" id="youtube_video" class="youtube-player" />
             </div>
-            <video runat="server" id="video_container" controls="controls" class="video-player" style="object-fit:contain; margin-bottom:0px" preload="none" visible="false" >
+            <video runat="server" id="video_container" controls="controls" class="video-player" style="display:inline-block; object-fit:contain; margin-bottom:0px" preload="none" visible="false" >
                 <source runat="server" id="VideoSource" type="video/mp4" />
                 Your browser does not support HTML5 video.
             </video>
@@ -56,7 +55,6 @@
                 <asp:Button runat="server" ID="Button_ViewAlbum" class="btn btn-info btn-lg btn-block" Text="CLICK for more like this!" OnClick="Button_ViewAlbum_Click"></asp:Button>
             </div>
         </form>
-    </div>
     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content" style="margin:0px; padding:0px">
