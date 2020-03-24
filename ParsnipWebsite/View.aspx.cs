@@ -229,22 +229,22 @@ namespace ParsnipWebsite
 
             switch (MyMedia.AlbumId)
             {
-                case MediaTagIds.Amsterdam:
+                case (int)MediaTag.MediaTagIds.Amsterdam:
                     redirect = "~/amsterdam?focus=";
                     break;
-                case MediaTagIds.Krakow:
+                case (int)MediaTag.MediaTagIds.Krakow:
                     redirect = "~/krakow?focus=";
                     break;
-                case MediaTagIds.Memes:
+                case (int)MediaTag.MediaTagIds.Memes:
                     redirect = "~/memes?focus=";
                     break;
-                case MediaTagIds.Photos:
+                case (int)MediaTag.MediaTagIds.Photos:
                     redirect = "~/photos?focus=";
                     break;
-                case MediaTagIds.Portugal:
+                case (int)MediaTag.MediaTagIds.Portugal:
                     redirect = "~/portugal?focus=";
                     break;
-                case MediaTagIds.Videos:
+                case (int)MediaTag.MediaTagIds.Videos:
                     redirect = "~/videos?focus=";
                     break;
                 default:
