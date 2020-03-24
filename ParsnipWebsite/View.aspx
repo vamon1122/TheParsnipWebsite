@@ -75,16 +75,18 @@
             var v = document.getElementsByClassName("youtube-player");
             var p = document.getElementById("youtube_video");
             var iframe = document.createElement("iframe");
+            //https://developers.google.com/youtube/player_parameters
             var playbackParameters;
-            if (false) {
-                playbackParameters = "?controls=0";
+            if (isMobile()) {
+                playbackParameters = "?autoplay=0&controls=0&enablejsapi=1";
             }
             else {
-                playbackParameters = "?autoplay=1&mute=1&controls=1";
+                playbackParameters = "?autoplay=1&controls=1&enablejsapi=0";
             }
-            playbackParameters += "&autohide=2&border=0&wmode=opaque&enablejsapi=1"
+            playbackParameters += "modestbranding=1&mute=0&playsinline=0&fs=1"
             iframe.setAttribute("src", "//www.youtube.com/embed/" + v[0].dataset.id + playbackParameters);
             iframe.setAttribute("frameborder", "0");
+            iframe.setAttribute("allowfullscreen", "allowfullscreen")
             iframe.setAttribute("id", "youtube-iframe");
             p.appendChild(iframe);
         })()
