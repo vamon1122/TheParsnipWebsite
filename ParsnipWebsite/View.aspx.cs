@@ -14,7 +14,7 @@ namespace ParsnipWebsite
     {
         User myUser;
         static readonly Log DebugLog = Log.Select(3);
-        ParsnipData.Media.Image myImage;
+        ParsnipData.Media.Media myImage;
         ParsnipData.Media.Video myVideo;
         ParsnipData.Media.Youtube myYoutubeVideo;
         public Media MyMedia { get {

@@ -78,24 +78,6 @@ namespace ParsnipWebsite
         protected global::System.Web.UI.HtmlControls.HtmlImage ImagePreview;
 
         /// <summary>
-        /// video_container control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlVideo video_container;
-
-        /// <summary>
-        /// VideoSource control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlSource VideoSource;
-
-        /// <summary>
         /// youtube_video_container control.
         /// </summary>
         /// <remarks>
@@ -112,6 +94,24 @@ namespace ParsnipWebsite
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl youtube_video;
+
+        /// <summary>
+        /// video_container control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlVideo video_container;
+
+        /// <summary>
+        /// VideoSource control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlSource VideoSource;
 
         /// <summary>
         /// form1 control.

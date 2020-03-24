@@ -17,20 +17,15 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
     <!-- BOOTSTRAP END -->
-    
     <script src="../Javascript/UsefulFunctions.js"></script>
     <link id="link_style" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="Css/SharedStyle.css" />
     <script src="../Javascript/ApplyStyle.js"></script>
-
     <script src="Javascript/IntersectionObserver.js"></script>
-
     <title>Photos</title>
 </head>
 <body class="fade0p5" id="body" style="text-align:center">
     <menuControls:Menu runat="server" ID="Menu" />
-
-    
     <div class="alert alert-warning alert-dismissible parsnip-alert" style="display: none;" id="AccessWarning">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         <strong>Access Denied</strong> You do not have permission to edit media which other people have uploaded!
@@ -39,23 +34,22 @@
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         <strong>Upload Error</strong> You cannot upload videos to the website yet (I have to do this manually)
     </div>
-
-    <div class="cens_req padded-text"><label>Certain elements of this page were removed by request. <a href="content_removal">Click here</a> to learn more.</label></div>
-    
-
-
-    <h2 class="page-title"><b>Photos</b></h2>
+    <div class="cens_req padded-text">
+        <label>Certain elements of this page were removed by request. 
+            <a href="content_removal">Click here</a> to learn more.
+        </label>
+    </div>
+    <h2 class="page-title">
+        <b>Photos</b>
+    </h2>
     <hr class="break" />
-    
     <a href ="https://photos.app.goo.gl/GgkSHa8FvichfXRZ7">
         <img src="Resources/Media/Images/Web_Media/google-photos.svg" width="100" />
     </a>
-
     <br />
     <div class="media-control-text" style="margin: auto">
         <label>Click <a href="https://photos.app.goo.gl/GgkSHa8FvichfXRZ7">here</a> to view 'The Parsnip Collection' on google photos. This includes many of the photos on this page and was curated by Tom.</label>
     </div>
-        
     <form runat="server">
         <div runat="server" id="UploadDiv" class="form-group" style="display:none; ">
             <label class="file-upload file-upload-menu-container">   
@@ -63,15 +57,16 @@
                 <asp:FileUpload ID="PhotoUpload2" runat="server" class="form-control-file" onchange="this.form.submit()" />
             </label>
             <label class="file-upload file-upload-btn btn">                
-                <span><strong>Upload Photo</strong></span>
+                <span>
+                    <strong>Upload Photo</strong>
+                </span>
                 <asp:FileUpload ID="PhotoUpload" runat="server" class="form-control-file" onchange="this.form.submit()" />
             </label>
             <hr class="break" />
-            </div>
+        </div>
         <div runat="server" id="DynamicMediaDiv">
         </div>
     </form>    
-    
     <script src="../Javascript/UsefulFunctions.js"></script>
     <script src="../Javascript/FocusImage.js"></script>
     <script src="../Javascript/Youtube.js"></script>
