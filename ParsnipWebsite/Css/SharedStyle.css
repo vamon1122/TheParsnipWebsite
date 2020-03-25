@@ -78,7 +78,7 @@
         }
     }
 
-    @media only screen and (min-width: 700px) {
+    @media only screen and (min-width: 701px) {
         .video-player-element {
             max-width: 65vw;
             margin: auto;
@@ -102,7 +102,7 @@
     }
 
     /*I am bigger than 720p*/
-    @media only screen and (min-width: 1280px) {
+    @media only screen and (min-width: 1281px) {
         .video-player-element {
             max-width: 75vw;
             margin: auto;
@@ -114,7 +114,7 @@
 
         .video-viewer {
             width: 75vw;
-            max-height: 83vh
+            max-height: 87vh
         }
 
         .media-viewer-title {
@@ -129,7 +129,7 @@
     }
 
     /*I am bigger than 1080p*/
-    @media only screen and (min-width: 1920px) {
+    @media only screen and (min-width: 1921px) {
         .video-player-element {
             max-width: 80vw;
             margin: auto;
@@ -156,7 +156,7 @@
     }
 
     /*I am bigger than 1440p*/
-    @media only screen and (min-width: 2560px) {
+    @media only screen and (min-width: 2561px) {
         .video-player-element {
             max-width: 77vw;
             margin:auto;
