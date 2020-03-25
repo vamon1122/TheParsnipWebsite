@@ -38,9 +38,9 @@
             <img src="../../Resources/Media/Images/Web_Media/Share_White.svg" style="height:40px" />
     </button>
         <div runat="server" id="MediaContainer" class="background-lightest" style="display:inline-block; padding-top:8px; padding-bottom:5px">
-            <h3><b runat="server" id="ImageTitle"></b></h3>
+            <h3 class="media-title"><b runat="server" id="ImageTitle"></b></h3>
             <img runat="server" id="ImagePreview" class="video-player" />
-            <div runat="server" id="youtube_video_container" style="margin-bottom:6px; width:80vw;" visible="false">
+            <div runat="server" id="youtube_video_container" class="youtube-video-player" style="margin-bottom:6px; margin:auto" visible="false">
                 <div runat="server" id="youtube_video" class="youtube-player" />
             </div>
             <video runat="server" id="video_container" controls="controls" class="video-player" style="display:inline-block; object-fit:contain; margin-bottom:0px" preload="none" visible="false" >
