@@ -38,12 +38,12 @@
             <img src="../../Resources/Media/Images/Web_Media/Share_White.svg" style="height:40px" />
     </button>
         <div runat="server" id="MediaContainer" class="background-lightest" style="display:inline-block; padding-top:8px; padding-bottom:5px">
-            <h3 class="media-title"><b runat="server" id="ImageTitle"></b></h3>
-            <img runat="server" id="ImagePreview" class="video-player" />
-            <div runat="server" id="youtube_video_container" class="youtube-video-player" style="margin-bottom:6px; margin:auto" visible="false">
+            <h3 class="media-viewer-title"><b runat="server" id="ImageTitle"></b></h3>
+            <img runat="server" id="ImagePreview" class="media-viewer" />
+            <div runat="server" id="youtube_video_container" class="media-viewer" style="margin-bottom:6px; margin:auto" visible="false">
                 <div runat="server" id="youtube_video" class="youtube-player" />
             </div>
-            <video runat="server" id="video_container" controls="controls" class="video-player" style="display:inline-block; object-fit:contain; margin-bottom:0px" preload="none" visible="false" >
+            <video runat="server" id="video_container" controls="controls" class="media-viewer" style="display:inline-block; object-fit:contain; margin-bottom:0px" preload="none" visible="false" >
                 <source runat="server" id="VideoSource" type="video/mp4" />
                 Your browser does not support HTML5 video.
             </video>

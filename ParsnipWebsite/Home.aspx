@@ -46,26 +46,24 @@
         <div runat="server" id="LatestVideo" style="margin-top:10px"></div>
     </form>
     <div class="">
-    <div class="media-control-text" style="margin: auto">
-    <h3 class="section-title"><b>YOUR WEBSITE NEEDS YOU!</b></h3>
-    If someone could upload everything from the crystal parsnip, that would be awesome!
+        <div class="media-control-title" style="margin: auto">
+            <h3 class="section-title"><b>YOUR WEBSITE NEEDS YOU!</b></h3>
+            If someone could upload everything from the crystal parsnip, that would be awesome!
     
-        <h3 class="section-title"><b>*NEW*</b></h3>
-        <ol style="list-style-type: square; text-align: left; padding-left:18px">
-            <li style="text-align: left">[TBC] You can now upload videos directly from youtube</li>
-            <li style="text-align: left">[28/10/19] Fixed bug where page would 'jump around' whilst content was loading</li>
-            <li style="text-align: left">[20/09/19] Fixed bug where video player would take ages to load</li>
-            <li style="text-align: left">[15/09/19] Added time machine! View the website as it was in <a href="http://original.theparsnip.co.uk">2015</a> when it was first conceived and in <a href="http://2016.theparsnip.co.uk">2016</a> when it had it's first major visual overhaul!</li>
-            <li style="text-align: left">[17/08/19] Fixed broken image links on the <a href="Photos.aspx">photos page</a></li>
-            <li style="text-align: left">[17/08/19] Fixed slow loading times on the <a href="Videos.aspx">videos page</a></li>
-            <li style="text-align: left">[07/08/19] New <a href="Krakow.aspx">Krakow page!</a> Upload, view & share holiday photos!</li>
-            <li style="text-align: left">[24/06/19] Share <a href="Photos.aspx">photos</a> and <a href="Videos.aspx">videos</a>! (Recipient doesn't even need an account to view what you share!!!)</li>
-            <li style="text-align: left">[24/06/19] You can now access the home page without logging in</li>
-        </ol>
-        
-    </div>
+                <h3 class="section-title"><b>*NEW*</b></h3>
+                <ol style="list-style-type: square; text-align: left; padding-left:18px">
+                    <li style="text-align: left">[TBC] You can now upload videos directly from youtube</li>
+                    <li style="text-align: left">[28/10/19] Fixed bug where page would 'jump around' whilst content was loading</li>
+                    <li style="text-align: left">[20/09/19] Fixed bug where video player would take ages to load</li>
+                    <li style="text-align: left">[15/09/19] Added time machine! View the website as it was in <a href="http://original.theparsnip.co.uk">2015</a> when it was first conceived and in <a href="http://2016.theparsnip.co.uk">2016</a> when it had it's first major visual overhaul!</li>
+                    <li style="text-align: left">[17/08/19] Fixed broken image links on the <a href="Photos.aspx">photos page</a></li>
+                    <li style="text-align: left">[17/08/19] Fixed slow loading times on the <a href="Videos.aspx">videos page</a></li>
+                    <li style="text-align: left">[07/08/19] New <a href="Krakow.aspx">Krakow page!</a> Upload, view & share holiday photos!</li>
+                    <li style="text-align: left">[24/06/19] Share <a href="Photos.aspx">photos</a> and <a href="Videos.aspx">videos</a>! (Recipient doesn't even need an account to view what you share!!!)</li>
+                    <li style="text-align: left">[24/06/19] You can now access the home page without logging in</li>
+                </ol>
         </div>
-    
+    </div>
     <script src="../Javascript/Youtube.js"></script>
     <script src="Javascript/LazyImages.js"></script>
     <script>
