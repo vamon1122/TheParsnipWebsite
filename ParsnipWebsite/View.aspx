@@ -43,7 +43,7 @@
             <div runat="server" id="youtube_video_container" class="media-viewer" style="margin-bottom:6px; margin:auto" visible="false">
                 <div runat="server" id="youtube_video" class="youtube-player" />
             </div>
-            <video runat="server" id="video_container" controls="controls" class="media-viewer" style="display:inline-block; object-fit:contain; margin-bottom:0px" preload="none" visible="false" >
+            <video runat="server" id="video_container" controls="controls" class="video-viewer" style="display:inline-block; object-fit:contain; margin-bottom:0px" preload="none" visible="false" >
                 <source runat="server" id="VideoSource" type="video/mp4" />
                 Your browser does not support HTML5 video.
             </video>

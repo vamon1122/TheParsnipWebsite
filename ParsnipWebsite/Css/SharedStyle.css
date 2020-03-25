@@ -34,6 +34,10 @@
             width:100vw;
         }
 
+        .video-viewer {
+            width: 100vw;
+        }
+
         .media-viewer-title {
             padding-left: 10px;
             padding-right: 10px;
@@ -55,7 +59,12 @@
         }
 
         .media-viewer {
-            width: 55vw
+            width: 55vw;
+        }
+
+        .video-viewer {
+            width: 55vw;
+            max-height: 65vh;
         }
 
         .media-viewer-title {
@@ -76,7 +85,13 @@
         }
 
         .media-viewer {
-            width: 65vw
+            width: 65vw;
+        }
+
+        .video-viewer {
+            width: 65vw;
+            /*16:8 - 100*/
+            max-height: 75vh;
         }
 
         .media-viewer-title {
@@ -94,7 +109,12 @@
         }
 
         .media-viewer {
-            width: 75vw
+            width: 75vw;
+        }
+
+        .video-viewer {
+            width: 75vw;
+            max-height: 83vh
         }
 
         .media-viewer-title {
@@ -116,7 +136,12 @@
         }
 
         .media-viewer {
-            width: 80vw
+            width: 80vw;
+        }
+
+        .video-viewer {
+            width: 80vw;
+            max-height: 89vh;
         }
 
         .media-viewer-title {
@@ -139,6 +164,11 @@
 
         .media-viewer {
             width: 77vw;
+        }
+
+        .video-viewer {
+            width: 77vw;
+            max-height: 92vh;
         }
 
         .media-viewer-title {
