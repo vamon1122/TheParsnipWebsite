@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using ParsnipData.Cookies;
-using ParsnipData.Logs;
+using ParsnipData.Logging;
 using ParsnipData.Accounts;
 using BenLog;
 using System.Diagnostics;
@@ -16,7 +16,6 @@ namespace ParsnipWebsite
     {
         private User myUser;
         private string Redirect;
-        Log DebugLog = Log.Select(3);
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -50,7 +49,7 @@ namespace ParsnipWebsite
                 myUser = ParsnipData.Accounts.User.LogIn(Request["inputUsername"].ToString(), RememberPwd.Checked, Request["inputPwd"].ToString(), RememberPwd.Checked);
                 if (myUser != null)
                 {
-                    new LogEntry(Log.Select(5)) { text = String.Format("{0} logged in from {1} {2}.", myUser.FullName, myUser.PosessivePronoun, Data.DeviceType) };
+                    new LogEntry(Log.LogInOut) { text = String.Format("{0} logged in from {1} {2}.", myUser.FullName, myUser.PosessivePronoun, Data.DeviceType) };
                     WriteCookie();
                     Response.Redirect(Redirect);
                 }

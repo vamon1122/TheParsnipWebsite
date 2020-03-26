@@ -6,7 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using ParsnipData.Accounts;
 using ParsnipData.Media;
-using ParsnipData.Logs;
+using ParsnipData.Logging;
 using ParsnipWebsite.Custom_Controls.Media;
 using System.Configuration;
 
@@ -14,7 +14,6 @@ namespace ParsnipWebsite
 {
     public partial class Home : System.Web.UI.Page
     {
-        public static readonly Log DebugLog = Log.Select(3);
         private User myUser;
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -26,7 +25,7 @@ namespace ParsnipWebsite
                 Response.Redirect("get_device_info?url=home");
             }
 
-            new LogEntry(DebugLog) { text = string.Format("The home page was accessed by {0} from {1} {2} device.", 
+            new LogEntry(Log.Debug) { text = string.Format("The home page was accessed by {0} from {1} {2} device.", 
                 myUser == null ? "someone who was not logged in" : myUser.Forename, 
                 myUser == null ? "their" : myUser.PosessivePronoun, Data.DeviceType) };
 

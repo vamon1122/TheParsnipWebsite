@@ -3,7 +3,7 @@ using ParsnipData.Accounts;
 using System.Linq;
 using System.Web;
 using System.Web.UI.WebControls;
-using ParsnipData.Logs;
+using ParsnipData.Logging;
 using ParsnipData.Media;
 using ParsnipData;
 using System.Diagnostics;
@@ -17,7 +17,6 @@ namespace ParsnipWebsite
 {
     public static class MediaManager
     {
-        static readonly Log DebugLog = Log.Select(3);
 
         public static List<MediaControl> GetUserMediaAsMediaControls(int userId, int loggedInUserId)
         {
@@ -62,7 +61,7 @@ namespace ParsnipWebsite
             catch(Exception ex)
             {
                 var e = "Exception whilst uploading image: " + ex;
-                new LogEntry(DebugLog) { text = e };
+                new LogEntry(Log.Debug) { text = e };
                 Debug.WriteLine(e);
                 HttpContext.Current.Response.Redirect("photos?error=video");
             }

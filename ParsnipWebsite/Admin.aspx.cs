@@ -6,7 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using ParsnipData.Accounts;
 using System.Data.SqlClient;
-using ParsnipData.Logs;
+using ParsnipData.Logging;
 using ParsnipData;
 using System.Reflection;
 using System.Configuration;
@@ -17,7 +17,6 @@ namespace ParsnipWebsite
     public partial class Admin : System.Web.UI.Page
     {
         User myAccount;
-        static readonly Log Debug = Log.Select(3);
         protected void Page_Load(object sender, EventArgs e)
         {
             myAccount = Account.SecurePage("admin", this, Data.DeviceType, "admin");

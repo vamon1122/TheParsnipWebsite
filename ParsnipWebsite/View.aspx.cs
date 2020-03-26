@@ -1,5 +1,5 @@
 ﻿using ParsnipData.Accounts;
-using ParsnipData.Logs;
+using ParsnipData.Logging;
 using ParsnipData.Media;
 using System;
 using System.Collections.Generic;
@@ -13,7 +13,6 @@ namespace ParsnipWebsite
     public partial class View_Image : System.Web.UI.Page
     {
         User myUser;
-        static readonly Log DebugLog = Log.Select(3);
         ParsnipData.Media.Media myImage;
         ParsnipData.Media.Video myVideo;
         ParsnipData.Media.Youtube myYoutubeVideo;
@@ -60,7 +59,7 @@ namespace ParsnipWebsite
 
                     if (string.IsNullOrEmpty(myMediaShare.MediaId.ToString()))
                     {
-                        new LogEntry(DebugLog) { text = $"Someone tried to access share {myMediaShare.Id}. Access was denied because the person who created this link has been suspended." };
+                        new LogEntry(Log.Debug) { text = $"Someone tried to access share {myMediaShare.Id}. Access was denied because the person who created this link has been suspended." };
                         ShareUserSuspendedError.Visible = true;
                     }
                     else
@@ -78,7 +77,7 @@ namespace ParsnipWebsite
                         myYoutubeVideo = Youtube.Select(myMediaShare.MediaId, myUserId);
                         
 
-                        new LogEntry(DebugLog) { text = string.Format("{0}'s link to {1} got another hit! Now up to {2}", createdBy.FullName, MyMedia.Title, myMediaShare.TimesUsed) };
+                        new LogEntry(Log.Debug) { text = string.Format("{0}'s link to {1} got another hit! Now up to {2}", createdBy.FullName, MyMedia.Title, myMediaShare.TimesUsed) };
                     }
                 }
             }
@@ -209,7 +208,7 @@ namespace ParsnipWebsite
                 User sharedBy = ParsnipData.Accounts.User.Select(myMediaShare.UserId);
 
 
-                new LogEntry(Log.Select(4))
+                new LogEntry(Log.General)
                 {
                     text = string.Format("{0} started watching video called \"{1}\" " +
                     "using {2}'s access token. This token has now been used {3} times!", personFullName, MyMedia.Title,
@@ -219,7 +218,7 @@ namespace ParsnipWebsite
             else
             {
 
-                new LogEntry(Log.Select(4)) { text = string.Format("{0} started watching video called \"{1}\"", personFullName, MyMedia.Title) };
+                new LogEntry(Log.General) { text = string.Format("{0} started watching video called \"{1}\"", personFullName, MyMedia.Title) };
             }
         }
 
@@ -229,22 +228,22 @@ namespace ParsnipWebsite
 
             switch (MyMedia.AlbumId)
             {
-                case (int)MediaTag.MediaTagIds.Amsterdam:
+                case (int)MediaTag.Ids.Amsterdam:
                     redirect = "~/amsterdam?focus=";
                     break;
-                case (int)MediaTag.MediaTagIds.Krakow:
+                case (int)MediaTag.Ids.Krakow:
                     redirect = "~/krakow?focus=";
                     break;
-                case (int)MediaTag.MediaTagIds.Memes:
+                case (int)MediaTag.Ids.Memes:
                     redirect = "~/memes?focus=";
                     break;
-                case (int)MediaTag.MediaTagIds.Photos:
+                case (int)MediaTag.Ids.Photos:
                     redirect = "~/photos?focus=";
                     break;
-                case (int)MediaTag.MediaTagIds.Portugal:
+                case (int)MediaTag.Ids.Portugal:
                     redirect = "~/portugal?focus=";
                     break;
-                case (int)MediaTag.MediaTagIds.Videos:
+                case (int)MediaTag.Ids.Videos:
                     redirect = "~/videos?focus=";
                     break;
                 default:

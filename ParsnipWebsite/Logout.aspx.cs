@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using ParsnipData.Accounts;
-using ParsnipData.Logs;
+using ParsnipData.Logging;
 
 namespace ParsnipWebsite
 {
@@ -18,7 +18,7 @@ namespace ParsnipWebsite
 
             User myUser = new User("logout get name");
             ParsnipData.Accounts.User.LogIn();
-            new LogEntry(Log.Select(5)) { text = String.Format("{0} logged out from {1} {2} device.", myUser.FullName, myUser.PosessivePronoun, Data.DeviceType) };
+            new LogEntry(Log.LogInOut) { text = String.Format("{0} logged out from {1} {2} device.", myUser.FullName, myUser.PosessivePronoun, Data.DeviceType) };
             ParsnipData.Accounts.User.LogOut();
             Response.Redirect("login");
         }

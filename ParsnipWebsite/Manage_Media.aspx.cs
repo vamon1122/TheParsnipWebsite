@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using ParsnipData.Accounts;
-using ParsnipData.Logs;
+using ParsnipData.Logging;
 using System.Data.SqlClient;
 using ParsnipData;
 using ParsnipData.Media;
@@ -18,33 +18,10 @@ namespace ParsnipWebsite
     {
         User myUser;
         int selectedUserId;
-        static readonly Log DebugLog = Log.Select(3);
 
         protected void Page_Load(object sender, EventArgs e)
         {
             myUser = Account.SecurePage("manage_media", this, Data.DeviceType, "admin");
-
-            //UpdateUserList();
-
-            //if (Request.QueryString["id"] != null && Request.QueryString["id"].ToString() != "")
-            //{
-            //    new LogEntry(DebugLog) { text = "Manage_Media userId = " + Request.QueryString["id"].ToString() };
-            //    selectedUserId = Convert.ToInt16(Request.QueryString["id"]);
-
-            //    SelectUser.SelectedValue = selectedUserId.ToString();
-
-
-            //    foreach (MediaControl temp in MediaManager.GetUserMediaAsMediaControls(selectedUserId, myUser.Id))
-            //    {
-            //        DisplayPhotosDiv.Controls.Add(temp);
-            //    }
-            //}
-            //else
-            //{
-
-            //    if (Request.QueryString["id"] == null)
-            //        Response.Redirect("manage_media?id=0");
-            //}
         }
 
         protected void Page_LoadComplete(object sender, EventArgs e)
@@ -53,7 +30,7 @@ namespace ParsnipWebsite
 
             if (Request.QueryString["id"] != null && Request.QueryString["id"].ToString() != "")
             {
-                new LogEntry(DebugLog) { text = "Manage_Media userId = " + Request.QueryString["id"].ToString() };
+                new LogEntry(Log.Debug) { text = "Manage_Media userId = " + Request.QueryString["id"].ToString() };
                 selectedUserId = Convert.ToInt16(Request.QueryString["id"]);
 
                 SelectUser.SelectedValue = selectedUserId.ToString();

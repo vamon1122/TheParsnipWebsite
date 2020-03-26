@@ -6,7 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using ParsnipData.Accounts;
 using ParsnipData.Media;
-using ParsnipData.Logs;
+using ParsnipData.Logging;
 using ParsnipData;
 using System.Diagnostics;
 
@@ -15,7 +15,6 @@ namespace ParsnipWebsite
     public partial class Edit_Media : System.Web.UI.Page
     {
         User myUser;
-        static readonly Log GeneralLog = Log.Select(4);
         private ParsnipData.Media.Media MyImage;
         private Video MyVideo;
         private Youtube MyYoutubeVideo;
@@ -119,22 +118,22 @@ namespace ParsnipWebsite
 
                 switch (MyMedia.AlbumId)
                 {
-                    case (int)MediaTag.MediaTagIds.Photos:
+                    case (int)MediaTag.Ids.Photos:
                         OriginalAlbumRedirect = "photos?focus=" + MyMedia.Id.ToString();
                         break;
-                    case (int)MediaTag.MediaTagIds.Memes:
+                    case (int)MediaTag.Ids.Memes:
                         OriginalAlbumRedirect = "memes?focus=" + MyMedia.Id.ToString();
                         break;
-                    case (int)MediaTag.MediaTagIds.Krakow:
+                    case (int)MediaTag.Ids.Krakow:
                         OriginalAlbumRedirect = "krakow?focus=" + MyMedia.Id.ToString();
                         break;
-                    case (int)MediaTag.MediaTagIds.Videos:
+                    case (int)MediaTag.Ids.Videos:
                         OriginalAlbumRedirect = "videos?focus=" + MyMedia.Id.ToString();
                         break;
-                    case (int)MediaTag.MediaTagIds.Portugal:
+                    case (int)MediaTag.Ids.Portugal:
                         OriginalAlbumRedirect = "portugal?focus=" + MyMedia.Id.ToString();
                         break;
-                    case (int)MediaTag.MediaTagIds.Amsterdam:
+                    case (int)MediaTag.Ids.Amsterdam:
                         OriginalAlbumRedirect = "amsterdam?focus=" + MyMedia.Id.ToString();
                         break;
                     case default(int):
@@ -183,7 +182,7 @@ namespace ParsnipWebsite
                     }
                     else
                     {
-                        new LogEntry(GeneralLog)
+                        new LogEntry(Log.General)
                         {
                             text = string.Format("{0} tried to delete media called \"{1}\", but {2} was not allowed " +
                             "because {2} is not an admin", myUser.FullName, MyMedia.Title, 
@@ -196,22 +195,22 @@ namespace ParsnipWebsite
 
                     switch (Convert.ToInt16(NewAlbumsDropDown.SelectedValue))
                     {
-                        case (int)MediaTag.MediaTagIds.Amsterdam:
+                        case (int)MediaTag.Ids.Amsterdam:
                             Redirect = "amsterdam";
                             break;
-                        case (int)MediaTag.MediaTagIds.Krakow:
+                        case (int)MediaTag.Ids.Krakow:
                             Redirect = "krakow";
                             break;
-                        case (int)MediaTag.MediaTagIds.Memes:
+                        case (int)MediaTag.Ids.Memes:
                             Redirect = "memes";
                             break;
-                        case (int)MediaTag.MediaTagIds.Photos:
+                        case (int)MediaTag.Ids.Photos:
                             Redirect = "photos";
                             break;
-                        case (int)MediaTag.MediaTagIds.Portugal:
+                        case (int)MediaTag.Ids.Portugal:
                             Redirect = "portugal";
                             break;
-                        case (int)MediaTag.MediaTagIds.Videos:
+                        case (int)MediaTag.Ids.Videos:
                             Redirect = "videos";
                             break;
                         case 0:
@@ -224,7 +223,7 @@ namespace ParsnipWebsite
                     }
                     if (deleteSuccess)
                     {
-                        new LogEntry(GeneralLog) { text = string.Format("{0} deleted media called \"{1}\"", 
+                        new LogEntry(Log.General) { text = string.Format("{0} deleted media called \"{1}\"", 
                             myUser.FullName, MyMedia.Title) };
                         Response.Redirect(Redirect);
                     }
@@ -277,7 +276,7 @@ namespace ParsnipWebsite
 
                             if (myUser.Id.ToString() == MyMedia.CreatedById.ToString())
                             {
-                                new LogEntry(GeneralLog)
+                                new LogEntry(Log.General)
                                 {
                                     text = string.Format("{0} saved changes to {1} media called \"{2}\"",
                                     myUser.FullName, myUser.PosessivePronoun, MyMedia.Title)
@@ -287,7 +286,7 @@ namespace ParsnipWebsite
                             {
                                 string accountType = myUser.AccountType == "admin" ? "admin" : "approved media editor";
 
-                                new LogEntry(GeneralLog)
+                                new LogEntry(Log.General)
                                 {
                                     text = string.Format("{0} saved changes to media called \"{1}\". {3} does not own " +
                                     "the media but {2} is allowed since {2} is an {4}" , myUser.FullName, 
@@ -301,7 +300,7 @@ namespace ParsnipWebsite
                         else
                         {
                             changesWereSaved = false;
-                            new LogEntry(GeneralLog)
+                            new LogEntry(Log.General)
                             {
                                 text =
                                 string.Format("{0} tried to save changes to media called \"{1}\" which {2} did not own. {3} is not " +
@@ -316,22 +315,22 @@ namespace ParsnipWebsite
 
                         switch (MyMedia.AlbumId)
                         {
-                            case (int)MediaTag.MediaTagIds.Photos:
+                            case (int)MediaTag.Ids.Photos:
                                 Redirect = "photos?focus=" + MyMedia.Id.ToString();
                                 break;
-                            case (int)MediaTag.MediaTagIds.Memes:
+                            case (int)MediaTag.Ids.Memes:
                                 Redirect = "memes?focus=" + MyMedia.Id.ToString();
                                 break;
-                            case (int)MediaTag.MediaTagIds.Krakow:
+                            case (int)MediaTag.Ids.Krakow:
                                 Redirect = "krakow?focus=" + MyMedia.Id.ToString();
                                 break;
-                            case (int)MediaTag.MediaTagIds.Videos:
+                            case (int)MediaTag.Ids.Videos:
                                 Redirect = "videos?focus=" + MyMedia.Id.ToString();
                                 break;
-                            case (int)MediaTag.MediaTagIds.Portugal:
+                            case (int)MediaTag.Ids.Portugal:
                                 Redirect = "portugal?focus=" + MyMedia.Id.ToString();
                                 break;
-                            case (int)MediaTag.MediaTagIds.Amsterdam:
+                            case (int)MediaTag.Ids.Amsterdam:
                                 Redirect = "amsterdam?focus=" + MyMedia.Id.ToString();
                                 break;
                             case default(int):
@@ -382,7 +381,7 @@ namespace ParsnipWebsite
                     if (myUser.AccountType == "admin" || myUser.AccountType == "media")
                     {
                         string accountType = myUser.AccountType == "admin" ? "admin" : "approved media editor";
-                        new LogEntry(GeneralLog)
+                        new LogEntry(Log.General)
                         {
                             text = string.Format("{0} started editing media called \"{1}\". {2} does not own the " +
                             "media but {3} is allowed since {3} is an {4}", myUser.FullName, MyMedia.Title, 
@@ -392,7 +391,7 @@ namespace ParsnipWebsite
                     }
                     else
                     {
-                        new LogEntry(GeneralLog)
+                        new LogEntry(Log.General)
                         {
                             text = string.Format("{0} attempted to edit media called \"{1}\" which {2} " +
                         "did not own. Access was DENIED!", myUser.FullName, MyMedia.Title, myUser.SubjectiveGenderPronoun)

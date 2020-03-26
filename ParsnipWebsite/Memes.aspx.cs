@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using ParsnipData.Logs;
+using ParsnipData.Logging;
 using ParsnipData.Media;
 using System.Web.UI.HtmlControls;
 using ParsnipData;
@@ -18,7 +18,6 @@ namespace ParsnipWebsite
     public partial class Memes : System.Web.UI.Page
     {
         private User myUser;
-        static readonly Log DebugLog = Log.Select(3);
         static readonly MediaTag MemesMediaTag = new MediaTag(3);
 
         public Memes()
