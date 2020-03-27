@@ -9,6 +9,7 @@ using ParsnipData.Media;
 using ParsnipData.Logging;
 using ParsnipData;
 using System.Diagnostics;
+using ParsnipWebsite.Custom_Controls.Media;
 
 namespace ParsnipWebsite
 {
@@ -33,10 +34,6 @@ namespace ParsnipWebsite
                 if (MyImage != null)
                     return MyImage;
 
-                
-
-                
-
                 return null;
             }
         }
@@ -48,8 +45,15 @@ namespace ParsnipWebsite
 
             if (Request.QueryString["id"] == null)
                 myUser = Account.SecurePage("edit_media", this, Data.DeviceType);
+            else if(Request.QueryString["tag"] == null)
+                myUser = Account.SecurePage($"edit_media?id={Request.QueryString["id"]}", this, Data.DeviceType);
             else
-                myUser = Account.SecurePage("edit_media?id=" + Request.QueryString["id"], this, Data.DeviceType);
+                myUser = Account.SecurePage($"edit_media?id={Request.QueryString["id"]}&tag={Request.QueryString["tag"]}", this, Data.DeviceType);
+
+            if (Request.QueryString["removetag"] == "true")
+            {
+                MediaTagPair.Delete(new MediaId(Request.QueryString["id"]), Convert.ToInt32(Request.QueryString["tag"]));
+            }
 
             if (Request.QueryString["id"] != null)
             {
@@ -116,6 +120,17 @@ namespace ParsnipWebsite
                     Response.Redirect("home");
                 }
 
+                Page httpHandler = (Page)HttpContext.Current.Handler;
+                foreach (MediaTagPair mediaTagPair in MyMedia.MediaTagPairs)
+                {
+                    MediaTagPairControl mediaTagPairControl = (MediaTagPairControl)httpHandler.LoadControl("~/Custom_Controls/Media/MediaTagPairControl.ascx");
+                    mediaTagPairControl.MyMedia = MyMedia;
+                    mediaTagPairControl.MyPair = mediaTagPair;
+                    MediaTagContainer.Controls.Add(mediaTagPairControl);
+                }
+
+                
+
                 switch (MyMedia.AlbumId)
                 {
                     case (int)MediaTag.Ids.Photos:
@@ -162,13 +177,20 @@ namespace ParsnipWebsite
                 var AlbumIds = MyMedia.SelectMediaTagIds();
                 int NumberOfAlbums = AlbumIds.Count();
 
-                if (NumberOfAlbums > 0)
+                if (Request.QueryString["tag"] == null)
                 {
-                    NewAlbumsDropDown.SelectedValue = AlbumIds.First().ToString();
+                    if (NumberOfAlbums > 0)
+                    {
+                        NewAlbumsDropDown.SelectedValue = AlbumIds.First().ToString();
+                    }
+                    else
+                    {
+                        NewAlbumsDropDown.SelectedValue = "0";
+                    }
                 }
                 else
                 {
-                    NewAlbumsDropDown.SelectedValue = "0";
+                    NewAlbumsDropDown.SelectedValue = Request.QueryString["tag"];
                 }
 
                 if (Request.QueryString["delete"] != null)

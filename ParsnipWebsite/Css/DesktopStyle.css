@@ -27,6 +27,123 @@
         display: inline-block;
     }
 
+@media only screen and (orientation: portrait) {
+
+    @media only screen and (min-width: 0px) {
+        .center_form {
+            width: 100%;
+            display: inline-block;
+        }
+    }
+
+    @media only screen and (min-width: 400px) {
+        .center_form {
+            width: 95%;
+            display: inline-block;
+        }
+    }
+
+    @media only screen and (min-width: 500px) {
+        .center_form {
+            width: 85%;
+            display: inline-block;
+        }
+    }
+
+    @media only screen and (min-width: 700px) {
+        .center_form {
+            width: 65%;
+            display: inline-block;
+        }
+    }
+
+    @media only screen and (min-width: 900px) {
+        .center_form {
+            width: 50%;
+            display: inline-block;
+        }
+    }
+}
+
+@media only screen and (orientation: landscape) {
+    @media only screen and (min-width: 0px) {
+        .center_form {
+            width: 100%;
+            display: inline-block;
+        }
+    }
+
+    @media only screen and (min-width: 400px) {
+        .center_form {
+            width: 95%;
+            display: inline-block;
+        }
+    }
+
+    @media only screen and (min-width: 500px) {
+        .center_form {
+            width: 85%;
+            display: inline-block;
+        }
+    }
+
+    @media only screen and (min-width: 700px) {
+        .center_form {
+            width: 65%;
+            display: inline-block;
+        }
+    }
+
+    @media only screen and (min-width: 900px) {
+        .center_form {
+            width: 50%;
+            display: inline-block;
+        }
+    }
+
+    @media only screen and (min-width: 1200px) {
+        .center_form {
+            width: 40%;
+            display: inline-block;
+        }
+    }
+
+    @media only screen and (min-width: 1200px) {
+        .center_form {
+            width: 40%;
+            display: inline-block;
+        }
+    }
+
+    @media only screen and (min-width: 1400px) {
+        .center_form {
+            width: 35%;
+            display: inline-block;
+        }
+    }
+
+    @media only screen and (min-width: 1800px) {
+        .center_form {
+            width: 30%;
+            display: inline-block;
+        }
+    }
+
+    @media only screen and (min-width: 2200px) {
+        .center_form {
+            width: 25%;
+            display: inline-block;
+        }
+    }
+
+    @media only screen and (min-width: 2700px) {
+        .center_form {
+            width: 20%;
+            display: inline-block;
+        }
+    }
+}
+
 
 
     .image-preview {

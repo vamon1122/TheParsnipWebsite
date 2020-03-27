@@ -79,6 +79,9 @@
             <div runat="server" id="youtube_video_container" class="youtube-container" style="display:inline-block; margin-bottom:0px; padding-bottom:0px" visible="false">
                 <div runat="server" id="youtube_video" class="youtube-player" />
             </div>
+            <br />
+            <br />
+            <div runat="server" id="MediaTagContainer"></div>
 
             <!-- Delete / save buttons -->
             <div style="width:100%; padding-left:5%; padding-right:5%; padding-top:20px; display:block;">

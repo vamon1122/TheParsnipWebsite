@@ -40,7 +40,7 @@ namespace ParsnipWebsite
             myYoutube.Scrape();
             myYoutube.Insert();
 
-            Response.Redirect($"edit_media?id={myYoutube.Id}");
+            Response.Redirect($"edit_media?id={myYoutube.Id}&tag={MediaTag.Ids.Videos}");
         }
     }
 }

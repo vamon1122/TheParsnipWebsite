@@ -78,6 +78,8 @@
     <Content Include="Css\MobileLandscapeStyle.css" />
     <Content Include="Custom_Controls\Admin\AdminMenu.ascx" />
     <Content Include="Custom_Controls\Media\MediaControl.ascx" />
+    <Content Include="Custom_Controls\Media\MediaTagPairControl.ascx" />
+    <Content Include="Custom_Controls\Media\MediaTagPairViewControl.ascx" />
     <Content Include="Custom_Controls\Menu\Menu.ascx" />
     <Content Include="Custom_Controls\Uac\AdminUserForm.ascx" />
     <Content Include="Default.aspx" />
@@ -180,6 +182,20 @@
     </Compile>
     <Compile Include="Custom_Controls\Media\MediaControl.ascx.designer.cs">
       <DependentUpon>MediaControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Custom_Controls\Media\MediaTagPairControl.ascx.cs">
+      <DependentUpon>MediaTagPairControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Custom_Controls\Media\MediaTagPairControl.ascx.designer.cs">
+      <DependentUpon>MediaTagPairControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Custom_Controls\Media\MediaTagPairViewControl.ascx.cs">
+      <DependentUpon>MediaTagPairViewControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Custom_Controls\Media\MediaTagPairViewControl.ascx.designer.cs">
+      <DependentUpon>MediaTagPairViewControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="Custom_Controls\Menu\Menu.ascx.cs">
       <DependentUpon>Menu.ascx</DependentUpon>

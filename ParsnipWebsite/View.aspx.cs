@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using ParsnipWebsite.Custom_Controls.Media;
 
 namespace ParsnipWebsite
 {
@@ -121,6 +122,14 @@ namespace ParsnipWebsite
             }
             else
             {
+                Page httpHandler = (Page)HttpContext.Current.Handler;
+                foreach (MediaTagPair mediaTagPair in MyMedia.MediaTagPairs)
+                {
+                    MediaTagPairViewControl mediaTagPairViewControl = (MediaTagPairViewControl)httpHandler.LoadControl("~/Custom_Controls/Media/MediaTagPairViewControl.ascx");
+                    mediaTagPairViewControl.MyMedia = MyMedia;
+                    mediaTagPairViewControl.MyPair = mediaTagPair;
+                    MediaTagContainer.Controls.Add(mediaTagPairViewControl);
+                }
 
                 if (MyMedia.AlbumId == 0)
                     Button_ViewAlbum.Visible = false;
@@ -178,7 +187,6 @@ namespace ParsnipWebsite
                     youtube_video.Attributes.Add("data-id", myYoutubeVideo.DataId);
                     ImagePreview.Visible = false;
                     video_container.Visible = false;
-                    //MyEdit.HRef = string.Format("../../edit_media?id={0}", myYoutubeVideo.Id);
                 }
                 else
                 {
@@ -191,7 +199,6 @@ namespace ParsnipWebsite
                     VideoSource.Src = myVideo.VideoData.Compressed;
                     ImagePreview.Visible = false;
                     youtube_video_container.Visible = false;
-                    //MyEdit.HRef = string.Format("../../edit_media?id={0}", myVideo.Id);
                 }
 
                 ShareLink.Value = Request.Url.GetLeftPart(UriPartial.Authority) + "/view?share=" +

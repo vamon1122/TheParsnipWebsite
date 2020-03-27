@@ -16,6 +16,8 @@ namespace ParsnipWebsite.Custom_Controls.Media
 
         }
 
+        public ParsnipData.Media.MediaTag MyMediaTag { get; set; }
+
         ParsnipData.Media.Media _myMedia;
         public ParsnipData.Media.Media MyMedia
         {
@@ -28,7 +30,11 @@ namespace ParsnipWebsite.Custom_Controls.Media
                 SetContainerWidth();
                 MyTitle.InnerHtml = value.Title;
                 MediaContainer.ID = value.Id.ToString();
-                MyEdit.HRef = string.Format("../../edit_media?id={0}", value.Id);
+                MyEdit.HRef = $"../../edit_media?id={value.Id}";
+                if(MyMediaTag != null && MyMediaTag.Id != default)
+                {
+                    MyEdit.HRef += $"&tag={MyMediaTag.Id}";
+                }
 
                 if (value.Type == "image")
                 {

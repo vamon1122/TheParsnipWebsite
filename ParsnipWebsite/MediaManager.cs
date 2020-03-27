@@ -42,6 +42,7 @@ namespace ParsnipWebsite
             foreach (ParsnipData.Media.Media temp in mediaTag.GetAllMedia(loggedInUserId))
             {
                 MediaControl myMediaControl = (MediaControl)httpHandler.LoadControl("~/Custom_Controls/Media/MediaControl.ascx");
+                myMediaControl.MyMediaTag = mediaTag;
                 myMediaControl.MyMedia = temp;
                 mediaControls.Add(myMediaControl);
             }
@@ -56,7 +57,7 @@ namespace ParsnipWebsite
                 ParsnipData.Media.Image myImage = new ParsnipData.Media.Image(uploader, mediaTag, uploadControl.PostedFile);
                 myImage.Insert();
                 myImage.Update();
-                HttpContext.Current.Response.Redirect("edit_media?id=" + myImage.Id, false);
+                HttpContext.Current.Response.Redirect($"edit_media?id={myImage.Id}&tag={mediaTag.Id}", false);
             }
             catch(Exception ex)
             {

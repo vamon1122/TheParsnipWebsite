@@ -40,14 +40,18 @@
         <div runat="server" id="MediaContainer" class="background-lightest" style="display:inline-block; padding-top:8px; padding-bottom:5px">
             <h3 class="media-viewer-title"><b runat="server" id="ImageTitle"></b></h3>
             <img runat="server" id="ImagePreview" class="media-viewer" />
-            <div runat="server" id="youtube_video_container" class="media-viewer" style="margin-bottom:6px; margin:auto" visible="false">
+            <div runat="server" id="youtube_video_container" class="media-viewer" style="margin:auto" visible="false">
                 <div runat="server" id="youtube_video" class="youtube-player" />
             </div>
             <video runat="server" id="video_container" controls="controls" class="video-viewer" style="display:inline-block; object-fit:contain; margin-bottom:0px" preload="none" visible="false" >
                 <source runat="server" id="VideoSource" type="video/mp4" />
                 Your browser does not support HTML5 video.
             </video>
+            <br />
+            <div runat="server" id="MediaTagContainer" class="center_div" style="margin:auto; padding-top:4px">More like this: </div>
+            <br />
         </div>
+    
         <form id="form1" runat="server" style="width:100%; margin-bottom:5%">
             <br />
             <br />

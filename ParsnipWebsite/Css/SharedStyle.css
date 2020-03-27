@@ -104,23 +104,23 @@
     /*I am bigger than 720p*/
     @media only screen and (min-width: 1281px) {
         .video-player-element {
-            max-width: 75vw;
+            max-width: 70vw;
             margin: auto;
         }
 
         .media-viewer {
-            width: 75vw;
+            width: 70vw;
         }
 
         .video-viewer {
-            width: 75vw;
-            max-height: 87vh
+            width: 70vw;
+            max-height: 82vh
         }
 
         .media-viewer-title {
             padding-left: 10px;
             padding-right: 10px;
-            width: 75vw
+            width: 70vw
         }
 
         .meme {
@@ -131,23 +131,23 @@
     /*I am bigger than 1080p*/
     @media only screen and (min-width: 1921px) {
         .video-player-element {
-            max-width: 80vw;
+            max-width: 78vw;
             margin: auto;
         }
 
         .media-viewer {
-            width: 80vw;
+            width: 78vw;
         }
 
         .video-viewer {
-            width: 80vw;
-            max-height: 89vh;
+            width: 78vw;
+            max-height: 87vh;
         }
 
         .media-viewer-title {
             padding-left: 10px;
             padding-right: 10px;
-            width: 80vw
+            width: 78vw
         }
 
         .meme {
