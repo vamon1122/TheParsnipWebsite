@@ -52,7 +52,7 @@
     
                 <h3 class="section-title"><b>*NEW*</b></h3>
                 <ol style="list-style-type: square; text-align: left; padding-left:18px">
-                    <li style="text-align: left">[TBC] You can now upload videos directly from youtube</li>
+                    <li style="text-align: left">[08/03/20] You can now upload videos directly from youtube</li>
                     <li style="text-align: left">[28/10/19] Fixed bug where page would 'jump around' whilst content was loading</li>
                     <li style="text-align: left">[20/09/19] Fixed bug where video player would take ages to load</li>
                     <li style="text-align: left">[15/09/19] Added time machine! View the website as it was in <a href="http://original.theparsnip.co.uk">2015</a> when it was first conceived and in <a href="http://2016.theparsnip.co.uk">2016</a> when it had it's first major visual overhaul!</li>
