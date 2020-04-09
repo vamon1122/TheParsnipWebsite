@@ -29,9 +29,9 @@ namespace ParsnipWebsite
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Request.QueryString["focus"] == null)
-                myUser = Account.SecurePage("amsterdam", this, Data.DeviceType, "media");
+                myUser = Account.SecurePage("amsterdam", this, Data.DeviceType);
             else
-                myUser = Account.SecurePage("amsterdam?focus=" + Request.QueryString["focus"], this, Data.DeviceType, "media");
+                myUser = Account.SecurePage("amsterdam?focus=" + Request.QueryString["focus"], this, Data.DeviceType);
 
             if (IsPostBack)
             {
