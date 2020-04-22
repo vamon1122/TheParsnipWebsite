@@ -33,31 +33,13 @@ namespace ParsnipWebsite
         protected global::ParsnipWebsite.Custom_Controls.Menu.Menu Menu;
 
         /// <summary>
-        /// UploadDiv control.
+        /// UploadMediaControl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl UploadDiv;
-
-        /// <summary>
-        /// PhotoUpload2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload PhotoUpload2;
-
-        /// <summary>
-        /// PhotoUpload control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload PhotoUpload;
+        protected global::ParsnipWebsite.Custom_Controls.Media.UploadMediaControl UploadMediaControl;
 
         /// <summary>
         /// DynamicMediaDiv control.

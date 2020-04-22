@@ -33,17 +33,7 @@ namespace ParsnipWebsite
             else
                 myUser = Account.SecurePage("portugal?focus=" + Request.QueryString["focus"], this, Data.DeviceType);
 
-            if (IsPostBack)
-            {
-                if (PhotoUpload.PostedFile.ContentLength > 0)
-                    MediaManager.UploadImage(myUser, PortugalMediaTag, PhotoUpload);
-
-                if (PhotoUpload2.PostedFile.ContentLength > 0)
-                    MediaManager.UploadImage(myUser, PortugalMediaTag, PhotoUpload2);
-            }
-
-            if (myUser.AccountType == "admin" || myUser.AccountType == "member")
-                UploadDiv.Style.Clear();
+            UploadMediaControl.Initialise(myUser, PortugalMediaTag, this);
         }
 
         protected void Page_LoadComplete(object sender, EventArgs e)

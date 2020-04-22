@@ -1,5 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Photos.aspx.cs" Inherits="ParsnipWebsite.Photos" %>
 <%@ Register Src="~/Custom_Controls/Menu/Menu.ascx" TagPrefix="menuControls" TagName="Menu" %>
+<%@ Register Src="~/Custom_Controls/Media/UploadMediaControl.ascx" TagPrefix="mediaControls" TagName="UploadMediaControl" %>
+
 
 <!DOCTYPE html>
 
@@ -51,19 +53,7 @@
         <label>Click <a href="https://photos.app.goo.gl/GgkSHa8FvichfXRZ7">here</a> to view 'The Parsnip Collection' on google photos. This includes many of the photos on this page and was curated by Tom.</label>
     </div>
     <form runat="server">
-        <div runat="server" id="UploadDiv" class="form-group" style="display:none; ">
-            <label class="file-upload file-upload-menu-container">   
-                <img src="../../Resources/Media/Images/Web_Media/upload-cloud.svg" class="file-upload-menu-button" />
-                <asp:FileUpload ID="PhotoUpload2" runat="server" class="form-control-file" onchange="this.form.submit()" />
-            </label>
-            <label class="file-upload file-upload-btn btn">                
-                <span>
-                    <strong>Upload Photo</strong>
-                </span>
-                <asp:FileUpload ID="PhotoUpload" runat="server" class="form-control-file" onchange="this.form.submit()" />
-            </label>
-            <hr class="break" />
-        </div>
+        <mediaControls:UploadMediaControl runat="server" ID="UploadMediaControl" />
         <div runat="server" id="DynamicMediaDiv">
         </div>
     </form>    

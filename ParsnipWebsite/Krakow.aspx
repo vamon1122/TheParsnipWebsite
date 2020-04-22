@@ -1,5 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Krakow.aspx.cs" Inherits="ParsnipWebsite.Krakow" %>
 <%@ Register Src="~/Custom_Controls/Menu/Menu.ascx" TagPrefix="menuControls" TagName="Menu" %>
+<%@ Register Src="~/Custom_Controls/Media/UploadMediaControl.ascx" TagPrefix="mediaControls" TagName="UploadMediaControl" %>
+
 
 <!DOCTYPE html>
 
@@ -39,27 +41,9 @@
         <strong>Upload Error</strong> You cannot upload videos yet!
     </div>
 
-    <h2 class="page-title"><b>Krakow</b></h2>
-    
+    <h2><b>Krakow</b></h2>
     <form runat="server">
-        <div runat="server" id="UploadDiv" class="form-group" style="display:none; ">
-            <label class="file-upload file-upload-menu-container">                
-                <img src="../../Resources/Media/Images/Web_Media/upload-cloud.svg" class="file-upload-menu-button" />
-                <asp:FileUpload ID="PhotoUpload2" runat="server" class="form-control-file" onchange="this.form.submit()" />
-            </label>
-            <h3 class="section-title"><b>Upload your Krakow photos</b></h3>
-            <div class="media-control-text" style="margin: auto">
-            If you have any videos, send them to me, otherwise, upload any missing photos!
-            Let me know if you want to help improve the captions for our holiday photos. 
-            I appreciate that they're awful at the moment 😂. I can give you editing rights if you're interested :P
-                </div>
-            <br />
-        
-            <label class="file-upload file-upload-btn  btn">                
-                <span><strong>Upload Photo</strong></span>
-                <asp:FileUpload ID="PhotoUpload" runat="server" class="form-control-file" onchange="this.form.submit()" />
-            </label>
-        </div>
+        <mediaControls:UploadMediaControl runat="server" id="UploadMediaControl" />
         <div runat="server" id="DynamicMediaDiv">
         </div>
     </form>    

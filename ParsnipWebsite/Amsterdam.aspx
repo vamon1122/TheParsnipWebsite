@@ -1,5 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Amsterdam.aspx.cs" Inherits="ParsnipWebsite.Amsterdam" %>
 <%@ Register Src="~/Custom_Controls/Menu/Menu.ascx" TagPrefix="menuControls" TagName="Menu" %>
+<%@ Register Src="~/Custom_Controls/Media/UploadMediaControl.ascx" TagPrefix="mediaControls" TagName="UploadMediaControl" %>
+
 
 <!DOCTYPE html>
 
@@ -40,16 +42,7 @@
 
     <h2><b>Amsterdam</b></h2>
     <form id="form1" runat="server">
-        <div runat="server" id="UploadDiv" class="form-group" style="display:none">
-            <label class="file-upload file-upload-menu-container">                
-                <img src="../../Resources/Media/Images/Web_Media/upload-cloud.svg" class="file-upload-menu-button" />
-                <asp:FileUpload ID="PhotoUpload2" runat="server" class="form-control-file" onchange="this.form.submit()" />
-            </label>
-            <label class="file-upload file-upload-btn btn">            
-                <span><strong>Upload Photo</strong></span>
-                <asp:FileUpload ID="PhotoUpload" runat="server" class="form-control-file" onchange="this.form.submit()" />
-            </label>
-        </div>
+        <mediaControls:UploadMediaControl runat="server" ID="UploadMediaControl" />
         <div runat="server" id="DynamicMediaDiv"></div>
     </form>
     <script src="../Javascript/FocusImage.js"></script>

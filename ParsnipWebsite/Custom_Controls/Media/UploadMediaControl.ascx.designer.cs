@@ -7,47 +7,47 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ParsnipWebsite
+namespace ParsnipWebsite.Custom_Controls.Media
 {
 
 
-    public partial class Videos
+    public partial class UploadMediaControl
     {
 
         /// <summary>
-        /// link_style control.
+        /// UploadDiv control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlLink link_style;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl UploadDiv;
 
         /// <summary>
-        /// Menu control.
+        /// MediaUpload control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::ParsnipWebsite.Custom_Controls.Menu.Menu Menu;
+        protected global::System.Web.UI.WebControls.FileUpload MediaUpload;
 
         /// <summary>
-        /// UploadMediaControl control.
+        /// TextBox_UploadDataId control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::ParsnipWebsite.Custom_Controls.Media.UploadMediaControl UploadMediaControl;
+        protected global::System.Web.UI.WebControls.TextBox TextBox_UploadDataId;
 
         /// <summary>
-        /// links_div control.
+        /// Button_UploadDataId control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl links_div;
+        protected global::System.Web.UI.WebControls.Button Button_UploadDataId;
     }
 }

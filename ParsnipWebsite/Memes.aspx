@@ -1,5 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Memes.aspx.cs" Inherits="ParsnipWebsite.Memes" %>
 <%@ Register Src="~/Custom_Controls/Menu/Menu.ascx" TagPrefix="menuControls" TagName="Menu" %>
+<%@ Register Src="~/Custom_Controls/Media/UploadMediaControl.ascx" TagPrefix="mediaControls" TagName="UploadMediaControl" %>
+
 
 <!DOCTYPE html>
 
@@ -41,16 +43,7 @@
 
     <h2><b>Memes</b></h2>
     <form runat="server">
-        <div runat="server" id="UploadDiv" class="form-group" style="display:none">
-            <label class="file-upload file-upload-menu-container">                
-                <img src="../../Resources/Media/Images/Web_Media/upload-cloud.svg" class="file-upload-menu-button" />
-                <asp:FileUpload ID="PhotoUpload2" runat="server" class="form-control-file" onchange="this.form.submit()" />
-            </label>
-            <label class="file-upload file-upload-btn btn">            
-                <span><strong>Upload Meme</strong></span>
-                <asp:FileUpload ID="PhotoUpload" runat="server" class="form-control-file" onchange="this.form.submit()" />
-            </label>
-        </div>
+        <mediaControls:UploadMediaControl runat="server" ID="UploadMediaControl" />
         <div runat="server" id="DynamicMediaDiv"></div>
     </form>
 

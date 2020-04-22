@@ -475,7 +475,10 @@ button {
     padding: 0px;
     position: fixed;
     top: 2px;
-    right: -45px;
+    /* 150 button width = right: 45
+        300 button width = right 120
+    */
+    right: -120px;
     z-index: 2147483646;
     background-color: none;
 }
@@ -503,12 +506,12 @@ button {
     /*height: 1.3em;*/
     height: 35px;
     cursor: pointer;
-    width: 150px;
+    width: 300px;
 }
 
     .file-upload, .file-upload span {
         width: 3.5em;
-        width: 150px;
+        width: 300px;
         height: 35px;
     }
 
@@ -517,14 +520,14 @@ button {
             top: 0;
             left: 0;
             margin: 0;
-            font-size: 11px;
             /* Loses tab index in webkit if width is set to 0 */
             opacity: 0;
             filter: alpha(opacity=0);
         }
 
         .file-upload strong {
-            font: normal 16px Tahoma,sans-serif;
+            font-size: 16px;
+            font-weight: normal;
             text-align: center;
             vertical-align: middle;
         }
@@ -535,7 +538,7 @@ button {
             left: 0;
             display: inline-block;
             /* Adjust button text vertical alignment */
-            padding-top: .15em;
+            padding-top: .23em;
             /*padding-left: 2px;*/
         }
 /* FILE UPLOAD END */

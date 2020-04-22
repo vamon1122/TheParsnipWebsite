@@ -22,6 +22,8 @@ namespace ParsnipWebsite
                 myUser = Account.SecurePage("videos", this, Data.DeviceType);
             else
                 myUser = Account.SecurePage("videos?focus=" + Request.QueryString["focus"], this, Data.DeviceType);
+
+            UploadMediaControl.Initialise(myUser, VideoMediaTag, this);
         }
 
         protected void Page_LoadComplete(object sender, EventArgs e)
@@ -30,17 +32,6 @@ namespace ParsnipWebsite
             {
                 links_div.Controls.Add(mc);
             }
-        }
-
-        protected void Button_UploadDataId_Click(object sender, EventArgs e)
-        {
-            var rawDataId = TextBox_UploadDataId.Text;
-            var dataId = TextBox_UploadDataId.Text.Substring(rawDataId.Length - 11, 11);
-            Youtube myYoutube = new Youtube(dataId, myUser, VideoMediaTag);
-            myYoutube.Scrape();
-            myYoutube.Insert();
-
-            Response.Redirect($"edit_media?id={myYoutube.Id}&tag={(int)MediaTag.Ids.Videos}");
         }
     }
 }

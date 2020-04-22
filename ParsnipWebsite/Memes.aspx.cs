@@ -20,12 +20,6 @@ namespace ParsnipWebsite
         private User myUser;
         static readonly MediaTag MemesMediaTag = new MediaTag(3);
 
-        public Memes()
-        {
-            //Retrieves wrong album ID and overwrites
-            //MemesAlbum.Select();
-        }
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Request.QueryString["focus"] == null)
@@ -33,17 +27,7 @@ namespace ParsnipWebsite
             else
                 myUser = Account.SecurePage("memes?focus=" + Request.QueryString["focus"], this, Data.DeviceType);
 
-            if (IsPostBack)
-            {
-                if (PhotoUpload.PostedFile.ContentLength > 0)
-                    MediaManager.UploadImage(myUser, MemesMediaTag, PhotoUpload);
-
-                if (PhotoUpload2.PostedFile.ContentLength > 0)
-                    MediaManager.UploadImage(myUser, MemesMediaTag, PhotoUpload2);
-            }
-
-            if (myUser.AccountType == "admin" || myUser.AccountType == "member")
-                UploadDiv.Style.Clear();
+            UploadMediaControl.Initialise(myUser, MemesMediaTag, this);
         }
 
         protected void Page_LoadComplete(object sender, EventArgs e)

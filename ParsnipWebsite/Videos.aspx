@@ -1,5 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Videos.aspx.cs" Inherits="ParsnipWebsite.Videos" %>
 <%@ Register Src="~/Custom_Controls/Menu/Menu.ascx" TagPrefix="menuControls" TagName="Menu" %>
+<%@ Register Src="~/Custom_Controls/Media/UploadMediaControl.ascx" TagPrefix="mediaControls" TagName="UploadMediaControl" %>
+
 
 <!DOCTYPE html>
 
@@ -46,29 +48,12 @@
         <h5><b>📽️ *NEW* Upload from youtube! 📽️</b></h5>
         <span>You can now share links directly from youtube!</span>
         <br />
-        <asp:Button runat="server" ID="Upload_Youtube" CssClass="file-upload file-upload-btn btn" Text="Upload Youtube" Visible="true" data-toggle="modal" data-target="#youtubeModal" OnClientClick="return false;"></asp:Button>
-        <br />
-        <br />
-        
+        <mediaControls:UploadMediaControl runat="server" ID="UploadMediaControl" />
         <div runat="server" id="links_div">
             
         </div>
 
-        <div class="modal fade" id="youtubeModal" tabindex="-1" role="dialog" aria-labelledby="shareMediaLink" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content" style="margin:0px; padding:0px">
-                    <div class="input-group" style="margin:0px; padding:0px">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroup-sizing-default">Link</span>
-                        </div>
-                        <asp:TextBox runat="server"  CssClass="form-control" ID="TextBox_UploadDataId"></asp:TextBox>
-                        <span class="input-group-btn">
-                            <asp:Button runat="server" ID="Button_UploadDataId"  CssClass="btn btn-primary" Text="Upload" OnClick="Button_UploadDataId_Click" />
-                        </span>
-                    </div>
-                </div>
-           </div>
-        </div>
+        
     </form>
 
     <!--SCRIPTS-->
