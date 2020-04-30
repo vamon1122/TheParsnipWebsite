@@ -155,5 +155,37 @@ namespace ParsnipWebsite.Custom_Controls.Media
                 "      </div>\n" +
                 "   </div>\n",tempGuid, ShareLink);
         }
+
+        public static List<MediaControl> GetAlbumAsMediaControls(MediaTag mediaTag)
+        {
+            var mediaControls = new List<MediaControl>();
+            Page httpHandler = (Page)HttpContext.Current.Handler;
+            int loggedInUserId = ParsnipData.Accounts.User.LogIn().Id;
+
+            foreach (ParsnipData.Media.Media temp in mediaTag.GetAllMedia(loggedInUserId))
+            {
+                MediaControl myMediaControl = (MediaControl)httpHandler.LoadControl("~/Custom_Controls/Media/MediaControl.ascx");
+                myMediaControl.MyMediaTag = mediaTag;
+                myMediaControl.MyMedia = temp;
+                mediaControls.Add(myMediaControl);
+            }
+
+            return mediaControls.OrderByDescending(mediaControl => mediaControl.MyMedia.DateTimeCaptured).ToList();
+        }
+
+        public static List<MediaControl> GetUserMediaAsMediaControls(int userId, int loggedInUserId)
+        {
+            var mediaControls = new List<MediaControl>();
+            Page httpHandler = (Page)HttpContext.Current.Handler;
+
+            foreach (ParsnipData.Media.Media temp in ParsnipData.Media.Media.SelectByUserId(userId, loggedInUserId))
+            {
+                MediaControl myMediaControl = (MediaControl)httpHandler.LoadControl("~/Custom_Controls/Media/MediaControl.ascx");
+                myMediaControl.MyMedia = temp;
+                mediaControls.Add(myMediaControl);
+            }
+
+            return mediaControls;
+        }
     }
 }

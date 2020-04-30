@@ -22,6 +22,18 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="uploadThumbnail" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content" style="margin:0px; padding:0px; background-color:transparent; border-color: transparent">
+                <div class="center_div">
+                    <label runat="server" class="file-upload file-upload-btn btn">            
+                        <span><strong>Upload Video Thumbnail</strong></span>
+                        <asp:FileUpload ID="ThumbnailUpload" runat="server" class="form-control-file" onchange="this.form.submit()" />
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="modal fade" id="uploadYoutube" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content" style="margin:0px; padding:0px;">
@@ -38,3 +50,8 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    function openUploadThumbnail() {
+        $('#uploadThumbnail').modal('show');
+    }
+</script>

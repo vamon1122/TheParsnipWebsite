@@ -28,7 +28,7 @@ namespace ParsnipWebsite
 
         protected void Page_LoadComplete(object sender, EventArgs e)
         {
-            foreach (MediaControl mc in MediaManager.GetAlbumAsMediaControls(VideoMediaTag))
+            foreach (MediaControl mc in MediaControl.GetAlbumAsMediaControls(VideoMediaTag))
             {
                 links_div.Controls.Add(mc);
             }
