@@ -71,12 +71,19 @@ namespace ParsnipWebsite.Custom_Controls.Media
         protected void Button_UploadDataId_Click(object sender, EventArgs e)
         {
             var rawDataId = TextBox_UploadDataId.Text;
-            var dataId = TextBox_UploadDataId.Text.Substring(rawDataId.Length - 11, 11);
-            Youtube myYoutube = new Youtube(dataId, LoggedInUser, MyMediaTag);
-            myYoutube.Scrape();
-            myYoutube.Insert();
+            var dataId = Youtube.ParseDataId(TextBox_UploadDataId.Text);//TextBox_UploadDataId.Text.Substring(rawDataId.Length - 11, 11);
+            if(dataId == null)
+            {
+                YoutubeError.Visible = true;
+            }
+            else
+            {
+                Youtube myYoutube = new Youtube(dataId, LoggedInUser, MyMediaTag);
+                myYoutube.Scrape();
+                myYoutube.Insert();
 
-            Response.Redirect($"edit_media?id={myYoutube.Id}&tag={MyMediaTag.Id}");
+                Response.Redirect($"edit_media?id={myYoutube.Id}&tag={MyMediaTag.Id}");
+            }
         }
         public static void UploadImage(User uploader, MediaTag mediaTag, FileUpload uploadControl)
         {

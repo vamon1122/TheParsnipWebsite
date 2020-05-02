@@ -1,4 +1,8 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UploadMediaControl.ascx.cs" Inherits="ParsnipWebsite.Custom_Controls.Media.UploadMediaControl" %>
+<div runat="server" class="alert alert-danger alert-dismissible parsnip-alert" Visible="false" id="YoutubeError">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Upload Error</strong> The youtube link which you tried to share didn't look quite right... give the url a check and try again!
+</div>
 <div runat="server" id="UploadDiv" class="form-group" style="display:none">
     <label class="file-upload file-upload-menu-container" data-toggle="modal" data-target="#uploadMedia">                
         <img src="../../Resources/Media/Images/Web_Media/upload-cloud.svg" class="file-upload-menu-button" />
