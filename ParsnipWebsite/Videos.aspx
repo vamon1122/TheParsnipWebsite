@@ -35,10 +35,6 @@
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         <strong>Access Denied</strong> You cannot edit media which other people have uploaded!
     </div>
-    <div class="alert alert-danger alert-dismissible parsnip-alert" style="display: none;" id="VideoError">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        <strong>Upload Error</strong> You cannot upload videos yet!
-    </div>
 
     <div class="cens_req padded-text"><label>Certain elements of this page were removed by request. <a href="content_removal">Click here</a> to learn more.</label></div>
 
@@ -66,12 +62,7 @@
         var error = url.searchParams.get("error");
         if (error !== "" && error !== null)
         {
-            if (error === "video")
-            {
-                document.getElementById("VideoError").style = "display:block";
-            }
-            else
-            {
+            if (error === "access") {
                 document.getElementById("AccessWarning").style = "display:block";
             }
         }

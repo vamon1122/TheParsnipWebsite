@@ -32,10 +32,6 @@
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         <strong>Access Denied</strong> You do not have permission to edit media which other people have uploaded!
     </div>
-    <div class="alert alert-danger alert-dismissible parsnip-alert" style="display: none;" id="VideoError">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        <strong>Upload Error</strong> You cannot upload videos to the website yet (I have to do this manually)
-    </div>
     <div class="cens_req padded-text">
         <label>Certain elements of this page were removed by request. 
             <a href="content_removal">Click here</a> to learn more.
@@ -50,7 +46,7 @@
     </a>
     <br />
     <div class="media-control-text" style="margin: auto">
-        <label>Click <a href="https://photos.app.goo.gl/GgkSHa8FvichfXRZ7">here</a> to view 'The Parsnip Collection' on google photos. This includes many of the photos on this page and was curated by Tom.</label>
+        <label>Click <a href="https://photos.app.goo.gl/GgkSHa8FvichfXRZ7">here</a> to view 'The Parsnip Collection' on google photos. This includes some of the older photos on this page and was curated by Tom.</label>
     </div>
     <form runat="server">
         <mediaControls:UploadMediaControl runat="server" ID="UploadMediaControl" />
@@ -67,10 +63,7 @@
         var error = url.searchParams.get("error");
         if (error !== "" && error !== null)
         {
-            if (error === "video") {
-                document.getElementById("VideoError").style = "display:block";
-            }
-            else {
+            if (error === "access") {
                 document.getElementById("AccessWarning").style = "display:block";
             }
         }
