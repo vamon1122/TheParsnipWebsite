@@ -128,6 +128,7 @@ namespace ParsnipWebsite
                     MediaTagPairViewControl mediaTagPairViewControl = (MediaTagPairViewControl)httpHandler.LoadControl("~/Custom_Controls/Media/MediaTagPairViewControl.ascx");
                     mediaTagPairViewControl.MyMedia = MyMedia;
                     mediaTagPairViewControl.MyPair = mediaTagPair;
+                    mediaTagPairViewControl.UpdateLink();
                     MediaTagContainer.Controls.Add(mediaTagPairViewControl);
                 }
 
@@ -253,8 +254,11 @@ namespace ParsnipWebsite
                 case (int)MediaTag.Ids.Videos:
                     redirect = "~/videos?focus=";
                     break;
+                case default(int):
+                    redirect = $"manage_media?id={MyMedia.Id}";
+                    break;
                 default:
-                    redirect = "photos?error=album_does_not_exist";
+                    redirect = $"tag?id={MyMedia.AlbumId}&focus={MyMedia.Id}";
                     break;
             }
 

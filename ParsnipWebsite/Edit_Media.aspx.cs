@@ -53,6 +53,10 @@ namespace ParsnipWebsite
             if (Request.QueryString["removetag"] == "true")
             {
                 MediaTagPair.Delete(new MediaId(Request.QueryString["id"]), Convert.ToInt32(Request.QueryString["tag"]));
+                if (Request.QueryString["tag"] == null)
+                    Response.Redirect($"edit_media?id={Request.QueryString["id"]}");
+                else
+                    Response.Redirect($"edit_media?id={Request.QueryString["id"]}&tag={Request.QueryString["tag"]}");
             }
 
             if (Request.QueryString["id"] != null)
@@ -129,42 +133,49 @@ namespace ParsnipWebsite
                     MediaTagContainer.Controls.Add(mediaTagPairControl);
                 }
 
-                
+                var tagParam = Request.QueryString["tag"];
+                MediaTag OriginalTag = string.IsNullOrEmpty(tagParam) ? null : new MediaTag(Convert.ToInt32(tagParam));
 
-                switch (MyMedia.AlbumId)
+                if (OriginalTag == null)
                 {
-                    case (int)MediaTag.Ids.Photos:
-                        OriginalAlbumRedirect = "photos?focus=" + MyMedia.Id.ToString();
-                        break;
-                    case (int)MediaTag.Ids.Memes:
-                        OriginalAlbumRedirect = "memes?focus=" + MyMedia.Id.ToString();
-                        break;
-                    case (int)MediaTag.Ids.Krakow:
-                        OriginalAlbumRedirect = "krakow?focus=" + MyMedia.Id.ToString();
-                        break;
-                    case (int)MediaTag.Ids.Videos:
-                        OriginalAlbumRedirect = "videos?focus=" + MyMedia.Id.ToString();
-                        break;
-                    case (int)MediaTag.Ids.Portugal:
-                        OriginalAlbumRedirect = "portugal?focus=" + MyMedia.Id.ToString();
-                        break;
-                    case (int)MediaTag.Ids.Amsterdam:
-                        OriginalAlbumRedirect = "amsterdam?focus=" + MyMedia.Id.ToString();
-                        break;
-                    case default(int):
-                        Debug.WriteLine("Album id is empty. Redirecting to manage_media");
-                        OriginalAlbumRedirect = "manage_media?" + MyMedia.Id.ToString();
-                        break;
-                    default:
-                        Debug.WriteLine(string.Format("The album id {0} was not recognised!",
-                            MyMedia.AlbumId));
-                        OriginalAlbumRedirect = "home?error=nomediaalbum4";
-                        break;
+                    OriginalAlbumRedirect = "manage_media?" + MyMedia.Id.ToString();
+                }
+                else
+                {
+                    switch (OriginalTag.Id)
+                    {
+                        case (int)MediaTag.Ids.Photos:
+                            OriginalAlbumRedirect = "photos?focus=" + MyMedia.Id.ToString();
+                            break;
+                        case (int)MediaTag.Ids.Memes:
+                            OriginalAlbumRedirect = "memes?focus=" + MyMedia.Id.ToString();
+                            break;
+                        case (int)MediaTag.Ids.Krakow:
+                            OriginalAlbumRedirect = "krakow?focus=" + MyMedia.Id.ToString();
+                            break;
+                        case (int)MediaTag.Ids.Videos:
+                            OriginalAlbumRedirect = "videos?focus=" + MyMedia.Id.ToString();
+                            break;
+                        case (int)MediaTag.Ids.Portugal:
+                            OriginalAlbumRedirect = "portugal?focus=" + MyMedia.Id.ToString();
+                            break;
+                        case (int)MediaTag.Ids.Amsterdam:
+                            OriginalAlbumRedirect = "amsterdam?focus=" + MyMedia.Id.ToString();
+                            break;
+                        case default(int):
+                            OriginalAlbumRedirect = $"tag?id={OriginalTag.Id}&focus={MyMedia.Id}";
+                            break;
+                        default:
+                            Debug.WriteLine(string.Format("The album id {0} was not recognised!",
+                                MyMedia.AlbumId));
+                            OriginalAlbumRedirect = "home?error=nomediaalbum4";
+                            break;
+                    }
                 }
 
                 NewAlbumsDropDown.Items.Clear();
                 if (myUser.AccountType == "admin")
-                    NewAlbumsDropDown.Items.Add(new ListItem() { Value = "0", Text = "None" });
+                    NewAlbumsDropDown.Items.Add(new ListItem() { Value = "0", Text = "(No tag selected)" });
                 foreach (MediaTag tempMediaTag in MediaTag.GetAllTags())
                 {
                     NewAlbumsDropDown.Items.Add(new ListItem()
@@ -175,23 +186,6 @@ namespace ParsnipWebsite
                 }
 
                 var AlbumIds = MyMedia.SelectMediaTagIds();
-                int NumberOfAlbums = AlbumIds.Count();
-
-                if (Request.QueryString["tag"] == null)
-                {
-                    if (NumberOfAlbums > 0)
-                    {
-                        NewAlbumsDropDown.SelectedValue = AlbumIds.First().ToString();
-                    }
-                    else
-                    {
-                        NewAlbumsDropDown.SelectedValue = "0";
-                    }
-                }
-                else
-                {
-                    NewAlbumsDropDown.SelectedValue = Request.QueryString["tag"];
-                }
 
                 if (Request.QueryString["delete"] != null)
                 {
@@ -235,12 +229,12 @@ namespace ParsnipWebsite
                         case (int)MediaTag.Ids.Videos:
                             Redirect = "videos";
                             break;
-                        case 0:
+                        case default(int):
                             Debug.WriteLine("No album selected. Must be none! Redirecting to manage photos...");
                             Redirect = "manage_media";
                             break;
                         default:
-                            Redirect = "home?error=nomediaalbum2";
+                            Redirect = $"tag?id={OriginalTag.Id}&focus={MyMedia.Id}";
                             break;
                     }
                     if (deleteSuccess)
@@ -255,132 +249,6 @@ namespace ParsnipWebsite
                             Response.Redirect(Redirect + "&error=access");
                         else
                             Response.Redirect(Redirect + "?error=access");
-                    }
-                }
-
-                if (IsPostBack)
-                {
-                    bool changesWereSaved;
-                    try
-                    {
-                        if (myUser.AccountType == "admin" || myUser.AccountType == "media" || myUser.Id.ToString() == MyMedia.CreatedById.ToString())
-                        {
-                            changesWereSaved = true;
-                            MyMedia.Title = Request["InputTitleTwo"].ToString();
-
-                            if (myUser.AccountType == "admin")
-                            {
-                                try
-                                {
-                                    MyMedia.DateTimeCaptured = Convert.ToDateTime(Request["input_date_media_captured"]);
-                                }
-                                catch (Exception ex)
-                                {
-                                    input_date_media_captured.Value = Request["input_date_media_captured"];
-                                    input_date_media_captured.Attributes.Add("class", "form-control is-invalid login");
-                                    throw ex;
-                                }
-                            }
-
-                            int newAlbumId = default;
-                            try
-                            {
-                                newAlbumId = Convert.ToInt16(Request["NewAlbumsDropDown"]);
-                            }
-                            catch
-                            {
-                                Debug.WriteLine("There was no album!");
-                            }
-
-                            MyMedia.AlbumId = newAlbumId;
-
-                            MyMedia.Update();
-
-                            if (myUser.Id.ToString() == MyMedia.CreatedById.ToString())
-                            {
-                                new LogEntry(Log.General)
-                                {
-                                    text = string.Format("{0} saved changes to {1} media called \"{2}\"",
-                                    myUser.FullName, myUser.PosessivePronoun, MyMedia.Title)
-                                };
-                            }
-                            else
-                            {
-                                string accountType = myUser.AccountType == "admin" ? "admin" : "approved media editor";
-
-                                new LogEntry(Log.General)
-                                {
-                                    text = string.Format("{0} saved changes to media called \"{1}\". {3} does not own " +
-                                    "the media but {2} is allowed since {2} is an {4}" , myUser.FullName, 
-                                    MyMedia.Title, myUser.SubjectiveGenderPronoun, 
-                                    myUser.SubjectiveGenderPronoun.First().ToString().ToUpper() +
-                                    myUser.SubjectiveGenderPronoun.Substring(1), accountType)
-                                };
-                            }
-                            
-                        }
-                        else
-                        {
-                            changesWereSaved = false;
-                            new LogEntry(Log.General)
-                            {
-                                text =
-                                string.Format("{0} tried to save changes to media called \"{1}\" which {2} did not own. {3} is not " +
-                                "an admin or an approved media editor so {4} changes were not saved",
-                                myUser.FullName, MyMedia.Title, myUser.SubjectiveGenderPronoun, 
-                                myUser.SubjectiveGenderPronoun.First().ToString().ToUpper() +
-                                myUser.SubjectiveGenderPronoun.Substring(1), myUser.PosessivePronoun)
-                            };
-                        }
-
-                        string Redirect;
-
-                        switch (MyMedia.AlbumId)
-                        {
-                            case (int)MediaTag.Ids.Photos:
-                                Redirect = "photos?focus=" + MyMedia.Id.ToString();
-                                break;
-                            case (int)MediaTag.Ids.Memes:
-                                Redirect = "memes?focus=" + MyMedia.Id.ToString();
-                                break;
-                            case (int)MediaTag.Ids.Krakow:
-                                Redirect = "krakow?focus=" + MyMedia.Id.ToString();
-                                break;
-                            case (int)MediaTag.Ids.Videos:
-                                Redirect = "videos?focus=" + MyMedia.Id.ToString();
-                                break;
-                            case (int)MediaTag.Ids.Portugal:
-                                Redirect = "portugal?focus=" + MyMedia.Id.ToString();
-                                break;
-                            case (int)MediaTag.Ids.Amsterdam:
-                                Redirect = "amsterdam?focus=" + MyMedia.Id.ToString();
-                                break;
-                            case default(int):
-                                Debug.WriteLine("New album id is empty. Redirecting to original album");
-                                //Redirect = "manage_medias?id=" + MyMedia.Id.ToString();
-                                Redirect = OriginalAlbumRedirect;
-                                break;
-                            default:
-                                Debug.WriteLine(string.Format("Edit_Media: The album id {0} was not recognised!",
-                                    MyMedia.AlbumId.ToString().ToUpper()));
-                                Redirect = "home?error=nomediaalbum3";
-                                break;
-                        }
-                        if (changesWereSaved)
-                        {
-                            Response.Redirect(Redirect);
-                        }
-                        else
-                        {
-                            if (Redirect.Contains("?"))
-                                Response.Redirect(Redirect + "&error=access");
-                            else
-                                Response.Redirect(Redirect + "?error=access");
-                        }
-                    }
-                    catch
-                    {
-
                     }
                 }
 
@@ -433,6 +301,101 @@ namespace ParsnipWebsite
         protected void ButtonSave_Click(object sender, EventArgs e)
         {
             Debug.WriteLine("Save button clicked. Saving changes...");
+            if (IsPostBack)
+            {
+                bool changesWereSaved;
+                try
+                {
+                    if (myUser.AccountType == "admin" || myUser.AccountType == "media" || myUser.Id.ToString() == MyMedia.CreatedById.ToString())
+                    {
+                        changesWereSaved = true;
+                        MyMedia.Title = Request["InputTitleTwo"].ToString();
+
+                        if (myUser.AccountType == "admin")
+                        {
+                            try
+                            {
+                                MyMedia.DateTimeCaptured = Convert.ToDateTime(Request["input_date_media_captured"]);
+                            }
+                            catch (Exception ex)
+                            {
+                                input_date_media_captured.Value = Request["input_date_media_captured"];
+                                input_date_media_captured.Attributes.Add("class", "form-control is-invalid login");
+                                throw ex;
+                            }
+                        }
+
+                        MyMedia.Update();
+
+                        if (myUser.Id.ToString() == MyMedia.CreatedById.ToString())
+                        {
+                            new LogEntry(Log.General)
+                            {
+                                text = string.Format("{0} saved changes to {1} media called \"{2}\"",
+                                myUser.FullName, myUser.PosessivePronoun, MyMedia.Title)
+                            };
+                        }
+                        else
+                        {
+                            string accountType = myUser.AccountType == "admin" ? "admin" : "approved media editor";
+
+                            new LogEntry(Log.General)
+                            {
+                                text = string.Format("{0} saved changes to media called \"{1}\". {3} does not own " +
+                                "the media but {2} is allowed since {2} is an {4}", myUser.FullName,
+                                MyMedia.Title, myUser.SubjectiveGenderPronoun,
+                                myUser.SubjectiveGenderPronoun.First().ToString().ToUpper() +
+                                myUser.SubjectiveGenderPronoun.Substring(1), accountType)
+                            };
+                        }
+
+                    }
+                    else
+                    {
+                        changesWereSaved = false;
+                        new LogEntry(Log.General)
+                        {
+                            text =
+                            string.Format("{0} tried to save changes to media called \"{1}\" which {2} did not own. {3} is not " +
+                            "an admin or an approved media editor so {4} changes were not saved",
+                            myUser.FullName, MyMedia.Title, myUser.SubjectiveGenderPronoun,
+                            myUser.SubjectiveGenderPronoun.First().ToString().ToUpper() +
+                            myUser.SubjectiveGenderPronoun.Substring(1), myUser.PosessivePronoun)
+                        };
+                    }
+
+                    string Redirect = OriginalAlbumRedirect;
+                    if (changesWereSaved)
+                    {
+                        Response.Redirect(Redirect);
+                    }
+                    else
+                    {
+                        if (Redirect.Contains("?"))
+                            Response.Redirect(Redirect + "&error=access");
+                        else
+                            Response.Redirect(Redirect + "?error=access");
+                    }
+                }
+                catch
+                {
+
+                }
+            }
+        }
+
+        protected void AddMediaTagPair_Click(object sender, EventArgs e)
+        {
+            int selectedTag = Convert.ToInt16(Request["NewAlbumsDropDown"]);
+            if (selectedTag != default)
+            {
+                MediaTag myMediaTag = new MediaTag(selectedTag);
+
+                MediaTagPair newMediaTagPair = new MediaTagPair(MyMedia, myMediaTag, myUser);
+                newMediaTagPair.Insert();
+
+                Page.Response.Redirect(Page.Request.Url.ToString(), true);
+            }
         }
     }
 }

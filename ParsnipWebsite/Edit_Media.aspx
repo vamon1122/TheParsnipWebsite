@@ -47,14 +47,19 @@
                 <label>Title</label>
                 <asp:TextBox CssClass="form-control" runat="server" ID="InputTitleTwo" />
             </div>
-
-            <!-- Album select -->
+            <!-- Tag select -->
             <div runat="server" id="DropDownDiv" style="padding-left:5%; padding-right: 5%;">
-                <label>Album</label>
-                <asp:DropDownList ID="NewAlbumsDropDown" runat="server" AutoPostBack="False" CssClass="form-control" >
-                </asp:DropDownList>
+                <label>Tags</label>
+                <div class="input-group" style="margin:0px; padding:0px">
+                    <asp:DropDownList ID="NewAlbumsDropDown" runat="server" AutoPostBack="False" CssClass="form-control" ></asp:DropDownList>
+                    <span class="input-group-btn">
+                        <asp:Button runat="server" ID="AddMediaTagPair" OnClick="AddMediaTagPair_Click" Text="Add Tag" CssClass="btn btn-primary" />
+                    </span>
+                </div>
                 <br />
             </div>
+            <div runat="server" id="MediaTagContainer"></div>
+            
 
             <div runat="server" id="DateCapturedDiv" class="form-group has-error" style="padding-left:5%; padding-right: 5%;" visible="false">
                 <label>Date Captured</label>
@@ -81,7 +86,6 @@
             </div>
             <br />
             <br />
-            <div runat="server" id="MediaTagContainer"></div>
 
             <!-- Delete / save buttons -->
             <div style="width:100%; padding-left:5%; padding-right:5%; padding-top:20px; display:block;">

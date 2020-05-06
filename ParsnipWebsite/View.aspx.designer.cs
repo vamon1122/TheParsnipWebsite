@@ -51,6 +51,15 @@ namespace ParsnipWebsite
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl UploadUserSuspendedError;
 
         /// <summary>
+        /// MediaTagContainer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl MediaTagContainer;
+
+        /// <summary>
         /// MediaContainer control.
         /// </summary>
         /// <remarks>
@@ -112,15 +121,6 @@ namespace ParsnipWebsite
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlSource VideoSource;
-
-        /// <summary>
-        /// MediaTagContainer control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl MediaTagContainer;
 
         /// <summary>
         /// form1 control.
