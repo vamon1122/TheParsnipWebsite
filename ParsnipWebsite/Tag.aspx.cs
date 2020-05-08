@@ -34,7 +34,7 @@ namespace ParsnipWebsite
             }
             else
             {
-                myTag = new MediaTag(Convert.ToInt32(Request.QueryString["id"]));
+                myTag = MediaTag.Select(Convert.ToInt32(Request.QueryString["id"]));
                 string focus = Request.QueryString["focus"];
 
                 if (string.IsNullOrEmpty(focus))

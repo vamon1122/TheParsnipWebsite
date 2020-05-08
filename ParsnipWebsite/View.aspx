@@ -49,7 +49,6 @@
                 Your browser does not support HTML5 video.
             </video>
             <br />
-            
         </div>
     
         <form id="form1" runat="server" style="width:100%; margin-bottom:5%">

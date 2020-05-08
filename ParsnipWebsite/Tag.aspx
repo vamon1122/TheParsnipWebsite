@@ -35,7 +35,6 @@
     <h2 class="page-title">
         <b runat="server" id="TagName"></b>
     </h2>
-    <hr class="break" />
     <form runat="server">
         <mediaControls:UploadMediaControl runat="server" ID="UploadMediaControl" />
         <div runat="server" id="DynamicMediaDiv">
