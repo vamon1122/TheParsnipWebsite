@@ -58,6 +58,14 @@ namespace ParsnipWebsite
                 else
                     Response.Redirect($"edit_media?id={Request.QueryString["id"]}&tag={Request.QueryString["tag"]}");
             }
+            else if (Request.QueryString["removeusertag"] == "true")
+            {
+                MediaUserPair.Delete(new MediaId(Request.QueryString["id"]), Convert.ToInt32(Request.QueryString["userid"]));
+                if (Request.QueryString["userid"] == null)
+                    Response.Redirect($"edit_media?id={Request.QueryString["id"]}");
+                else
+                    Response.Redirect($"edit_media?id={Request.QueryString["id"]}&userid={Request.QueryString["userid"]}");
+            }
 
             if (Request.QueryString["id"] != null)
             {
@@ -132,6 +140,13 @@ namespace ParsnipWebsite
                     mediaTagPairControl.MyPair = mediaTagPair;
                     MediaTagContainer.Controls.Add(mediaTagPairControl);
                 }
+                foreach (MediaUserPair mediaUserPair in MyMedia.MediaUserPairs)
+                {
+                    MediaUserPairControl mediaUserPairControl = (MediaUserPairControl)httpHandler.LoadControl("~/Custom_Controls/Media/MediaUserPairControl.ascx");
+                    mediaUserPairControl.MyMedia = MyMedia;
+                    mediaUserPairControl.MyPair = mediaUserPair;
+                    UserTagContainer.Controls.Add(mediaUserPairControl);
+                }
 
                 var tagParam = Request.QueryString["tag"];
                 MediaTag OriginalTag = string.IsNullOrEmpty(tagParam) ? null : new MediaTag(Convert.ToInt32(tagParam));
@@ -182,6 +197,18 @@ namespace ParsnipWebsite
                     {
                         Value = Convert.ToString(tempMediaTag.Id),
                         Text = tempMediaTag.Name
+                    });
+                }
+
+                DropDown_SelectUser.Items.Clear();
+                if (myUser.AccountType == "admin")
+                    DropDown_SelectUser.Items.Add(new ListItem() { Value = "0", Text = "(No user selected)" });
+                foreach (User user in ParsnipData.Accounts.User.GetAllUsers())
+                {
+                    DropDown_SelectUser.Items.Add(new ListItem()
+                    {
+                        Value = Convert.ToString(user.Id),
+                        Text = user.FullName
                     });
                 }
 
@@ -393,6 +420,20 @@ namespace ParsnipWebsite
 
                 MediaTagPair newMediaTagPair = new MediaTagPair(MyMedia, myMediaTag, myUser);
                 newMediaTagPair.Insert();
+
+                Page.Response.Redirect(Page.Request.Url.ToString(), true);
+            }
+        }
+
+        protected void AddMediaUserPair_Click(object sender, EventArgs e)
+        {
+            int selectedUserId = Convert.ToInt16(Request["DropDown_SelectUser"]);
+            if (selectedUserId != default)
+            {
+                int userId = selectedUserId;
+
+                MediaUserPair newMediaUserPair = new MediaUserPair(MyMedia, selectedUserId, myUser);
+                newMediaUserPair.Insert();
 
                 Page.Response.Redirect(Page.Request.Url.ToString(), true);
             }

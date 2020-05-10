@@ -80,6 +80,8 @@
     <Content Include="Custom_Controls\Media\MediaControl.ascx" />
     <Content Include="Custom_Controls\Media\MediaTagPairControl.ascx" />
     <Content Include="Custom_Controls\Media\MediaTagPairViewControl.ascx" />
+    <Content Include="Custom_Controls\Media\MediaUserPairControl.ascx" />
+    <Content Include="Custom_Controls\Media\MediaUserPairViewControl.ascx" />
     <Content Include="Custom_Controls\Media\UploadMediaControl.ascx" />
     <Content Include="Custom_Controls\Menu\Menu.ascx" />
     <Content Include="Custom_Controls\Uac\AdminUserForm.ascx" />
@@ -198,6 +200,20 @@
     </Compile>
     <Compile Include="Custom_Controls\Media\MediaTagPairViewControl.ascx.designer.cs">
       <DependentUpon>MediaTagPairViewControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Custom_Controls\Media\MediaUserPairControl.ascx.cs">
+      <DependentUpon>MediaUserPairControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Custom_Controls\Media\MediaUserPairControl.ascx.designer.cs">
+      <DependentUpon>MediaUserPairControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Custom_Controls\Media\MediaUserPairViewControl.ascx.cs">
+      <DependentUpon>MediaUserPairViewControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Custom_Controls\Media\MediaUserPairViewControl.ascx.designer.cs">
+      <DependentUpon>MediaUserPairViewControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="Custom_Controls\Media\UploadMediaControl.ascx.cs">
       <DependentUpon>UploadMediaControl.ascx</DependentUpon>

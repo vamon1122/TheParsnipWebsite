@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Diagnostics;
 using ParsnipData.Media;
+using ParsnipData.Accounts;
 
 namespace ParsnipWebsite.Custom_Controls.Media
 {
@@ -154,6 +155,23 @@ namespace ParsnipWebsite.Custom_Controls.Media
                 "           </div>\n" +
                 "      </div>\n" +
                 "   </div>\n",tempGuid, ShareLink);
+        }
+
+        public static List<MediaControl> GetMediaUserPairAsMediaControls(int mediaTagUserId)
+        {
+            var mediaControls = new List<MediaControl>();
+            Page httpHandler = (Page)HttpContext.Current.Handler;
+            int loggedInUserId = ParsnipData.Accounts.User.LogIn().Id;
+
+            foreach (ParsnipData.Media.Media temp in MediaUserPair.GetAllMedia(mediaTagUserId, loggedInUserId))
+            {
+                MediaControl myMediaControl = (MediaControl)httpHandler.LoadControl("~/Custom_Controls/Media/MediaControl.ascx");
+                //myMediaControl.MyMediaTag = mediaTag;
+                myMediaControl.MyMedia = temp;
+                mediaControls.Add(myMediaControl);
+            }
+
+            return mediaControls.OrderByDescending(mediaControl => mediaControl.MyMedia.DateTimeCaptured).ToList();
         }
 
         public static List<MediaControl> GetAlbumAsMediaControls(MediaTag mediaTag)

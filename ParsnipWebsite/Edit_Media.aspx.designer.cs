@@ -87,6 +87,42 @@ namespace ParsnipWebsite
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl MediaTagContainer;
 
         /// <summary>
+        /// Modal_SelectUser control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Modal_SelectUser;
+
+        /// <summary>
+        /// DropDown_SelectUser control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DropDown_SelectUser;
+
+        /// <summary>
+        /// AddMediaUserPair control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button AddMediaUserPair;
+
+        /// <summary>
+        /// UserTagContainer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl UserTagContainer;
+
+        /// <summary>
         /// DateCapturedDiv control.
         /// </summary>
         /// <remarks>

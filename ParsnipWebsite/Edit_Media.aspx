@@ -59,6 +59,18 @@
                 <br />
             </div>
             <div runat="server" id="MediaTagContainer"></div>
+            <!-- User select -->
+            <div runat="server" id="Modal_SelectUser" style="padding-left:5%; padding-right: 5%;">
+                <label>Tags</label>
+                <div class="input-group" style="margin:0px; padding:0px">
+                    <asp:DropDownList ID="DropDown_SelectUser" runat="server" AutoPostBack="False" CssClass="form-control" ></asp:DropDownList>
+                    <span class="input-group-btn">
+                        <asp:Button runat="server" ID="AddMediaUserPair" Text="Tag User" CssClass="btn btn-primary" OnClick="AddMediaUserPair_Click" />
+                    </span>
+                </div>
+                <br />
+            </div>
+            <div runat="server" id="UserTagContainer"></div>
             
 
             <div runat="server" id="DateCapturedDiv" class="form-group has-error" style="padding-left:5%; padding-right: 5%;" visible="false">

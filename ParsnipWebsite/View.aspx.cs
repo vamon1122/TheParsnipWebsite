@@ -132,6 +132,15 @@ namespace ParsnipWebsite
                     MediaTagContainer.Controls.Add(mediaTagPairViewControl);
                 }
 
+                foreach (MediaUserPair mediaUserPair in MyMedia.MediaUserPairs)
+                {
+                    MediaUserPairViewControl mediaUserPairViewControl = (MediaUserPairViewControl)httpHandler.LoadControl("~/Custom_Controls/Media/MediaUserPairViewControl.ascx");
+                    mediaUserPairViewControl.MyMedia = MyMedia;
+                    mediaUserPairViewControl.MyPair = mediaUserPair;
+                    mediaUserPairViewControl.UpdateLink();
+                    MediaTagContainer.Controls.Add(mediaUserPairViewControl);
+                }
+
                 if (MyMedia.AlbumId == 0)
                     Button_ViewAlbum.Visible = false;
 
