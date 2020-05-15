@@ -29,14 +29,14 @@ namespace ParsnipWebsite
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(Request.QueryString["id"]) && string.IsNullOrEmpty(Request.QueryString["userid"]))
+            if (string.IsNullOrEmpty(Request.QueryString["id"]) && string.IsNullOrEmpty(Request.QueryString["user"]))
             {
                 Response.Redirect("home");
             }
             else
             {
                 myTag = MediaTag.Select(Convert.ToInt32(Request.QueryString["id"]));
-                myTagUser = ParsnipData.Accounts.User.Select(Convert.ToInt32(Request.QueryString["userid"]));
+                myTagUser = ParsnipData.Accounts.User.Select(Convert.ToInt32(Request.QueryString["user"]));
                 string focus = Request.QueryString["focus"];
 
                 if (myTagUser == null)
@@ -49,9 +49,9 @@ namespace ParsnipWebsite
                 else
                 {
                     if (string.IsNullOrEmpty(focus))
-                        myUser = Account.SecurePage($"tag?userid={myTagUser.Id}", this, Data.DeviceType);
+                        myUser = Account.SecurePage($"tag?user={myTagUser.Id}", this, Data.DeviceType);
                     else
-                        myUser = Account.SecurePage($"tag?userid={myTagUser.Id}&{focus}", this, Data.DeviceType);
+                        myUser = Account.SecurePage($"tag?user={myTagUser.Id}&{focus}", this, Data.DeviceType);
                 }
             }
 

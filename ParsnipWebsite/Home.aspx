@@ -42,6 +42,12 @@
 
         <asp:Label runat="server" ID="WelcomeLabel"></asp:Label>
     </div>
+    <div runat="server" id="seeYourselfContainer" visible="false">
+        <h3 class="section-title"><b runat="server" id="seeYourselfTitle"></b></h3>
+        <a runat="server" id="seeYourself">
+            <img src="Resources/Media/Images/Local/Dirt_On_You.jpg" style="display:inline-block;padding-bottom:5px;width:100vmin;max-width:480px;"/>
+        </a>
+    </div>
     <form runat="server">
         <div runat="server" id="LatestVideo" style="margin-top:10px"></div>
     </form>

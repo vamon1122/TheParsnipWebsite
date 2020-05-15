@@ -33,6 +33,13 @@ namespace ParsnipWebsite
                 string.Format("Hiya {0} to the parsnip website!", myUser == null ?
                 "stranger, welcome" : myUser.Forename + ", welcome back");
 
+            if(myUser != null)
+            {
+                seeYourselfContainer.Visible = true;
+                seeYourselfTitle.InnerText = $"Hey {myUser.Forename}, which content have YOU been tagged in? 😜";
+                seeYourself.HRef = $"tag?user={myUser.Id}";
+            }
+
             int userId = myUser == null ? 0 : myUser.Id;
             Media latestVideo = Media.SelectLatestVideo(userId);
             if(latestVideo != null)

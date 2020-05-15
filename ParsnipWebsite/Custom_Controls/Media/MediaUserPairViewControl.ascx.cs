@@ -18,7 +18,7 @@ namespace ParsnipWebsite.Custom_Controls.Media
 
         public void UpdateLink()
         {
-            string redirect = $"tag?userid={myPair.UserId}&focus={MyMedia.Id}";
+            string redirect = $"tag?user={myPair.UserId}&focus={MyMedia.Id}";
             if (MyMedia != null && MyPair != null && myPair.UserId != default)
                 ViewButtonLink.HRef = $"{HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority)}/{redirect}";
         }

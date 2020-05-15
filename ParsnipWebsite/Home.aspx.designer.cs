@@ -51,6 +51,33 @@ namespace ParsnipWebsite
         protected global::System.Web.UI.WebControls.Label WelcomeLabel;
 
         /// <summary>
+        /// seeYourselfContainer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl seeYourselfContainer;
+
+        /// <summary>
+        /// seeYourselfTitle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl seeYourselfTitle;
+
+        /// <summary>
+        /// seeYourself control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor seeYourself;
+
+        /// <summary>
         /// LatestVideo control.
         /// </summary>
         /// <remarks>
