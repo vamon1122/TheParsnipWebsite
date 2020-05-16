@@ -20,7 +20,7 @@ namespace ParsnipWebsite
             ParsnipData.Accounts.User.LogIn();
             new LogEntry(Log.LogInOut) { text = String.Format("{0} logged out from {1} {2} device.", myUser.FullName, myUser.PosessivePronoun, Data.DeviceType) };
             ParsnipData.Accounts.User.LogOut();
-            Response.Redirect("login");
+            Response.Redirect("home");
         }
     }
 }
