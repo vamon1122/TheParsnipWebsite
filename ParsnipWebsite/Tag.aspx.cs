@@ -55,6 +55,15 @@ namespace ParsnipWebsite
                 }
             }
 
+            if (myTagUser == null)
+            {
+                Page.Title = $"Tag: {myTag.Name}";
+            }
+            else
+            {
+                Page.Title = $"Tag: {myTagUser.Forename}";
+            }
+
             TagName.InnerText = string.IsNullOrEmpty(myTag.Name) ? myTagUser.FullName : myTag.Name;
             
             if(myTag != null)
