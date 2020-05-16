@@ -103,6 +103,7 @@
     <Content Include="Logout.aspx" />
     <Content Include="Manage_Media.aspx" />
     <Content Include="Manage_Users.aspx" />
+    <Content Include="Me.aspx" />
     <Content Include="Memes.aspx" />
     <Content Include="package.json" />
     <Content Include="Dev_connections.config" />
@@ -308,6 +309,13 @@
     </Compile>
     <Compile Include="Manage_Users.aspx.designer.cs">
       <DependentUpon>Manage_Users.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Me.aspx.cs">
+      <DependentUpon>Me.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Me.aspx.designer.cs">
+      <DependentUpon>Me.aspx</DependentUpon>
     </Compile>
     <Compile Include="Memes.aspx.cs">
       <DependentUpon>Memes.aspx</DependentUpon>
