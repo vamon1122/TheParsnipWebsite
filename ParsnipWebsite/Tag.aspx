@@ -24,7 +24,7 @@
     <link rel="stylesheet" type="text/css" href="Css/SharedStyle.css" />
     <script src="../Javascript/ApplyStyle.js"></script>
     <script src="Javascript/IntersectionObserver.js"></script>
-    <title>Photos</title>
+    <title>#TheParsnip</title>
 </head>
 <body class="fade0p5" id="body" style="text-align:center">
     <menuControls:Menu runat="server" ID="Menu" />
