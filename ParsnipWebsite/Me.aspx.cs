@@ -15,15 +15,12 @@ namespace ParsnipWebsite
         User myUser;
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(Data.DeviceType))
-                Response.Redirect("get_device_info?url=me");
-
-            myUser = Account.SecurePage("me", this, Data.DeviceType);
+            myUser = ParsnipData.Accounts.User.LogIn();
 
             if (myUser != null)
                 Response.Redirect($"tag?user={myUser.Id}");
             else
-                Response.Redirect("home");
+                Response.Redirect("login?url=me");
         }
     }
 }

@@ -94,6 +94,11 @@ namespace ParsnipWebsite.Custom_Controls.Media
         {
             get
             {
+                if(_anchorLink != null)
+                {
+                    return _anchorLink;
+                }
+
                 if (MyMedia.MyMediaShare == null || MyMedia.MyMediaShare.Id.ToString() == default)
                 {
                     return "You must log in to share media";
@@ -111,6 +116,11 @@ namespace ParsnipWebsite.Custom_Controls.Media
                 };
             }
         }
+
+        public string AnchorLink { get { return _anchorLink; } set { _anchorLink = value; MyAnchorLink.HRef = value; } }
+        private string _anchorLink;
+
+
 
         private ParsnipData.Media.Image _myImage;
 

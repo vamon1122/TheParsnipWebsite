@@ -24,6 +24,16 @@ namespace ParsnipWebsite
                 Redirect = Request.QueryString["url"];
                 Warning.Attributes.CssStyle.Add("display", "block");
 
+                if(Request.QueryString["url"] == "me")
+                {
+                    Page.Header.Controls.Add(new LiteralControl("<meta property=\"og:title\" content=\"What DIRT do we have on YOU? 😜\" />"));
+                    Page.Header.Controls.Add(new LiteralControl($"<meta property=\"og:image\" content=\"{Request.Url.GetLeftPart(UriPartial.Authority)}/Resources/Media/Images/Local/Dirt_On_You.jpg\" />"));
+                    Page.Header.Controls.Add(new LiteralControl("<meta property=\"og:type\" content=\"website\" />"));
+                    Page.Header.Controls.Add(new LiteralControl($"<meta property=\"og:url\" content=\"{Request.Url}\" />"));
+                    Page.Header.Controls.Add(new LiteralControl("<meta property=\"og:description\" content=\"See every piece of #TheParsnip content you've ever featured in!\" />"));
+                    Page.Header.Controls.Add(new LiteralControl("<meta property=\"og:alt\" content=\"What DIRT do we have on YOU? 😜\" />"));
+                    Page.Header.Controls.Add(new LiteralControl("<meta property=\"fb:app_id\" content=\"521313871968697\" />"));
+                }
             }
             else
             {

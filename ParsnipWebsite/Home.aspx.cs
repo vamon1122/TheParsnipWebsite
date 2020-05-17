@@ -33,12 +33,24 @@ namespace ParsnipWebsite
                 string.Format("Hiya {0} to the parsnip website!", myUser == null ?
                 "stranger, welcome" : myUser.Forename + ", welcome back");
 
-            if(myUser != null)
-            {
-                seeYourselfContainer.Visible = true;
-                seeYourselfTitle.InnerText = $"Hey {myUser.Forename}, which content have YOU been tagged in? 😜";
-                seeYourself.HRef = $"tag?user={myUser.Id}";
-            }
+            
+
+            var myImage = new ParsnipData.Media.Image();
+            myImage.Id = MediaId.NewMediaId();
+            myImage.Compressed = "Resources/Media/Images/Local/Dirt_On_You.jpg";
+            myImage.Placeholder = "Resources/Media/Images/Local/Dirt_On_You.jpg";
+            
+            if (myUser != null)
+                myImage.Title = $"Hey {myUser.Forename}, what DIRT do we have on YOU? 😜";
+            else
+                myImage.Title = $"What DIRT do we have on YOU? 😜";
+
+            var MySeeYourselfControl = (MediaControl)Page.LoadControl("~/Custom_Controls/Media/MediaControl.ascx");
+            MySeeYourselfControl.AnchorLink = $"{Request.Url.GetLeftPart(UriPartial.Authority)}/me";
+            MySeeYourselfControl.MyMedia = myImage;
+
+            seeYourself.Controls.Add(MySeeYourselfControl);
+            seeYourself.Visible = true;
 
             int userId = myUser == null ? 0 : myUser.Id;
             Media latestVideo = Media.SelectLatestVideo(userId);
