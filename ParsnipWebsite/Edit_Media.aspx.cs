@@ -149,13 +149,14 @@ namespace ParsnipWebsite
                 }
 
                 var tagParam = Request.QueryString["tag"];
+                var userTagParam = Request.QueryString["user"];
                 MediaTag OriginalTag = string.IsNullOrEmpty(tagParam) ? null : new MediaTag(Convert.ToInt32(tagParam));
 
-                if (OriginalTag == null)
+                if (OriginalTag == null && userTagParam == null)
                 {
                     OriginalAlbumRedirect = "manage_media?" + MyMedia.Id.ToString();
                 }
-                else
+                else if(userTagParam == null)
                 {
                     switch (OriginalTag.Id)
                     {
@@ -178,16 +179,19 @@ namespace ParsnipWebsite
                             OriginalAlbumRedirect = "amsterdam?focus=" + MyMedia.Id.ToString();
                             break;
                         case default(int):
-                            OriginalAlbumRedirect = $"tag?id={OriginalTag.Id}&focus={MyMedia.Id}";
-                            break;
-                        default:
                             Debug.WriteLine(string.Format("The album id {0} was not recognised!",
                                 MyMedia.AlbumId));
                             OriginalAlbumRedirect = "home?error=nomediaalbum4";
                             break;
+                        default:
+                            OriginalAlbumRedirect = $"tag?id={OriginalTag.Id}&focus={MyMedia.Id}";
+                            break;
                     }
                 }
-
+                else
+                {
+                    OriginalAlbumRedirect = $"tag?user={userTagParam}&focus={MyMedia.Id}";
+                }
                 NewAlbumsDropDown.Items.Clear();
                 if (myUser.AccountType == "admin")
                     NewAlbumsDropDown.Items.Add(new ListItem() { Value = "0", Text = "(No tag selected)" });

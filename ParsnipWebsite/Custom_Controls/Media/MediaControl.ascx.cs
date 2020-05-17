@@ -19,6 +19,8 @@ namespace ParsnipWebsite.Custom_Controls.Media
 
         public ParsnipData.Media.MediaTag MyMediaTag { get; set; }
 
+        public ParsnipData.Media.MediaUserPair MyMediaUserPair { get; set; }
+
         ParsnipData.Media.Media _myMedia;
         public ParsnipData.Media.Media MyMedia
         {
@@ -35,6 +37,11 @@ namespace ParsnipWebsite.Custom_Controls.Media
                 if(MyMediaTag != null && MyMediaTag.Id != default)
                 {
                     MyEdit.HRef += $"&tag={MyMediaTag.Id}";
+                }
+
+                if (MyMediaUserPair != null && MyMediaUserPair.UserId != default)
+                {
+                    MyEdit.HRef += $"&user={MyMediaUserPair.UserId}";
                 }
 
                 if (value.Type == "image")
@@ -166,7 +173,7 @@ namespace ParsnipWebsite.Custom_Controls.Media
             foreach (ParsnipData.Media.Media temp in MediaUserPair.GetAllMedia(mediaTagUserId, loggedInUserId))
             {
                 MediaControl myMediaControl = (MediaControl)httpHandler.LoadControl("~/Custom_Controls/Media/MediaControl.ascx");
-                //myMediaControl.MyMediaTag = mediaTag;
+                myMediaControl.MyMediaUserPair = new MediaUserPair() { UserId = mediaTagUserId, MediaId = temp.Id };
                 myMediaControl.MyMedia = temp;
                 mediaControls.Add(myMediaControl);
             }
@@ -199,6 +206,7 @@ namespace ParsnipWebsite.Custom_Controls.Media
             foreach (ParsnipData.Media.Media temp in ParsnipData.Media.Media.SelectByUserId(userId, loggedInUserId))
             {
                 MediaControl myMediaControl = (MediaControl)httpHandler.LoadControl("~/Custom_Controls/Media/MediaControl.ascx");
+                myMediaControl.MyMediaUserPair = new MediaUserPair() { UserId = userId, MediaId = temp.Id };
                 myMediaControl.MyMedia = temp;
                 mediaControls.Add(myMediaControl);
             }
