@@ -41,11 +41,11 @@
             <img src="../../Resources/Media/Images/Web_Media/Share_White.svg" style="height:40px" /></button>
     
     <div class="center_form" style="padding-bottom:5%" >
-        <form id="form1" runat="server" >
+        <form id="form1" runat="server" defaultbutton="ButtonSave" >
             <!-- Title -->
             <div class="form-group" style="padding-left:5%; padding-right: 5%;" >
                 <label>Title</label>
-                <asp:TextBox CssClass="form-control" runat="server" ID="InputTitleTwo" autofocus="true"/>
+                <asp:TextBox CssClass="form-control" runat="server" ID="InputTitleTwo" />
             </div>
             <!-- Tag select -->
             <div runat="server" id="DropDownDiv" style="padding-left:5%; padding-right: 5%;">
@@ -101,7 +101,7 @@
 
             <!-- Delete / save buttons -->
             <div style="width:100%; padding-left:5%; padding-right:5%; padding-top:20px; display:block;">
-                <asp:Button runat="server" ID="btn_AdminDelete"  CssClass="btn btn-primary float-left" Width="100px" Text="Delete" Visible="false" data-toggle="modal" data-target="#confirmDelete" OnClientClick="return false;" UseSubmitBehavior="false"></asp:Button>
+                <asp:Button runat="server" ID="btn_AdminDelete"  CssClass="btn btn-primary float-left" Width="100px" Text="Delete" Visible="false" data-toggle="modal" data-target="#confirmDelete" OnClientClick="return false;"></asp:Button>
                 <asp:Button runat="server" ID="ButtonSave" class="btn btn-primary float-right" Text="Save" Width="100px" OnClick="ButtonSave_Click"></asp:Button>
             </div>
 

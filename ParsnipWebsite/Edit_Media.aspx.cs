@@ -67,6 +67,9 @@ namespace ParsnipWebsite
                     Response.Redirect($"edit_media?id={Request.QueryString["id"]}&userid={Request.QueryString["userid"]}");
             }
 
+            if (!IsPostBack)
+                InputTitleTwo.Focus();
+
             if (Request.QueryString["id"] != null)
             {
                 string id = Request.QueryString["id"];
