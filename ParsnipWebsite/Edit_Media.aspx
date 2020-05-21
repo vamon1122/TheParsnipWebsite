@@ -45,7 +45,7 @@
             <!-- Title -->
             <div class="form-group" style="padding-left:5%; padding-right: 5%;" >
                 <label>Title</label>
-                <asp:TextBox CssClass="form-control" runat="server" ID="InputTitleTwo" />
+                <asp:TextBox CssClass="form-control" runat="server" ID="InputTitleTwo" autofocus="true"/>
             </div>
             <!-- Tag select -->
             <div runat="server" id="DropDownDiv" style="padding-left:5%; padding-right: 5%;">
