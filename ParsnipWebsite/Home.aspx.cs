@@ -20,6 +20,24 @@ namespace ParsnipWebsite
             MOTD_div.InnerHtml = ConfigurationManager.AppSettings["MOTD"];
 
             myUser = ParsnipData.Accounts.User.LogIn();
+
+            Page httpHandler = (Page)HttpContext.Current.Handler;
+            if (myUser == null)
+                LoginNudge.Visible = true;
+            else
+            {
+                UploadMediaControl.Initialise(myUser, this);
+                var mediaControls = MediaControl.GetUserMediaAsMediaControls(myUser.Id, myUser.Id);
+                if (mediaControls.Count != default)
+                    UploadsPlaceholder.Visible = false;
+                
+                foreach (MediaControl mc in mediaControls)
+                {
+                    MyMediaContainer.Controls.Add(mc);
+                }
+            }
+                
+
             if (string.IsNullOrEmpty(Data.DeviceType))
             {
                 Response.Redirect("get_device_info?url=home");
@@ -33,7 +51,22 @@ namespace ParsnipWebsite
                 string.Format("Hiya {0} to the parsnip website!", myUser == null ?
                 "stranger, welcome" : myUser.Forename + ", welcome back");
 
-            
+            foreach (MediaTag mediaTag in MediaTag.GetAllTags())
+            {
+                MediaTagPairViewControl mediaTagPairViewControl = (MediaTagPairViewControl)httpHandler.LoadControl("~/Custom_Controls/Media/MediaTagPairViewControl.ascx");
+                mediaTagPairViewControl.MyTag = mediaTag;
+                mediaTagPairViewControl.UpdateLink();
+                MediaTagContainer.Controls.Add(mediaTagPairViewControl);
+            }
+
+            //foreach (MediaUserPair mediaUserPair in MyMedia.MediaUserPairs)
+            //{
+            //    MediaUserPairViewControl mediaUserPairViewControl = (MediaUserPairViewControl)httpHandler.LoadControl("~/Custom_Controls/Media/MediaUserPairViewControl.ascx");
+            //    mediaUserPairViewControl.MyMedia = MyMedia;
+            //    mediaUserPairViewControl.MyPair = mediaUserPair;
+            //    mediaUserPairViewControl.UpdateLink();
+            //    MediaTagContainer.Controls.Add(mediaUserPairViewControl);
+            //}
 
             var myImage = new ParsnipData.Media.Image();
             myImage.Id = MediaId.NewMediaId();

@@ -14,7 +14,7 @@ namespace ParsnipWebsite
     public partial class Videos : System.Web.UI.Page
     {
         private User myUser;
-        static readonly MediaTag VideoMediaTag = new MediaTag(2);
+        static readonly MediaTag VideoMediaTag = MediaTag.Select((int)Data.MediaTagIds.Videos);
 
         protected void Page_Load(object sender, EventArgs e)
         {

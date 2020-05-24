@@ -10,6 +10,7 @@ using ParsnipData.Logging;
 using ParsnipData;
 using System.Diagnostics;
 using ParsnipWebsite.Custom_Controls.Media;
+using System.Security.Cryptography.X509Certificates;
 
 namespace ParsnipWebsite
 {
@@ -40,45 +41,79 @@ namespace ParsnipWebsite
         string OriginalAlbumRedirect;
         protected void Page_Load(object sender, EventArgs e)
         {
-            //REQUIRED TO VIEW POSTBACK
-            form1.Action = Request.RawUrl;
+            Login();
+            
+            GetMedia(); //CheckPermissions() is dependent on this for CreatedByUserId
 
-            if (Request.QueryString["id"] == null)
-                myUser = Account.SecurePage("edit_media", this, Data.DeviceType);
-            else if(Request.QueryString["tag"] == null)
-                myUser = Account.SecurePage($"edit_media?id={Request.QueryString["id"]}", this, Data.DeviceType);
+            CheckPermissions(); 
+
+            string id = Request.QueryString["id"];
+            var tagParam = Request.QueryString["tag"];
+            var userTagParam = Request.QueryString["user"];
+            MediaTag OriginalTag = string.IsNullOrEmpty(tagParam) ? null : new MediaTag(Convert.ToInt32(tagParam));
+
+            if (!string.IsNullOrEmpty(id))
+            {
+                //REQUIRED TO VIEW POSTBACK
+                form1.Action = Request.RawUrl;
+
+                GetOriginalRedirect();
+
+                if (Request.QueryString["delete"] != null)
+                {
+                    DoDeleteMedia();
+
+                    Response.Redirect(OriginalAlbumRedirect);
+                }
+
+                GetTags();
+
+                PopulateTagDropDowns();
+
+                DisplayMediaAttributes();
+
+                if (!IsPostBack)
+                    InputTitleTwo.Focus();
+            }
             else
-                myUser = Account.SecurePage($"edit_media?id={Request.QueryString["id"]}&tag={Request.QueryString["tag"]}", this, Data.DeviceType);
-
-            if (Request.QueryString["removetag"] == "true")
             {
-                MediaTagPair.Delete(new MediaId(Request.QueryString["id"]), Convert.ToInt32(Request.QueryString["tag"]));
-                if (Request.QueryString["tag"] == null)
-                    Response.Redirect($"edit_media?id={Request.QueryString["id"]}");
-                else
-                    Response.Redirect($"edit_media?id={Request.QueryString["id"]}&tag={Request.QueryString["tag"]}");
-            }
-            else if (Request.QueryString["removeusertag"] == "true")
-            {
-                MediaUserPair.Delete(new MediaId(Request.QueryString["id"]), Convert.ToInt32(Request.QueryString["userid"]));
-                if (Request.QueryString["userid"] == null)
-                    Response.Redirect($"edit_media?id={Request.QueryString["id"]}");
-                else
-                    Response.Redirect($"edit_media?id={Request.QueryString["id"]}&userid={Request.QueryString["userid"]}");
+                Response.Redirect("home");
             }
 
-            if (!IsPostBack)
-                InputTitleTwo.Focus();
-
-            if (Request.QueryString["id"] != null)
+            void Login()
             {
-                string id = Request.QueryString["id"];
+                if (Request.QueryString["id"] == null)
+                    myUser = Account.SecurePage("edit_media", this, Data.DeviceType);
+                else if (Request.QueryString["tag"] == null)
+                    myUser = Account.SecurePage($"edit_media?id={Request.QueryString["id"]}", this, Data.DeviceType);
+                else
+                    myUser = Account.SecurePage($"edit_media?id={Request.QueryString["id"]}&tag={Request.QueryString["tag"]}", this, Data.DeviceType);
 
+                if (Request.QueryString["removetag"] == "true")
+                {
+                    MediaTagPair.Delete(new MediaId(Request.QueryString["id"]), Convert.ToInt32(Request.QueryString["tag"]));
+                    if (Request.QueryString["tag"] == null)
+                        Response.Redirect($"edit_media?id={Request.QueryString["id"]}");
+                    else
+                        Response.Redirect($"edit_media?id={Request.QueryString["id"]}&tag={Request.QueryString["tag"]}");
+                }
+                else if (Request.QueryString["removeusertag"] == "true")
+                {
+                    MediaUserPair.Delete(new MediaId(Request.QueryString["id"]), Convert.ToInt32(Request.QueryString["userid"]));
+                    if (Request.QueryString["userid"] == null)
+                        Response.Redirect($"edit_media?id={Request.QueryString["id"]}");
+                    else
+                        Response.Redirect($"edit_media?id={Request.QueryString["id"]}&userid={Request.QueryString["userid"]}");
+                }
+            }
+
+            void GetMedia()
+            {
                 MyYoutubeVideo = ParsnipData.Media.Youtube.Select(new MediaId(Request.QueryString["id"]), myUser.Id);
-                if(MyYoutubeVideo == null)
+                if (MyYoutubeVideo == null)
                     MyVideo = ParsnipData.Media.Video.Select(new MediaId(Request.QueryString["id"]), myUser.Id);
 
-                if(MyYoutubeVideo == null && MyVideo == null)
+                if (MyYoutubeVideo == null && MyVideo == null)
                     MyImage = ParsnipData.Media.Image.Select(new MediaId(Request.QueryString["id"]), myUser.Id);
 
                 if (MyYoutubeVideo != null)
@@ -101,7 +136,7 @@ namespace ParsnipWebsite
                 {
                     MyVideo = Video.Select(new MediaId(Request.QueryString["id"]), myUser.Id);
                     MediaShare myMediaShare = MyVideo.MyMediaShare;
-                    if(myMediaShare == null)
+                    if (myMediaShare == null)
                     {
                         myMediaShare = new MediaShare(MyVideo.Id, myUser.Id);
                         myMediaShare.Insert();
@@ -134,7 +169,10 @@ namespace ParsnipWebsite
                 {
                     Response.Redirect("home");
                 }
+            }
 
+            void GetTags()
+            {
                 Page httpHandler = (Page)HttpContext.Current.Handler;
                 foreach (MediaTagPair mediaTagPair in MyMedia.MediaTagPairs)
                 {
@@ -150,16 +188,17 @@ namespace ParsnipWebsite
                     mediaUserPairControl.MyPair = mediaUserPair;
                     UserTagContainer.Controls.Add(mediaUserPairControl);
                 }
+            }
 
-                var tagParam = Request.QueryString["tag"];
-                var userTagParam = Request.QueryString["user"];
-                MediaTag OriginalTag = string.IsNullOrEmpty(tagParam) ? null : new MediaTag(Convert.ToInt32(tagParam));
+            void GetOriginalRedirect()
+            {
+                
 
-                if (OriginalTag == null && userTagParam == null)
+                if (OriginalTag == null && tagParam == null && userTagParam == null && MyMedia.AlbumId == default && MyMedia.MediaTagPairs.Count == default)
                 {
-                    OriginalAlbumRedirect = "manage_media?" + MyMedia.Id.ToString();
+                    OriginalAlbumRedirect = "home?focus=" + MyMedia.Id.ToString();
                 }
-                else if(userTagParam == null)
+                else if (OriginalTag != null)
                 {
                     switch (OriginalTag.Id)
                     {
@@ -193,11 +232,22 @@ namespace ParsnipWebsite
                 }
                 else
                 {
-                    OriginalAlbumRedirect = $"tag?user={userTagParam}&focus={MyMedia.Id}";
+                    if (userTagParam != null)
+                        OriginalAlbumRedirect = $"tag?user={userTagParam}&focus={MyMedia.Id}";
+                    else if (tagParam != null)
+                        OriginalAlbumRedirect = $"tag?id={tagParam}&focus={MyMedia.Id}";
+                    else
+                        OriginalAlbumRedirect = $"home?focus={MyMedia.Id}";
+                    //else if (MyMedia.MediaTagPairs.Count != default)
+                    //    OriginalAlbumRedirect = $"tag?id={MyMedia.MediaTagPairs[0].MediaTag.Id}&focus={MyMedia.Id}";
+
                 }
+            }
+
+            void PopulateTagDropDowns()
+            {
                 NewAlbumsDropDown.Items.Clear();
-                if (myUser.AccountType == "admin")
-                    NewAlbumsDropDown.Items.Add(new ListItem() { Value = "0", Text = "(No tag selected)" });
+                NewAlbumsDropDown.Items.Add(new ListItem() { Value = "0", Text = "(No tag selected)" });
                 foreach (MediaTag tempMediaTag in MediaTag.GetAllTags())
                 {
                     NewAlbumsDropDown.Items.Add(new ListItem()
@@ -208,8 +258,6 @@ namespace ParsnipWebsite
                 }
 
                 DropDown_SelectUser.Items.Clear();
-                if (myUser.AccountType == "admin")
-                    DropDown_SelectUser.Items.Add(new ListItem() { Value = "0", Text = "(No user selected)" });
                 foreach (User user in ParsnipData.Accounts.User.GetAllUsers())
                 {
                     DropDown_SelectUser.Items.Add(new ListItem()
@@ -218,98 +266,42 @@ namespace ParsnipWebsite
                         Text = user.FullName
                     });
                 }
-
-                var AlbumIds = MyMedia.SelectMediaTagIds();
-
-                if (Request.QueryString["delete"] != null)
-                {
-                    bool deleteSuccess;
-
-                    if (myUser.AccountType == "admin")
-                    {
-                        MyMedia.Delete();
-                        deleteSuccess = true;
-                    }
-                    else
-                    {
-                        new LogEntry(Log.General)
-                        {
-                            text = string.Format("{0} tried to delete media called \"{1}\", but {2} was not allowed " +
-                            "because {2} is not an admin", myUser.FullName, MyMedia.Title, 
-                            myUser.SubjectiveGenderPronoun)
-                        };
-                        deleteSuccess = false;
-                    }
-
-                    string Redirect;
-
-                    switch (Convert.ToInt16(NewAlbumsDropDown.SelectedValue))
-                    {
-                        case (int)Data.MediaTagIds.Amsterdam:
-                            Redirect = "amsterdam";
-                            break;
-                        case (int)Data.MediaTagIds.Krakow:
-                            Redirect = "krakow";
-                            break;
-                        case (int)Data.MediaTagIds.Memes:
-                            Redirect = "memes";
-                            break;
-                        case (int)Data.MediaTagIds.Photos:
-                            Redirect = "photos";
-                            break;
-                        case (int)Data.MediaTagIds.Portugal:
-                            Redirect = "portugal";
-                            break;
-                        case (int)Data.MediaTagIds.Videos:
-                            Redirect = "videos";
-                            break;
-                        case default(int):
-                            Debug.WriteLine("No album selected. Must be none! Redirecting to manage photos...");
-                            Redirect = "manage_media";
-                            break;
-                        default:
-                            Redirect = $"tag?id={OriginalTag.Id}&focus={MyMedia.Id}";
-                            break;
-                    }
-                    if (deleteSuccess)
-                    {
-                        new LogEntry(Log.General) { text = string.Format("{0} deleted media called \"{1}\"", 
-                            myUser.FullName, MyMedia.Title) };
-                        Response.Redirect(Redirect);
-                    }
-                    else
-                    {
-                        if (Redirect.Contains("?"))
-                            Response.Redirect(Redirect + "&error=access");
-                        else
-                            Response.Redirect(Redirect + "?error=access");
-                    }
-                }
-
-                if (MyMedia.Title != null && !string.IsNullOrEmpty(MyMedia.Title) &&
-                    !string.IsNullOrWhiteSpace(MyMedia.Title))
-                {
-                    Debug.WriteLine("Updating title from media object: " + MyMedia.Title);
-                    InputTitleTwo.Text = MyMedia.Title;
-                }
+            }
+        
+            void DoDeleteMedia()
+            {
+                bool deleteSuccess;
 
                 if (myUser.AccountType == "admin")
                 {
-                    DateCapturedDiv.Visible = true;
-                    btn_AdminDelete.Visible = true;
+                    MyMedia.Delete();
+                    deleteSuccess = true;
                 }
+                else
+                {
+                    new LogEntry(Log.General)
+                    {
+                        text = string.Format("{0} tried to delete media called \"{1}\", but {2} was not allowed " +
+                        "because {2} is not an admin", myUser.FullName, MyMedia.Title,
+                        myUser.SubjectiveGenderPronoun)
+                    };
+                    deleteSuccess = false;
+                }
+            }
 
+            void CheckPermissions()
+            {
                 if (MyMedia.CreatedById.ToString() != myUser.Id.ToString())
                 {
-                    
+
                     if (myUser.AccountType == "admin" || myUser.AccountType == "media")
                     {
                         string accountType = myUser.AccountType == "admin" ? "admin" : "approved media editor";
                         new LogEntry(Log.General)
                         {
                             text = string.Format("{0} started editing media called \"{1}\". {2} does not own the " +
-                            "media but {3} is allowed since {3} is an {4}", myUser.FullName, MyMedia.Title, 
-                            myUser.SubjectiveGenderPronoun.First().ToString().ToUpper() + 
+                            "media but {3} is allowed since {3} is an {4}", myUser.FullName, MyMedia.Title,
+                            myUser.SubjectiveGenderPronoun.First().ToString().ToUpper() +
                             myUser.SubjectiveGenderPronoun.Substring(1), myUser.SubjectiveGenderPronoun, accountType)
                         };
                     }
@@ -324,11 +316,20 @@ namespace ParsnipWebsite
                         Response.Redirect(OriginalAlbumRedirect + "&error=0");
                     }
                 }
-                Debug.WriteLine("Setting media directory to: " + MyMedia.Compressed);
             }
-            else
+
+            void DisplayMediaAttributes()
             {
-                Response.Redirect("home");
+                if (MyMedia.Title != null && !string.IsNullOrEmpty(MyMedia.Title) && !string.IsNullOrWhiteSpace(MyMedia.Title))
+                {
+                    InputTitleTwo.Text = MyMedia.Title;
+                }
+
+                if (myUser.AccountType == "admin")
+                {
+                    DateCapturedDiv.Visible = true;
+                    btn_AdminDelete.Visible = true;
+                }
             }
         }
 
@@ -398,7 +399,7 @@ namespace ParsnipWebsite
                         };
                     }
 
-                    string Redirect = OriginalAlbumRedirect;
+                    string Redirect = MyMedia.AlbumId == default ? OriginalAlbumRedirect : $"{Request.Url.GetLeftPart(UriPartial.Authority)}/tag?id={MyMedia.AlbumId}&media={MyMedia.Id}";
                     if (changesWereSaved)
                     {
                         Response.Redirect(Redirect);

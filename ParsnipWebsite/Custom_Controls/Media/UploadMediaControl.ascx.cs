@@ -26,6 +26,15 @@ namespace ParsnipWebsite.Custom_Controls.Media
                 UploadDiv.Style.Clear();
         }
 
+        public void Initialise(User loggedInUser, Page page)
+        {
+            myPage = page;
+            LoggedInUser = loggedInUser;
+            MyMediaTag = null;
+            if (LoggedInUser.AccountType == "admin" || LoggedInUser.AccountType == "member")
+                UploadDiv.Style.Clear();
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (IsPostBack)
@@ -49,7 +58,7 @@ namespace ParsnipWebsite.Custom_Controls.Media
                 {
                     if (ThumbnailUpload.PostedFile.ContentLength > 0)
                     {
-                        UploadVideo(LoggedInUser, MyMediaTag, MediaUpload, ThumbnailUpload);
+                        UploadVideo(LoggedInUser, MediaUpload, ThumbnailUpload, MyMediaTag);
                     }
                     else
                     {
@@ -58,7 +67,7 @@ namespace ParsnipWebsite.Custom_Controls.Media
                         string originalFileExtension = originalFileName.Split('.').Last();
 
                         if (ParsnipData.Media.Image.IsValidFileExtension(originalFileExtension))
-                            UploadImage(LoggedInUser, MyMediaTag, MediaUpload);
+                            UploadImage(LoggedInUser, MediaUpload, MyMediaTag);
                         else if (Video.IsValidFileExtension(originalFileExtension))
                         {
                             ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openUploadThumbnail();", true);
@@ -71,28 +80,46 @@ namespace ParsnipWebsite.Custom_Controls.Media
         protected void Button_UploadDataId_Click(object sender, EventArgs e)
         {
             var rawDataId = TextBox_UploadDataId.Text;
-            var dataId = Youtube.ParseDataId(TextBox_UploadDataId.Text);//TextBox_UploadDataId.Text.Substring(rawDataId.Length - 11, 11);
+            var dataId = Youtube.ParseDataId(TextBox_UploadDataId.Text);
             if(dataId == null)
             {
                 YoutubeError.Visible = true;
             }
             else
             {
-                Youtube myYoutube = new Youtube(dataId, LoggedInUser, MyMediaTag);
+                Youtube myYoutube = new Youtube(dataId, LoggedInUser);
                 myYoutube.Scrape();
                 myYoutube.Insert();
 
-                Response.Redirect($"edit_media?id={myYoutube.Id}&tag={MyMediaTag.Id}");
+                if (MyMediaTag != null)
+                {
+                    var mediaTagPair = new MediaTagPair(myYoutube, MyMediaTag, LoggedInUser);
+                    mediaTagPair.Insert();
+                }
+                
+                if (MyMediaTag == null)
+                    Response.Redirect($"edit_media?id={myYoutube.Id}", false);
+                else
+                    Response.Redirect($"edit_media?id={myYoutube.Id}&tag={MyMediaTag.Id}", false);
             }
         }
-        public static void UploadImage(User uploader, MediaTag mediaTag, FileUpload uploadControl)
+        public static void UploadImage(User uploader, FileUpload uploadControl, MediaTag mediaTag)
         {
             try
             {
-                ParsnipData.Media.Image myImage = new ParsnipData.Media.Image(uploader, mediaTag, uploadControl.PostedFile);
+                ParsnipData.Media.Image myImage = new ParsnipData.Media.Image(uploader, uploadControl.PostedFile);
                 myImage.Insert();
-                myImage.Update();
-                HttpContext.Current.Response.Redirect($"edit_media?id={myImage.Id}&tag={mediaTag.Id}", false);
+
+                if(mediaTag != null)
+                {
+                    var mediaTagPair = new MediaTagPair(myImage, mediaTag, uploader);
+                    mediaTagPair.Insert();
+                }
+
+                if (mediaTag == null)
+                    HttpContext.Current.Response.Redirect($"edit_media?id={myImage.Id}", false);
+                else
+                    HttpContext.Current.Response.Redirect($"edit_media?id={myImage.Id}&tag={mediaTag.Id}", false);
             }
             catch (Exception ex)
             {
@@ -103,14 +130,23 @@ namespace ParsnipWebsite.Custom_Controls.Media
             }
         }
 
-        public static void UploadVideo(User uploader, MediaTag mediaTag, FileUpload videoUpload, FileUpload thumbnailUpload)
+        public static void UploadVideo(User uploader, FileUpload videoUpload, FileUpload thumbnailUpload, MediaTag mediaTag)
         {
             try
             {
-                ParsnipData.Media.Video myVideo = new ParsnipData.Media.Video(uploader, mediaTag, videoUpload.PostedFile, thumbnailUpload.PostedFile);
+                ParsnipData.Media.Video myVideo = new ParsnipData.Media.Video(uploader, videoUpload.PostedFile, thumbnailUpload.PostedFile);
                 myVideo.Insert();
-                //myVideo.Update();
-                HttpContext.Current.Response.Redirect($"edit_media?id={myVideo.Id}&tag={mediaTag.Id}", false);
+
+                if (mediaTag != null)
+                {
+                    var mediaTagPair = new MediaTagPair(myVideo, mediaTag, uploader);
+                    mediaTagPair.Insert();
+                }
+
+                if (mediaTag == null)
+                    HttpContext.Current.Response.Redirect($"edit_media?id={myVideo.Id}", false);
+                else
+                    HttpContext.Current.Response.Redirect($"edit_media?id={myVideo.Id}&tag={mediaTag.Id}", false);
             }
             catch (Exception ex)
             {

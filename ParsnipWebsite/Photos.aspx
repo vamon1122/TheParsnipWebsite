@@ -40,14 +40,6 @@
     <h2 class="page-title">
         <b>Photos</b>
     </h2>
-    <hr class="break" />
-    <a href ="https://photos.app.goo.gl/GgkSHa8FvichfXRZ7">
-        <img src="Resources/Media/Images/Web_Media/google-photos.svg" width="100" />
-    </a>
-    <br />
-    <div class="media-control-text" style="margin: auto">
-        <label>Click <a href="https://photos.app.goo.gl/GgkSHa8FvichfXRZ7">here</a> to view 'The Parsnip Collection' on google photos. This includes some of the older photos on this page and was curated by Tom.</label>
-    </div>
     <form runat="server">
         <mediaControls:UploadMediaControl runat="server" ID="UploadMediaControl" />
         <div runat="server" id="DynamicMediaDiv">

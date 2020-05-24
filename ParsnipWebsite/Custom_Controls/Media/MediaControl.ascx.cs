@@ -216,7 +216,6 @@ namespace ParsnipWebsite.Custom_Controls.Media
             foreach (ParsnipData.Media.Media temp in ParsnipData.Media.Media.SelectByUserId(userId, loggedInUserId))
             {
                 MediaControl myMediaControl = (MediaControl)httpHandler.LoadControl("~/Custom_Controls/Media/MediaControl.ascx");
-                myMediaControl.MyMediaUserPair = new MediaUserPair() { UserId = userId, MediaId = temp.Id };
                 myMediaControl.MyMedia = temp;
                 mediaControls.Add(myMediaControl);
             }

@@ -51,6 +51,33 @@ namespace ParsnipWebsite
         protected global::System.Web.UI.WebControls.Label WelcomeLabel;
 
         /// <summary>
+        /// LoginNudge control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl LoginNudge;
+
+        /// <summary>
+        /// MediaTagContainer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl MediaTagContainer;
+
+        /// <summary>
+        /// UploadMediaControl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::ParsnipWebsite.Custom_Controls.Media.UploadMediaControl UploadMediaControl;
+
+        /// <summary>
         /// seeYourself control.
         /// </summary>
         /// <remarks>
@@ -67,5 +94,23 @@ namespace ParsnipWebsite
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl LatestVideo;
+
+        /// <summary>
+        /// UploadsPlaceholder control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl UploadsPlaceholder;
+
+        /// <summary>
+        /// MyMediaContainer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl MyMediaContainer;
     }
 }

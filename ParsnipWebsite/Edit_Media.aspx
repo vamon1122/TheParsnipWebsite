@@ -157,7 +157,11 @@
             {
                 //More efficient but does not work on older browsers
                 url = new URL(url_string);
+                var tagId = url.searchParams.get("tag");
                 redirect += "id=" + url.searchParams.get("id") + "&delete=true";
+                if (tagId != null && tagId != "") {
+                    redirect += "&tag=" + tagId
+                }
             }
             catch (e)
             {
