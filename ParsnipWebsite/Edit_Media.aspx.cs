@@ -163,22 +163,22 @@ namespace ParsnipWebsite
                 {
                     switch (OriginalTag.Id)
                     {
-                        case (int)MediaTag.Ids.Photos:
+                        case (int)Data.MediaTagIds.Photos:
                             OriginalAlbumRedirect = "photos?focus=" + MyMedia.Id.ToString();
                             break;
-                        case (int)MediaTag.Ids.Memes:
+                        case (int)Data.MediaTagIds.Memes:
                             OriginalAlbumRedirect = "memes?focus=" + MyMedia.Id.ToString();
                             break;
-                        case (int)MediaTag.Ids.Krakow:
+                        case (int)Data.MediaTagIds.Krakow:
                             OriginalAlbumRedirect = "krakow?focus=" + MyMedia.Id.ToString();
                             break;
-                        case (int)MediaTag.Ids.Videos:
+                        case (int)Data.MediaTagIds.Videos:
                             OriginalAlbumRedirect = "videos?focus=" + MyMedia.Id.ToString();
                             break;
-                        case (int)MediaTag.Ids.Portugal:
+                        case (int)Data.MediaTagIds.Portugal:
                             OriginalAlbumRedirect = "portugal?focus=" + MyMedia.Id.ToString();
                             break;
-                        case (int)MediaTag.Ids.Amsterdam:
+                        case (int)Data.MediaTagIds.Amsterdam:
                             OriginalAlbumRedirect = "amsterdam?focus=" + MyMedia.Id.ToString();
                             break;
                         case default(int):
@@ -245,22 +245,22 @@ namespace ParsnipWebsite
 
                     switch (Convert.ToInt16(NewAlbumsDropDown.SelectedValue))
                     {
-                        case (int)MediaTag.Ids.Amsterdam:
+                        case (int)Data.MediaTagIds.Amsterdam:
                             Redirect = "amsterdam";
                             break;
-                        case (int)MediaTag.Ids.Krakow:
+                        case (int)Data.MediaTagIds.Krakow:
                             Redirect = "krakow";
                             break;
-                        case (int)MediaTag.Ids.Memes:
+                        case (int)Data.MediaTagIds.Memes:
                             Redirect = "memes";
                             break;
-                        case (int)MediaTag.Ids.Photos:
+                        case (int)Data.MediaTagIds.Photos:
                             Redirect = "photos";
                             break;
-                        case (int)MediaTag.Ids.Portugal:
+                        case (int)Data.MediaTagIds.Portugal:
                             Redirect = "portugal";
                             break;
-                        case (int)MediaTag.Ids.Videos:
+                        case (int)Data.MediaTagIds.Videos:
                             Redirect = "videos";
                             break;
                         case default(int):

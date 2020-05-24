@@ -8,6 +8,15 @@ namespace ParsnipWebsite
 {
     public static class Data
     {
+        public enum MediaTagIds
+        {
+            Photos = 1,
+            Videos = 2,
+            Memes = 3,
+            Amsterdam = 4,
+            Portugal = 5,
+            Krakow = 6
+        }
         public static bool IsMobile { get { return Convert.ToBoolean(Cookie.Read("isMobile")); } }
 
         public static string DeviceType

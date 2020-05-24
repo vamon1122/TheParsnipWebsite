@@ -21,22 +21,22 @@ namespace ParsnipWebsite.Custom_Controls.Media
             string redirect;
             switch (myPair.MediaTag.Id)
             {
-                case (int)MediaTag.Ids.Amsterdam:
+                case (int)Data.MediaTagIds.Amsterdam:
                     redirect = $"amsterdam?focus={myMedia.Id}";
                     break;
-                case (int)MediaTag.Ids.Krakow:
+                case (int)Data.MediaTagIds.Krakow:
                     redirect = $"krakow?focus={myMedia.Id}";
                     break;
-                case (int)MediaTag.Ids.Memes:
+                case (int)Data.MediaTagIds.Memes:
                     redirect = $"memes?focus={myMedia.Id}";
                     break;
-                case (int)MediaTag.Ids.Photos:
+                case (int)Data.MediaTagIds.Photos:
                     redirect = $"photos?focus={myMedia.Id}";
                     break;
-                case (int)MediaTag.Ids.Portugal:
+                case (int)Data.MediaTagIds.Portugal:
                     redirect = $"portugal?focus={myMedia.Id}";
                     break;
-                case (int)MediaTag.Ids.Videos:
+                case (int)Data.MediaTagIds.Videos:
                     redirect = $"videos?focus={myMedia.Id}";
                     break;
                 case default(int):
