@@ -11,7 +11,7 @@ namespace ParsnipWebsite.Custom_Controls.Media
 {
 
 
-    public partial class MediaTagPairViewControl
+    public partial class ViewTagControl
     {
 
         /// <summary>

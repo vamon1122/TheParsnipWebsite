@@ -51,22 +51,30 @@ namespace ParsnipWebsite
                 string.Format("Hiya {0} to the parsnip website!", myUser == null ?
                 "stranger, welcome" : myUser.Forename + ", welcome back");
 
+            List<ViewTagControl> ViewTagControls = new List<ViewTagControl>();
             foreach (MediaTag mediaTag in MediaTag.GetAllTags())
             {
-                MediaTagPairViewControl mediaTagPairViewControl = (MediaTagPairViewControl)httpHandler.LoadControl("~/Custom_Controls/Media/MediaTagPairViewControl.ascx");
+                ViewTagControl mediaTagPairViewControl = (ViewTagControl)httpHandler.LoadControl("~/Custom_Controls/Media/ViewTagControl.ascx");
                 mediaTagPairViewControl.MyTag = mediaTag;
                 mediaTagPairViewControl.UpdateLink();
-                MediaTagContainer.Controls.Add(mediaTagPairViewControl);
+                //MediaTagContainer.Controls.Add(mediaTagPairViewControl);
+                ViewTagControls.Add(mediaTagPairViewControl);
             }
 
-            //foreach (MediaUserPair mediaUserPair in MyMedia.MediaUserPairs)
-            //{
-            //    MediaUserPairViewControl mediaUserPairViewControl = (MediaUserPairViewControl)httpHandler.LoadControl("~/Custom_Controls/Media/MediaUserPairViewControl.ascx");
-            //    mediaUserPairViewControl.MyMedia = MyMedia;
-            //    mediaUserPairViewControl.MyPair = mediaUserPair;
-            //    mediaUserPairViewControl.UpdateLink();
-            //    MediaTagContainer.Controls.Add(mediaUserPairViewControl);
-            //}
+            foreach (ParsnipData.Accounts.User user in ParsnipData.Accounts.User.GetAllUsers())
+            {
+                ViewTagControl mediaUserPairViewControl = (ViewTagControl)httpHandler.LoadControl("~/Custom_Controls/Media/ViewTagControl.ascx");
+                mediaUserPairViewControl.MyUser = user;
+                mediaUserPairViewControl.UpdateLink();
+                //MediaTagContainer.Controls.Add(mediaUserPairViewControl);
+                ViewTagControls.Add(mediaUserPairViewControl);
+            }
+
+            foreach (ViewTagControl control in ViewTagControls.OrderBy(x => x.Name))
+            {
+                MediaTagContainer.Controls.Add(control);
+            }
+
 
             var myImage = new ParsnipData.Media.Image();
             myImage.Id = MediaId.NewMediaId();

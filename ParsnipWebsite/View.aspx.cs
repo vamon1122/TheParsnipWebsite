@@ -122,23 +122,29 @@ namespace ParsnipWebsite
             }
             else
             {
+                List<ViewTagControl> ViewTagControls = new List<ViewTagControl>();
                 Page httpHandler = (Page)HttpContext.Current.Handler;
                 foreach (MediaTagPair mediaTagPair in MyMedia.MediaTagPairs)
                 {
-                    MediaTagPairViewControl mediaTagPairViewControl = (MediaTagPairViewControl)httpHandler.LoadControl("~/Custom_Controls/Media/MediaTagPairViewControl.ascx");
+                    ViewTagControl mediaTagPairViewControl = (ViewTagControl)httpHandler.LoadControl("~/Custom_Controls/Media/ViewTagControl.ascx");
                     mediaTagPairViewControl.MyMedia = MyMedia;
-                    mediaTagPairViewControl.MyPair = mediaTagPair;
+                    mediaTagPairViewControl.MyTagPair = mediaTagPair;
                     mediaTagPairViewControl.UpdateLink();
-                    MediaTagContainer.Controls.Add(mediaTagPairViewControl);
+                    ViewTagControls.Add(mediaTagPairViewControl);
                 }
 
                 foreach (MediaUserPair mediaUserPair in MyMedia.MediaUserPairs)
                 {
-                    MediaUserPairViewControl mediaUserPairViewControl = (MediaUserPairViewControl)httpHandler.LoadControl("~/Custom_Controls/Media/MediaUserPairViewControl.ascx");
+                    ViewTagControl mediaUserPairViewControl = (ViewTagControl)httpHandler.LoadControl("~/Custom_Controls/Media/ViewTagControl.ascx");
                     mediaUserPairViewControl.MyMedia = MyMedia;
-                    mediaUserPairViewControl.MyPair = mediaUserPair;
+                    mediaUserPairViewControl.MyUserPair = mediaUserPair;
                     mediaUserPairViewControl.UpdateLink();
-                    MediaTagContainer.Controls.Add(mediaUserPairViewControl);
+                    ViewTagControls.Add(mediaUserPairViewControl);
+                }
+
+                foreach (ViewTagControl control in ViewTagControls.OrderBy(x => x.Name))
+                {
+                    MediaTagContainer.Controls.Add(control);
                 }
 
                 if (MyMedia.AlbumId == 0)

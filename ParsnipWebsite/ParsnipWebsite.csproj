@@ -79,10 +79,9 @@
     <Content Include="Custom_Controls\Admin\AdminMenu.ascx" />
     <Content Include="Custom_Controls\Media\MediaControl.ascx" />
     <Content Include="Custom_Controls\Media\MediaTagPairControl.ascx" />
-    <Content Include="Custom_Controls\Media\MediaTagPairViewControl.ascx" />
     <Content Include="Custom_Controls\Media\MediaUserPairControl.ascx" />
-    <Content Include="Custom_Controls\Media\MediaUserPairViewControl.ascx" />
     <Content Include="Custom_Controls\Media\UploadMediaControl.ascx" />
+    <Content Include="Custom_Controls\Media\ViewTagControl.ascx" />
     <Content Include="Custom_Controls\Menu\Menu.ascx" />
     <Content Include="Custom_Controls\Uac\AdminUserForm.ascx" />
     <Content Include="Default.aspx" />
@@ -195,13 +194,6 @@
     <Compile Include="Custom_Controls\Media\MediaTagPairControl.ascx.designer.cs">
       <DependentUpon>MediaTagPairControl.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Custom_Controls\Media\MediaTagPairViewControl.ascx.cs">
-      <DependentUpon>MediaTagPairViewControl.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Custom_Controls\Media\MediaTagPairViewControl.ascx.designer.cs">
-      <DependentUpon>MediaTagPairViewControl.ascx</DependentUpon>
-    </Compile>
     <Compile Include="Custom_Controls\Media\MediaUserPairControl.ascx.cs">
       <DependentUpon>MediaUserPairControl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -209,19 +201,19 @@
     <Compile Include="Custom_Controls\Media\MediaUserPairControl.ascx.designer.cs">
       <DependentUpon>MediaUserPairControl.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Custom_Controls\Media\MediaUserPairViewControl.ascx.cs">
-      <DependentUpon>MediaUserPairViewControl.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Custom_Controls\Media\MediaUserPairViewControl.ascx.designer.cs">
-      <DependentUpon>MediaUserPairViewControl.ascx</DependentUpon>
-    </Compile>
     <Compile Include="Custom_Controls\Media\UploadMediaControl.ascx.cs">
       <DependentUpon>UploadMediaControl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Custom_Controls\Media\UploadMediaControl.ascx.designer.cs">
       <DependentUpon>UploadMediaControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Custom_Controls\Media\ViewTagControl.ascx.cs">
+      <DependentUpon>ViewTagControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Custom_Controls\Media\ViewTagControl.ascx.designer.cs">
+      <DependentUpon>ViewTagControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="Custom_Controls\Menu\Menu.ascx.cs">
       <DependentUpon>Menu.ascx</DependentUpon>
