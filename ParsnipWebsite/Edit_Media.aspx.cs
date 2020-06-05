@@ -127,9 +127,10 @@ namespace ParsnipWebsite
                     }
                     ShareLink.Value = Request.Url.GetLeftPart(UriPartial.Authority) + "/view?share=" +
                     myMediaShare.Id;
+                    thumbnail.Src = MyYoutubeVideo.Compressed;
                     input_date_media_captured.Value = MyYoutubeVideo.DateTimeCaptured.ToString();
-                    youtube_video.Attributes.Add("data-id", MyYoutubeVideo.DataId);
-                    youtube_video_container.Visible = true;
+                    a_play_video.HRef = string.Format("../../view?id={0}", MyYoutubeVideo.Id);
+                    a_play_video.Visible = true;
                     Page.Title = "Edit Youtube Video";
                 }
                 else if (MyVideo != null)

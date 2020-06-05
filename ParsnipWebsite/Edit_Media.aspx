@@ -79,10 +79,7 @@
                 <div class="form-group">  
                         <input runat="server" class="form-control login" id="input_date_media_captured" name="date" placeholder="DD/MM/YYYY" type="text" />
                         </div>
-                 </div>
-                
-            
-
+                </div>
             <!-- Image preview -->
             <asp:Image runat="server" ID="ImagePreview" CssClass="image-preview" Width="100%" visible="false" />
             <a runat="server" id="a_play_video" visible="false" >
@@ -93,9 +90,6 @@
                     </span>
                 </div>
             </a>
-            <div runat="server" id="youtube_video_container" class="youtube-container" style="display:inline-block; margin-bottom:0px; padding-bottom:0px" visible="false">
-                <div runat="server" id="youtube_video" class="youtube-player" />
-            </div>
             <br />
             <br />
 
@@ -142,8 +136,6 @@
           </div>
   </div>
 </div>
-      
-    <script src="../Javascript/Youtube.js"></script>
     <script>
         //Uses url parameter "id" to delete the image whose Id is 
         //sepcified in the url parameter "id". Fired by delete modal.
