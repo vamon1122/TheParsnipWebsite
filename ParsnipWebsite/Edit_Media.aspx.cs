@@ -45,19 +45,20 @@ namespace ParsnipWebsite
             
             GetMedia(); //CheckPermissions() is dependent on this for CreatedByUserId
 
-            CheckPermissions(); 
-
-            string id = Request.QueryString["id"];
             var tagParam = Request.QueryString["tag"];
             var userTagParam = Request.QueryString["user"];
             MediaTag OriginalTag = string.IsNullOrEmpty(tagParam) ? null : new MediaTag(Convert.ToInt32(tagParam));
 
+            GetOriginalRedirect();
+
+            CheckPermissions();
+
+            string id = Request.QueryString["id"];
+            
             if (!string.IsNullOrEmpty(id))
             {
                 //REQUIRED TO VIEW POSTBACK
                 form1.Action = Request.RawUrl;
-
-                GetOriginalRedirect();
 
                 if (Request.QueryString["delete"] != null)
                 {
@@ -314,7 +315,7 @@ namespace ParsnipWebsite
                         "did not own. Access was DENIED!", myUser.FullName, MyMedia.Title, myUser.SubjectiveGenderPronoun)
                         };
 
-                        Response.Redirect(OriginalAlbumRedirect + "&error=0");
+                        Response.Redirect($"{OriginalAlbumRedirect}&error=0");
                     }
                 }
             }
