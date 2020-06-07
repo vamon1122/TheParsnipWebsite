@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Home.aspx.cs" Inherits="ParsnipWebsite.Home" %>
 <%@ Register Src="~/Custom_Controls/Menu/Menu.ascx" TagPrefix="menuControls" TagName="Menu" %>
 <%@ Register Src="~/Custom_Controls/Media/UploadMediaControl.ascx" TagPrefix="menuControls" TagName="UploadMediaControl" %>
-
+<%@ Register Src="~/Custom_Controls/ErrorHandler.ascx" TagPrefix="errorHandler" TagName="ErrorHandler" %>
 
 <!DOCTYPE html>
 
@@ -31,6 +31,7 @@
     <script src="Javascript/IntersectionObserver.js"></script>
     <title>Home</title>
 </head>
+<errorHandler:ErrorHandler runat="server" ID="ErrorHandler" />
 <body class="fade0p5" id="body" style="text-align:center">
     <label class="censored" id="pageId">home.html</label>
     <menuControls:Menu runat="server" ID="Menu" />
@@ -81,21 +82,5 @@
     <script src="../Javascript/Youtube.js"></script>
     <script src="Javascript/LazyImages.js"></script>
     <script src="Javascript/FocusImage.js"></script>
-    <script>
-        var url_string = window.location.href
-        var url = new URL(url_string);
-        var error = url.searchParams.get("error");
-        if (error !== "" && error !== null)
-        {
-            if (error === "video")
-            {
-                document.getElementById("VideoError").style = "display:block";
-            }
-            else
-            {
-                document.getElementById("AccessWarning").style = "display:block";
-            }
-        }
-    </script>
 </body>
 </html>

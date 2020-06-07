@@ -24,6 +24,15 @@ namespace ParsnipWebsite
         protected global::System.Web.UI.HtmlControls.HtmlLink link_style;
 
         /// <summary>
+        /// ErrorHandler control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::ParsnipWebsite.Custom_Controls.ErrorHandler ErrorHandler;
+
+        /// <summary>
         /// Menu control.
         /// </summary>
         /// <remarks>

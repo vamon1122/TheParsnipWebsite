@@ -76,6 +76,7 @@ namespace ParsnipWebsite
                         myImage = ParsnipData.Media.Image.Select(myMediaShare.MediaId, myUserId);
                         myVideo = Video.Select(myMediaShare.MediaId, myUserId);
                         myYoutubeVideo = Youtube.Select(myMediaShare.MediaId, myUserId);
+
                         
 
                         new LogEntry(Log.Debug) { text = string.Format("{0}'s link to {1} got another hit! Now up to {2}", createdBy.FullName, MyMedia.Title, myMediaShare.TimesUsed) };
@@ -103,12 +104,11 @@ namespace ParsnipWebsite
                 }
             }
 
+            if (MyMedia == null)
+                Response.Redirect("home?error=P101");
+
             ShareLink.Value = Request.Url.GetLeftPart(UriPartial.Authority) + "/view?share=" +
                     myMediaShare.Id;
-
-
-
-
 
             //Get the image which the user is trying to access, and display it on the screen.
             if (MyMedia == null || string.IsNullOrEmpty(MyMedia.Compressed))

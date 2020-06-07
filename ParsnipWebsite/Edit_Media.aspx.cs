@@ -315,7 +315,7 @@ namespace ParsnipWebsite
                         "did not own. Access was DENIED!", myUser.FullName, MyMedia.Title, myUser.SubjectiveGenderPronoun)
                         };
 
-                        Response.Redirect($"{OriginalAlbumRedirect}&error=0");
+                        Response.Redirect($"{OriginalAlbumRedirect}&error=P100");
                     }
                 }
             }
@@ -409,9 +409,9 @@ namespace ParsnipWebsite
                     else
                     {
                         if (Redirect.Contains("?"))
-                            Response.Redirect(Redirect + "&error=access");
+                            Response.Redirect(Redirect + "&error=P100");
                         else
-                            Response.Redirect(Redirect + "?error=access");
+                            Response.Redirect(Redirect + "?error=P100");
                     }
                 }
                 catch

@@ -77,6 +77,7 @@
     <Content Include="Css\Jonsuh_Hamburgers\Hamburgers.min.css" />
     <Content Include="Css\MobileLandscapeStyle.css" />
     <Content Include="Custom_Controls\Admin\AdminMenu.ascx" />
+    <Content Include="Custom_Controls\ErrorHandler.ascx" />
     <Content Include="Custom_Controls\Media\MediaControl.ascx" />
     <Content Include="Custom_Controls\Media\MediaTagPairControl.ascx" />
     <Content Include="Custom_Controls\Media\MediaUserPairControl.ascx" />
@@ -180,6 +181,13 @@
       <DependentUpon>AdminMenu.ascx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Custom_Controls\ErrorHandler.ascx.cs">
+      <DependentUpon>ErrorHandler.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Custom_Controls\ErrorHandler.ascx.designer.cs">
+      <DependentUpon>ErrorHandler.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Custom_Controls\Media\MediaControl.ascx.cs">
       <DependentUpon>MediaControl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

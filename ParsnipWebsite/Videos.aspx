@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Videos.aspx.cs" Inherits="ParsnipWebsite.Videos" %>
 <%@ Register Src="~/Custom_Controls/Menu/Menu.ascx" TagPrefix="menuControls" TagName="Menu" %>
 <%@ Register Src="~/Custom_Controls/Media/UploadMediaControl.ascx" TagPrefix="mediaControls" TagName="UploadMediaControl" %>
-
+<%@ Register Src="~/Custom_Controls/ErrorHandler.ascx" TagPrefix="errorHandler" TagName="ErrorHandler" %>
 
 <!DOCTYPE html>
 
@@ -29,6 +29,7 @@
 
 </head>
 <body class="fade0p5" id="body" style="text-align:center">
+    <errorHandler:ErrorHandler runat="server" ID="ErrorHandler" />
     <menuControls:Menu runat="server" ID="Menu" />
 
     <div class="alert alert-warning alert-dismissible parsnip-alert" style="display: none;" id="AccessWarning">
@@ -45,28 +46,13 @@
         <span>You can now share links directly from youtube!</span>
         <br />
         <mediaControls:UploadMediaControl runat="server" ID="UploadMediaControl" />
-        <div runat="server" id="links_div">
-            
-        </div>
-
-        
+        <div runat="server" id="links_div"></div>
     </form>
 
     <!--SCRIPTS-->
     <script src="../Javascript/FocusImage.js"></script>
     <script src="../Javascript/Youtube.js"></script>
     <script src="Javascript/LazyImages.js"></script>
-    <script>
-        var url_string = window.location.href
-        var url = new URL(url_string);
-        var error = url.searchParams.get("error");
-        if (error !== "" && error !== null)
-        {
-            if (error === "access") {
-                document.getElementById("AccessWarning").style = "display:block";
-            }
-        }
-    </script>
 </body>
 </html>
 

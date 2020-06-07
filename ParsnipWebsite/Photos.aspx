@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Photos.aspx.cs" Inherits="ParsnipWebsite.Photos" %>
 <%@ Register Src="~/Custom_Controls/Menu/Menu.ascx" TagPrefix="menuControls" TagName="Menu" %>
 <%@ Register Src="~/Custom_Controls/Media/UploadMediaControl.ascx" TagPrefix="mediaControls" TagName="UploadMediaControl" %>
-
+<%@ Register Src="~/Custom_Controls/ErrorHandler.ascx" TagPrefix="errorHandler" TagName="ErrorHandler" %>
 
 <!DOCTYPE html>
 
@@ -27,11 +27,11 @@
     <title>Photos</title>
 </head>
 <body class="fade0p5" id="body" style="text-align:center">
+    <errorHandler:ErrorHandler runat="server" id="ErrorHandler" />
+
+
     <menuControls:Menu runat="server" ID="Menu" />
-    <div class="alert alert-warning alert-dismissible parsnip-alert" style="display: none;" id="AccessWarning">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        <strong>Access Denied</strong> You do not have permission to edit media which other people have uploaded!
-    </div>
+    
     <div class="cens_req padded-text">
         <label>Certain elements of this page were removed by request. 
             <a href="content_removal">Click here</a> to learn more.
@@ -49,16 +49,5 @@
     <script src="../Javascript/FocusImage.js"></script>
     <script src="../Javascript/Youtube.js"></script>
     <script src="Javascript/LazyImages.js"></script>
-    <script>
-        var url_string = window.location.href
-        var url = new URL(url_string);
-        var error = url.searchParams.get("error");
-        if (error !== "" && error !== null)
-        {
-            if (error === "access") {
-                document.getElementById("AccessWarning").style = "display:block";
-            }
-        }
-    </script>
 </body>
 </html>
