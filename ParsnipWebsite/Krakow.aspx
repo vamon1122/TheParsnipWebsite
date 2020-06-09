@@ -19,7 +19,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
     <!-- BOOTSTRAP END -->
     
-    <script src="../Javascript/UsefulFunctions.js"></script>
     <link id="link_style" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="Css/SharedStyle.css" />
     <script src="../Javascript/ApplyStyle.js"></script>
@@ -45,9 +44,7 @@
         </div>
     </form>    
     
-    <script src="../Javascript/UsefulFunctions.js"></script>
     <script src="../Javascript/FocusImage.js"></script>
-    <script src="../Javascript/Youtube.js"></script>
     <script src="Javascript/LazyImages.js"></script>
 </body>
 </html>

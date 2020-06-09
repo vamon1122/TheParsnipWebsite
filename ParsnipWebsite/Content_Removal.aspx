@@ -18,7 +18,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
     <!-- BOOTSTRAP END -->
 
-    <script src="../Javascript/UsefulFunctions.js"></script>
     <link id="link_style" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="Css/SharedStyle.css" />
     <script src="../Javascript/ApplyStyle.js"></script>
@@ -37,7 +36,6 @@
         uploaded onto the website and I will ofcourse take down anything that you deem to be offensive. Please be reasonable with your requests
         and understand if I can't act immediately.
     </div>
-    <script src="../Javascript/UsefulFunctions.js"></script>
     <script>
         if (isMobile()) {
             /*var body = document.getElementById("body")

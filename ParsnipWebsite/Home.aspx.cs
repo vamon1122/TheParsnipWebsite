@@ -43,7 +43,7 @@ namespace ParsnipWebsite
                 Response.Redirect("get_device_info?url=home");
             }
 
-            new LogEntry(Log.Debug) { text = string.Format("The home page was accessed by {0} from {1} {2} device.", 
+            new LogEntry(Log.Debug) { Text = string.Format("The home page was accessed by {0} from {1} {2} device.", 
                 myUser == null ? "someone who was not logged in" : myUser.Forename, 
                 myUser == null ? "their" : myUser.PosessivePronoun, Data.DeviceType) };
 

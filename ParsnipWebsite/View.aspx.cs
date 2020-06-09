@@ -60,7 +60,7 @@ namespace ParsnipWebsite
 
                     if (string.IsNullOrEmpty(myMediaShare.MediaId.ToString()))
                     {
-                        new LogEntry(Log.Debug) { text = $"Someone tried to access share {myMediaShare.Id}. Access was denied because the person who created this link has been suspended." };
+                        new LogEntry(Log.Debug) { Text = $"Someone tried to access share {myMediaShare.Id}. Access was denied because the person who created this link has been suspended." };
                         ShareUserSuspendedError.Visible = true;
                     }
                     else
@@ -79,7 +79,7 @@ namespace ParsnipWebsite
 
                         
 
-                        new LogEntry(Log.Debug) { text = string.Format("{0}'s link to {1} got another hit! Now up to {2}", createdBy.FullName, MyMedia.Title, myMediaShare.TimesUsed) };
+                        new LogEntry(Log.Debug) { Text = string.Format("{0}'s link to {1} got another hit! Now up to {2}", createdBy.FullName, MyMedia.Title, myMediaShare.TimesUsed) };
                     }
                 }
             }
@@ -233,7 +233,7 @@ namespace ParsnipWebsite
 
                 new LogEntry(Log.General)
                 {
-                    text = string.Format("{0} started watching video called \"{1}\" " +
+                    Text = string.Format("{0} started watching video called \"{1}\" " +
                     "using {2}'s access token. This token has now been used {3} times!", personFullName, MyMedia.Title,
                     sharedBy.FullName, myMediaShare.TimesUsed)
                 };
@@ -241,7 +241,7 @@ namespace ParsnipWebsite
             else
             {
 
-                new LogEntry(Log.General) { text = string.Format("{0} started watching video called \"{1}\"", personFullName, MyMedia.Title) };
+                new LogEntry(Log.General) { Text = string.Format("{0} started watching video called \"{1}\"", personFullName, MyMedia.Title) };
             }
         }
 

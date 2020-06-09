@@ -4,6 +4,7 @@
     var url = new URL(url_string);
     var id = document.querySelector('[id*="' + url.searchParams.get("focus") + '"]').id;
     document.getElementById(id).scrollIntoView();
+    document.getElementById(id).scrollTop = 30;
 }
 catch (e)
 {

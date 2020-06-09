@@ -21,24 +21,18 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" 
         integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous">
     </script>
-
     <!-- BOOTSTRAP END -->
-
-    <script src="../Javascript/UsefulFunctions.js"></script>
     <link id="link_style" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="Css/SharedStyle.css" />
     <script src="../Javascript/ApplyStyle.js"></script>
     <script src="Javascript/IntersectionObserver.js"></script>
     <title>Home</title>
 </head>
-<errorHandler:ErrorHandler runat="server" ID="ErrorHandler" />
 <body class="fade0p5" id="body" style="text-align:center">
-    <label class="censored" id="pageId">home.html</label>
+    <errorHandler:ErrorHandler runat="server" ID="ErrorHandler" />
     <menuControls:Menu runat="server" ID="Menu" />
-    <div runat="server" ID="MOTD_div" class="media-control-text" style="margin: auto; font-family: 'Pacifico', cursive; color:red; font-size:40px; padding-bottom:10px">
-            "Message of the day!"
-    </div>
-            <asp:Label runat="server" ID="WelcomeLabel"></asp:Label>
+    <div runat="server" ID="MOTD_div" class="media-control-text" style="margin: auto; font-family: 'Pacifico', cursive; color:red; font-size:40px; padding-bottom:10px"></div>
+    <asp:Label runat="server" ID="WelcomeLabel"></asp:Label>
     <br />
     <br />
     <h2><b>Looking for something?</b></h2>
@@ -48,14 +42,12 @@
     <form runat="server">
         <br />
         <menuControls:UploadMediaControl runat="server" ID="UploadMediaControl" />
-        
         <div runat="server" id="seeYourself" visible="false"></div>
         <div runat="server" id="LatestVideo" style="margin-top:10px"></div>
         <div class="">
-        <div class="media-control-title" style="margin: auto">
-            <h2 class="section-title"><b>YOUR WEBSITE NEEDS YOU!</b></h2>
-            If you notice anything missing, upload it! I don't have Instagram so the crystal parsnip would be an awesome place to start!
-    
+            <div class="media-control-title" style="margin: auto">
+                <h2 class="section-title"><b>YOUR WEBSITE NEEDS YOU!</b></h2>
+                If you notice anything missing, upload it! I don't have Instagram so the crystal parsnip would be an awesome place to start!
                 <h2 class="section-title"><b>*NEW*</b></h2>
                 <ol style="list-style-type: square; text-align: left; padding-left:18px">
                     <li style="text-align: left">[22/05/20] <a href="Portugal.aspx">Portugal album</a> finally complete!</li>
@@ -72,14 +64,12 @@
                     <li style="text-align: left">[24/06/19] Share <a href="Photos.aspx">photos</a> and <a href="Videos.aspx">videos</a>! (Recipient doesn't even need an account to view what you share!!!)</li>
                     <li style="text-align: left">[24/06/19] You can now access the home page without logging in</li>
                 </ol>
+            </div>
         </div>
-    </div>
         <h2><b>My Uploads</b></h2>
         <label runat="server" id="UploadsPlaceholder">When you upload content, it will appear here!</label>
         <div runat="server" id="MyMediaContainer"></div>
     </form>
-    
-    <script src="../Javascript/Youtube.js"></script>
     <script src="Javascript/LazyImages.js"></script>
     <script src="Javascript/FocusImage.js"></script>
 </body>

@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Menu.ascx.cs" Inherits="ParsnipWebsite.Custom_Controls.Menu.Menu" %>
 <link href="Css/Jonsuh_Hamburgers/Hamburgers.css" rel="stylesheet">
-
+<script src="../../Javascript/UsefulFunctions.js"></script>
 <div id="titleAndMenu"></div>
 <div id="menuDiv"></div>
 

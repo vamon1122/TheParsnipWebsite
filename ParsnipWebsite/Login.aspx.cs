@@ -59,7 +59,7 @@ namespace ParsnipWebsite
                 myUser = ParsnipData.Accounts.User.LogIn(Request["inputUsername"].ToString(), RememberPwd.Checked, Request["inputPwd"].ToString(), RememberPwd.Checked);
                 if (myUser != null)
                 {
-                    new LogEntry(Log.LogInOut) { text = String.Format("{0} logged in from {1} {2}.", myUser.FullName, myUser.PosessivePronoun, Data.DeviceType) };
+                    new LogEntry(Log.LogInOut) { Text = String.Format("{0} logged in from {1} {2}.", myUser.FullName, myUser.PosessivePronoun, Data.DeviceType) };
                     WriteCookie();
                     Response.Redirect(Redirect);
                 }

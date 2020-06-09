@@ -124,7 +124,7 @@ namespace ParsnipWebsite.Custom_Controls.Media
             catch (Exception ex)
             {
                 var e = "Exception whilst uploading image: " + ex;
-                new LogEntry(Log.Debug) { text = e };
+                new LogEntry(Log.Debug) { Text = e };
                 Debug.WriteLine(e);
                 HttpContext.Current.Response.Redirect("photos?error=video");
             }
@@ -151,7 +151,7 @@ namespace ParsnipWebsite.Custom_Controls.Media
             catch (Exception ex)
             {
                 var e = "Exception whilst uploading video: " + ex;
-                new LogEntry(Log.Debug) { text = e };
+                new LogEntry(Log.Debug) { Text = e };
                 Debug.WriteLine(e);
                 HttpContext.Current.Response.Redirect("photos?error=video");
             }

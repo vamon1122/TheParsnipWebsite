@@ -37,7 +37,7 @@ namespace ParsnipWebsite
                 TableRow MyRow = new TableRow();
                 MyRow.Attributes.Add("style", "word-wrap:break-word");
                 MyRow.Cells.Add(new TableCell() { Text = myEntry.date.ToString(), CssClass = "date-cell" } );
-                MyRow.Cells.Add(new TableCell() { Text = myEntry.text });
+                MyRow.Cells.Add(new TableCell() { Text = myEntry.Text });
                 LogTable.Rows.Add(MyRow);
             }
 
@@ -80,7 +80,7 @@ namespace ParsnipWebsite
         {
             ParsnipData.Logging.Data.ClearLogs();
 
-            new LogEntry(Log.Default) { text = string.Format("Logs were cleared by {0}!", myUser.FullName) };
+            new LogEntry(Log.Default) { Text = string.Format("Logs were cleared by {0}!", myUser.FullName) };
 
             Response.Redirect("logs?id=0&action=delete&success=true");
         }

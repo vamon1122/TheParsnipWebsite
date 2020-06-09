@@ -18,7 +18,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
     <!-- BOOTSTRAP END -->
 
-    <script src="../Javascript/UsefulFunctions.js"></script>
     <link id="link_style" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="Css/SharedStyle.css" />
     <script src="../Javascript/ApplyStyle.js"></script>
@@ -79,39 +78,7 @@
         </div>
     </form>
     <script src="../Javascript/FocusImage.js"></script>
-    <script src="../Javascript/Youtube.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function ()
-                {
-                    var lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
-
-                    if ("IntersectionObserver" in window)
-                    {
-                        let lazyImageObserver = new IntersectionObserver(function (entries, observer)
-                        {
-                            entries.forEach(function (entry)
-                            {
-                                if (entry.isIntersecting)
-                                {
-                                    let lazyImage = entry.target;
-                                    lazyImage.src = lazyImage.dataset.src;
-                                    lazyImage.srcset = lazyImage.dataset.srcset;
-                                    lazyImage.classList.remove("lazy");
-                                    lazyImageObserver.unobserve(lazyImage);
-                                }
-                            });
-                        });
-
-                        lazyImages.forEach(function (lazyImage) {
-                            lazyImageObserver.observe(lazyImage);
-                        });
-                    }
-                    else
-                    {
-                        //I used Javascript/intersection-observer as a fallback
-                    }
-                });
-    </script>
+    <script src="Javascript/IntersectionObserver.js"></script>
 </body>
 </html>
 

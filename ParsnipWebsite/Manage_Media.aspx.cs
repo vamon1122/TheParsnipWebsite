@@ -30,7 +30,7 @@ namespace ParsnipWebsite
 
             if (Request.QueryString["id"] != null && Request.QueryString["id"].ToString() != "")
             {
-                new LogEntry(Log.Debug) { text = "Manage_Media userId = " + Request.QueryString["id"].ToString() };
+                new LogEntry(Log.Debug) { Text = "Manage_Media userId = " + Request.QueryString["id"].ToString() };
                 selectedUserId = Convert.ToInt16(Request.QueryString["id"]);
 
                 SelectUser.SelectedValue = selectedUserId.ToString();

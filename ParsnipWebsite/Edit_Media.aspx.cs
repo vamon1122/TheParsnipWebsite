@@ -283,7 +283,7 @@ namespace ParsnipWebsite
                 {
                     new LogEntry(Log.General)
                     {
-                        text = string.Format("{0} tried to delete media called \"{1}\", but {2} was not allowed " +
+                        Text = string.Format("{0} tried to delete media called \"{1}\", but {2} was not allowed " +
                         "because {2} is not an admin", myUser.FullName, MyMedia.Title,
                         myUser.SubjectiveGenderPronoun)
                     };
@@ -301,7 +301,7 @@ namespace ParsnipWebsite
                         string accountType = myUser.AccountType == "admin" ? "admin" : "approved media editor";
                         new LogEntry(Log.General)
                         {
-                            text = string.Format("{0} started editing media called \"{1}\". {2} does not own the " +
+                            Text = string.Format("{0} started editing media called \"{1}\". {2} does not own the " +
                             "media but {3} is allowed since {3} is an {4}", myUser.FullName, MyMedia.Title,
                             myUser.SubjectiveGenderPronoun.First().ToString().ToUpper() +
                             myUser.SubjectiveGenderPronoun.Substring(1), myUser.SubjectiveGenderPronoun, accountType)
@@ -311,7 +311,7 @@ namespace ParsnipWebsite
                     {
                         new LogEntry(Log.General)
                         {
-                            text = string.Format("{0} attempted to edit media called \"{1}\" which {2} " +
+                            Text = string.Format("{0} attempted to edit media called \"{1}\" which {2} " +
                         "did not own. Access was DENIED!", myUser.FullName, MyMedia.Title, myUser.SubjectiveGenderPronoun)
                         };
 
@@ -368,7 +368,7 @@ namespace ParsnipWebsite
                         {
                             new LogEntry(Log.General)
                             {
-                                text = string.Format("{0} saved changes to {1} media called \"{2}\"",
+                                Text = string.Format("{0} saved changes to {1} media called \"{2}\"",
                                 myUser.FullName, myUser.PosessivePronoun, MyMedia.Title)
                             };
                         }
@@ -378,7 +378,7 @@ namespace ParsnipWebsite
 
                             new LogEntry(Log.General)
                             {
-                                text = string.Format("{0} saved changes to media called \"{1}\". {3} does not own " +
+                                Text = string.Format("{0} saved changes to media called \"{1}\". {3} does not own " +
                                 "the media but {2} is allowed since {2} is an {4}", myUser.FullName,
                                 MyMedia.Title, myUser.SubjectiveGenderPronoun,
                                 myUser.SubjectiveGenderPronoun.First().ToString().ToUpper() +
@@ -392,7 +392,7 @@ namespace ParsnipWebsite
                         changesWereSaved = false;
                         new LogEntry(Log.General)
                         {
-                            text =
+                            Text =
                             string.Format("{0} tried to save changes to media called \"{1}\" which {2} did not own. {3} is not " +
                             "an admin or an approved media editor so {4} changes were not saved",
                             myUser.FullName, MyMedia.Title, myUser.SubjectiveGenderPronoun,
