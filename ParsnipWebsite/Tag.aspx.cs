@@ -35,8 +35,21 @@ namespace ParsnipWebsite
             }
             else
             {
-                myTag = MediaTag.Select(Convert.ToInt32(Request.QueryString["id"]));
-                myTagUser = ParsnipData.Accounts.User.Select(Convert.ToInt32(Request.QueryString["user"]));
+                var tagId = Convert.ToInt32(Request.QueryString["id"]);
+                var userId = Convert.ToInt32(Request.QueryString["user"]);
+
+                if (tagId != default)
+                {
+                    myTag = MediaTag.Select(tagId);
+                    TagName.InnerText = myTag.Name;
+                }
+
+                if(userId != default)
+                {
+                    myTagUser = ParsnipData.Accounts.User.Select(userId);
+                    TagName.InnerText = myTagUser.FullName;
+                }
+
                 string focus = Request.QueryString["focus"];
 
                 if (myTagUser == null)
@@ -64,10 +77,10 @@ namespace ParsnipWebsite
                 Page.Title = $"Tag: {myTagUser.Forename}";
             }
 
-            TagName.InnerText = string.IsNullOrEmpty(myTag.Name) ? myTagUser.FullName : myTag.Name;
-            
-            if(myTag != null)
+            if (myTag != null)
                 UploadMediaControl.Initialise(myUser, myTag, this);
+            else
+                UploadMediaControl.Initialise(myUser, this);
         }
 
         protected void Page_LoadComplete(object sender, EventArgs e)
