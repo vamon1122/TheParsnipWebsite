@@ -15,6 +15,7 @@ namespace ParsnipWebsite.Custom_Controls.Media
     {
         User LoggedInUser;
         ParsnipData.Media.MediaTag MyMediaTag;
+        int TaggedUserId;
         Page myPage;
 
         public void Initialise(User loggedInUser, MediaTag myMediaTag, Page page)
@@ -22,6 +23,15 @@ namespace ParsnipWebsite.Custom_Controls.Media
             myPage = page;
             LoggedInUser = loggedInUser;
             MyMediaTag = myMediaTag;
+            if (LoggedInUser.AccountType == "admin" || LoggedInUser.AccountType == "member")
+                UploadDiv.Style.Clear();
+        }
+
+        public void Initialise(User loggedInUser, int taggedUserId, Page page)
+        {
+            myPage = page;
+            LoggedInUser = loggedInUser;
+            TaggedUserId = taggedUserId;
             if (LoggedInUser.AccountType == "admin" || LoggedInUser.AccountType == "member")
                 UploadDiv.Style.Clear();
         }
@@ -58,7 +68,24 @@ namespace ParsnipWebsite.Custom_Controls.Media
                 {
                     if (ThumbnailUpload.PostedFile.ContentLength > 0)
                     {
-                        UploadVideo(LoggedInUser, MediaUpload, ThumbnailUpload, MyMediaTag);
+                        var myVideo = UploadVideo(LoggedInUser, MediaUpload, ThumbnailUpload);
+
+                        if (MyMediaTag != null)
+                        {
+                            var mediaTagPair = new MediaTagPair(myVideo, MyMediaTag, LoggedInUser);
+                            mediaTagPair.Insert();
+                            HttpContext.Current.Response.Redirect($"edit_media?id={myVideo.Id}&tag={MyMediaTag.Id}", false);
+                        }
+                        else if (TaggedUserId != default)
+                        {
+                            var mediaUserPair = new MediaUserPair(myVideo, TaggedUserId, LoggedInUser);
+                            mediaUserPair.Insert();
+                            HttpContext.Current.Response.Redirect($"edit_media?id={myVideo.Id}&user={TaggedUserId}", false);
+                        }
+                        else
+                        {
+                            HttpContext.Current.Response.Redirect($"edit_media?id={myVideo.Id}", false);
+                        }
                     }
                     else
                     {
@@ -67,7 +94,26 @@ namespace ParsnipWebsite.Custom_Controls.Media
                         string originalFileExtension = originalFileName.Split('.').Last();
 
                         if (ParsnipData.Media.Image.IsValidFileExtension(originalFileExtension))
-                            UploadImage(LoggedInUser, MediaUpload, MyMediaTag);
+                        {
+                            var myImage = UploadImage(LoggedInUser, MediaUpload);
+
+                            if (MyMediaTag != null)
+                            {
+                                var mediaTagPair = new MediaTagPair(myImage, MyMediaTag, LoggedInUser);
+                                mediaTagPair.Insert();
+                                HttpContext.Current.Response.Redirect($"edit_media?id={myImage.Id}&tag={MyMediaTag.Id}", false);
+                            }
+                            else if (TaggedUserId != default)
+                            {
+                                var mediaUserPair = new MediaUserPair(myImage, TaggedUserId, LoggedInUser);
+                                mediaUserPair.Insert();
+                                HttpContext.Current.Response.Redirect($"edit_media?id={myImage.Id}&user={TaggedUserId}", false);
+                            }
+                            else
+                            {
+                                HttpContext.Current.Response.Redirect($"edit_media?id={myImage.Id}", false);
+                            }
+                        }
                         else if (Video.IsValidFileExtension(originalFileExtension))
                         {
                             ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openUploadThumbnail();", true);
@@ -96,30 +142,28 @@ namespace ParsnipWebsite.Custom_Controls.Media
                     var mediaTagPair = new MediaTagPair(myYoutube, MyMediaTag, LoggedInUser);
                     mediaTagPair.Insert();
                 }
+
+                if(TaggedUserId != default)
+                {
+                    var mediaUserPair = new MediaUserPair(myYoutube, TaggedUserId, LoggedInUser);
+                    mediaUserPair.Insert();
+                }
                 
-                if (MyMediaTag == null)
-                    Response.Redirect($"edit_media?id={myYoutube.Id}", false);
-                else
+                if (MyMediaTag != null)
                     Response.Redirect($"edit_media?id={myYoutube.Id}&tag={MyMediaTag.Id}", false);
+                else if (TaggedUserId != default)
+                    Response.Redirect($"edit_media?id={myYoutube.Id}&user={TaggedUserId}", false);
+                else
+                    Response.Redirect($"edit_media?id={myYoutube.Id}", false);
             }
         }
-        public static void UploadImage(User uploader, FileUpload uploadControl, MediaTag mediaTag)
+        public static ParsnipData.Media.Image UploadImage(User uploader, FileUpload uploadControl)
         {
             try
             {
                 ParsnipData.Media.Image myImage = new ParsnipData.Media.Image(uploader, uploadControl.PostedFile);
                 myImage.Insert();
-
-                if(mediaTag != null)
-                {
-                    var mediaTagPair = new MediaTagPair(myImage, mediaTag, uploader);
-                    mediaTagPair.Insert();
-                }
-
-                if (mediaTag == null)
-                    HttpContext.Current.Response.Redirect($"edit_media?id={myImage.Id}", false);
-                else
-                    HttpContext.Current.Response.Redirect($"edit_media?id={myImage.Id}&tag={mediaTag.Id}", false);
+                return myImage;
             }
             catch (Exception ex)
             {
@@ -128,25 +172,16 @@ namespace ParsnipWebsite.Custom_Controls.Media
                 Debug.WriteLine(e);
                 HttpContext.Current.Response.Redirect("photos?error=video");
             }
+            return null;
         }
 
-        public static void UploadVideo(User uploader, FileUpload videoUpload, FileUpload thumbnailUpload, MediaTag mediaTag)
+        public static Video UploadVideo(User uploader, FileUpload videoUpload, FileUpload thumbnailUpload)
         {
             try
             {
                 ParsnipData.Media.Video myVideo = new ParsnipData.Media.Video(uploader, videoUpload.PostedFile, thumbnailUpload.PostedFile);
                 myVideo.Insert();
-
-                if (mediaTag != null)
-                {
-                    var mediaTagPair = new MediaTagPair(myVideo, mediaTag, uploader);
-                    mediaTagPair.Insert();
-                }
-
-                if (mediaTag == null)
-                    HttpContext.Current.Response.Redirect($"edit_media?id={myVideo.Id}", false);
-                else
-                    HttpContext.Current.Response.Redirect($"edit_media?id={myVideo.Id}&tag={mediaTag.Id}", false);
+                return myVideo;
             }
             catch (Exception ex)
             {
@@ -155,6 +190,7 @@ namespace ParsnipWebsite.Custom_Controls.Media
                 Debug.WriteLine(e);
                 HttpContext.Current.Response.Redirect("photos?error=video");
             }
+            return null;
         }
     }
 }

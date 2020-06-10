@@ -41,12 +41,14 @@ namespace ParsnipWebsite
         string OriginalAlbumRedirect;
         protected void Page_Load(object sender, EventArgs e)
         {
+            var tagParam = Request.QueryString["tag"];
+            var userTagParam = Request.QueryString["user"];
+
             Login();
             
             GetMedia(); //CheckPermissions() is dependent on this for CreatedByUserId
 
-            var tagParam = Request.QueryString["tag"];
-            var userTagParam = Request.QueryString["user"];
+            
             MediaTag OriginalTag = string.IsNullOrEmpty(tagParam) ? null : new MediaTag(Convert.ToInt32(tagParam));
 
             GetOriginalRedirect();
@@ -85,10 +87,13 @@ namespace ParsnipWebsite
             {
                 if (Request.QueryString["id"] == null)
                     myUser = Account.SecurePage("edit_media", this, Data.DeviceType);
-                else if (Request.QueryString["tag"] == null)
-                    myUser = Account.SecurePage($"edit_media?id={Request.QueryString["id"]}", this, Data.DeviceType);
-                else
+                else if (Request.QueryString["tag"] != null)
                     myUser = Account.SecurePage($"edit_media?id={Request.QueryString["id"]}&tag={Request.QueryString["tag"]}", this, Data.DeviceType);
+                else if (Request.QueryString["user"] != null)
+                    myUser = Account.SecurePage($"edit_media?id={Request.QueryString["id"]}&user={Request.QueryString["user"]}", this, Data.DeviceType);
+                else
+                    myUser = Account.SecurePage($"edit_media?id={Request.QueryString["id"]}", this, Data.DeviceType);
+
 
                 if (Request.QueryString["removetag"] == "true")
                 {

@@ -80,7 +80,7 @@ namespace ParsnipWebsite
             if (myTag != null)
                 UploadMediaControl.Initialise(myUser, myTag, this);
             else
-                UploadMediaControl.Initialise(myUser, this);
+                UploadMediaControl.Initialise(myUser, myTagUser.Id, this);
         }
 
         protected void Page_LoadComplete(object sender, EventArgs e)
