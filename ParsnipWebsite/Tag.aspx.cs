@@ -70,12 +70,27 @@ namespace ParsnipWebsite
 
             if (myTagUser == null)
             {
+                Page.Header.Controls.Add(new LiteralControl($"<meta property=\"og:title\" content=\"{myTag.Name}\" />"));
+                Page.Header.Controls.Add(new LiteralControl($"<meta property=\"og:description\" content=\"{myTag.Description}\" />"));
+                //Page.Header.Controls.Add(new LiteralControl($"<meta property=\"og:image\" content=\"{Request.Url.GetLeftPart(UriPartial.Authority)}/Resources/Media/Images/Local/Dirt_On_You.jpg\" />"));
+                Page.Header.Controls.Add(new LiteralControl(string.Format("<meta property=\"og:alt\" content=\"{0}\" />", myTag.Description)));
+
                 Page.Title = $"Tag: {myTag.Name}";
             }
             else
             {
+                Page.Header.Controls.Add(new LiteralControl($"<meta property=\"og:title\" content=\"{myTagUser.FullName} was tagged in...\" />"));
+                Page.Header.Controls.Add(new LiteralControl($"<meta property=\"og:description\" content=\"See pictures and videos which {myTagUser.FullName} has been tagged in!\" />"));
+                //Page.Header.Controls.Add(new LiteralControl($"<meta property=\"og:image\" content=\"{Request.Url.GetLeftPart(UriPartial.Authority)}/Resources/Media/Images/Local/Dirt_On_You.jpg\" />"));
+                Page.Header.Controls.Add(new LiteralControl(string.Format($"<meta property=\"og:alt\" content=\"See pictures and videos which {myTagUser.FullName} has been tagged in!\" />")));
+
                 Page.Title = $"Tag: {myTagUser.Forename}";
             }
+
+            //This will break youtube videos which have not had their thumbnail regenerated
+            Page.Header.Controls.Add(new LiteralControl("<meta property=\"og:type\" content=\"website\" />"));
+            Page.Header.Controls.Add(new LiteralControl(string.Format("<meta property=\"og:url\" content=\"{0}\" />", Request.Url.ToString())));
+            Page.Header.Controls.Add(new LiteralControl("<meta property=\"fb:app_id\" content=\"521313871968697\" />"));
 
             if (myTag != null)
                 UploadMediaControl.Initialise(myUser, myTag, this);

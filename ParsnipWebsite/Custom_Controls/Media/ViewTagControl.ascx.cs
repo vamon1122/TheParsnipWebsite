@@ -56,39 +56,58 @@ namespace ParsnipWebsite.Custom_Controls.Media
                 try
                 {
                     var defaultRedirect = $"tag?id={MyTag.Id}";
-                    if (myTagPair == null)
+                    if (MyTag == null)
                     {
                         redirect = defaultRedirect;
                     }
                     else
                     {
-                        switch (myTagPair.MediaTag.Id)
+                        switch (MyTag.Id)
                         {
                             case (int)Data.MediaTagIds.Amsterdam:
-                                redirect = $"amsterdam?focus={myMedia.Id}";
+                                redirect = $"amsterdam";
+                                if (MyMedia != null && myMedia.Id != null)
+                                    redirect += $"?focus={myMedia.Id}";
                                 break;
                             case (int)Data.MediaTagIds.Krakow:
-                                redirect = $"krakow?focus={myMedia.Id}";
+                                redirect = $"krakow";
+                                if (MyMedia != null && myMedia.Id != null)
+                                    redirect += $"?focus={myMedia.Id}";
                                 break;
                             case (int)Data.MediaTagIds.Memes:
-                                redirect = $"memes?focus={myMedia.Id}";
+                                redirect = $"memes";
+                                if (MyMedia != null && myMedia.Id != null)
+                                    redirect += $"?focus={myMedia.Id}";
                                 break;
                             case (int)Data.MediaTagIds.Photos:
-                                redirect = $"photos?focus={myMedia.Id}";
+                                redirect = $"photos";
+                                if (MyMedia != null && myMedia.Id != null)
+                                    redirect += $"?focus={myMedia.Id}";
                                 break;
                             case (int)Data.MediaTagIds.Portugal:
-                                redirect = $"portugal?focus={myMedia.Id}";
+                                redirect = $"portugal";
+                                if (MyMedia != null && myMedia.Id != null)
+                                    redirect += $"?focus={myMedia.Id}";
                                 break;
                             case (int)Data.MediaTagIds.Videos:
-                                redirect = $"videos?focus={myMedia.Id}";
+                                redirect = $"videos";
+                                if (MyMedia != null && myMedia.Id != null)
+                                    redirect += $"?focus={myMedia.Id}";
                                 break;
                             case default(int):
-                                redirect = $"manage_media?id={MyMedia.Id}";
+                                redirect = $"manage_media";
+                                if (MyMedia != null && myMedia.Id != null)
+                                    redirect += $"?id={MyMedia.Id}";
                                 break;
                             default:
-                                redirect = $"{defaultRedirect}&focus={MyMedia.Id}";
+                                redirect = $"{defaultRedirect}";
+                                if (MyMedia != null && myMedia.Id != null)
+                                    redirect += $"&focus={MyMedia.Id}";
                                 break;
                         }
+
+                        
+
                     }
                 }
                 catch (Exception ex)

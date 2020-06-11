@@ -86,11 +86,9 @@ namespace ParsnipWebsite
             else
             {
                 myUser = Account.SecurePage("view?id=" + Request.QueryString["id"], this, Data.DeviceType);
-                
                 myVideo = Video.Select(new MediaId(Request.QueryString["id"]), myUser.Id);
                 myYoutubeVideo = Youtube.Select(new MediaId(Request.QueryString["id"]), myUser.Id);
                 myImage = ParsnipData.Media.Image.Select(new MediaId(Request.QueryString["id"].ToString()), myUser == null ? default : myUser.Id);
-
 
                 if (MyMedia != null && MyMedia.MyMediaShare != null)
                 {

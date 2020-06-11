@@ -9,6 +9,7 @@ using ParsnipData.Logging;
 using ParsnipData.Accounts;
 using BenLog;
 using System.Diagnostics;
+using ParsnipData.Media;
 
 namespace ParsnipWebsite
 {
