@@ -65,19 +65,14 @@ namespace ParsnipWebsite
                     }
                     else
                     {
-                        if (!IsPostBack)
-                        {
-                            myMediaShare.TimesUsed++;
-                            myMediaShare.View(myUser);
-                        }
-
                         User createdBy = ParsnipData.Accounts.User.Select(myMediaShare.UserId);
                         var myUserId = myUser == null ? default : myUser.Id;
                         myImage = ParsnipData.Media.Image.Select(myMediaShare.MediaId, myUserId);
                         myVideo = Video.Select(myMediaShare.MediaId, myUserId);
                         myYoutubeVideo = Youtube.Select(myMediaShare.MediaId, myUserId);
 
-                        
+                        myMediaShare.View(myUser);
+                        MyMedia.ViewCount++;
 
                         new LogEntry(Log.Debug) { Text = string.Format("{0}'s link to {1} got another hit! Now up to {2}", createdBy.FullName, MyMedia.Title, myMediaShare.TimesUsed) };
                     }
@@ -90,20 +85,27 @@ namespace ParsnipWebsite
                 myYoutubeVideo = Youtube.Select(new MediaId(Request.QueryString["id"]), myUser.Id);
                 myImage = ParsnipData.Media.Image.Select(new MediaId(Request.QueryString["id"].ToString()), myUser == null ? default : myUser.Id);
 
-                if (MyMedia != null && MyMedia.MyMediaShare != null)
+                if (MyMedia != null)
                 {
-                    myMediaShare = MyMedia.MyMediaShare;
-
-                    if (myMediaShare == null)
+                    if (MyMedia.MyMediaShare != null)
                     {
-                        myMediaShare = new MediaShare(MyMedia.Id, myUser.Id);
-                        myMediaShare.Insert();
+                        myMediaShare = MyMedia.MyMediaShare;
+
+                        if (myMediaShare == null)
+                        {
+                            myMediaShare = new MediaShare(MyMedia.Id, myUser.Id);
+                            myMediaShare.Insert();
+                        }
                     }
+
+                    MyMedia.View(myUser);
                 }
             }
 
             if (MyMedia == null)
                 Response.Redirect("home?error=P101");
+            else
+                viewCount.InnerText = $"{MyMedia.ViewCount} view(s)";
 
             ShareLink.Value = Request.Url.GetLeftPart(UriPartial.Authority) + "/view?share=" +
                     myMediaShare.Id;

@@ -49,7 +49,7 @@
             </video>
             <br />
         </div>
-    
+        <div runat="server" id="viewCount"></div>
         <form id="form1" runat="server" style="width:100%; margin-bottom:5%">
             <br />
             <br />
