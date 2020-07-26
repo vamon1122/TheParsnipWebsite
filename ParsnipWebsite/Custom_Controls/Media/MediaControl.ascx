@@ -13,7 +13,6 @@
                 </span>
             </div>
         </a>
-        <div runat="server" class="youtube-player" id="YoutubePlayer" style="margin-bottom:5px" visible="false"></div>
         <a runat="server" id="MyEdit" >
             <img src="../../Resources/Media/Images/Web_Media/Edit.svg" style="height:25px" /></a>
         <div style="display:inline-block; width:28px"></div>

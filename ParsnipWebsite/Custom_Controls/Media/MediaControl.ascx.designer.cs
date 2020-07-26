@@ -69,15 +69,6 @@ namespace ParsnipWebsite.Custom_Controls.Media
         protected global::System.Web.UI.HtmlControls.HtmlImage thumbnail;
 
         /// <summary>
-        /// YoutubePlayer control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl YoutubePlayer;
-
-        /// <summary>
         /// MyEdit control.
         /// </summary>
         /// <remarks>
