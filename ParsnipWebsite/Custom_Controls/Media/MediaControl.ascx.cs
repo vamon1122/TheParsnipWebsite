@@ -52,6 +52,8 @@ namespace ParsnipWebsite.Custom_Controls.Media
                         MyImageHolder.Style.Add("max-height", string.Format("{0}px", maxWidth * (value.YScale / value.XScale)));
                     }
 
+                    MyAnchorLink.HRef = string.Format("../../view?id={0}", value.Id);
+
                     MyImageHolder.Visible = true;
                     MyImageHolder.Style.Add("margin-bottom", "8px");
                     MyImageHolder.ImageUrl = value.Placeholder.Contains("http://") || value.Placeholder.Contains("https://") ? value.Placeholder : Request.Url.GetLeftPart(UriPartial.Authority) + "/" + value.Placeholder;
