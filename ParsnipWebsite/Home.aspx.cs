@@ -87,8 +87,8 @@ namespace ParsnipWebsite
                 myImage.Title = $"What DIRT do we have on YOU? 😜";
 
             var MySeeYourselfControl = (MediaControl)Page.LoadControl("~/Custom_Controls/Media/MediaControl.ascx");
-            MySeeYourselfControl.AnchorLink = $"{Request.Url.GetLeftPart(UriPartial.Authority)}/me";
             MySeeYourselfControl.MyMedia = myImage;
+            MySeeYourselfControl.AnchorLink = $"{Request.Url.GetLeftPart(UriPartial.Authority)}/me";
 
             seeYourself.Controls.Add(MySeeYourselfControl);
             seeYourself.Visible = true;
