@@ -212,7 +212,7 @@ namespace ParsnipWebsite
                     video_container.Poster = myVideo.Compressed;
                     video_container.Visible = true;
                     ImageTitle.InnerText = myVideo.Title;
-                    VideoSource.Src = myVideo.VideoData.Compressed;
+                    VideoSource.Src = myVideo.VideoData.VideoDir;
                     ImagePreview.Visible = false;
                     youtube_video_container.Visible = false;
                 }

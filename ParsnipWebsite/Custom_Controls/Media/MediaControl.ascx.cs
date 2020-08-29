@@ -48,8 +48,8 @@ namespace ParsnipWebsite.Custom_Controls.Media
                 {
                     if (value.XScale != default || value.YScale != default)
                     {
-                        MyImageHolder.Style.Add("height", string.Format("{0}vmin", MyImageHolder.Width.Value * (value.YScale / value.XScale)));
-                        MyImageHolder.Style.Add("max-height", string.Format("{0}px", maxWidth * (value.YScale / value.XScale)));
+                        MyImageHolder.Style.Add("height", string.Format("{0}vmin", MyImageHolder.Width.Value * ((double)value.YScale / value.XScale)));
+                        MyImageHolder.Style.Add("max-height", string.Format("{0}px", maxWidth * ((double)value.YScale / value.XScale)));
                     }
 
                     MyAnchorLink.HRef = string.Format("../../view?id={0}", value.Id);
@@ -65,8 +65,8 @@ namespace ParsnipWebsite.Custom_Controls.Media
                 {
                     if (value.XScale != default || value.YScale != default)
                     {
-                        thumbnail.Style.Add("height", string.Format("{0}vmin", width * (value.YScale / value.XScale)));
-                        thumbnail.Style.Add("max-height", string.Format("{0}px", maxWidth * (value.YScale / value.XScale)));
+                        thumbnail.Style.Add("height", string.Format("{0}vmin", width * ((double)value.YScale / value.XScale)));
+                        thumbnail.Style.Add("max-height", string.Format("{0}px", maxWidth * ((double)value.YScale / value.XScale)));
                     }
 
                     a_play_video.Visible = true;
