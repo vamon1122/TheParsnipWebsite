@@ -87,6 +87,16 @@ namespace ParsnipWebsite.Custom_Controls.Media
                     
                 }
 
+                if(MyMedia.Status != null)
+                {
+                    if (MyMedia.Status.Equals(MediaStatus.Unprocessed))
+                        MyTitle.InnerHtml += " ⚫ - Unprocessed";
+                    else if (MyMedia.Status.Equals(MediaStatus.Processing))
+                        MyTitle.InnerHtml += " 🔵 - Processing...";
+                    else if (MyMedia.Status.Equals(MediaStatus.Error))
+                        MyTitle.InnerHtml += " 🔴 - Error whilst processing";
+                }
+
                 GenerateShareButton();
             }
 

@@ -153,7 +153,7 @@ namespace ParsnipWebsite
                 ImageTitle.InnerText = MyMedia.Title;
                 Page.Title = MyMedia.Title;
 
-                if(MyMedia.Type == "image")
+                if (MyMedia.Type == "image")
                     ImagePreview.Src = MyMedia.Compressed;
 
                 Page.Header.Controls.Add(new LiteralControl(string.Format("<meta property=\"og:title\" content=\"{0}\" />", MyMedia.Title)));
@@ -215,7 +215,19 @@ namespace ParsnipWebsite
                     VideoSource.Src = myVideo.VideoData.VideoDir;
                     ImagePreview.Visible = false;
                     youtube_video_container.Visible = false;
+
+                    if (myVideo.Status != null)
+                    {
+                        if (myVideo.Status.Equals(MediaStatus.Unprocessed))
+                            ImageTitle.InnerHtml += " ⚫ - Unprocessed";
+                        else if (myVideo.Status.Equals(MediaStatus.Processing))
+                            ImageTitle.InnerHtml += " 🔵 - Processing...";
+                        else if (myVideo.Status.Equals(MediaStatus.Error))
+                            ImageTitle.InnerHtml += " 🔴 - Error whilst processing";
+                    }
                 }
+
+                
 
                 ShareLink.Value = Request.Url.GetLeftPart(UriPartial.Authority) + "/view?share=" +
                     myMediaShare.Id;
