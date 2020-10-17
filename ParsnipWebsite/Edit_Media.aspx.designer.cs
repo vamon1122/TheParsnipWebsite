@@ -15,22 +15,13 @@ namespace ParsnipWebsite
     {
 
         /// <summary>
-        /// link_style control.
+        /// NewMenu control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlLink link_style;
-
-        /// <summary>
-        /// Menu control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::ParsnipWebsite.Custom_Controls.Menu.Menu Menu;
+        protected global::ParsnipWebsite.Custom_Controls.Menu.NewMenu NewMenu;
 
         /// <summary>
         /// form1 control.
@@ -49,15 +40,6 @@ namespace ParsnipWebsite
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox InputTitleTwo;
-
-        /// <summary>
-        /// DropDownDiv control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl DropDownDiv;
 
         /// <summary>
         /// NewAlbumsDropDown control.
@@ -87,15 +69,6 @@ namespace ParsnipWebsite
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl MediaTagContainer;
 
         /// <summary>
-        /// Modal_SelectUser control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Modal_SelectUser;
-
-        /// <summary>
         /// DropDown_SelectUser control.
         /// </summary>
         /// <remarks>
@@ -123,15 +96,6 @@ namespace ParsnipWebsite
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl UserTagContainer;
 
         /// <summary>
-        /// DateCapturedDiv control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl DateCapturedDiv;
-
-        /// <summary>
         /// input_date_media_captured control.
         /// </summary>
         /// <remarks>
@@ -139,6 +103,15 @@ namespace ParsnipWebsite
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText input_date_media_captured;
+
+        /// <summary>
+        /// ImagePreviewContainer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor ImagePreviewContainer;
 
         /// <summary>
         /// ImagePreview control.
@@ -186,15 +159,6 @@ namespace ParsnipWebsite
         protected global::System.Web.UI.WebControls.Button ButtonSave;
 
         /// <summary>
-        /// ShareLinkContainer control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ShareLinkContainer;
-
-        /// <summary>
         /// ShareLink control.
         /// </summary>
         /// <remarks>
@@ -202,5 +166,14 @@ namespace ParsnipWebsite
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText ShareLink;
+
+        /// <summary>
+        /// DynamicMediaDiv control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl DynamicMediaDiv;
     }
 }

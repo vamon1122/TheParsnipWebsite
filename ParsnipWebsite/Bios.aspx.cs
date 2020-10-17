@@ -14,6 +14,8 @@ namespace ParsnipWebsite
         protected void Page_Load(object sender, EventArgs e)
         {
             myUser = Account.SecurePage("bios", this, Data.DeviceType);
+            NewMenu.LoggedInUser = myUser;
+            NewMenu.SelectedPage = PageIndex.Bios;
         }
     }
 }

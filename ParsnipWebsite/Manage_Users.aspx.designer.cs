@@ -7,20 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ParsnipWebsite {
-    
-    
-    public partial class Manage_Users {
-        
-        /// <summary>
-        /// link_style control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlLink link_style;
-        
+namespace ParsnipWebsite
+{
+
+
+    public partial class Manage_Users
+    {
+
         /// <summary>
         /// Error control.
         /// </summary>
@@ -29,7 +22,7 @@ namespace ParsnipWebsite {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl Error;
-        
+
         /// <summary>
         /// ErrorText control.
         /// </summary>
@@ -38,7 +31,7 @@ namespace ParsnipWebsite {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label ErrorText;
-        
+
         /// <summary>
         /// Warning control.
         /// </summary>
@@ -47,7 +40,7 @@ namespace ParsnipWebsite {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl Warning;
-        
+
         /// <summary>
         /// WarningText control.
         /// </summary>
@@ -56,7 +49,7 @@ namespace ParsnipWebsite {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label WarningText;
-        
+
         /// <summary>
         /// Success control.
         /// </summary>
@@ -65,7 +58,7 @@ namespace ParsnipWebsite {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl Success;
-        
+
         /// <summary>
         /// SuccessText control.
         /// </summary>
@@ -74,7 +67,7 @@ namespace ParsnipWebsite {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label SuccessText;
-        
+
         /// <summary>
         /// adminMenu1 control.
         /// </summary>
@@ -83,7 +76,7 @@ namespace ParsnipWebsite {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::ParsnipWebsite.Custom_Controls.Admin.AdminMenu adminMenu1;
-        
+
         /// <summary>
         /// selectUser control.
         /// </summary>
@@ -92,7 +85,7 @@ namespace ParsnipWebsite {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList selectUser;
-        
+
         /// <summary>
         /// UserForm control.
         /// </summary>
@@ -101,7 +94,7 @@ namespace ParsnipWebsite {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::ParsnipWebsite.Custom_Controls.Uac.AdminUserForm UserForm;
-        
+
         /// <summary>
         /// Button_Action control.
         /// </summary>
@@ -110,7 +103,7 @@ namespace ParsnipWebsite {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button Button_Action;
-        
+
         /// <summary>
         /// Button_Delete control.
         /// </summary>
@@ -119,7 +112,7 @@ namespace ParsnipWebsite {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button Button_Delete;
-        
+
         /// <summary>
         /// Button_DeleteConfirm control.
         /// </summary>

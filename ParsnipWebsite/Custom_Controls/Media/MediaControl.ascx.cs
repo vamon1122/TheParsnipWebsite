@@ -90,9 +90,9 @@ namespace ParsnipWebsite.Custom_Controls.Media
                 if(MyMedia.Status != null)
                 {
                     if (MyMedia.Status.Equals(MediaStatus.Unprocessed))
-                        MyTitle.InnerHtml += " ⚫ - Unprocessed";
+                        unprocessed.Visible = true;
                     else if (MyMedia.Status.Equals(MediaStatus.Processing))
-                        MyTitle.InnerHtml += " 🔵 - Processing...";
+                        processing.Visible = true;
                     else if (MyMedia.Status.Equals(MediaStatus.Error))
                         MyTitle.InnerHtml += " 🔴 - Error whilst processing";
                 }
@@ -156,7 +156,7 @@ namespace ParsnipWebsite.Custom_Controls.Media
         private void GenerateShareButton()
         {
             Guid tempGuid = Guid.NewGuid();
-            ShareButton.Attributes.Add("data-target", "#share" + tempGuid);
+            ShareButton.Attributes.Add("onclick", $"document.getElementById('share{tempGuid}').style.display='block'");
 
             /* 
              * This is an ugly fix to a problem which I was struggling to work out. The HTML which is generated below
@@ -170,20 +170,13 @@ namespace ParsnipWebsite.Custom_Controls.Media
              * with this. Just generating the modal HTML in a string and then inserting it into the user-control. Not 
              * pretty, but it works :P.
              */
-            modalDiv.InnerHtml = string.Format(
+            modalDiv.InnerHtml =
                 "\n" +
-                "   <div class=\"modal fade\" id=\"share{0}\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"shareMediaLink\" aria-hidden=\"true\">\n" +
-                "       <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\n" +
-                "           <div class=\"modal-content\" style=\"margin:0px; padding:0px\">\n" +
-                "               <div class=\"input-group\" style=\"margin:0px; padding:0px\">\n" +
-                "                   <div class=\"input-group-prepend\">" +
-                "                       <span class=\"input-group-text\" id=\"inputGroup-sizing-default\">Share</span>\n" +
-                "                  </div>\n" +
-                "                  <input runat=\"server\" type=\"text\" id=\"ShareLink\" class=\"form-control\" onclick=\"this.setSelectionRange(0, this.value.length)\" value = \"{1}\" />\n" +
-                "               </div>\n" +
-                "           </div>\n" +
+                $"  <div class=\"w3-modal\" id=\"share{tempGuid}\" onclick=\"void(0)\">\n" +
+                "       <div class=\"w3-modal-content w3-display-middle modal-content\" style=\"background-color: transparent\">\n" +
+                $"         <input runat=\"server\" type=\"text\" id=\"ShareLink\" class=\"w3-input w3-border\" onclick=\"this.setSelectionRange(0, this.value.length)\" value = \"{ShareLink}\" />\n" +
                 "      </div>\n" +
-                "   </div>\n",tempGuid, ShareLink);
+                "   </div>\n";
         }
 
         public static List<MediaControl> GetMediaUserPairAsMediaControls(int mediaTagUserId)
@@ -199,6 +192,8 @@ namespace ParsnipWebsite.Custom_Controls.Media
                 myMediaControl.MyMedia = temp;
                 mediaControls.Add(myMediaControl);
             }
+
+            
 
             return mediaControls.OrderByDescending(mediaControl => mediaControl.MyMedia.DateTimeCaptured).ToList();
         }

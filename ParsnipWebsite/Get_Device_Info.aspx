@@ -13,7 +13,8 @@
             <label id="redirectLabel" style ="visibility:hidden">default redirect</label>
         </div>
     </form>
-    <script src="../Javascript/UsefulFunctions.js"></script>
+    <script src="../Javascript/Cookies.js"></script>
+    <script src="../Javascript/DeviceInfo.js"></script>
     <script>
         var errorLabel = document.getElementById("errorLabel");
         var redirectLabel = document.getElementById("redirectLabel");

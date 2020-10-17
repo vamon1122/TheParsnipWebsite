@@ -7,18 +7,20 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ParsnipWebsite {
-    
-    
-    public partial class Content_Removal {
-        
+namespace ParsnipWebsite
+{
+
+
+    public partial class Content_Removal
+    {
+
         /// <summary>
-        /// Menu control.
+        /// NewMenu control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::ParsnipWebsite.Custom_Controls.Menu.Menu Menu;
+        protected global::ParsnipWebsite.Custom_Controls.Menu.NewMenu NewMenu;
     }
 }

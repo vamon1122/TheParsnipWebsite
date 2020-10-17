@@ -1,30 +1,23 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="View.aspx.cs" Inherits="ParsnipWebsite.View_Image" %>
-<%@ Register Src="~/Custom_Controls/Menu/Menu.ascx" TagPrefix="menuControls" TagName="Menu" %>
+<%@ Register Src="~/Custom_Controls/Menu/NewMenu.ascx" TagPrefix="menuControls" TagName="NewMenu" %>
 
 <!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head runat="server">
-    <!-- GOOGLE FONTS: Nunito -->
-    <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
-    <!-- iPhone FAVICONS -->
+    <title>View</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="Libraries/w3.css-4.13/w3.css" />
+    <link rel="stylesheet" href="Libraries/Fonts/Lato/Lato.css" />
+    <link rel="stylesheet" href="Libraries/Fonts/Montserrat/Montserrat.css" />
+    <link href="Libraries/fontawesome-free-5.15.1-web/css/all.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="Css/MediaStyle.css" />
+    <!-- FAVICONS -->
     <link rel="apple-touch-icon" sizes="114×114" href="Resources/Favicons/apple-icon-114×114.png" />
     <link rel="apple-touch-icon" sizes="72×72" href="Resources/Favicons/apple-icon-72x72.png" />
     <link rel="apple-touch-icon" href="Resources/Favicons/apple-icon.png" />
-    <!-- BOOTSTRAP START -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
-    <!-- BOOTSTRAP END -->
-    <link id="link_style" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="Css/SharedStyle.css" />
-    <script src="../Javascript/ApplyStyle.js"></script>
-    <script src="Javascript/IntersectionObserver.js"></script>
-    <title>View Image</title>
 </head>
-<body class="fade0p5" id="body" style="text-align:center">
-    <menuControls:Menu runat="server" ID="Menu" />
+<body>
+    <menuControls:NewMenu runat="server" ID="NewMenu" />
     <div runat="server" class="alert alert-danger alert-dismissible parsnip-alert" Visible="false" id="ShareUserSuspendedError">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         <strong>Error:</strong> Could not access image. The image has been deleted or the person who shared this image has been suspended!
@@ -33,43 +26,44 @@
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         <strong>Error:</strong> Could not access image. The image has been deleted or the person who uploaded the image has been suspended!
     </div>
-    <button type="button" class="btn btn-link" data-toggle="modal" data-target="#exampleModalCenter" style="padding:0px; position:fixed; top: 1px; right: 3px; z-index:2147483646">
-            <img src="../../Resources/Media/Images/Web_Media/Share_White.svg" style="height:40px" />
-    </button>
-    <div runat="server" id="MediaTagContainer" class="center_div" style="margin:auto; padding-bottom:10px">More like this: </div>
-        <div runat="server" id="MediaContainer" class="background-lightest" style="display:inline-block; padding-top:8px; padding-bottom:5px">
-            <h3 class="media-viewer-title"><b runat="server" id="ImageTitle"></b></h3>
-            <img runat="server" id="ImagePreview" class="media-viewer" />
-            <div runat="server" id="youtube_video_container" class="media-viewer" style="margin:auto" visible="false">
-                <div runat="server" id="youtube_video" class="youtube-player" />
-            </div>
-            <video runat="server" id="video_container" controls="controls" class="video-viewer" style="display:inline-block; object-fit:contain; margin-bottom:0px" preload="none" visible="false" >
+    <div runat="server" id="MediaContainer" style="display:inline-block; padding-top:65px; padding-bottom:5px; text-align:center; align-content:center; margin:auto; width:100%">
+        <div runat="server" id="MediaTagContainer" class="center_div" style="margin:auto; padding-bottom:10px; margin:auto">More like this: </div>
+        <div runat="server" id="TitleContainer" class="background-lightest media-viewer-title" style="margin:auto; display:block; padding-top:0px; padding-bottom:13px; min-height:38px">
+            <h4 style="word-wrap:break-word; position:relative; display:inline; top:7px; margin:0px" runat="server" id="ImageTitle"></h4><i runat="server" id="unprocessed" class="fas fa-circle w3-right fa-2x" style="position:relative; right: -5px; top:6px" visible="false"></i><i runat="server" id="processing" class="fas fa-circle-notch w3-spin w3-right fa-2x" style="position:relative; right:-5px; top: 6px" visible="false"></i><i runat="server" id="error" class="far fa-times-circle w3-red w3-right fa-2x" style="position:relative; right: -5px; top: 6px" visible="false"></i>
+        </div>
+        <img runat="server" id="ImagePreview" class="media-viewer-landscape" style="max-width:100%" />
+        <div runat="server" id="youtube_video_container" class="media-viewer-landscape" style="margin:auto" visible="false">
+            <div runat="server" id="youtube_video" class="youtube-player" /></div>
+            <video runat="server" id="video_container" controls="controls" class="media-viewer-landscape" style="display:inline-block; object-fit:contain; margin-bottom:0px; max-width:100%" preload="none" visible="false" >
                 <source runat="server" id="VideoSource" type="video/mp4" />
                 Your browser does not support HTML5 video.
             </video>
-            <br />
-        </div>
+        <br />
         <div runat="server" id="viewCount"></div>
-        <form id="form1" runat="server" style="width:100%; margin-bottom:5%">
-            <br />
-            <br />
-            <div style="padding-left:2.5%; padding-right:2.5%">
-                <asp:Button runat="server" ID="Button_ViewAlbum" class="btn btn-info btn-lg btn-block" Text="CLICK for more like this!" OnClick="Button_ViewAlbum_Click"></asp:Button>
-            </div>
-        </form>
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content" style="margin:0px; padding:0px">
-                <div runat="server" id="ShareLinkContainer" class="input-group" style="margin:0px; padding:0px">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroup-sizing-default">Link</span>
-                    </div>
-                    <input runat="server" type="text" id="ShareLink" class="form-control" 
-                        onclick="this.setSelectionRange(0, this.value.length)" />
-                </div>
+    </div>
+    <form id="form1" runat="server" style="width:100%; margin-bottom:5%">
+        <br />
+        <br />
+        <div style="padding-left:2.5%; padding-right:2.5%">
+            <asp:Button runat="server" ID="Button_ViewAlbum" class="btn btn-info btn-lg btn-block" Text="CLICK for more like this!" OnClick="Button_ViewAlbum_Click"></asp:Button>
+        </div>
+    </form>
+    <div class="w3-modal" id="shareModal" onclick="void(0)">
+        <div class="w3-modal-content w3-display-middle modal-content" style="background-color:transparent">
+            <div class="w3-container">
+                <input runat="server" type="text" id="ShareLink" class="w3-input w3-border" onclick="this.setSelectionRange(0, this.value.length)" />
             </div>
         </div>
     </div>
+
+    <script src="Libraries/jquery-3.5.1/jquery.min.js"></script>
+    <script src="Javascript/LazyImages.js"></script>
+    <script src="Javascript/IntersectionObserver.js"></script>
+    <script src="Javascript/smoothscroll.min.js"></script>
+    <script>smoothscroll.polyfill();</script>
+    <script src="Javascript/FocusImage.js"></script>
+    <script src="Javascript/W3ModalDismiss.js"></script>
+    <script src="Javascript/DeviceInfo.js"></script>
     <script>
         (function () {
             var v = document.getElementsByClassName("youtube-player");

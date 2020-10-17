@@ -7,29 +7,31 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ParsnipWebsite {
-    
-    
-    public partial class Login {
-        
+namespace ParsnipWebsite
+{
+
+
+    public partial class Login
+    {
+
         /// <summary>
-        /// link_style control.
+        /// ErrorHandler control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlLink link_style;
-        
+        protected global::ParsnipWebsite.Custom_Controls.ErrorHandler ErrorHandler;
+
         /// <summary>
-        /// Warning control.
+        /// Snowflakes control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Warning;
-        
+        protected global::ParsnipWebsite.Custom_Controls.Snowflakes Snowflakes;
+
         /// <summary>
         /// inputUsername control.
         /// </summary>
@@ -38,7 +40,7 @@ namespace ParsnipWebsite {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox inputUsername;
-        
+
         /// <summary>
         /// inputPwd control.
         /// </summary>
@@ -47,7 +49,7 @@ namespace ParsnipWebsite {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox inputPwd;
-        
+
         /// <summary>
         /// RememberPwd control.
         /// </summary>
@@ -56,7 +58,7 @@ namespace ParsnipWebsite {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox RememberPwd;
-        
+
         /// <summary>
         /// ButLogIn control.
         /// </summary>

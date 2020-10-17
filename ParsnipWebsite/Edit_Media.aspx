@@ -1,86 +1,55 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Edit_Media.aspx.cs" Inherits="ParsnipWebsite.Edit_Media" %>
-<%@ Register Src="~/Custom_Controls/Menu/Menu.ascx" TagPrefix="menuControls" TagName="Menu" %>
+<%@ Register Src="~/Custom_Controls/Media/UploadMediaControl.ascx" TagPrefix="mediaControls" TagName="UploadMediaControl" %>
+<%@ Register Src="~/Custom_Controls/ErrorHandler.ascx" TagPrefix="errorHandler" TagName="ErrorHandler" %>
+<%@ Register Src="~/Custom_Controls/Menu/NewMenu.ascx" TagPrefix="menuControls" TagName="NewMenu" %>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en">
 <head runat="server">
-    <!-- GOOGLE FONTS: Nunito -->
-    <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
-    <!-- iPhone FAVICONS -->
+    <title>Memes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="Libraries/w3.css-4.13/w3.css" />
+    <link rel="stylesheet" href="Libraries/Fonts/Lato/Lato.css" />
+    <link rel="stylesheet" href="Libraries/Fonts/Montserrat/Montserrat.css" />
+    <link rel="stylesheet" href="Libraries/fontawesome-free-5.15.1-web/css/all.css" />
+    <link rel="stylesheet" type="text/css" href="Css/MediaStyle.css" />
+    <!-- FAVICONS -->
     <link rel="apple-touch-icon" sizes="114×114" href="Resources/Favicons/apple-icon-114×114.png" />
     <link rel="apple-touch-icon" sizes="72×72" href="Resources/Favicons/apple-icon-72x72.png" />
     <link rel="apple-touch-icon" href="Resources/Favicons/apple-icon.png" />
-    <!-- BOOTSTRAP START -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
-    <!-- BOOTSTRAP END -->
-
-    <link id="link_style" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="Css/SharedStyle.css" />
-    <script src="../Javascript/ApplyStyle.js"></script>
-
-    <script src="Javascript/IntersectionObserver.js"></script>
-
-    <title>Edit Media</title>
-
-    <!-- Special version of Bootstrap that only affects content wrapped in .bootstrap-iso -->
-<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" /> 
-
-<!--Font Awesome (added because you use icons in your prepend/append)-->
-<link rel="stylesheet" href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css" />
-
-<!-- Inline CSS based on choices in "Settings" tab -->
-<style>.bootstrap-iso .formden_header h2, .bootstrap-iso .formden_header p, .bootstrap-iso form{font-family: Arial, Helvetica, sans-serif; color: black}.bootstrap-iso form button, .bootstrap-iso form button:hover{color: white !important;} .asteriskField{color: red;}</style>
 </head>
-<body class="fade0p5" id="body" style="text-align:center;"  >
-    <menuControls:Menu runat="server" ID="Menu" />
-
-    <button type="button" class="btn btn-link" data-toggle="modal" data-target="#exampleModalCenter" style="padding:0px; position:fixed; top: 1px; right: 3px; z-index:2147483646">
-            <img src="../../Resources/Media/Images/Web_Media/Share_White.svg" style="height:40px" /></button>
-    
-    <div class="center_form" style="padding-bottom:5%" >
+<body>
+    <menuControls:NewMenu runat="server" ID="NewMenu" />
+    <header class="w3-container w3-red w3-center" style="padding:60px 16px 20px 16px; margin-bottom: 20px">
+        <h1 class="w3-margin w3-jumbo" >Edit</h1>
+    </header>
+    <div class="w3-center" style="padding-bottom:5%; text-align: center" >
         <form id="form1" runat="server" defaultbutton="ButtonSave" >
-            <!-- Title -->
-            <div class="form-group" style="padding-left:5%; padding-right: 5%;" >
-                <label>Title</label>
-                <asp:TextBox CssClass="form-control" runat="server" ID="InputTitleTwo" />
-            </div>
-            <!-- Tag select -->
-            <div runat="server" id="DropDownDiv" style="padding-left:5%; padding-right: 5%;">
-                <label>Tags</label>
-                <div class="input-group" style="margin:0px; padding:0px">
-                    <asp:DropDownList ID="NewAlbumsDropDown" runat="server" AutoPostBack="False" CssClass="form-control" ></asp:DropDownList>
-                    <span class="input-group-btn">
-                        <asp:Button runat="server" ID="AddMediaTagPair" OnClick="AddMediaTagPair_Click" Text="Add Tag" CssClass="btn btn-primary" />
-                    </span>
-                </div>
-                <br />
-            </div>
-            <div runat="server" id="MediaTagContainer"></div>
-            <!-- User select -->
-            <div runat="server" id="Modal_SelectUser" style="padding-left:5%; padding-right: 5%;">
-                <label>Tags</label>
-                <div class="input-group" style="margin:0px; padding:0px">
-                    <asp:DropDownList ID="DropDown_SelectUser" runat="server" AutoPostBack="False" CssClass="form-control" ></asp:DropDownList>
-                    <span class="input-group-btn">
-                        <asp:Button runat="server" ID="AddMediaUserPair" Text="Tag User" CssClass="btn btn-primary" OnClick="AddMediaUserPair_Click" />
-                    </span>
-                </div>
-                <br />
-            </div>
-            <div runat="server" id="UserTagContainer"></div>
-            
-
-            <div runat="server" id="DateCapturedDiv" class="form-group has-error" style="padding-left:5%; padding-right: 5%;" visible="false">
-                <label>Date Captured</label>
-                
-                <div class="form-group">  
-                        <input runat="server" class="form-control login" id="input_date_media_captured" name="date" placeholder="DD/MM/YYYY" type="text" />
+            <div class="w3-container">
+                <label class="form-label">Title:</label>
+                <asp:TextBox CssClass="w3-input w3-border w3-margin-bottom" runat="server" ID="InputTitleTwo" />
+                <label class="form-label">Add Hashtags:</label>
+                    <div style="display:flex">
+                    <asp:DropDownList ID="NewAlbumsDropDown" runat="server" AutoPostBack="False" CssClass="w3-select" style="flex-grow: 1; overflow:hidden"></asp:DropDownList>
+                    <asp:Button runat="server" ID="AddMediaTagPair" OnClick="AddMediaTagPair_Click" Text="Add Tag" CssClass="w3-btn w3-black dropdown-button" />
                         </div>
+                <br />
+                <div runat="server" id="MediaTagContainer" class="w3-margin-bottom"></div>
+                <!-- User select -->
+                <label class="form-label">Tag People:</label>
+                <div style="display:flex">
+                    <asp:DropDownList ID="DropDown_SelectUser" runat="server" AutoPostBack="False" CssClass="w3-select" style="flex-grow: 1; overflow:hidden" ></asp:DropDownList>
+                    <asp:Button runat="server" ID="AddMediaUserPair" Text="Tag User" CssClass="w3-btn w3-black w3-right dropdown-button" OnClick="AddMediaUserPair_Click" />
                 </div>
-            <!-- Image preview -->
-            <asp:Image runat="server" ID="ImagePreview" CssClass="image-preview" Width="100%" visible="false" />
+                    
+                <br />
+                <div runat="server" id="UserTagContainer" class="w3-margin-bottom"></div>
+                <label class="form-label">Date Captured:</label>
+                <input runat="server" class="w3-input w3-border w3-margin-bottom" id="input_date_media_captured" name="date" placeholder="DD/MM/YYYY" type="text" />
+            </div>
+            <a runat="server" ID="ImagePreviewContainer" visible="false">
+            <asp:Image runat="server" ID="ImagePreview" CssClass="image-preview" Width="100%" />
+                </a>
             <a runat="server" id="a_play_video" visible="false" >
                 <div class="play-button-div">
                     <img runat="server" id="thumbnail" style="width:100%" />
@@ -89,63 +58,48 @@
                     </span>
                 </div>
             </a>
-            <br />
-            <br />
+            <asp:Button runat="server" ID="btn_AdminDelete"  CssClass="w3-btn w3-black w3-margin-top" Width="100px" Text="Delete" Visible="false" OnClientClick="document.getElementById('confirmMediaDelete').style.display='block'; return false"></asp:Button>
+            <asp:Button runat="server" ID="ButtonSave" class="w3-btn w3-black w3-margin-top" Text="Save" Width="100px" OnClick="ButtonSave_Click"></asp:Button>
+            <div class="w3-modal" id="confirmMediaDelete" onclick="void(0)">
+                <div class="w3-modal-content w3-display-middle modal-content">
+                    <header class="w3-container w3-red">
+                        <h3>Confirm Delete</h3>
+                    </header>
+                    <div class="w3-container">
 
-            <!-- Delete / save buttons -->
-            <div style="width:100%; padding-left:5%; padding-right:5%; padding-top:20px; display:block;">
-                <asp:Button runat="server" ID="btn_AdminDelete"  CssClass="btn btn-primary float-left" Width="100px" Text="Delete" Visible="false" data-toggle="modal" data-target="#confirmDelete" OnClientClick="return false;"></asp:Button>
-                <asp:Button runat="server" ID="ButtonSave" class="btn btn-primary float-right" Text="Save" Width="100px" OnClick="ButtonSave_Click"></asp:Button>
-            </div>
-
-            <!-- Delete modal -->
-            <div class="modal fade" id="confirmDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="text-align:left">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle">Confirm Delete</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            Are you sure that you want to DELETE this photo?
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                            <button id="BtnDeleteImage" class="btn btn-primary" onclick="DeletePhoto(); return false;" >Confirm</button>
-
+                        <p>Are you sure that you want to DELETE this media?</p>
+                        <div class="w3-margin-bottom">
+                            <button id="BtnDeleteImage" class="w3-btn w3-red" onclick="DeletePhoto(); return false;" >Confirm</button>
+                            <button type="button" class="w3-btn w3-black" onclick="document.getElementById('confirmMediaDelete').style.display='none'">Cancel</button>
                         </div>
                     </div>
                 </div>
             </div>
         </form>
     </div>
-
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content" style="margin:0px; padding:0px">
-      <div runat="server" id="ShareLinkContainer" class="input-group" style="margin:0px; padding:0px">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="inputGroup-sizing-default">Link</span>
+    <div class="w3-modal" id="shareModal" tabindex="-1" role="dialog" aria-labelledby="shareMediaLink" aria-hidden="true" onclick="void(0)">
+        <div class="w3-modal-content w3-display-middle modal-content" role="document" style="background-color: transparent">
+			<input runat="server" type="text" id="ShareLink" class="w3-input w3-border" onclick="this.setSelectionRange(0, this.value.length)" />
         </div>
-        <input runat="server" type="text" id="ShareLink" class="form-control" 
-            onclick="this.setSelectionRange(0, this.value.length)" />
     </div>
-          </div>
-  </div>
-</div>
+    <div runat="server" id="DynamicMediaDiv" style="margin: auto; text-align:center"></div>
+    
+    <script src="Libraries/jquery-3.5.1/jquery.min.js"></script>
+    <script src="Javascript/LazyImages.js"></script>
+    <script src="Javascript/IntersectionObserver.js"></script>
+    <script src="Javascript/smoothscroll.min.js"></script>
+    <script>smoothscroll.polyfill();</script>
+    <script src="Javascript/FocusImage.js"></script>
+    <script src="Javascript/W3ModalDismiss.js"></script>
     <script>
         //Uses url parameter "id" to delete the image whose Id is 
         //sepcified in the url parameter "id". Fired by delete modal.
-        function DeletePhoto()
-        {
+        function DeletePhoto() {
             var url_string = window.location.href
             var url;
             var redirect = "edit_media?"
 
-            try
-            {
+            try {
                 //More efficient but does not work on older browsers
                 url = new URL(url_string);
                 var tagId = url.searchParams.get("tag");
@@ -154,8 +108,7 @@
                     redirect += "&tag=" + tagId
                 }
             }
-            catch (e)
-            {
+            catch (e) {
                 //More compatible method
                 url = window.location.href;
                 redirect += "id=" + url.split('=')[url.split('=').length - 1] + "&delete=true";
@@ -168,10 +121,6 @@
             catch (e) { window.location = redirect; }
         }
     </script>
-        <!-- Extra JavaScript/CSS added manually in "Settings" tab -->
-<!-- Include jQuery -->
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 </body>
 </html>
-
 

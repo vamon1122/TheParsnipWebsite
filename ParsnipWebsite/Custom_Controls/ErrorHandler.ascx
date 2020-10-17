@@ -1,23 +1,41 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ErrorHandler.ascx.cs" Inherits="ParsnipWebsite.Custom_Controls.ErrorHandler" %>
-<div class="alert alert-warning alert-dismissible parsnip-alert" style="display: none;" id="AccessWarning">
-    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-    <strong>Access Denied</strong> You do not have permission to edit media which other people have uploaded!
-</div>
-<div class="alert alert-warning alert-dismissible parsnip-alert" style="display: none;" id="ExistsWarning">
-    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-    <strong>Media Not Found</strong> This media has been either been deleted... or it never existed!
+<div class="w3-container w3-margin-top" style="width:100%; position:fixed; z-index:100">
+    <div class="w3-panel w3-yellow w3-opacity alert" id="AccessWarning">
+        <span class="w3-right dismiss" onclick="document.getElementById('AccessWarning').style.display='none'">x</span>
+        <h3>Access Denied</h3>
+        <p>You do not have permission to edit media which other people have uploaded!</p>
+    </div> 
+    <div class="w3-panel w3-yellow w3-opacity alert" id="ExistsWarning">
+        <span class="w3-right dismiss" onclick="document.getElementById('ExistsWarning').style.display='none'">x</span>
+        <h3>Media Not Found</h3>
+        <p>The media you are looking for could not be found. This could be because it has been deleted, the person who uploaded it has deleted their account or had it suspended or the subject of the media has asked for it to be removed.</p>
+    </div>
+    <div class="w3-panel w3-yellow w3-opacity alert" id="LogInWarning">
+        <span class="w3-right dismiss" onclick="document.getElementById('LogInWarning').style.display='none'">x</span>
+        <h3>Confirm Identity</h3>
+        <p>You must log in first!</p>
+    </div>
 </div>
 <script>
-        var url_string = window.location.href
-        var url = new URL(url_string);
-        var error = url.searchParams.get("error");
-        if (error !== "" && error !== null)
-        {
-            if (error === "P100") {
-                document.getElementById("AccessWarning").style = "display:block";
-            }
-            if (error === "P101") {
-                document.getElementById("ExistsWarning").style = "display:block";
-            }
+    var url_string = window.location.href
+    var url = new URL(url_string);
+    var error = url.searchParams.get("alert");
+    if (error !== "" && error !== null) {
+        if (error === "P100") {
+            document.getElementById("AccessWarning").style = "display:block";
         }
+        if (error === "P101") {
+            document.getElementById("ExistsWarning").style = "display:block";
+        }
+        if (error === "P102") {
+            document.getElementById("LogInWarning").style = "display:block";
+        }
+    }
+
+    var redirect = url.searchParams.get("url");
+    if (redirect !== "" && redirect !== null && url_string.includes("login")) {
+            document.getElementById("LogInWarning").style = "display:block"
+    }
+
+
 </script>

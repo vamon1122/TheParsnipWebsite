@@ -1,76 +1,72 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Home.aspx.cs" Inherits="ParsnipWebsite.Home" %>
-<%@ Register Src="~/Custom_Controls/Menu/Menu.ascx" TagPrefix="menuControls" TagName="Menu" %>
 <%@ Register Src="~/Custom_Controls/Media/UploadMediaControl.ascx" TagPrefix="menuControls" TagName="UploadMediaControl" %>
-<%@ Register Src="~/Custom_Controls/ErrorHandler.ascx" TagPrefix="errorHandler" TagName="ErrorHandler" %>
+<%@ Register Src="~/Custom_Controls/Menu/NewMenu.ascx" TagPrefix="menuControls" TagName="NewMenu" %>
+<%@ Register Src="~/Custom_Controls/Snowflakes.ascx" TagPrefix="christmas" TagName="Snowflakes" %>
 
 <!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <link href="https://fonts.googleapis.com/css?family=Nunito|Pacifico&display=swap" rel="stylesheet">
-    <!-- iPhone FAVICONS -->
+<html lang="en">
+<head>
+    <title>Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="Libraries/w3.css-4.13/w3.css" />
+    <link rel="stylesheet" href="Libraries/Fonts/Lato/Lato.css" />
+    <link rel="stylesheet" href="Libraries/Fonts/Montserrat/Montserrat.css" />
+    <link href="Libraries/fontawesome-free-5.15.1-web/css/all.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="Css/MediaStyle.css" />
+    <!-- FAVICONS -->
     <link rel="apple-touch-icon" sizes="114×114" href="Resources/Favicons/apple-icon-114×114.png" />
     <link rel="apple-touch-icon" sizes="72×72" href="Resources/Favicons/apple-icon-72x72.png" />
     <link rel="apple-touch-icon" href="Resources/Favicons/apple-icon.png" />
-    <!-- BOOTSTRAP START -->
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" 
-        integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous" />
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" 
-        integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous">
-    </script>
-    <!-- BOOTSTRAP END -->
-    <link id="link_style" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="Css/SharedStyle.css" />
-    <script src="../Javascript/ApplyStyle.js"></script>
-    <script src="Javascript/IntersectionObserver.js"></script>
-    <title>Home</title>
 </head>
-<body class="fade0p5" id="body" style="text-align:center">
-    <errorHandler:ErrorHandler runat="server" ID="ErrorHandler" />
-    <menuControls:Menu runat="server" ID="Menu" />
-    <div runat="server" ID="MOTD_div" class="media-control-text" style="margin: auto; font-family: 'Pacifico', cursive; color:red; font-size:40px; padding-bottom:10px"></div>
-    <asp:Label runat="server" ID="WelcomeLabel"></asp:Label>
-    <br />
-    <br />
-    <h2><b>Looking for something?</b></h2>
-    <label>Check out the categories below to get started. Notice anything missing? Click the cloud in the top right corner and get uploading!</label>
-    <label runat="server" id="LoginNudge" style="color:red" Visible ="false">You must <a href="login">login</a> before you can view or upload content.</label>
-    <div runat="server" id="MediaTagContainer"></div>
-    <form runat="server">
-        <br />
-        <menuControls:UploadMediaControl runat="server" ID="UploadMediaControl" />
-        <div runat="server" id="seeYourself" visible="false"></div>
-        <div runat="server" id="LatestVideo" style="margin-top:10px"></div>
-        <div class="">
-            <div class="media-control-title" style="margin: auto">
-                <h2 class="section-title"><b>YOUR WEBSITE NEEDS YOU!</b></h2>
-                If you notice anything missing, upload it! I don't have Instagram so the crystal parsnip would be an awesome place to start!
-                <h2 class="section-title"><b>*NEW*</b></h2>
-                <ol style="list-style-type: square; text-align: left; padding-left:18px">
-                    <li style="text-align: left">[22/05/20] <a href="Portugal.aspx">Portugal album</a> finally complete!</li>
-                    <li style="text-align: left">[10/05/20] You can now tag people in media!</li>
-                    <li style="text-align: left">[08/04/20] NEW videos uploaded to <a href="Amsterdam.aspx">the Amsterdam album</a>!</li>
-                    <li style="text-align: left">[27/04/20] You can now add tags to media!</li>
-                    <li style="text-align: left">[08/03/20] You can now <a href="Videos.aspx">upload videos directly from Youtube</a></li>
-                    <li style="text-align: left">[28/10/19] Fixed bug where page would 'jump around' whilst content was loading</li>
-                    <li style="text-align: left">[20/09/19] Fixed bug where video player would take ages to load</li>
-                    <li style="text-align: left">[15/09/19] Added time machine! View the website as it was in <a href="http://original.theparsnip.co.uk">2015</a> when it was first conceived and in <a href="http://2016.theparsnip.co.uk">2016</a> when it had it's first major visual overhaul!</li>
-                    <li style="text-align: left">[17/08/19] Fixed broken image links on <a href="Photos.aspx">the photos album</a></li>
-                    <li style="text-align: left">[17/08/19] Fixed slow loading times on <a href="Videos.aspx">the videos album</a></li>
-                    <li style="text-align: left">[07/08/19] New <a href="Krakow.aspx">Krakow album</a>! Upload, view & share holiday photos!</li>
-                    <li style="text-align: left">[24/06/19] Share <a href="Photos.aspx">photos</a> and <a href="Videos.aspx">videos</a>! (Recipient doesn't even need an account to view what you share!!!)</li>
-                    <li style="text-align: left">[24/06/19] You can now access the home page without logging in</li>
-                </ol>
+<body>
+    <christmas:Snowflakes runat="server" id="Snowflakes" />
+    <menuControls:NewMenu runat="server" ID="NewMenu" />
+    <header class="w3-container w3-red w3-center" style="padding:60px 16px 0px 16px">
+        <h1 class="w3-margin w3-jumbo jumbo-line-height">#The<wbr />Parsnip Website</h1>
+        <p class="w3-xlarge" id="MOTD" runat="server"></p>
+        <form runat="server" id="uploadForm" style="height:70px" Visible="false">
+            <menuControls:UploadMediaControl runat="server" ID="UploadMediaControl" />
+        </form>
+        <div id="UploadButtonPadding" runat="server" style="padding-bottom: 20px" class="w3-hide-large w3-hide-medium" Visible="false" />
+        <div id="NoArrowPadding" runat="server" style="padding-bottom: 40px" class="w3-hide-small" />
+	    <div id="ArrowPadding" runat="server" style="padding-bottom: 100px" class="w3-hide-large w3-hide-medium" />
+        <div onclick="document.getElementById('section2').scrollIntoView({behavior: 'smooth', block: 'start'})" style="text-decoration:none; color:white;" class="bounce">
+            <i class="fas fa-chevron-down fa-5x w3-hide-large w3-hide-medium"></i>
+        </div>
+    </header>
+    <div id="section2" class="w3-row-padding w3-padding-64 w3-container">
+        <div class="w3-content">
+            <div class="w3-twothird">
+                <h1><i class="fa fa-hashtag w3-text-red"></i>Awesome</h1>
+                <h5 class="w3-padding-32">There's no need to break a sweat trying to find *THAT* video anymore.</h5>
+                <p class="w3-text-grey">With 1000s of pictures and videos from the past 15 years, conveniently sorted into albums, there's no need to trawl through your camera roll and hope you haven't deleted it anymore (facepalm). You can even tag people! Have a go yourself... whenever you see the cloud button (top right), you can upload from your camera-roll or youtube, and tag a freind. It couldn't be easier!</p>
+                <div runat="server" id="MediaTagContainer" style="overflow:hidden" />
+            </div>
+            <div class="w3-third w3-center">
             </div>
         </div>
-        <h2><b>My Uploads</b></h2>
-        <label runat="server" id="UploadsPlaceholder">When you upload content, it will appear here!</label>
-        <div runat="server" id="MyMediaContainer"></div>
-    </form>
+    </div>
+    <div class="w3-row-padding w3-light-grey w3-padding-64 w3-container">
+        <div class="w3-content">
+            <div class="w3-third w3-center"></div>
+            <div class="w3-twothird w3-right">
+                <h1>Look to the <br class="w3-hide-large w3-hide-medium" />clouds <i class="fa fa-cloud w3-text-red"></i></h1>
+                <h5 class="w3-padding-32">Have you noticed the cloud floating in the top right of your screen?</h5>
+                <p class="w3-text-grey">Any time you see the cloud icon, you can tap it to upload some new content! Found a juicy old video? Don't let it get lost in the group chat... 
+                    imortalise it here! Found a cringey old youtube video? No worries! You can upload directly from youtube! Just click the cloud to get started!
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script src="Libraries/jquery-3.5.1/jquery.min.js"></script>
     <script src="Javascript/LazyImages.js"></script>
+    <script src="Javascript/IntersectionObserver.js"></script>
+    <script src="Javascript/smoothscroll.min.js"></script>
+    <script>smoothscroll.polyfill();</script>
     <script src="Javascript/FocusImage.js"></script>
+    <script src="Javascript/W3ModalDismiss.js"></script>
 </body>
 </html>
+
+

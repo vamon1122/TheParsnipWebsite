@@ -1,0 +1,669 @@
+﻿* {
+    -webkit-border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
+    border-radius: 0 !important;
+}
+
+body, h1, h2, h3, h4, h5, h6 {
+    font-family: "Lato", sans-serif
+}
+
+.w3-bar, h1, button {
+    font-family: "Montserrat", sans-serif
+}
+
+.fa-anchor, .fa-coffee {
+    font-size: 200px
+}
+
+.main-container {
+    display: flex;
+}
+
+.main-container > div {
+    background-color: gray;
+}
+
+.dropdown-button{
+    min-width:100px
+}
+
+#center-content {
+    flex-grow: 1;
+    background-color: red;
+    overflow: hidden;
+}
+
+.bar-item{
+    margin:0px !important;
+}
+
+.dismiss{
+    margin-top:5px;
+    cursor:pointer
+}
+
+.alert{
+    display:none;
+    margin:auto
+}
+
+.float-left{
+    float:left;
+}
+
+.drop-down{
+    height:38px;
+    max-width:100%
+}
+
+.form-label {
+    display:block;
+    width:100%; 
+    text-align:left
+}
+
+.modal-content {
+    min-width: 340px;
+    max-width: 640px;
+    margin: 0px
+}
+
+.hover-pointer:hover{
+    cursor:pointer;
+}
+
+.jumbo-line-height {
+    line-height: 80px
+}
+
+.custom-youtube-upload-button{
+    margin-bottom:-1px
+}
+
+.upload-youtube-button{
+    height: 40px;
+}
+
+
+.youtube-player {
+    display: block;
+    width: 100%; /* assuming that the video has a 16:9 ratio */
+    padding-bottom: 56.25%;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+img.youtube-thumb {
+    bottom: 0;
+    display: block;
+    left: 0;
+    margin: auto;
+    max-width: 100%;
+    width: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: auto
+}
+
+.media-control-title {
+    width: 100vmin;
+    max-width: 480px;
+    padding-left: 10px;
+    padding-right: 10px
+}
+
+@media only screen and (min-width: 0px) {
+    .large-media-landscape {
+        width: 100%;
+        min-width: 300px;
+        max-width: 900px
+    }
+}
+
+@media only screen and (min-width: 900px) {
+    .large-media-landscape {
+        width: 70%;
+        min-width: 900px;
+        max-width: none;
+    }
+}
+
+
+@media only screen and (orientation: portrait) {
+
+    @media only screen and (min-width: 0px) {
+        .media-viewer-landscape{
+            width: 100vw;
+        }
+
+        media-viewer-portrait{
+            width: 100vw;
+        }
+
+
+        .media-viewer-title {
+            padding-left: 10px;
+            padding-right: 10px;
+            width: 100vw;
+            max-width: 100vw
+        }
+
+        .meme {
+            width: 100vw;
+        }
+    }
+
+    @media only screen and (min-width: 440px) {
+        .media-viewer-portrait {
+            width: 78vw;
+        }
+
+        .media-viewer-title-portrait {
+            padding-left: 10px;
+            padding-right: 10px;
+            width: 78vw;
+            max-width: 78vw
+        }
+    }
+
+    @media only screen and (min-width: 540px) {
+        .media-viewer-portrait {
+            width: 65vw;
+        }
+
+        .media-viewer-title-portrait {
+            padding-left: 10px;
+            padding-right: 10px;
+            width: 65vw;
+            max-width: 65vw
+        }
+    }
+
+    @media only screen and (min-width: 640px) {
+        .media-viewer-portrait {
+            width: 57vw;
+        }
+
+        .media-viewer-title-portrait {
+            padding-left: 10px;
+            padding-right: 10px;
+            width: 57vw;
+            max-width: 57vw
+        }
+    }
+
+    @media only screen and (min-width: 740px) {
+        .media-viewer-portrait {
+            width: 50vw;
+        }
+
+        .media-viewer-title-portrait {
+            padding-left: 10px;
+            padding-right: 10px;
+            width: 50vw;
+            max-width: 50vw
+        }
+    }
+
+    @media only screen and (min-width: 840px) {
+        .media-viewer-portrait {
+            width: 45vw;
+        }
+
+        .media-viewer-title-portrait {
+            padding-left: 10px;
+            padding-right: 10px;
+            width: 45vw;
+            max-width: 45vw
+        }
+    }
+
+    @media only screen and (min-width: 960px){
+        .media-viewer-portrait {
+            width: 42vw;
+        }
+
+        .media-viewer-title-portrait {
+            padding-left: 10px;
+            padding-right: 10px;
+            width: 42vw;
+            max-width: 42vw
+        }
+    }
+}
+
+@media only screen and (orientation: landscape) {
+    @media only screen and (min-width: 0px) {
+        
+
+        .media-viewer-landscape{
+            width: 100vw;
+        }
+
+        .media-viewer-title {
+            padding-left: 10px;
+            padding-right: 10px;
+            width: 100vw
+        }
+
+        media-viewer-portrait {
+            width: 15vw;
+            max-height: 65vh;
+        }
+
+        .media-viewer-title-portrait {
+            width: 15vw;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+        .meme {
+            width: 100vw;
+        }
+    }
+    @media only screen and (min-width: 641px) {
+        .media-viewer-portrait {
+            width: 44vw;
+        }
+
+        .media-viewer-title-portrait {
+            padding-left: 10px;
+            padding-right: 10px;
+            width: 44vw;
+            max-width: 44vw
+        }
+    }
+    
+    @media only screen and (min-width: 961px) {
+
+        .media-viewer-landscape{
+            width: 65vw;
+        }
+
+        .media-viewer-title {
+            padding-left: 10px;
+            padding-right: 10px;
+            width: 65vw
+        }
+
+        .media-viewer-portrait {
+            width: 20vw;
+            /*16:8 - 100*/
+            max-height: 75vh;
+        }
+
+        .media-viewer-title-portrait {
+            width: 20vw;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+    }
+
+    /*I am bigger than 720p*/
+    @media only screen and (min-width: 1281px) {
+        
+        .media-viewer-landscape{
+            width: 70vw;
+            max-height: 82vh
+        }
+
+        .media-viewer-title {
+            padding-left: 10px;
+            padding-right: 10px;
+            width: 70vw
+        }
+
+        .media-viewer-portrait {
+            width: 22vw;
+            max-height: 82vh
+        }
+
+        .media-viewer-title-portrait {
+            width: 22vw;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+        .meme {
+            width: 43.5vw;
+        }
+    }
+
+    /*I am bigger than 1080p*/
+    @media only screen and (min-width: 1921px) {
+        .video-player-element {
+            max-width: 78vw;
+            margin: auto;
+        }
+
+        .media-viewer-landscape{
+            width: 78vw;
+            max-height: 87vh;
+        }
+
+        .media-viewer-title {
+            padding-left: 10px;
+            padding-right: 10px;
+            width: 78vw
+        }
+
+        .media-viewer-portrait {
+            width: 24vw;
+            max-height: 86vh
+        }
+
+        .media-viewer-title-portrait {
+            width: 24vw;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+        .meme {
+            width: 31.5vw;
+        }
+    }
+
+    /*I am bigger than 1440p*/
+    @media only screen and (min-width: 2561px) {
+        .video-player-element {
+            max-width: 77vw;
+            margin: auto;
+        }
+
+        .media-viewer-landscape{
+            width: 77vw;
+            max-height: 92vh;
+        }
+
+        .media-viewer-title {
+            padding-left: 10px;
+            padding-right: 10px;
+            width: 77vw;
+        }
+
+        .media-viewer-portrait {
+            width: 25vw;
+            max-height: 88vh
+        }
+
+        .media-viewer-title-portrait {
+            width: 25vw;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+        .meme {
+            width: 25.75vw;
+        }
+    }
+}
+
+.center_div {
+    margin: 0 auto;
+    width: 100% /* value of your choice which suits your alignment */
+}
+
+.background-lightest {
+    background-color: #f2f2f2;
+}
+
+.block {
+    display: block;
+}
+
+.no-bottom-margin {
+    margin-bottom: 0px;
+}
+
+.play-button-div {
+    position: relative;
+    display: block;
+}
+
+
+.play-button-icon {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.play-button {
+    width: 60px;
+    height: 60px
+}
+
+.file-upload {
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+    text-align: center !important;
+    vertical-align: middle;
+}
+
+.file-upload-menu-container {
+    padding: 0px;
+    position: fixed;
+    top: 2px;
+    /* 150 button width = right: 45
+        300 button width = right 120
+    */
+    right: -120px;
+    z-index: 2147483646;
+    background-color: none;
+}
+
+.file-upload-menu-button {
+    height: 40px;
+}
+
+.file-upload-btn {
+    /* Cosmetics */
+    border: 0px solid black;
+    background: black;
+    color: white;
+    padding: 4px;
+    /* browser can do it */
+    border-radius: 0px;
+    -moz-border-radius: 0px;
+    /*text-shadow: #000 1px 1px 2px;*/
+    -webkit-border-radius: 0px;
+}
+
+/* The button size */
+.file-upload {
+    /*height: 1.3em;*/
+    height: 35px;
+    cursor: pointer;
+    width: 300px;
+    margin-bottom:10px;
+}
+
+    .file-upload, .file-upload span {
+        width: 3.5em;
+        width: 300px;
+        height: 35px;
+    }
+
+        .file-upload input {
+            position: absolute;
+            top: 0;
+            left: 0;
+            margin: 0;
+            /* Loses tab index in webkit if width is set to 0 */
+            opacity: 0;
+            filter: alpha(opacity=0);
+        }
+
+        .file-upload strong {
+            font-size: 16px;
+            font-weight: normal;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .file-upload span {
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: inline-block;
+            /* Adjust button text vertical alignment */
+            padding-top: .23em;
+            /*padding-left: 2px;*/
+        }
+/* FILE UPLOAD END */
+
+.bounce {
+    position: absolute;
+    left: 50%;
+    margin-left: -32px;
+    margin-top: -85px;
+    border: 0px solid #990000;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    border-radius: 50%;
+    animation: bounce 10s infinite;
+    -webkit-animation: bounce 10s infinite;
+    -moz-animation: bounce 10s infinite;
+    -o-animation: bounce 10s infinite;
+}
+
+@-webkit-keyframes bounce {
+    0%, 44%, 50%, 56%, 60% {
+        -webkit-transform: translateY(0);
+    }
+
+    48% {
+        -webkit-transform: translateY(-30px);
+    }
+
+    52% {
+        -webkit-transform: translateY(-15px);
+    }
+}
+
+@-moz-keyframes bounce {
+    0%, 44%, 50%, 56%, 60% {
+        -moz-transform: translateY(0);
+    }
+
+    48% {
+        -moz-transform: translateY(-30px);
+    }
+
+    52% {
+        -moz-transform: translateY(-15px);
+    }
+}
+
+@-o-keyframes bounce {
+    0%, 44%, 50%, 56%, 60% {
+        -o-transform: translateY(0);
+    }
+
+    48% {
+        -o-transform: translateY(-30px);
+    }
+
+    52% {
+        -o-transform: translateY(-15px);
+    }
+}
+
+
+@keyframes bounce {
+    0%, 44%, 50%, 56%, 60% {
+        transform: translateY(0);
+    }
+
+    48% {
+        transform: translateY(-30px);
+    }
+
+    52% {
+        transform: translateY(-15px);
+    }
+}
+
+/*@keyframes bounce {
+    0%, 4%, 10%, 16%, 20% {
+        transform: translateY(0);
+    }
+
+    8% {
+        transform: translateY(-30px);
+    }
+
+    12% {
+        transform: translateY(-15px);
+    }
+}*/
+
+/*Youtube CSS*/
+.large-youtube-container {
+    display: block;
+    margin: auto;
+    width: 80%;
+}
+
+/*Youtube CSS*/
+.youtube-container {
+    display: block;
+    margin: auto;
+    width: 40%;
+    min-width: 400px;
+    max-width: 550px;
+    height: 300px;
+}
+
+.youtube-player {
+    display: block;
+    width: 100%; /* assuming that the video has a 16:9 ratio */
+    padding-bottom: 56.25%;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+img.youtube-thumb {
+    bottom: 0;
+    display: block;
+    left: 0;
+    margin: auto;
+    max-width: 100%;
+    width: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: auto
+}
+
+.play-button {
+    width: 60px;
+    height: 60px
+}
+
+img.youtube-play-button {
+    left: 50%;
+    top: 50%;
+    margin-left: -36px;
+    margin-top: -36px;
+    position: absolute;
+    /*background: url("../Resources/Media/Images/Web_Media/play-button-3.svg") no-repeat;*/
+}
+
+#youtube-iframe {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}

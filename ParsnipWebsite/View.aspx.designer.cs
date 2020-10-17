@@ -15,22 +15,13 @@ namespace ParsnipWebsite
     {
 
         /// <summary>
-        /// link_style control.
+        /// NewMenu control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlLink link_style;
-
-        /// <summary>
-        /// Menu control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::ParsnipWebsite.Custom_Controls.Menu.Menu Menu;
+        protected global::ParsnipWebsite.Custom_Controls.Menu.NewMenu NewMenu;
 
         /// <summary>
         /// ShareUserSuspendedError control.
@@ -51,15 +42,6 @@ namespace ParsnipWebsite
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl UploadUserSuspendedError;
 
         /// <summary>
-        /// MediaTagContainer control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl MediaTagContainer;
-
-        /// <summary>
         /// MediaContainer control.
         /// </summary>
         /// <remarks>
@@ -69,6 +51,24 @@ namespace ParsnipWebsite
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl MediaContainer;
 
         /// <summary>
+        /// MediaTagContainer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl MediaTagContainer;
+
+        /// <summary>
+        /// TitleContainer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl TitleContainer;
+
+        /// <summary>
         /// ImageTitle control.
         /// </summary>
         /// <remarks>
@@ -76,6 +76,33 @@ namespace ParsnipWebsite
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl ImageTitle;
+
+        /// <summary>
+        /// unprocessed control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl unprocessed;
+
+        /// <summary>
+        /// processing control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl processing;
+
+        /// <summary>
+        /// error control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl error;
 
         /// <summary>
         /// ImagePreview control.
@@ -148,15 +175,6 @@ namespace ParsnipWebsite
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button Button_ViewAlbum;
-
-        /// <summary>
-        /// ShareLinkContainer control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ShareLinkContainer;
 
         /// <summary>
         /// ShareLink control.

@@ -1,58 +1,50 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="ParsnipWebsite.Login" %>
+<%@ Register Src="~/Custom_Controls/Snowflakes.ascx" TagPrefix="christmas" TagName="Snowflakes" %>
+<%@ Register Src="~/Custom_Controls/ErrorHandler.ascx" TagPrefix="error" TagName="ErrorHandler" %>
+
 
 <!DOCTYPE html>
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <!-- GOOGLE FONTS: Nunito -->
-    <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
-    <!-- iPhone FAVICONS -->
+    <head runat="server">
+    <title>Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="Libraries/Fonts/Lato/Lato.css" />
+    <link rel="stylesheet" href="Libraries/Fonts/Montserrat/Montserrat.css" />
+    <link rel="stylesheet" href="Libraries/w3.css-4.13/w3.css" />
+    <link href="Libraries/fontawesome-free-5.15.1-web/css/all.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="Css/MediaStyle.css" />
+    <!-- FAVICONS -->
     <link rel="apple-touch-icon" sizes="114×114" href="Resources/Favicons/apple-icon-114×114.png" />
     <link rel="apple-touch-icon" sizes="72×72" href="Resources/Favicons/apple-icon-72x72.png" />
     <link rel="apple-touch-icon" href="Resources/Favicons/apple-icon.png" />
-    
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous" />
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
-    <!--<script src="bootstrap-4.1.2-dist/js/bootstrap.js"></script>-->
-    
-    <link id="link_style" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="Css/SharedStyle.css" />
-    <script src="../Javascript/ApplyStyle.js"></script>
-
-    <title>Log In</title>
 </head>
-<body style="padding-top: 0px; text-align:center">
+<body>
+    <error:ErrorHandler runat="server" id="ErrorHandler" />
+    <christmas:Snowflakes runat="server" ID="Snowflakes" />
     <div style="padding-top: 1.5%; padding-left:1.5%; padding-right:1.5%;">
-        <div class="alert alert-warning alert-dismissible" runat="server" style="display:none;" id="Warning">
-            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            <strong>Confirm Identity</strong> You must log in first!
-        </div>
+        
     </div>
-    <div class="center_form">
-    <form runat="server" >        
-        <img src="Resources/Media/Images/Local/Fat_Kieron_Cutout.JPG" style="max-width:100px; display:block; margin-left: auto; margin-right:auto;" />
-        <div style="padding-right:5%;padding-left:5%;">
+    <div class="w3-display-middle">
+        <form runat="server">        
+            <img src="Resources/Media/Images/Local/Fat_Kieron_Cutout.JPG" style="max-width:100px; display:block; margin-left: auto; margin-right:auto;" />
+            <div>
                 <br />    
-                <label style="text-align:left; width:100%">Username</label>
-                <asp:TextBox runat="server" CssClass="form-control login" ID="inputUsername"  />
+                <asp:TextBox runat="server" CssClass="w3-input w3-border" ID="inputUsername" placeholder="username"  />
+                <br />
                 <div class="form-group">
-                    <label style="text-align:left; width:100%">Password</label>
-                    <asp:TextBox runat="server" TextMode="password" CssClass="form-control login" ID="inputPwd" />
+                    <asp:TextBox runat="server" TextMode="password" CssClass="w3-input w3-border" ID="inputPwd" placeholder="password" />
                 </div>
-                <div class="form-check" style="text-align:left; width:100%">
-                    <asp:CheckBox runat="server" CssClass="form-check-input login" ID="RememberPwd" />
-                    <label class="form-check-label" >Remember Password</label>
+                <div style="text-align:right; width:100%">
+                    <label class="form-check-label">Remember me:</label>
+                    <asp:CheckBox runat="server" CssClass="w3-check" ID="RememberPwd" />
                 </div>
                 <br />
-                <div style="float:left;">
-                    <asp:Button runat="server" ID="ButLogIn" OnClick="ButLogIn_Click" CssClass="btn btn-primary" Text="Log In"></asp:Button>
+                <div style="float:right;">
+                    <asp:Button runat="server" ID="ButLogIn" OnClick="ButLogIn_Click" CssClass="w3-btn w3-black" Text="Log In"></asp:Button>
                 </div>
             </div>
-    </form>
-        </div>
+        </form>
+    </div>
 </body>
 </html>
 

@@ -33,6 +33,10 @@ namespace ParsnipWebsite
             else
                 myUser = Account.SecurePage("portugal?focus=" + Request.QueryString["focus"], this, Data.DeviceType);
 
+            NewMenu.SelectedPage = PageIndex.Portugal;
+            NewMenu.LoggedInUser = myUser;
+            NewMenu.Upload = true;
+
             UploadMediaControl.Initialise(myUser, PortugalMediaTag, this);
         }
 

@@ -23,9 +23,7 @@ namespace ParsnipWebsite
             if(Request.QueryString["url"] != null)
             {
                 Redirect = Request.QueryString["url"];
-                Warning.Attributes.CssStyle.Add("display", "block");
-
-                if(Request.QueryString["url"] == "me")
+                if (Redirect == "me")
                 {
                     Page.Header.Controls.Add(new LiteralControl("<meta property=\"og:title\" content=\"What DIRT do we have on YOU? 😜\" />"));
                     Page.Header.Controls.Add(new LiteralControl($"<meta property=\"og:image\" content=\"{Request.Url.GetLeftPart(UriPartial.Authority)}/Resources/Media/Images/Local/Dirt_On_You.jpg\" />"));

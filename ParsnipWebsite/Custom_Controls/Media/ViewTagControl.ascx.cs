@@ -32,14 +32,14 @@ namespace ParsnipWebsite.Custom_Controls.Media
             
             } }
         public MediaTagPair MyTagPair { get { return myTagPair; } set { myTagPair = value; MyTag = value.MediaTag; } }
-        public MediaTag MyTag { get { return _myTag; } set { _myTag = value; ViewButton.InnerText = $"#{value.Name}"; } }
+        public MediaTag MyTag { get { return _myTag; } set { _myTag = value; ViewButtonLink.InnerText = $"#{value.Name}"; } }
 
         public ParsnipData.Media.Media MyMedia { get { return myMedia; } set { myMedia = value; } }
-        public MediaUserPair MyUserPair { get { return myUserPair; } set { MyUserId = value.UserId; myUserPair = value; ViewButton.InnerText = $"@{value.Name}"; } }
+        public MediaUserPair MyUserPair { get { return myUserPair; } set { MyUserId = value.UserId; myUserPair = value; ViewButtonLink.InnerText = $"@{value.Name}"; } }
 
         public int MyUserId { get { return _myUserId; } set { _myUserId = value; } }
 
-        public User MyUser { get { return _myUser; } set { ViewButton.InnerText = $"@{value.Username}"; _myUser = value; MyUserId = value.Id;  } }
+        public User MyUser { get { return _myUser; } set { ViewButtonLink.InnerText = $"@{value.Username}"; _myUser = value; MyUserId = value.Id;  } }
 
         public void UpdateLink()
         {

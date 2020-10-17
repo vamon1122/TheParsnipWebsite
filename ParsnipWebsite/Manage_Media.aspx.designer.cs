@@ -7,20 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ParsnipWebsite {
-    
-    
-    public partial class Manage_Media {
-        
-        /// <summary>
-        /// link_style control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlLink link_style;
-        
+namespace ParsnipWebsite
+{
+
+
+    public partial class Manage_Media
+    {
+
         /// <summary>
         /// form1 control.
         /// </summary>
@@ -29,7 +22,7 @@ namespace ParsnipWebsite {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
-        
+
         /// <summary>
         /// adminMenu1 control.
         /// </summary>
@@ -38,7 +31,7 @@ namespace ParsnipWebsite {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::ParsnipWebsite.Custom_Controls.Admin.AdminMenu adminMenu1;
-        
+
         /// <summary>
         /// SelectUser control.
         /// </summary>
@@ -47,7 +40,7 @@ namespace ParsnipWebsite {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList SelectUser;
-        
+
         /// <summary>
         /// btnDelete control.
         /// </summary>
@@ -56,7 +49,7 @@ namespace ParsnipWebsite {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnDelete;
-        
+
         /// <summary>
         /// DisplayPhotosDiv control.
         /// </summary>
@@ -65,7 +58,7 @@ namespace ParsnipWebsite {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl DisplayPhotosDiv;
-        
+
         /// <summary>
         /// BtnDeleteUploads control.
         /// </summary>

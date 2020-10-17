@@ -23,6 +23,10 @@ namespace ParsnipWebsite
             else
                 myUser = Account.SecurePage("videos?focus=" + Request.QueryString["focus"], this, Data.DeviceType);
 
+            NewMenu.SelectedPage = PageIndex.Videos;
+            NewMenu.LoggedInUser = myUser;
+            NewMenu.Upload = true;
+
             UploadMediaControl.Initialise(myUser, VideoMediaTag, this);
         }
 
@@ -30,7 +34,7 @@ namespace ParsnipWebsite
         {
             foreach (MediaControl mc in MediaControl.GetAlbumAsMediaControls(VideoMediaTag))
             {
-                links_div.Controls.Add(mc);
+                DynamicMediaDiv.Controls.Add(mc);
             }
         }
     }

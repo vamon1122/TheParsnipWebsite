@@ -4,58 +4,55 @@
         <strong>Upload Error</strong> The youtube link which you tried to share didn't look quite right... give the url a check and try again!
 </div>
 <div runat="server" id="UploadDiv" class="form-group" style="display:none">
-    <label class="file-upload file-upload-menu-container" data-toggle="modal" data-target="#uploadMedia">                
-        <img src="../../Resources/Media/Images/Web_Media/upload-cloud.svg" class="file-upload-menu-button" />
+    <label class="w3-button w3-black w3-padding-large w3-large w3-margin-top" onclick="document.getElementById('uploadMedia').style.display='block'">            
+        <span><strong>Upload Something</strong></span>
     </label>
-    <label class="file-upload file-upload-btn btn" data-toggle="modal" data-target="#uploadMedia">            
-        <span><strong>Upload Media</strong></span>
-    </label>
-    <div class="modal fade" id="uploadMedia" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content" style="margin:0px; padding:0px; background-color:transparent; border-color: transparent">
-                <div class="center_div">
-                    <label runat="server" class="file-upload file-upload-btn btn">            
+    
+  </div>
+<div id="uploadMedia" class="w3-modal" onclick="void(0)">
+    <div class="w3-modal-content w3-display-middle" style="background-color: transparent">
+      <div class="w3-container">
+                    <label runat="server" class="file-upload file-upload-btn">            
                         <span><strong>Upload From Device</strong></span>
                         <asp:FileUpload ID="MediaUpload" runat="server" class="form-control-file" onchange="this.form.submit()" />
                     </label>
                     <br />
-                    <label class="file-upload file-upload-btn btn" data-toggle="modal" data-dismiss="modal" data-target="#uploadYoutube">            
+                    <label class="file-upload file-upload-btn" onclick="document.getElementById('uploadMedia').style.display='none'; document.getElementById('uploadYoutube').style.display='block';">            
                         <span><strong>Upload From Youtube</strong></span>
                     </label>
-                </div>
-            </div>
-        </div>
+            <br />
+                        <a href="myuploads" class="file-upload file-upload-btn"><span><strong style="color: white">Manage My Uploads</strong></span></a>
+          </div>
+      </div>
     </div>
-    <div class="modal fade" id="uploadThumbnail" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content" style="margin:0px; padding:0px; background-color:transparent; border-color: transparent">
-                <div class="center_div">
-                    <label runat="server" class="file-upload file-upload-btn btn">            
+<div id="uploadThumbnail" class="w3-modal" onclick="void(0)">
+    <div class="w3-modal-content w3-display-middle" style="background-color: transparent">
+      <div class="w3-container">
+                    <label runat="server" class="file-upload file-upload-btn w3-black">            
                         <span><strong>Upload Video Thumbnail</strong></span>
                         <asp:FileUpload ID="ThumbnailUpload" runat="server" class="form-control-file" onchange="this.form.submit()" />
                     </label>
-                </div>
-            </div>
-        </div>
+          </div>
+      </div>
     </div>
-    <div class="modal fade" id="uploadYoutube" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content" style="margin:0px; padding:0px;">
-                <div class="input-group" style="margin:0px; padding:0px">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroup-sizing-default">Link</span>
-                    </div>
-                    <asp:TextBox runat="server"  CssClass="form-control" ID="TextBox_UploadDataId"></asp:TextBox>
-                    <span class="input-group-btn">
-                        <asp:Button runat="server" ID="Button_UploadDataId"  CssClass="btn btn-primary" Text="Upload" OnClick="Button_UploadDataId_Click" />
-                    </span>
-                </div>
-            </div>
-        </div>
+<div id="uploadYoutube" class="w3-modal" onclick="void(0)">
+    <div class="w3-modal-content w3-display-middle" style="background-color: transparent;  min-width: 500px">
+      <div class="w3-container" >
+          <div class="w3-bar">
+    <asp:TextBox runat="server" AutoPostback="True" ID="TextBox_UploadDataId" class="w3-input w3-border w3-bar-item" type="text" placeholder="youtu.be/watch?v=XXXXXXXXXXX" />
+                        <asp:Button runat="server" ID="Button_UploadDataId"  CssClass="w3-btn w3-black w3-bar-item upload-youtube-button w3-right" Text="Upload" OnClick="Button_UploadDataId_Click" />
+              </div>
+
+      </div>
     </div>
-</div>
+  </div>
+
+    
 <script type="text/javascript">
     function openUploadThumbnail() {
-        $('#uploadThumbnail').modal('show');
+        var thumbnail = document.getElementById("uploadThumbnail");
+        thumbnail.style.display = "block";
+        thumbnail.focus();
+
     }
 </script>

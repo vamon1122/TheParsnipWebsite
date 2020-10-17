@@ -33,6 +33,10 @@ namespace ParsnipWebsite
             else
                 myUser = Account.SecurePage("photos?focus=" + Request.QueryString["focus"], this, Data.DeviceType);
 
+            NewMenu.SelectedPage = PageIndex.Photos;
+            NewMenu.LoggedInUser = myUser;
+            NewMenu.Upload = true;
+
             UploadMediaControl.Initialise(myUser, PhotosMediaTag, this);
         }
 

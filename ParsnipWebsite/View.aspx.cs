@@ -37,6 +37,8 @@ namespace ParsnipWebsite
             var accessToken = Request.QueryString["share"];
 
 
+            NewMenu.SelectedPage = PageIndex.View;
+            NewMenu.Share = true;
 
             if (Request.QueryString["id"] == null)
             {
@@ -47,6 +49,7 @@ namespace ParsnipWebsite
                 else
                 {
                     myUser = ParsnipData.Accounts.User.LogIn();
+                    NewMenu.LoggedInUser = myUser;
                     myMediaShare = new MediaShare(new MediaShareId(Request.QueryString["share"].ToString()));
                     shareId = myMediaShare.Id;
                     try
@@ -81,6 +84,7 @@ namespace ParsnipWebsite
             else
             {
                 myUser = Account.SecurePage("view?id=" + Request.QueryString["id"], this, Data.DeviceType);
+                NewMenu.LoggedInUser = myUser;
                 myVideo = Video.Select(new MediaId(Request.QueryString["id"]), myUser.Id);
                 myYoutubeVideo = Youtube.Select(new MediaId(Request.QueryString["id"]), myUser.Id);
                 myImage = ParsnipData.Media.Image.Select(new MediaId(Request.QueryString["id"].ToString()), myUser == null ? default : myUser.Id);
@@ -103,9 +107,12 @@ namespace ParsnipWebsite
             }
 
             if (MyMedia == null)
-                Response.Redirect("home?error=P101");
+                Response.Redirect("home?alert=P101");
             else
                 viewCount.InnerText = $"{MyMedia.ViewCount} view(s)";
+
+            NewMenu.LoggedInUser = myUser;
+            NewMenu.HighlightButtonsForPage(PageIndex.Tag, "View");
 
             ShareLink.Value = Request.Url.GetLeftPart(UriPartial.Authority) + "/view?share=" +
                     myMediaShare.Id;
@@ -180,7 +187,36 @@ namespace ParsnipWebsite
                     }
                 }
             }
-            
+
+            if(myVideo != null)
+            {
+                if (myVideo.IsPortrait())
+                {
+                    video_container.Attributes.Remove("class");
+                    video_container.Attributes.Add("class", "media-viewer-portrait");
+
+                    TitleContainer.Attributes.Remove("class");
+                    TitleContainer.Attributes.Add("class", "media-viewer-title-portrait background-lightest");
+                    //TitleContainer.Attributes.Add("class", "background-lightest");
+                }
+            }
+
+            if (myImage != null)
+            {
+                if (myImage.IsPortrait())
+                {
+                    ImagePreview.Attributes.Remove("class");
+                    ImagePreview.Attributes.Add("class", "media-viewer-portrait");
+
+                    //MediaContainer.Attributes.Remove("class");
+                    //MediaContainer.Attributes.Add("class", "media-viewer-portrait");
+
+                    TitleContainer.Attributes.Remove("class");
+                    TitleContainer.Attributes.Add("class", "media-viewer-title-portrait background-lightest");
+                    //TitleContainer.Attributes.Add("class", "background-lightest");
+                }
+            }
+
         }
 
         void Page_LoadComplete(object sender, EventArgs e)
@@ -219,11 +255,11 @@ namespace ParsnipWebsite
                     if (myVideo.Status != null)
                     {
                         if (myVideo.Status.Equals(MediaStatus.Unprocessed))
-                            ImageTitle.InnerHtml += " ⚫ - Unprocessed";
+                            unprocessed.Visible = true;
                         else if (myVideo.Status.Equals(MediaStatus.Processing))
-                            ImageTitle.InnerHtml += " 🔵 - Processing...";
+                            processing.Visible = true;
                         else if (myVideo.Status.Equals(MediaStatus.Error))
-                            ImageTitle.InnerHtml += " 🔴 - Error whilst processing";
+                            error.Visible = true;
                     }
                 }
 
@@ -236,6 +272,8 @@ namespace ParsnipWebsite
 
             myUser = ParsnipData.Accounts.User.LogIn();
             string personFullName = myUser == null ? "A stranger" : myUser.FullName;
+
+            NewMenu.LoggedInUser = myUser;
 
             if (Request.QueryString["share"] != null)
             {

@@ -15,67 +15,40 @@ namespace ParsnipWebsite
     {
 
         /// <summary>
-        /// link_style control.
+        /// Snowflakes control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlLink link_style;
+        protected global::ParsnipWebsite.Custom_Controls.Snowflakes Snowflakes;
 
         /// <summary>
-        /// ErrorHandler control.
+        /// NewMenu control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::ParsnipWebsite.Custom_Controls.ErrorHandler ErrorHandler;
+        protected global::ParsnipWebsite.Custom_Controls.Menu.NewMenu NewMenu;
 
         /// <summary>
-        /// Menu control.
+        /// MOTD control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::ParsnipWebsite.Custom_Controls.Menu.Menu Menu;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl MOTD;
 
         /// <summary>
-        /// MOTD_div control.
+        /// uploadForm control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl MOTD_div;
-
-        /// <summary>
-        /// WelcomeLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label WelcomeLabel;
-
-        /// <summary>
-        /// LoginNudge control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl LoginNudge;
-
-        /// <summary>
-        /// MediaTagContainer control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl MediaTagContainer;
+        protected global::System.Web.UI.HtmlControls.HtmlForm uploadForm;
 
         /// <summary>
         /// UploadMediaControl control.
@@ -87,39 +60,39 @@ namespace ParsnipWebsite
         protected global::ParsnipWebsite.Custom_Controls.Media.UploadMediaControl UploadMediaControl;
 
         /// <summary>
-        /// seeYourself control.
+        /// UploadButtonPadding control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl seeYourself;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl UploadButtonPadding;
 
         /// <summary>
-        /// LatestVideo control.
+        /// NoArrowPadding control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl LatestVideo;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl NoArrowPadding;
 
         /// <summary>
-        /// UploadsPlaceholder control.
+        /// ArrowPadding control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl UploadsPlaceholder;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ArrowPadding;
 
         /// <summary>
-        /// MyMediaContainer control.
+        /// MediaTagContainer control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl MyMediaContainer;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl MediaTagContainer;
     }
 }

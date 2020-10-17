@@ -23,9 +23,9 @@ namespace ParsnipWebsite.Custom_Controls.Media
         private void GenerateDeleteButton()
         {
             Guid tempGuid = Guid.NewGuid();
-            DeleteButton.Attributes.Add("data-target", "#delete" + tempGuid);
+            DeleteButton.Attributes.Add("onclick", $"document.getElementById('delete{tempGuid}').style.display='block'");
 
-            
+
 
             /* 
              * This is an ugly fix to a problem which I was struggling to work out. The HTML which is generated below
@@ -39,28 +39,25 @@ namespace ParsnipWebsite.Custom_Controls.Media
              * with this. Just generating the modal HTML in a string and then inserting it into the user-control. Not 
              * pretty, but it works :P.
              */
+            
+
             modalDiv.InnerHtml =
                 "\n" +
-                $"   <div class=\"modal fade\" id=\"delete{tempGuid}\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"deleteMediaTagPair\" aria-hidden=\"true\">\n" +
-                "       <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\n" +
-                "           <div class=\"modal-content\" style=\"margin:0px; padding:0px\">\n" +
-                "               <div class=\"modal-header\">\n" +
-                "	                <h5 class=\"modal-title\">Confirm Remove</ h5 >\n" + 
-                "	                <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n" +
-                "		                <span aria-hidden=\"true\">&times;</ span >\n" + 
-                "	                </button>\n" +
-                "               </div>\n" +
-                "               <div class=\"modal-body\">\n" +
-                $"	                <p>Are you sure that you want to remove the tag \"{MyPair.MediaTag.Name}\" from the {myMedia.Type} called: \"{myMedia.Title}\"?</ p >\n" + 
-                "               </div>\n" +
-                "               <div class=\"modal-footer\">\n" +
-                $"                  <a href=\"Edit_Media?removetag=true&id={myMedia.Id}&tag={MyPair.MediaTag.Id}\" style=\"color: inherit;text-decoration: none;\">\n" +
-                "	                    <button type=\"button\" class=\"btn btn-danger\" >REMOVE</ button >\n" +
-                "                  </a>\n" +
-                "	                <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Cancel</ button >\n" + 
-                "              </div>\n" +
+                $"   <div class=\"w3-modal\" id=\"delete{tempGuid}\" onclick=\"void(0)\">\n" +
+                "       <div class=\"w3-modal-content w3-display-middle modal-content\">\n" +
+                "           <header class=\"w3-container w3-red\">\n" +
+                "	            <h3>Confirm Delete</h3>\n" +
+                "           </header>\n" +
+                "           <div class=\"w3-container\">\n" +
+                $"	            <p>Are you sure that you want to remove the tag \"{MyPair.MediaTag.Name}\" from the {myMedia.Type} called: \"{myMedia.Title}\"?</p>\n" + 
                 "           </div>\n" +
-                "      </div>\n" +
+                "           <div class=\"w3-margin-bottom\">\n" +
+                $"              <a href=\"Edit_Media?removetag=true&id={myMedia.Id}&tag={MyPair.MediaTag.Id}\" style=\"color: inherit;text-decoration: none;\">\n" +
+                "	                <button type=\"button\" class=\"w3-btn w3-red\" >REMOVE</button>\n" +
+                "               </a>\n" +
+                $"            <button type=\"button\" class=\"w3-btn w3-black\" onclick=\"document.getElementById('delete{tempGuid}').style.display='none'\">Cancel</button>\n" + 
+                "           </div>\n" +
+                "       </div>\n" +
                 "   </div>\n";
         }
     }

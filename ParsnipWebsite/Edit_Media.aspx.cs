@@ -48,7 +48,9 @@ namespace ParsnipWebsite
             
             GetMedia(); //CheckPermissions() is dependent on this for CreatedByUserId
 
-            
+            NewMenu.LoggedInUser = myUser;
+            NewMenu.HighlightButtonsForPage(PageIndex.Tag, "Edit");
+
             MediaTag OriginalTag = string.IsNullOrEmpty(tagParam) ? null : new MediaTag(Convert.ToInt32(tagParam));
 
             GetOriginalRedirect();
@@ -94,6 +96,9 @@ namespace ParsnipWebsite
                 else
                     myUser = Account.SecurePage($"edit_media?id={Request.QueryString["id"]}", this, Data.DeviceType);
 
+                NewMenu.SelectedPage = PageIndex.EditMedia;
+                NewMenu.LoggedInUser = myUser;
+                NewMenu.Share = true;
 
                 if (Request.QueryString["removetag"] == "true")
                 {
@@ -169,12 +174,13 @@ namespace ParsnipWebsite
                     myMediaShare.Id;
                     ImagePreview.ImageUrl = MyImage.Compressed;
                     input_date_media_captured.Value = MyImage.DateTimeCaptured.ToString();
-                    ImagePreview.Visible = true;
+                    ImagePreviewContainer.HRef = string.Format("../../view?id={0}", MyImage.Id);
+                    ImagePreviewContainer.Visible = true;
                     Page.Title = "Edit Image";
                 }
                 else
                 {
-                    Response.Redirect("home");
+                    Response.Redirect("myuploads");
                 }
             }
 
@@ -203,7 +209,7 @@ namespace ParsnipWebsite
 
                 if (OriginalTag == null && tagParam == null && userTagParam == null && MyMedia.AlbumId == default && MyMedia.MediaTagPairs.Count == default)
                 {
-                    OriginalAlbumRedirect = "home?focus=" + MyMedia.Id.ToString();
+                    OriginalAlbumRedirect = "myuploads?focus=" + MyMedia.Id.ToString();
                 }
                 else if (OriginalTag != null)
                 {
@@ -244,7 +250,7 @@ namespace ParsnipWebsite
                     else if (tagParam != null)
                         OriginalAlbumRedirect = $"tag?id={tagParam}&focus={MyMedia.Id}";
                     else
-                        OriginalAlbumRedirect = $"home?focus={MyMedia.Id}";
+                        OriginalAlbumRedirect = $"myuploads?focus={MyMedia.Id}";
                     //else if (MyMedia.MediaTagPairs.Count != default)
                     //    OriginalAlbumRedirect = $"tag?id={MyMedia.MediaTagPairs[0].MediaTag.Id}&focus={MyMedia.Id}";
 
@@ -320,7 +326,7 @@ namespace ParsnipWebsite
                         "did not own. Access was DENIED!", myUser.FullName, MyMedia.Title, myUser.SubjectiveGenderPronoun)
                         };
 
-                        Response.Redirect($"{OriginalAlbumRedirect}&error=P100");
+                        Response.Redirect($"{OriginalAlbumRedirect}&alert=P100");
                     }
                 }
             }
@@ -334,7 +340,6 @@ namespace ParsnipWebsite
 
                 if (myUser.AccountType == "admin")
                 {
-                    DateCapturedDiv.Visible = true;
                     btn_AdminDelete.Visible = true;
                 }
             }
@@ -414,9 +419,9 @@ namespace ParsnipWebsite
                     else
                     {
                         if (Redirect.Contains("?"))
-                            Response.Redirect(Redirect + "&error=P100");
+                            Response.Redirect(Redirect + "&alert=P100");
                         else
-                            Response.Redirect(Redirect + "?error=P100");
+                            Response.Redirect(Redirect + "?alert=P100");
                     }
                 }
                 catch

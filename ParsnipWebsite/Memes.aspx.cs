@@ -27,6 +27,10 @@ namespace ParsnipWebsite
             else
                 myUser = Account.SecurePage("memes?focus=" + Request.QueryString["focus"], this, Data.DeviceType);
 
+            NewMenu.SelectedPage = PageIndex.Memes;
+            NewMenu.LoggedInUser = myUser;
+            NewMenu.Upload = true;
+
             UploadMediaControl.Initialise(myUser, MemesMediaTag, this);
         }
 

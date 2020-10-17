@@ -19,7 +19,7 @@ namespace ParsnipWebsite
     {
         private User myUser;
         private MediaTag myTag;
-        private User myTagUser;
+        private User myTaggedUser;
 
         public View_Tag()
         {
@@ -46,13 +46,13 @@ namespace ParsnipWebsite
 
                 if(userId != default)
                 {
-                    myTagUser = ParsnipData.Accounts.User.Select(userId);
-                    TagName.InnerText = myTagUser.FullName;
+                    myTaggedUser = ParsnipData.Accounts.User.Select(userId);
+                    TagName.InnerText = myTaggedUser.FullName;
                 }
 
                 string focus = Request.QueryString["focus"];
 
-                if (myTagUser == null)
+                if (myTaggedUser == null)
                 {
                     if (string.IsNullOrEmpty(focus))
                         myUser = Account.SecurePage($"tag?id={myTag.Id}", this, Data.DeviceType);
@@ -62,13 +62,19 @@ namespace ParsnipWebsite
                 else
                 {
                     if (string.IsNullOrEmpty(focus))
-                        myUser = Account.SecurePage($"tag?user={myTagUser.Id}", this, Data.DeviceType);
+                        myUser = Account.SecurePage($"tag?user={myTaggedUser.Id}", this, Data.DeviceType);
                     else
-                        myUser = Account.SecurePage($"tag?user={myTagUser.Id}&{focus}", this, Data.DeviceType);
+                        myUser = Account.SecurePage($"tag?user={myTaggedUser.Id}&{focus}", this, Data.DeviceType);
                 }
+
+                var tagText = myTag == null ? $"@{myTaggedUser.Username}" : $"#{myTag.Name}";
+                
+                NewMenu.LoggedInUser = myUser;
+                NewMenu.Upload = true;
+                NewMenu.HighlightButtonsForPage(PageIndex.Tag, tagText);
             }
 
-            if (myTagUser == null)
+            if (myTaggedUser == null)
             {
                 Page.Header.Controls.Add(new LiteralControl($"<meta property=\"og:title\" content=\"{myTag.Name}\" />"));
                 Page.Header.Controls.Add(new LiteralControl($"<meta property=\"og:description\" content=\"{myTag.Description}\" />"));
@@ -79,12 +85,12 @@ namespace ParsnipWebsite
             }
             else
             {
-                Page.Header.Controls.Add(new LiteralControl($"<meta property=\"og:title\" content=\"{myTagUser.FullName} was tagged in...\" />"));
-                Page.Header.Controls.Add(new LiteralControl($"<meta property=\"og:description\" content=\"See pictures and videos which {myTagUser.FullName} has been tagged in!\" />"));
+                Page.Header.Controls.Add(new LiteralControl($"<meta property=\"og:title\" content=\"{myTaggedUser.FullName} was tagged in...\" />"));
+                Page.Header.Controls.Add(new LiteralControl($"<meta property=\"og:description\" content=\"See pictures and videos which {myTaggedUser.FullName} has been tagged in!\" />"));
                 //Page.Header.Controls.Add(new LiteralControl($"<meta property=\"og:image\" content=\"{Request.Url.GetLeftPart(UriPartial.Authority)}/Resources/Media/Images/Local/Dirt_On_You.jpg\" />"));
-                Page.Header.Controls.Add(new LiteralControl(string.Format($"<meta property=\"og:alt\" content=\"See pictures and videos which {myTagUser.FullName} has been tagged in!\" />")));
+                Page.Header.Controls.Add(new LiteralControl(string.Format($"<meta property=\"og:alt\" content=\"See pictures and videos which {myTaggedUser.FullName} has been tagged in!\" />")));
 
-                Page.Title = $"Tag: {myTagUser.Forename}";
+                Page.Title = $"Tag: {myTaggedUser.Forename}";
             }
 
             //This will break youtube videos which have not had their thumbnail regenerated
@@ -95,12 +101,12 @@ namespace ParsnipWebsite
             if (myTag != null)
                 UploadMediaControl.Initialise(myUser, myTag, this);
             else
-                UploadMediaControl.Initialise(myUser, myTagUser.Id, this);
+                UploadMediaControl.Initialise(myUser, myTaggedUser.Id, this);
         }
 
         protected void Page_LoadComplete(object sender, EventArgs e)
         {
-            if(myTagUser == null)
+            if(myTaggedUser == null)
             {
                 foreach (MediaControl mediaControl in MediaControl.GetAlbumAsMediaControls(myTag))
                 {
@@ -109,7 +115,7 @@ namespace ParsnipWebsite
             }
             else
             {
-                foreach (MediaControl mediaControl in MediaControl.GetMediaUserPairAsMediaControls(myTagUser.Id))
+                foreach (MediaControl mediaControl in MediaControl.GetMediaUserPairAsMediaControls(myTaggedUser.Id))
                 {
                     DynamicMediaDiv.Controls.Add(mediaControl);
                 }

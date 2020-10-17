@@ -27,6 +27,10 @@ namespace ParsnipWebsite
             else
                 myUser = Account.SecurePage("krakow?focus=" + Request.QueryString["focus"], this, Data.DeviceType);
 
+            NewMenu.SelectedPage = PageIndex.Krakow;
+            NewMenu.LoggedInUser = myUser;
+            NewMenu.Upload = true;
+
             UploadMediaControl.Initialise(myUser, KrakowMediaTag, this);
         }
 
