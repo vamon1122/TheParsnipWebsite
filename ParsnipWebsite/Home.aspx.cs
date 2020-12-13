@@ -51,28 +51,31 @@ namespace ParsnipWebsite
                 string.Format("Hiya {0} to the parsnip website!", myUser == null ?
                 "stranger, welcome" : myUser.Forename + ", welcome back");
 
-            List<ViewTagControl> ViewTagControls = new List<ViewTagControl>();
-            foreach (MediaTag mediaTag in MediaTag.GetAllTags())
+            if(myUser != null)
             {
-                ViewTagControl mediaTagPairViewControl = (ViewTagControl)httpHandler.LoadControl("~/Custom_Controls/Media/ViewTagControl.ascx");
-                mediaTagPairViewControl.MyTag = mediaTag;
-                mediaTagPairViewControl.UpdateLink();
-                //MediaTagContainer.Controls.Add(mediaTagPairViewControl);
-                ViewTagControls.Add(mediaTagPairViewControl);
-            }
+                List<ViewTagControl> ViewTagControls = new List<ViewTagControl>();
+                foreach (MediaTag mediaTag in MediaTag.GetAllTags())
+                {
+                    ViewTagControl mediaTagPairViewControl = (ViewTagControl)httpHandler.LoadControl("~/Custom_Controls/Media/ViewTagControl.ascx");
+                    mediaTagPairViewControl.MyTag = mediaTag;
+                    mediaTagPairViewControl.UpdateLink();
+                    //MediaTagContainer.Controls.Add(mediaTagPairViewControl);
+                    ViewTagControls.Add(mediaTagPairViewControl);
+                }
 
-            foreach (ParsnipData.Accounts.User user in ParsnipData.Accounts.User.GetAllUsers())
-            {
-                ViewTagControl mediaUserPairViewControl = (ViewTagControl)httpHandler.LoadControl("~/Custom_Controls/Media/ViewTagControl.ascx");
-                mediaUserPairViewControl.MyUser = user;
-                mediaUserPairViewControl.UpdateLink();
-                //MediaTagContainer.Controls.Add(mediaUserPairViewControl);
-                ViewTagControls.Add(mediaUserPairViewControl);
-            }
+                foreach (ParsnipData.Accounts.User user in ParsnipData.Accounts.User.GetAllUsers())
+                {
+                    ViewTagControl mediaUserPairViewControl = (ViewTagControl)httpHandler.LoadControl("~/Custom_Controls/Media/ViewTagControl.ascx");
+                    mediaUserPairViewControl.MyUser = user;
+                    mediaUserPairViewControl.UpdateLink();
+                    //MediaTagContainer.Controls.Add(mediaUserPairViewControl);
+                    ViewTagControls.Add(mediaUserPairViewControl);
+                }
 
-            foreach (ViewTagControl control in ViewTagControls.OrderBy(x => x.Name))
-            {
-                MediaTagContainer.Controls.Add(control);
+                foreach (ViewTagControl control in ViewTagControls.OrderBy(x => x.Name))
+                {
+                    MediaTagContainer.Controls.Add(control);
+                }
             }
 
 
