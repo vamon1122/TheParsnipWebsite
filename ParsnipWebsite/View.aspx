@@ -50,9 +50,7 @@
     </form>
     <div class="w3-modal" id="shareModal" onclick="void(0)">
         <div class="w3-modal-content w3-display-middle modal-content" style="background-color:transparent">
-            <div class="w3-container">
-                <input runat="server" type="text" id="ShareLink" class="w3-input w3-border" onclick="this.setSelectionRange(0, this.value.length)" />
-            </div>
+            <input runat="server" type="text" id="ShareLink" class="w3-input w3-border" onclick="this.setSelectionRange(0, this.value.length)" />
         </div>
     </div>
 
