@@ -26,7 +26,12 @@
                 <mediaControls:UploadMediaControl runat="server" ID="UploadMediaControl" />
             </div>
         </header>
-        <label runat="server" id="UploadsPlaceholder">When you upload content, it will appear here!</label>
+        <div runat="server" id="UploadPrompt" class="w3-container">
+            <div class="w3-center">
+                <h2>Nothing to see 😢</h2>
+                <label>You've not uploaded anything yet! When you get round to it, you can manage your content from here.</label>
+            </div>
+        </div>
         <div runat="server" id="MyMediaContainer" style="margin: auto; text-align:center"></div>
     </form>
 

@@ -38,7 +38,7 @@ namespace ParsnipWebsite
 
                 var mediaControls = MediaControl.GetUserMediaAsMediaControls(myUser.Id, myUser.Id);
                 if (mediaControls.Count != default)
-                    UploadsPlaceholder.Visible = false;
+                    UploadPrompt.Visible = false;
 
                 foreach (MediaControl mc in mediaControls)
                 {
