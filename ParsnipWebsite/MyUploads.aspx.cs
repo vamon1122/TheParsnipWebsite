@@ -26,9 +26,9 @@ namespace ParsnipWebsite
             else
                 myUser = Account.SecurePage("myuploads?focus=" + Request.QueryString["focus"], this, Data.DeviceType);
 
-            NewMenu.SelectedPage = PageIndex.MyUploads;
             NewMenu.LoggedInUser = myUser;
             NewMenu.Upload = true;
+            NewMenu.HighlightButtonsForPage(PageIndex.MyUploads, "My Uploads");
 
             UploadMediaControl.Initialise(myUser, this);
                 if (myUser.AccountType == "admin" || myUser.AccountType == "member" || myUser.AccountType == "media")
