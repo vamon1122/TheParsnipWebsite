@@ -49,6 +49,7 @@ namespace ParsnipWebsite.Custom_Controls.Menu
             set
             {
                 Modal_Share.Visible = value;
+                CalcButtons();
             }
 
         }
@@ -69,18 +70,36 @@ namespace ParsnipWebsite.Custom_Controls.Menu
         {
             if (LoggedInUser != null)
             {
-                if (LoggedInUser.AccountType == "admin" && Upload)
+                if (Upload)
                 {
-                    Admin.Visible = true;
-                    Modal_Upload.Visible = true;
-                    right_content.Style.Remove("min-width");
-                    right_content.Style.Add("min-width", "150px");
+                    if (LoggedInUser.AccountType == "admin")
+                    {
+                        Admin.Visible = true;
+                        Modal_Upload.Visible = true;
+                        right_content.Style.Remove("min-width");
+                        right_content.Style.Add("min-width", "150px");
+                    }
+                    else if (LoggedInUser.AccountType != "user")
+                    {
+                        Modal_Upload.Visible = true;
+                        right_content.Style.Remove("min-width");
+                        right_content.Style.Add("min-width", "78px");
+                    }
                 }
-                else if (LoggedInUser.AccountType != "user" && Upload)
+                else if (Share)
                 {
-                    Modal_Upload.Visible = true;
+                    Modal_Share.Visible = true;
                     right_content.Style.Remove("min-width");
-                    right_content.Style.Add("min-width", "78px");
+
+                    if (LoggedInUser.AccountType == "admin")
+                    {
+                        Admin.Visible = true;
+                        right_content.Style.Add("min-width", "141px");
+                    }
+                    else
+                    {
+                        right_content.Style.Add("min-width", "69px");
+                    }
                 }
             }
         }
