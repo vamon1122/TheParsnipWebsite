@@ -20,6 +20,7 @@
     <link rel="apple-touch-icon" href="Resources/Favicons/apple-icon.png" />
     </head>
 <body>
+    <errorHandler:ErrorHandler runat="server" ID="ErrorHandler" />
     <menuControls:NewMenu runat="server" ID="NewMenu" />
     <form runat="server">
         <header class="w3-container w3-red w3-center" style="padding:60px 16px 20px 16px; margin-bottom: 20px">

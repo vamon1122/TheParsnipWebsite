@@ -20,6 +20,7 @@
     <link rel="apple-touch-icon" href="Resources/Favicons/apple-icon.png" />
 </head>
 <body>
+    <errorHandler:ErrorHandler runat="server" ID="ErrorHandler" />
     <menuControls:NewMenu runat="server" ID="NewMenu" />
 
     <form runat="server">
