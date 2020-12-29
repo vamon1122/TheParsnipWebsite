@@ -36,7 +36,7 @@ namespace ParsnipWebsite
                 SelectUser.SelectedValue = selectedUserId.ToString();
 
 
-                foreach (MediaControl temp in MediaControl.GetUserMediaAsMediaControls(selectedUserId, myUser.Id))
+                foreach (AdminMediaControl temp in AdminMediaControl.GetUserMediaAsAdminMediaControls(selectedUserId, myUser.Id))
                 {
                     DisplayPhotosDiv.Controls.Add(temp);
                 }

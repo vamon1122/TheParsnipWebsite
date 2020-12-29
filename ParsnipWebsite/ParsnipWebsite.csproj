@@ -72,6 +72,7 @@
     <Content Include="AfternoonT.html" />
     <Content Include="Amsterdam.aspx" />
     <Content Include="Bios.aspx" />
+    <Content Include="Custom_Controls\Admin\AdminMediaControl.ascx" />
     <Content Include="Custom_Controls\Menu\NewMenu.ascx" />
     <Content Include="Custom_Controls\Snowflakes.ascx" />
     <Content Include="Javascript\Cookies.js" />
@@ -1903,6 +1904,13 @@
     </Compile>
     <Compile Include="Content_Removal.aspx.designer.cs">
       <DependentUpon>Content_Removal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Custom_Controls\Admin\AdminMediaControl.ascx.cs">
+      <DependentUpon>AdminMediaControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Custom_Controls\Admin\AdminMediaControl.ascx.designer.cs">
+      <DependentUpon>AdminMediaControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="Custom_Controls\Admin\AdminMenu.ascx.cs">
       <DependentUpon>AdminMenu.ascx</DependentUpon>

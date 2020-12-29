@@ -1,6 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Manage_Media.aspx.cs" Inherits="ParsnipWebsite.Manage_Media" %>
 <%@ Register Src="~/Custom_Controls/Admin/AdminMenu.ascx" TagPrefix="adminControls" TagName="adminMenu" %>
 
+
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -14,6 +15,40 @@
     <link rel="apple-touch-icon" sizes="114×114" href="Resources/Favicons/apple-icon-114×114.png" />
     <link rel="apple-touch-icon" sizes="72×72" href="Resources/Favicons/apple-icon-72x72.png" />
     <link rel="apple-touch-icon" href="Resources/Favicons/apple-icon.png" />
+    <style>
+        .play-button-div 
+        {
+            position: relative;
+            display: block;
+        }
+        
+        .play-button-icon 
+        {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .play-button
+        {
+            width: 60px;
+            height: 60px
+        }
+        
+        .background-lightest 
+        {
+            background-color: #f2f2f2;
+        }
+        ﻿
+        .media-control-title 
+        {
+            width: 100vmin;
+            max-width: 480px;
+            padding-left: 10px;
+            padding-right: 10px
+        }
+    </style>
 </head>
 <body style="padding-bottom:2.5%; padding-top:4%">
     <form id="form1" runat="server">
