@@ -20,7 +20,7 @@
             <a runat="server" id="MyEdit" class="fas fa-pen fa-lg" style="text-decoration:none;" >
             </a>
             <div style="display:inline-block; width:28px"></div>
-            <button runat="server" id="ShareButton" type="button" style="padding:0px; margin:0px; border:none; outline: none">
+            <button runat="server" id="ShareButton" type="button" style="padding:0px; margin:0px; border:none; outline: none; background:none">
                 <i class="fa fa-share-alt fa-lg"></i>
             </button>
             </div>
