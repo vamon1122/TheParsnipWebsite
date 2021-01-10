@@ -73,6 +73,7 @@
     <Content Include="Amsterdam.aspx" />
     <Content Include="Bios.aspx" />
     <Content Include="Custom_Controls\Admin\AdminMediaControl.ascx" />
+    <Content Include="Custom_Controls\Media\VideoThumbnailControl.ascx" />
     <Content Include="Custom_Controls\Menu\NewMenu.ascx" />
     <Content Include="Custom_Controls\Snowflakes.ascx" />
     <Content Include="Javascript\Cookies.js" />
@@ -1954,6 +1955,13 @@
     </Compile>
     <Compile Include="Custom_Controls\Media\UploadMediaControl.ascx.designer.cs">
       <DependentUpon>UploadMediaControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Custom_Controls\Media\VideoThumbnailControl.ascx.cs">
+      <DependentUpon>VideoThumbnailControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Custom_Controls\Media\VideoThumbnailControl.ascx.designer.cs">
+      <DependentUpon>VideoThumbnailControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="Custom_Controls\Media\ViewTagControl.ascx.cs">
       <DependentUpon>ViewTagControl.ascx</DependentUpon>

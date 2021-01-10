@@ -190,7 +190,7 @@ namespace ParsnipWebsite
 
             if(myVideo != null)
             {
-                if (myVideo.IsPortrait())
+                if (myVideo.VideoData.XScale != default && myVideo.VideoData.YScale != default &&myVideo.IsPortrait())
                 {
                     video_container.Attributes.Remove("class");
                     video_container.Attributes.Add("class", "media-viewer-portrait");

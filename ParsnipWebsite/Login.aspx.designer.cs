@@ -24,15 +24,6 @@ namespace ParsnipWebsite
         protected global::ParsnipWebsite.Custom_Controls.ErrorHandler ErrorHandler;
 
         /// <summary>
-        /// Snowflakes control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::ParsnipWebsite.Custom_Controls.Snowflakes Snowflakes;
-
-        /// <summary>
         /// inputUsername control.
         /// </summary>
         /// <remarks>

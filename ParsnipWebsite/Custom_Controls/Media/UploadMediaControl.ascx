@@ -25,34 +25,14 @@
           </div>
       </div>
     </div>
-<div id="uploadThumbnail" class="w3-modal" onclick="void(0)">
-    <div class="w3-modal-content w3-display-middle" style="background-color: transparent">
-      <div class="w3-container">
-                    <label runat="server" class="file-upload file-upload-btn w3-black">            
-                        <span><strong>Upload Video Thumbnail</strong></span>
-                        <asp:FileUpload ID="ThumbnailUpload" runat="server" class="form-control-file" onchange="this.form.submit()" />
-                    </label>
-          </div>
-      </div>
-    </div>
 <div id="uploadYoutube" class="w3-modal" onclick="void(0)">
     <div class="w3-modal-content w3-display-middle" style="background-color: transparent;  min-width: 500px">
       <div class="w3-container" >
           <div class="w3-bar">
-    <asp:TextBox runat="server" AutoPostback="True" ID="TextBox_UploadDataId" class="w3-input w3-border w3-bar-item" type="text" placeholder="youtu.be/watch?v=XXXXXXXXXXX" />
+    <asp:TextBox runat="server" AutoPostback="False" ID="TextBox_UploadDataId" class="w3-input w3-border w3-bar-item" type="text" placeholder="youtu.be/watch?v=XXXXXXXXXXX" />
                         <asp:Button runat="server" ID="Button_UploadDataId"  CssClass="w3-btn w3-black w3-bar-item upload-youtube-button w3-right" Text="Upload" OnClick="Button_UploadDataId_Click" />
               </div>
 
       </div>
     </div>
   </div>
-
-    
-<script type="text/javascript">
-    function openUploadThumbnail() {
-        var thumbnail = document.getElementById("uploadThumbnail");
-        thumbnail.style.display = "block";
-        thumbnail.focus();
-
-    }
-</script>

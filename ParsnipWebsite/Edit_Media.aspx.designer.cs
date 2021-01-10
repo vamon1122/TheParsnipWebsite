@@ -141,6 +141,51 @@ namespace ParsnipWebsite
         protected global::System.Web.UI.HtmlControls.HtmlImage thumbnail;
 
         /// <summary>
+        /// ThumbnailsAreProcessing control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ThumbnailsAreProcessing;
+
+        /// <summary>
+        /// ThumbnailSelectorContainer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ThumbnailSelectorContainer;
+
+        /// <summary>
+        /// ThumbnailSelector control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ThumbnailSelector;
+
+        /// <summary>
+        /// ThumbnailUploadControl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ThumbnailUploadControl;
+
+        /// <summary>
+        /// ThumbnailUpload control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload ThumbnailUpload;
+
+        /// <summary>
         /// btn_AdminDelete control.
         /// </summary>
         /// <remarks>

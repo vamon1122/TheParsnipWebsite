@@ -1,7 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="ParsnipWebsite.Login" %>
-<%@ Register Src="~/Custom_Controls/Snowflakes.ascx" TagPrefix="christmas" TagName="Snowflakes" %>
 <%@ Register Src="~/Custom_Controls/ErrorHandler.ascx" TagPrefix="error" TagName="ErrorHandler" %>
-
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -20,7 +18,6 @@
 </head>
 <body>
     <error:ErrorHandler runat="server" id="ErrorHandler" />
-    <christmas:Snowflakes runat="server" ID="Snowflakes" />
     <div style="padding-top: 1.5%; padding-left:1.5%; padding-right:1.5%;">
         
     </div>

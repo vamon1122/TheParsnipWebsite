@@ -71,7 +71,9 @@ namespace ParsnipWebsite
                     Response.Redirect(OriginalAlbumRedirect);
                 }
 
-                GetTags();
+                CheckForThumbnailUpload();
+
+                PopulateTags();
 
                 PopulateTagDropDowns();
 
@@ -120,12 +122,15 @@ namespace ParsnipWebsite
 
             void GetMedia()
             {
-                MyYoutubeVideo = ParsnipData.Media.Youtube.Select(new MediaId(Request.QueryString["id"]), myUser.Id);
-                if (MyYoutubeVideo == null)
-                    MyVideo = ParsnipData.Media.Video.Select(new MediaId(Request.QueryString["id"]), myUser.Id);
+                if (!string.IsNullOrWhiteSpace(Request.QueryString["id"]))
+                {
+                    MyYoutubeVideo = ParsnipData.Media.Youtube.Select(new MediaId(Request.QueryString["id"]), myUser.Id);
+                    if (MyYoutubeVideo == null)
+                        MyVideo = ParsnipData.Media.Video.Select(new MediaId(Request.QueryString["id"]), myUser.Id);
 
-                if (MyYoutubeVideo == null && MyVideo == null)
-                    MyImage = ParsnipData.Media.Image.Select(new MediaId(Request.QueryString["id"]), myUser.Id);
+                    if (MyYoutubeVideo == null && MyVideo == null)
+                        MyImage = ParsnipData.Media.Image.Select(new MediaId(Request.QueryString["id"]), myUser.Id);
+                }
 
                 if (MyYoutubeVideo != null)
                 {
@@ -160,6 +165,15 @@ namespace ParsnipWebsite
                     a_play_video.HRef = string.Format("../../view?id={0}", MyVideo.Id);
                     a_play_video.Visible = true;
                     Page.Title = "Edit Video";
+                    if (MyVideo.Thumbnails.Count() > 0)
+                    {
+                        ThumbnailSelectorContainer.Visible = true;
+                        foreach (var control in VideoThumbnailControl.GetVideoAsVideoThumbnailControls(MyVideo))
+                        {
+                            control.VideoThumbnailClick += new EventHandler(VideoThumbnail_ButtonClick);
+                            ThumbnailSelector.Controls.Add(control);
+                        }
+                    }
                 }
                 else if (MyImage != null)
                 {
@@ -184,7 +198,7 @@ namespace ParsnipWebsite
                 }
             }
 
-            void GetTags()
+            void PopulateTags()
             {
                 Page httpHandler = (Page)HttpContext.Current.Handler;
                 foreach (MediaTagPair mediaTagPair in MyMedia.MediaTagPairs)
@@ -343,6 +357,29 @@ namespace ParsnipWebsite
                     btn_AdminDelete.Visible = true;
                 }
             }
+        
+            void CheckForThumbnailUpload()
+            {
+                if (MyVideo != null)
+                {
+                    if (ThumbnailUpload.PostedFile != null && ThumbnailUpload.PostedFile.ContentLength > 0)
+                    {
+                        var thumbnail = new VideoThumbnail(MyVideo, myUser, ThumbnailUpload.PostedFile);
+                        thumbnail.Insert();
+                        Response.Redirect(Page.Request.Url.ToString(), true);
+                    }
+
+                    if (MyVideo.Thumbnails.Count > 0 || !MyVideo.Status.Equals(MediaStatus.Complete))
+                    {
+                        ThumbnailUploadControl.Visible = true;
+
+                        if(MyVideo.Thumbnails.Count == 0)
+                        {
+                            ThumbnailsAreProcessing.Visible = true;
+                        }
+                    }
+                }
+            }
         }
 
         protected void ButtonSave_Click(object sender, EventArgs e)
@@ -430,6 +467,10 @@ namespace ParsnipWebsite
                 }
             }
         }
+        protected void VideoThumbnail_ButtonClick(object sender, EventArgs e)
+        {
+            Response.Redirect(Page.Request.Url.ToString(), true);
+        }
 
         protected void AddMediaTagPair_Click(object sender, EventArgs e)
         {
@@ -441,7 +482,7 @@ namespace ParsnipWebsite
                 MediaTagPair newMediaTagPair = new MediaTagPair(MyMedia, myMediaTag, myUser);
                 newMediaTagPair.Insert();
 
-                Page.Response.Redirect(Page.Request.Url.ToString(), true);
+                Response.Redirect(Page.Request.Url.ToString(), true);
             }
         }
 
@@ -455,7 +496,7 @@ namespace ParsnipWebsite
                 MediaUserPair newMediaUserPair = new MediaUserPair(MyMedia, selectedUserId, myUser);
                 newMediaUserPair.Insert();
 
-                Page.Response.Redirect(Page.Request.Url.ToString(), true);
+                Response.Redirect(Page.Request.Url.ToString(), true);
             }
         }
     }

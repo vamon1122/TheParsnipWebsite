@@ -1,5 +1,4 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Edit_Media.aspx.cs" Inherits="ParsnipWebsite.Edit_Media" %>
-<%@ Register Src="~/Custom_Controls/Media/UploadMediaControl.ascx" TagPrefix="mediaControls" TagName="UploadMediaControl" %>
 <%@ Register Src="~/Custom_Controls/ErrorHandler.ascx" TagPrefix="errorHandler" TagName="ErrorHandler" %>
 <%@ Register Src="~/Custom_Controls/Menu/NewMenu.ascx" TagPrefix="menuControls" TagName="NewMenu" %>
 
@@ -58,6 +57,24 @@
                     </span>
                 </div>
             </a>
+            <br />
+            <div runat="server" id="ThumbnailsAreProcessing" Visible="false" class="w3-container">
+                Thumbnails are being generated for your video. Check back in a few minutes to pick your favourite!
+            </div>
+            <div runat="server" id="ThumbnailSelectorContainer" Visible="false" class="w3-container">
+                <label class="form-label">Select a thumbnail:</label>
+                <div id="ThumbnailSelector" runat="server">
+
+                </div>
+            </div>
+            <div runat="server" id="ThumbnailUploadControl" Visible="false">
+                <br />
+                <label runat="server" class="file-upload file-upload-btn w3-black">            
+                    <span><strong>Upload New Thumbnail</strong></span>
+                    <asp:FileUpload ID="ThumbnailUpload" runat="server" class="form-control-file" onchange="this.form.submit()" />
+                </label>
+                <br />
+            </div>
             <asp:Button runat="server" ID="btn_AdminDelete"  CssClass="w3-btn w3-black w3-margin-top" Width="100px" Text="Delete" Visible="false" OnClientClick="document.getElementById('confirmMediaDelete').style.display='block'; return false"></asp:Button>
             <asp:Button runat="server" ID="ButtonSave" class="w3-btn w3-black w3-margin-top" Text="Save" Width="100px" OnClick="ButtonSave_Click"></asp:Button>
             <div class="w3-modal" id="confirmMediaDelete" onclick="void(0)">

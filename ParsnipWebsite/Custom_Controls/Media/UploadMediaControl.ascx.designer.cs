@@ -42,15 +42,6 @@ namespace ParsnipWebsite.Custom_Controls.Media
         protected global::System.Web.UI.WebControls.FileUpload MediaUpload;
 
         /// <summary>
-        /// ThumbnailUpload control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload ThumbnailUpload;
-
-        /// <summary>
         /// TextBox_UploadDataId control.
         /// </summary>
         /// <remarks>

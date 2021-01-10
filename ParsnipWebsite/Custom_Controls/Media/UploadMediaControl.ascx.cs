@@ -49,26 +49,11 @@ namespace ParsnipWebsite.Custom_Controls.Media
         {
             if (IsPostBack)
             {
-                if (Session["MediaUpload"] == null && MediaUpload.HasFile)
-                {
-                    Session["MediaUpload"] = MediaUpload;
-                }
-                else if (Session["MediaUpload"] != null && !MediaUpload.HasFile)
-                {
-                    MediaUpload = (FileUpload)Session["MediaUpload"];
-                }
-                else if (MediaUpload.HasFile)
-                {
-                    Session["MediaUpload"] = MediaUpload;
-                }
-
-                
-                
                 if (MediaUpload.PostedFile.ContentLength > 0)
                 {
-                    if (ThumbnailUpload.PostedFile.ContentLength > 0)
+                    if (Video.IsValidFileExtension(MediaUpload.PostedFile.FileName.Split('.').Last()))
                     {
-                        var myVideo = UploadVideo(LoggedInUser, MediaUpload, ThumbnailUpload);
+                        var myVideo = UploadVideo(LoggedInUser, MediaUpload);
 
                         if (MyMediaTag != null)
                         {
@@ -113,10 +98,6 @@ namespace ParsnipWebsite.Custom_Controls.Media
                             {
                                 HttpContext.Current.Response.Redirect($"edit_media?id={myImage.Id}", false);
                             }
-                        }
-                        else if (Video.IsValidFileExtension(originalFileExtension))
-                        {
-                            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openUploadThumbnail();", true);
                         }
                     }
                 }
@@ -175,11 +156,11 @@ namespace ParsnipWebsite.Custom_Controls.Media
             return null;
         }
 
-        public static Video UploadVideo(User uploader, FileUpload videoUpload, FileUpload thumbnailUpload)
+        public static Video UploadVideo(User uploader, FileUpload videoUpload)
         {
             try
             {
-                ParsnipData.Media.Video myVideo = new ParsnipData.Media.Video(uploader, videoUpload.PostedFile, thumbnailUpload.PostedFile);
+                ParsnipData.Media.Video myVideo = new ParsnipData.Media.Video(uploader, videoUpload.PostedFile);
                 myVideo.Insert();
                 return myVideo;
             }
@@ -192,5 +173,6 @@ namespace ParsnipWebsite.Custom_Controls.Media
             }
             return null;
         }
+
     }
 }

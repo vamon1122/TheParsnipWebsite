@@ -1,7 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Home.aspx.cs" Inherits="ParsnipWebsite.Home" %>
 <%@ Register Src="~/Custom_Controls/Media/UploadMediaControl.ascx" TagPrefix="menuControls" TagName="UploadMediaControl" %>
 <%@ Register Src="~/Custom_Controls/Menu/NewMenu.ascx" TagPrefix="menuControls" TagName="NewMenu" %>
-<%@ Register Src="~/Custom_Controls/Snowflakes.ascx" TagPrefix="christmas" TagName="Snowflakes" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -19,7 +18,6 @@
     <link rel="apple-touch-icon" href="Resources/Favicons/apple-icon.png" />
 </head>
 <body>
-    <christmas:Snowflakes runat="server" id="Snowflakes" />
     <menuControls:NewMenu runat="server" ID="NewMenu" />
     <header class="w3-container w3-red w3-center" style="padding:60px 16px 0px 16px">
         <h1 class="w3-margin w3-jumbo jumbo-line-height">#The<wbr />Parsnip Website</h1>
