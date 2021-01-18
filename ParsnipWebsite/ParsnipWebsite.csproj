@@ -1837,13 +1837,8 @@
     <Content Include="Libraries\fontawesome-free-5.15.1-web\webfonts\fa-solid-900.ttf" />
     <Content Include="Libraries\fontawesome-free-5.15.1-web\webfonts\fa-solid-900.woff" />
     <Content Include="Libraries\fontawesome-free-5.15.1-web\webfonts\fa-solid-900.woff2" />
-    <Content Include="Libraries\Fonts\Montserrat\Montserrat.cyrillic-ext.woff2" />
-    <Content Include="Libraries\Fonts\Montserrat\Montserrat.cyrillic.woff2" />
-    <Content Include="Libraries\Fonts\Montserrat\Montserrat.latin-ext.woff2" />
-    <Content Include="Libraries\Fonts\Montserrat\Montserrat.latin.woff2" />
-    <Content Include="Libraries\Fonts\Montserrat\Montserrat.vietnamese.woff2" />
-    <Content Include="Libraries\Fonts\Lato\Lato.latin-ext.woff2" />
-    <Content Include="Libraries\Fonts\Lato\Lato.latin.woff2" />
+    <Content Include="Libraries\Fonts\Lato\Lato-Regular.ttf" />
+    <Content Include="Libraries\Fonts\Montserrat\Montserrat-Regular.ttf" />
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\Publish To Folder.pubxml" />
     <None Include="Properties\PublishProfiles\Publish To Live.pubxml" />
