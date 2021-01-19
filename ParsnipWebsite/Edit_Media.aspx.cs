@@ -410,29 +410,6 @@ namespace ParsnipWebsite
                         }
 
                         MyMedia.Update();
-
-                        if (myUser.Id.ToString() == MyMedia.CreatedById.ToString())
-                        {
-                            new LogEntry(Log.General)
-                            {
-                                Text = string.Format("{0} saved changes to {1} media called \"{2}\"",
-                                myUser.FullName, myUser.PosessivePronoun, MyMedia.Title)
-                            };
-                        }
-                        else
-                        {
-                            string accountType = myUser.AccountType == "admin" ? "admin" : "approved media editor";
-
-                            new LogEntry(Log.General)
-                            {
-                                Text = string.Format("{0} saved changes to media called \"{1}\". {3} does not own " +
-                                "the media but {2} is allowed since {2} is an {4}", myUser.FullName,
-                                MyMedia.Title, myUser.SubjectiveGenderPronoun,
-                                myUser.SubjectiveGenderPronoun.First().ToString().ToUpper() +
-                                myUser.SubjectiveGenderPronoun.Substring(1), accountType)
-                            };
-                        }
-
                     }
                     else
                     {

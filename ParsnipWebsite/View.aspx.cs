@@ -76,18 +76,18 @@ namespace ParsnipWebsite
 
                         myMediaShare.View(myUser);
                         MyMedia.ViewCount++;
-
-                        new LogEntry(Log.Debug) { Text = string.Format("{0}'s link to {1} got another hit! Now up to {2}", createdBy.FullName, MyMedia.Title, myMediaShare.TimesUsed) };
                     }
                 }
             }
             else
             {
-                myUser = Account.SecurePage("view?id=" + Request.QueryString["id"], this, Data.DeviceType);
+                var tempUser = ParsnipData.Accounts.User.LogIn();
+                myVideo = Video.Select(new MediaId(Request.QueryString["id"]), tempUser.Id);
+                myYoutubeVideo = Youtube.Select(new MediaId(Request.QueryString["id"]), tempUser.Id);
+                myImage = ParsnipData.Media.Image.Select(new MediaId(Request.QueryString["id"].ToString()), tempUser == null ? default : tempUser.Id);
+                myUser = Account.SecurePage("view?id=" + Request.QueryString["id"], this, Data.DeviceType, "user", string.IsNullOrEmpty(MyMedia.Title) ? null : MyMedia.Title);
                 NewMenu.LoggedInUser = myUser;
-                myVideo = Video.Select(new MediaId(Request.QueryString["id"]), myUser.Id);
-                myYoutubeVideo = Youtube.Select(new MediaId(Request.QueryString["id"]), myUser.Id);
-                myImage = ParsnipData.Media.Image.Select(new MediaId(Request.QueryString["id"].ToString()), myUser == null ? default : myUser.Id);
+                
 
                 if (MyMedia != null)
                 {
@@ -277,21 +277,13 @@ namespace ParsnipWebsite
 
             if (Request.QueryString["share"] != null)
             {
-
                 User sharedBy = ParsnipData.Accounts.User.Select(myMediaShare.UserId);
-
 
                 new LogEntry(Log.General)
                 {
-                    Text = string.Format("{0} started watching video called \"{1}\" " +
-                    "using {2}'s access token. This token has now been used {3} times!", personFullName, MyMedia.Title,
-                    sharedBy.FullName, myMediaShare.TimesUsed)
+                    Text = $"{personFullName} started watching video called \"{MyMedia.Title}\" " +
+                    $"using {sharedBy.FullName}'s share link. This link has now been used {myMediaShare.TimesUsed} times!"
                 };
-            }
-            else
-            {
-
-                new LogEntry(Log.General) { Text = string.Format("{0} started watching video called \"{1}\"", personFullName, MyMedia.Title) };
             }
         }
 

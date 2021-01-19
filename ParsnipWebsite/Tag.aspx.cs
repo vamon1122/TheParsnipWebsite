@@ -55,16 +55,16 @@ namespace ParsnipWebsite
                 if (myTaggedUser == null)
                 {
                     if (string.IsNullOrEmpty(focus))
-                        myUser = Account.SecurePage($"tag?id={myTag.Id}", this, Data.DeviceType);
+                        myUser = Account.SecurePage($"tag?id={myTag.Id}", this, Data.DeviceType, "user", $"#{myTag.Name}");
                     else
-                        myUser = Account.SecurePage($"tag?id={myTag.Id}&{focus}", this, Data.DeviceType);
+                        myUser = Account.SecurePage($"tag?id={myTag.Id}&{focus}", this, Data.DeviceType, "user", $"#{myTag.Name}");
                 }
                 else
                 {
                     if (string.IsNullOrEmpty(focus))
-                        myUser = Account.SecurePage($"tag?user={myTaggedUser.Id}", this, Data.DeviceType);
+                        myUser = Account.SecurePage($"tag?user={myTaggedUser.Id}", this, Data.DeviceType, "user", $"@{myTaggedUser.Username}");
                     else
-                        myUser = Account.SecurePage($"tag?user={myTaggedUser.Id}&{focus}", this, Data.DeviceType);
+                        myUser = Account.SecurePage($"tag?user={myTaggedUser.Id}&{focus}", this, Data.DeviceType, "user", $"@{myTaggedUser.Username}");
                 }
 
                 var tagText = myTag == null ? $"@{myTaggedUser.Username}" : $"#{myTag.Name}";

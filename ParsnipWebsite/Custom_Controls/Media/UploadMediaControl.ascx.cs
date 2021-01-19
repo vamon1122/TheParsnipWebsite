@@ -53,6 +53,7 @@ namespace ParsnipWebsite.Custom_Controls.Media
                 {
                     if (Video.IsValidFileExtension(MediaUpload.PostedFile.FileName.Split('.').Last()))
                     {
+                        new LogEntry(Log.General) { Text = $"{LoggedInUser.FullName} uploaded a video!" };
                         var myVideo = UploadVideo(LoggedInUser, MediaUpload);
 
                         if (MyMediaTag != null)
@@ -80,6 +81,7 @@ namespace ParsnipWebsite.Custom_Controls.Media
 
                         if (ParsnipData.Media.Image.IsValidFileExtension(originalFileExtension))
                         {
+                            new LogEntry(Log.General) { Text = $"{LoggedInUser.FullName} uploaded an image!" };
                             var myImage = UploadImage(LoggedInUser, MediaUpload);
 
                             if (MyMediaTag != null)
@@ -99,6 +101,10 @@ namespace ParsnipWebsite.Custom_Controls.Media
                                 HttpContext.Current.Response.Redirect($"edit_media?id={myImage.Id}", false);
                             }
                         }
+                        else
+                        {
+                            new LogEntry(Log.General) { Text = $"{LoggedInUser.FullName} tried to upload an invalid file: {originalFileName}" };
+                        }
                     }
                 }
             }
@@ -106,6 +112,7 @@ namespace ParsnipWebsite.Custom_Controls.Media
 
         protected void Button_UploadDataId_Click(object sender, EventArgs e)
         {
+            new LogEntry(Log.General) { Text = $"{LoggedInUser.FullName} uploaded a youtube video!" };
             var rawDataId = TextBox_UploadDataId.Text;
             var dataId = Youtube.ParseDataId(TextBox_UploadDataId.Text);
             if(dataId == null)
