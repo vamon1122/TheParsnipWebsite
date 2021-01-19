@@ -13,6 +13,12 @@
     <link rel="apple-touch-icon" sizes="114×114" href="Resources/Favicons/apple-icon-114×114.png" />
     <link rel="apple-touch-icon" sizes="72×72" href="Resources/Favicons/apple-icon-72x72.png" />
     <link rel="apple-touch-icon" href="Resources/Favicons/apple-icon.png" />
+    <style>
+        .date-cell 
+        {
+            width: 122px
+        }
+    </style>
 </head>
 <body style="padding-bottom:2.5%; padding-top:4%">
     <form id="form1" runat="server">
