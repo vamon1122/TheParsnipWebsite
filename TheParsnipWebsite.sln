@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29409.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParsnipWebsite", "ParsnipWebsite\ParsnipWebsite.csproj", "{8C3A9372-A884-4197-B3ED-71CBE4D99652}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParsnipData", "..\TheParsnipData\ParsnipData\ParsnipData.csproj", "{F0504054-EED6-4F6F-B35C-C684381181D3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParsnipData", "TheParsnipData\ParsnipData\ParsnipData.csproj", "{F0504054-EED6-4F6F-B35C-C684381181D3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
