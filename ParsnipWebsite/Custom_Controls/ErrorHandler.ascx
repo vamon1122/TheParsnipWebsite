@@ -15,6 +15,11 @@
         <h3>Confirm Identity</h3>
         <p>You must log in first!</p>
     </div>
+    <div class="w3-panel w3-yellow w3-opacity alert" id="BlankSearchWarning">
+        <span class="w3-right dismiss" onclick="document.getElementById('BlankSearchWarning').style.display='none'">x</span>
+        <h3>Search was blank!</h3>
+        <p>You must type something before clicking the search button</p>
+    </div>
 </div>
 <script>
     var url_string = window.location.href
@@ -29,6 +34,9 @@
         }
         if (error === "P102") {
             document.getElementById("LogInWarning").style = "display:block";
+        }
+        if (error === "P103") {
+            document.getElementById("BlankSearchWarning").style = "display:block";
         }
     }
 

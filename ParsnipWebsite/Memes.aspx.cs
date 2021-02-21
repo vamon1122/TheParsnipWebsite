@@ -30,6 +30,7 @@ namespace ParsnipWebsite
             NewMenu.SelectedPage = PageIndex.Memes;
             NewMenu.LoggedInUser = myUser;
             NewMenu.Upload = true;
+            NewMenu.Search = true;
 
             UploadMediaControl.Initialise(myUser, MemesMediaTag, this);
         }

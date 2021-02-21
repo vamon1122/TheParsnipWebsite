@@ -30,6 +30,7 @@ namespace ParsnipWebsite
             NewMenu.SelectedPage = PageIndex.Krakow;
             NewMenu.LoggedInUser = myUser;
             NewMenu.Upload = true;
+            NewMenu.Search = true;
 
             UploadMediaControl.Initialise(myUser, KrakowMediaTag, this);
         }

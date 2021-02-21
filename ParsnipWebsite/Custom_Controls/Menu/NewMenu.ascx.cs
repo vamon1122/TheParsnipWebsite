@@ -66,8 +66,22 @@ namespace ParsnipWebsite.Custom_Controls.Menu
 
         }
 
+        public bool Search
+        {
+            get { return Search_Button.Visible; }
+            set
+            {
+                if (LoggedInUser != null)
+                    Search_Button.Visible = value;
+
+                CalcButtons();
+            }
+
+        }
+
         private void CalcButtons()
         {
+            int minWidth = 0;
             if (LoggedInUser != null)
             {
                 if (Upload)
@@ -77,13 +91,13 @@ namespace ParsnipWebsite.Custom_Controls.Menu
                         Admin.Visible = true;
                         Modal_Upload.Visible = true;
                         right_content.Style.Remove("min-width");
-                        right_content.Style.Add("min-width", "150px");
+                        minWidth += 150;
                     }
                     else if (LoggedInUser.AccountType != "user")
                     {
                         Modal_Upload.Visible = true;
                         right_content.Style.Remove("min-width");
-                        right_content.Style.Add("min-width", "78px");
+                        minWidth += 78;
                     }
                 }
                 else if (Share)
@@ -94,13 +108,18 @@ namespace ParsnipWebsite.Custom_Controls.Menu
                     if (LoggedInUser.AccountType == "admin")
                     {
                         Admin.Visible = true;
-                        right_content.Style.Add("min-width", "141px");
+                        minWidth += 141;
                     }
                     else
                     {
-                        right_content.Style.Add("min-width", "69px");
+                        minWidth += 69;
                     }
                 }
+
+                if (Search)
+                    minWidth += 72;
+
+                right_content.Style.Add("min-width", $"{minWidth}px");
             }
         }
 
@@ -142,6 +161,8 @@ namespace ParsnipWebsite.Custom_Controls.Menu
             if (page.Equals(PageIndex.MyUploads))
                 return Selected_Page;
             if (page.Equals(PageIndex.View))
+                return Selected_Page;
+            if (page.Equals(PageIndex.Search))
                 return Selected_Page;
 
             return null;

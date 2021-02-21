@@ -198,6 +198,22 @@ namespace ParsnipWebsite.Custom_Controls.Media
             return mediaControls.OrderByDescending(mediaControl => mediaControl.MyMedia.DateTimeCaptured).ToList();
         }
 
+
+        public static List<MediaControl> GetMediaSearchResultAsMediaControls(MediaSearchResult mediaSearchResult)
+        {
+            var mediaControls = new List<MediaControl>();
+            Page httpHandler = (Page)HttpContext.Current.Handler;
+
+            foreach (ParsnipData.Media.Media temp in mediaSearchResult.Media)
+            {
+                MediaControl myMediaControl = (MediaControl)httpHandler.LoadControl("~/Custom_Controls/Media/MediaControl.ascx");
+                myMediaControl.MyMedia = temp;
+                mediaControls.Add(myMediaControl);
+            }
+
+            return mediaControls.ToList();
+        }
+
         public static List<MediaControl> GetAlbumAsMediaControls(MediaTag mediaTag)
         {
             var mediaControls = new List<MediaControl>();

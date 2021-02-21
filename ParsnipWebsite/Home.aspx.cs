@@ -17,7 +17,7 @@ namespace ParsnipWebsite
         private User myUser;
         protected void Page_Load(object sender, EventArgs e)
         {
-            MOTD.InnerHtml = ConfigurationManager.AppSettings["MOTD"];
+            MOTD.InnerHtml = System.Configuration.ConfigurationManager.AppSettings["MOTD"];
 
             myUser = ParsnipData.Accounts.User.LogIn();
             
@@ -26,6 +26,7 @@ namespace ParsnipWebsite
             {
                 NewMenu.LoggedInUser = myUser;
                 NewMenu.Upload = true;
+                NewMenu.Search = true;
             }
 
             Page httpHandler = (Page)HttpContext.Current.Handler;
