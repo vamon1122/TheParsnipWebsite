@@ -36,6 +36,7 @@ namespace ParsnipWebsite
             NewMenu.SelectedPage = PageIndex.Portugal;
             NewMenu.LoggedInUser = myUser;
             NewMenu.Upload = true;
+            NewMenu.Search = true;
 
             UploadMediaControl.Initialise(myUser, PortugalMediaTag, this);
         }
