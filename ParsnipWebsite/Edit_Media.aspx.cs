@@ -357,6 +357,11 @@ namespace ParsnipWebsite
                 {
                     btn_AdminDelete.Visible = true;
                 }
+
+                if (MyMedia.SearchTerms != null && !string.IsNullOrEmpty(MyMedia.SearchTerms) && !string.IsNullOrWhiteSpace(MyMedia.SearchTerms))
+                {
+                    SearchTerms_Input.Text = MyMedia.SearchTerms;
+                }
             }
         
             void CheckForThumbnailUpload()
@@ -409,6 +414,9 @@ namespace ParsnipWebsite
                                 throw ex;
                             }
                         }
+
+                        var searchTerms = Request["SearchTerms_Input"]?.ToString();
+                            MyMedia.SearchTerms = string.IsNullOrEmpty(searchTerms) ? null : searchTerms.Trim();
 
                         MyMedia.Update();
                     }

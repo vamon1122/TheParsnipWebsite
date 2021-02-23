@@ -75,6 +75,10 @@
                 </label>
                 <br />
             </div>
+            <div class="w3-container">
+                <label class="form-label">Search Terms:</label>
+                <asp:TextBox CssClass="w3-input w3-border w3-margin-bottom" runat="server" ID="SearchTerms_Input" />
+            </div>
             <asp:Button runat="server" ID="btn_AdminDelete"  CssClass="w3-btn w3-black w3-margin-top" Width="100px" Text="Delete" Visible="false" OnClientClick="document.getElementById('confirmMediaDelete').style.display='block'; return false"></asp:Button>
             <asp:Button runat="server" ID="ButtonSave" class="w3-btn w3-black w3-margin-top" Text="Save" Width="100px" OnClick="ButtonSave_Click"></asp:Button>
             <div class="w3-modal" id="confirmMediaDelete" onclick="void(0)">
