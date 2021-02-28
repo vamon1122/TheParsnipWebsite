@@ -112,37 +112,45 @@ namespace ParsnipWebsite.Custom_Controls.Media
 
         protected void Button_UploadDataId_Click(object sender, EventArgs e)
         {
-            new LogEntry(Log.General) { Text = $"{LoggedInUser.FullName} uploaded a youtube video!" };
-            var rawDataId = TextBox_UploadDataId.Text;
-            var dataId = Youtube.ParseDataId(TextBox_UploadDataId.Text);
-            if(dataId == null)
+            if (LoggedInUser == null)
             {
-                YoutubeError.Visible = true;
+                new LogEntry(Log.General) { Text = $"Someone, who was not logged in, tried upload a youtube video!" };
+                Response.Redirect($"login?alert=P102", false);
             }
             else
             {
-                Youtube myYoutube = new Youtube(dataId, LoggedInUser);
-                myYoutube.Scrape();
-                myYoutube.Insert();
-
-                if (MyMediaTag != null)
+                new LogEntry(Log.General) { Text = $"{LoggedInUser.FullName} uploaded a youtube video!" };
+                var rawDataId = TextBox_UploadDataId.Text;
+                var dataId = Youtube.ParseDataId(TextBox_UploadDataId.Text);
+                if (dataId == null)
                 {
-                    var mediaTagPair = new MediaTagPair(myYoutube, MyMediaTag, LoggedInUser);
-                    mediaTagPair.Insert();
+                    YoutubeError.Visible = true;
                 }
-
-                if(TaggedUserId != default)
-                {
-                    var mediaUserPair = new MediaUserPair(myYoutube, TaggedUserId, LoggedInUser);
-                    mediaUserPair.Insert();
-                }
-                
-                if (MyMediaTag != null)
-                    Response.Redirect($"edit_media?id={myYoutube.Id}&tag={MyMediaTag.Id}", false);
-                else if (TaggedUserId != default)
-                    Response.Redirect($"edit_media?id={myYoutube.Id}&user={TaggedUserId}", false);
                 else
-                    Response.Redirect($"edit_media?id={myYoutube.Id}", false);
+                {
+                    Youtube myYoutube = new Youtube(dataId, LoggedInUser);
+                    myYoutube.Scrape();
+                    myYoutube.Insert();
+
+                    if (MyMediaTag != null)
+                    {
+                        var mediaTagPair = new MediaTagPair(myYoutube, MyMediaTag, LoggedInUser);
+                        mediaTagPair.Insert();
+                    }
+
+                    if (TaggedUserId != default)
+                    {
+                        var mediaUserPair = new MediaUserPair(myYoutube, TaggedUserId, LoggedInUser);
+                        mediaUserPair.Insert();
+                    }
+
+                    if (MyMediaTag != null)
+                        Response.Redirect($"edit_media?id={myYoutube.Id}&tag={MyMediaTag.Id}", false);
+                    else if (TaggedUserId != default)
+                        Response.Redirect($"edit_media?id={myYoutube.Id}&user={TaggedUserId}", false);
+                    else
+                        Response.Redirect($"edit_media?id={myYoutube.Id}", false);
+                }
             }
         }
         public static ParsnipData.Media.Image UploadImage(User uploader, FileUpload uploadControl)

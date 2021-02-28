@@ -16,8 +16,8 @@ namespace ParsnipWebsite
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            if (Request.QueryString["search"] == null)
-                myUser = Account.SecurePage("search", this, Data.DeviceType);
+            if (Request.QueryString["text"] == null)
+                myUser = Account.SecurePage("text", this, Data.DeviceType);
             else
                 myUser = Account.SecurePage("search?text=" + Request.QueryString["text"], this, Data.DeviceType);
             

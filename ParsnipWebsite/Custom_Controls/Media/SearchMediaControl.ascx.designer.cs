@@ -15,6 +15,15 @@ namespace ParsnipWebsite.Custom_Controls.Media
     {
 
         /// <summary>
+        /// search_panel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel search_panel;
+
+        /// <summary>
         /// TextBox_SearchNew control.
         /// </summary>
         /// <remarks>
