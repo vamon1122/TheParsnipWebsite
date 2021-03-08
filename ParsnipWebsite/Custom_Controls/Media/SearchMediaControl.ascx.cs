@@ -16,6 +16,11 @@ namespace ParsnipWebsite.Custom_Controls.Media
             TextBox_SearchNew.Attributes.Add("placeholder", ConfigurationManager.AppSettings["SearchPlaceholder"]);
         }
 
+        public override void Focus()
+        {
+            TextBox_SearchNew.Focus();
+        }
+
         protected void Button_Search_Click(object sender, EventArgs e)
         {
             if (IsPostBack)

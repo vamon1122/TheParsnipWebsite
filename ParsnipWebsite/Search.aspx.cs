@@ -17,7 +17,10 @@ namespace ParsnipWebsite
         {
 
             if (Request.QueryString["text"] == null)
+            {
                 myUser = Account.SecurePage("text", this, Data.DeviceType);
+                SearchMediaControl.Focus();
+            }
             else
                 myUser = Account.SecurePage("search?text=" + Request.QueryString["text"], this, Data.DeviceType);
             
