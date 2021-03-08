@@ -102,7 +102,6 @@ namespace ParsnipWebsite
                 NewMenu.SelectedPage = PageIndex.EditMedia;
                 NewMenu.LoggedInUser = myUser;
                 NewMenu.Share = true;
-                NewMenu.Search = true;
 
                 if (Request.QueryString["removetag"] == "true")
                 {

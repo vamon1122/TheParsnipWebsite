@@ -36,7 +36,6 @@ namespace ParsnipWebsite
             NewMenu.SelectedPage = PageIndex.Amsterdam;
             NewMenu.LoggedInUser = myUser;
             NewMenu.Upload = true;
-            NewMenu.Search = true;
 
             UploadMediaControl.Initialise(myUser, AmsterdamMediaTag, this);
         }

@@ -26,7 +26,6 @@ namespace ParsnipWebsite
             {
                 NewMenu.LoggedInUser = myUser;
                 NewMenu.Upload = true;
-                NewMenu.Search = true;
             }
 
             Page httpHandler = (Page)HttpContext.Current.Handler;

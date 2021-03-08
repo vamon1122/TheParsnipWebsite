@@ -71,7 +71,6 @@ namespace ParsnipWebsite
                 
                 NewMenu.LoggedInUser = myUser;
                 NewMenu.Upload = true;
-                NewMenu.Search = true;
                 NewMenu.HighlightButtonsForPage(PageIndex.Tag, tagText);
             }
 

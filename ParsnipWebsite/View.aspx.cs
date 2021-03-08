@@ -39,7 +39,6 @@ namespace ParsnipWebsite
 
             NewMenu.SelectedPage = PageIndex.View;
             NewMenu.Share = true;
-            NewMenu.Search = true;
 
             if (Request.QueryString["id"] == null)
             {

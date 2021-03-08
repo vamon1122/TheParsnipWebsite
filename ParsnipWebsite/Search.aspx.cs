@@ -26,7 +26,6 @@ namespace ParsnipWebsite
             
             NewMenu.LoggedInUser = myUser;
             NewMenu.Upload = true;
-            NewMenu.Search = true;
             NewMenu.HighlightButtonsForPage(PageIndex.Search, "Search");
 
             var text = Request.QueryString["text"];

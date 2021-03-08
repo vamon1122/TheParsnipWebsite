@@ -26,7 +26,6 @@ namespace ParsnipWebsite
             NewMenu.SelectedPage = PageIndex.Videos;
             NewMenu.LoggedInUser = myUser;
             NewMenu.Upload = true;
-            NewMenu.Search = true;
 
             UploadMediaControl.Initialise(myUser, VideoMediaTag, this);
         }

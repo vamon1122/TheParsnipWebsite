@@ -66,19 +66,6 @@ namespace ParsnipWebsite.Custom_Controls.Menu
 
         }
 
-        public bool Search
-        {
-            get { return Search_Button.Visible; }
-            set
-            {
-                if (LoggedInUser != null)
-                    Search_Button.Visible = value;
-
-                CalcButtons();
-            }
-
-        }
-
         private void CalcButtons()
         {
             int minWidth = 0;
@@ -115,9 +102,8 @@ namespace ParsnipWebsite.Custom_Controls.Menu
                         minWidth += 69;
                     }
                 }
-
-                if (Search)
-                    minWidth += 72;
+                //Serach button
+                minWidth += 72;
 
                 right_content.Style.Add("min-width", $"{minWidth}px");
             }

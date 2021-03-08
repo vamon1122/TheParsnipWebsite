@@ -26,7 +26,7 @@
     <div runat="server" id="right_content" class="w3-red" style="min-width:0px">
         <span runat="server" id="Modal_Upload" class="w3-bar-item w3-button w3-padding-large w3-black w3-right" onclick="document.getElementById('uploadMedia').style.display='block'" Visible="false" style="width:78px" ><i class="fa fa-cloud-upload-alt fa-lg"></i></span>
         <span runat="server" id="Modal_Share" class="w3-bar-item w3-button w3-padding-large w3-black w3-right" onclick="document.getElementById('shareModal').style.display='block'" Visible="false" style="width:69px" ><i class="fa fa-share-alt fa-lg"></i></span>
-        <a runat="server" id="Search_Button" class="w3-bar-item w3-button w3-padding-large w3-black w3-right" href="../../search" Visible="false" style="width:72px" ><i class="fas fa-search fa-lg"></i></a>
+        <a runat="server" id="Search_Button" class="w3-bar-item w3-button w3-padding-large w3-black w3-right" href="../../search" style="width:72px" ><i class="fas fa-search fa-lg"></i></a>
         <a runat="server" id="Admin" class="w3-bar-item w3-button w3-padding-large w3-black w3-right" href="../../admin" Visible="false" style="width:72px" ><i class="fas fa-tools fa-lg"></i></a>
     </div>
     </div>
