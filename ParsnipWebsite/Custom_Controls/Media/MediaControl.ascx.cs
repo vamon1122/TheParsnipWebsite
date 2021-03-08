@@ -21,6 +21,8 @@ namespace ParsnipWebsite.Custom_Controls.Media
 
         public ParsnipData.Media.MediaUserPair MyMediaUserPair { get; set; }
 
+        public string MySearch { get; set; }
+
         ParsnipData.Media.Media _myMedia;
         public ParsnipData.Media.Media MyMedia
         {
@@ -42,6 +44,11 @@ namespace ParsnipWebsite.Custom_Controls.Media
                 if (MyMediaUserPair != null && MyMediaUserPair.UserId != default)
                 {
                     MyEdit.HRef += $"&user={MyMediaUserPair.UserId}";
+                }
+
+                if (MySearch != null)
+                {
+                    MyEdit.HRef += $"&search={MySearch}";
                 }
 
                 if (value.Type == "image")
@@ -207,6 +214,7 @@ namespace ParsnipWebsite.Custom_Controls.Media
             foreach (ParsnipData.Media.Media temp in mediaSearchResult.Media)
             {
                 MediaControl myMediaControl = (MediaControl)httpHandler.LoadControl("~/Custom_Controls/Media/MediaControl.ascx");
+                myMediaControl.MySearch = mediaSearchResult.SearchTerms;
                 myMediaControl.MyMedia = temp;
                 mediaControls.Add(myMediaControl);
             }

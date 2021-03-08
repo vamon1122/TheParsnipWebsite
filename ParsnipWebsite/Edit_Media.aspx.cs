@@ -43,6 +43,7 @@ namespace ParsnipWebsite
         {
             var tagParam = Request.QueryString["tag"];
             var userTagParam = Request.QueryString["user"];
+            var Search = Request.QueryString["search"];
 
             Login();
             
@@ -220,11 +221,15 @@ namespace ParsnipWebsite
 
             void GetOriginalRedirect()
             {
-                
 
-                if (OriginalTag == null && tagParam == null && userTagParam == null && MyMedia.AlbumId == default && MyMedia.MediaTagPairs.Count == default)
+
+                if (OriginalTag == null && tagParam == null && userTagParam == null && MyMedia.AlbumId == default && MyMedia.MediaTagPairs.Count == default && !string.IsNullOrEmpty(OriginalAlbumRedirect))
                 {
                     OriginalAlbumRedirect = "myuploads?focus=" + MyMedia.Id.ToString();
+                }
+                else if (!string.IsNullOrEmpty(Search))
+                {
+                    OriginalAlbumRedirect = $"search?text={Search}&focus={MyMedia.Id}";
                 }
                 else if (OriginalTag != null)
                 {
