@@ -78,6 +78,9 @@
             <div class="w3-container">
                 <label class="form-label">Search Terms:</label>
                 <asp:TextBox CssClass="w3-input w3-border w3-margin-bottom" runat="server" ID="SearchTerms_Input" />
+                <!--Submit behaviour not working on final VISIBLE TextBox. This is a blank TextBox which does not require
+                    submit behaviour-->
+                <input type="text" runat="server" style="height:0px; width:0px; padding:0px; border:0px" />
             </div>
             <asp:Button runat="server" ID="btn_AdminDelete"  CssClass="w3-btn w3-black w3-margin-top" Width="100px" Text="Delete" Visible="false" OnClientClick="document.getElementById('confirmMediaDelete').style.display='block'; return false"></asp:Button>
             <asp:Button runat="server" ID="ButtonSave" class="w3-btn w3-black w3-margin-top" Text="Save" Width="100px" OnClick="ButtonSave_Click"></asp:Button>
