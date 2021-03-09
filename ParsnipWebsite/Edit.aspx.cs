@@ -91,13 +91,13 @@ namespace ParsnipWebsite
             void Login()
             {
                 if (Request.QueryString["id"] == null)
-                    myUser = Account.SecurePage("edit_media", this, Data.DeviceType);
+                    myUser = Account.SecurePage("edit", this, Data.DeviceType);
                 else if (Request.QueryString["tag"] != null)
-                    myUser = Account.SecurePage($"edit_media?id={Request.QueryString["id"]}&tag={Request.QueryString["tag"]}", this, Data.DeviceType);
+                    myUser = Account.SecurePage($"edit?id={Request.QueryString["id"]}&tag={Request.QueryString["tag"]}", this, Data.DeviceType);
                 else if (Request.QueryString["user"] != null)
-                    myUser = Account.SecurePage($"edit_media?id={Request.QueryString["id"]}&user={Request.QueryString["user"]}", this, Data.DeviceType);
+                    myUser = Account.SecurePage($"edit?id={Request.QueryString["id"]}&user={Request.QueryString["user"]}", this, Data.DeviceType);
                 else
-                    myUser = Account.SecurePage($"edit_media?id={Request.QueryString["id"]}", this, Data.DeviceType);
+                    myUser = Account.SecurePage($"edit?id={Request.QueryString["id"]}", this, Data.DeviceType);
 
                 NewMenu.SelectedPage = PageIndex.EditMedia;
                 NewMenu.LoggedInUser = myUser;
@@ -107,17 +107,17 @@ namespace ParsnipWebsite
                 {
                     MediaTagPair.Delete(new MediaId(Request.QueryString["id"]), Convert.ToInt32(Request.QueryString["tag"]));
                     if (Request.QueryString["tag"] == null)
-                        Response.Redirect($"edit_media?id={Request.QueryString["id"]}");
+                        Response.Redirect($"edit?id={Request.QueryString["id"]}");
                     else
-                        Response.Redirect($"edit_media?id={Request.QueryString["id"]}&tag={Request.QueryString["tag"]}");
+                        Response.Redirect($"edit?id={Request.QueryString["id"]}&tag={Request.QueryString["tag"]}");
                 }
                 else if (Request.QueryString["removeusertag"] == "true")
                 {
                     MediaUserPair.Delete(new MediaId(Request.QueryString["id"]), Convert.ToInt32(Request.QueryString["userid"]));
                     if (Request.QueryString["userid"] == null)
-                        Response.Redirect($"edit_media?id={Request.QueryString["id"]}");
+                        Response.Redirect($"edit?id={Request.QueryString["id"]}");
                     else
-                        Response.Redirect($"edit_media?id={Request.QueryString["id"]}&userid={Request.QueryString["userid"]}");
+                        Response.Redirect($"edit?id={Request.QueryString["id"]}&userid={Request.QueryString["userid"]}");
                 }
             }
 

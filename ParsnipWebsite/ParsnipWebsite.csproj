@@ -1750,7 +1750,7 @@
     <Content Include="Custom_Controls\Media\ViewTagControl.ascx" />
     <Content Include="Custom_Controls\Uac\AdminUserForm.ascx" />
     <Content Include="Default.aspx" />
-    <Content Include="Edit_Media.aspx" />
+    <Content Include="Edit.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Get_Device_Info.aspx" />
     <Content Include="Home.aspx" />
@@ -2001,12 +2001,12 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Edit_Media.aspx.cs">
-      <DependentUpon>Edit_Media.aspx</DependentUpon>
+    <Compile Include="Edit.aspx.cs">
+      <DependentUpon>Edit.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Edit_Media.aspx.designer.cs">
-      <DependentUpon>Edit_Media.aspx</DependentUpon>
+    <Compile Include="Edit.aspx.designer.cs">
+      <DependentUpon>Edit.aspx</DependentUpon>
     </Compile>
     <Compile Include="Enums.cs" />
     <Compile Include="Get_Device_Info.aspx.cs">

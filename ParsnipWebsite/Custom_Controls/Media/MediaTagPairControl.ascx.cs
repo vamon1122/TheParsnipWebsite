@@ -52,7 +52,7 @@ namespace ParsnipWebsite.Custom_Controls.Media
                 $"	            <p>Are you sure that you want to remove the tag \"{MyPair.MediaTag.Name}\" from the {myMedia.Type} called: \"{myMedia.Title}\"?</p>\n" + 
                 "           </div>\n" +
                 "           <div class=\"w3-margin-bottom\">\n" +
-                $"              <a href=\"Edit_Media?removetag=true&id={myMedia.Id}&tag={MyPair.MediaTag.Id}\" style=\"color: inherit;text-decoration: none;\">\n" +
+                $"              <a href=\"edit?removetag=true&id={myMedia.Id}&tag={MyPair.MediaTag.Id}\" style=\"color: inherit;text-decoration: none;\">\n" +
                 "	                <button type=\"button\" class=\"w3-btn w3-red\" >REMOVE</button>\n" +
                 "               </a>\n" +
                 $"            <button type=\"button\" class=\"w3-btn w3-black\" onclick=\"document.getElementById('delete{tempGuid}').style.display='none'\">Cancel</button>\n" + 

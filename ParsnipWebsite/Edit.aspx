@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Edit_Media.aspx.cs" Inherits="ParsnipWebsite.Edit_Media" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Edit.aspx.cs" Inherits="ParsnipWebsite.Edit_Media" %>
 <%@ Register Src="~/Custom_Controls/ErrorHandler.ascx" TagPrefix="errorHandler" TagName="ErrorHandler" %>
 <%@ Register Src="~/Custom_Controls/Menu/NewMenu.ascx" TagPrefix="menuControls" TagName="NewMenu" %>
 
@@ -121,7 +121,7 @@
         function DeletePhoto() {
             var url_string = window.location.href
             var url;
-            var redirect = "edit_media?"
+            var redirect = "edit?"
 
             try {
                 //More efficient but does not work on older browsers

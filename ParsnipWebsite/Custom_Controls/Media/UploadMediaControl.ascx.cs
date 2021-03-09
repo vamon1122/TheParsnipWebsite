@@ -62,17 +62,17 @@ namespace ParsnipWebsite.Custom_Controls.Media
                         {
                             var mediaTagPair = new MediaTagPair(myVideo, MyMediaTag, LoggedInUser);
                             mediaTagPair.Insert();
-                            HttpContext.Current.Response.Redirect($"edit_media?id={myVideo.Id}&tag={MyMediaTag.Id}", false);
+                            HttpContext.Current.Response.Redirect($"edit?id={myVideo.Id}&tag={MyMediaTag.Id}", false);
                         }
                         else if (TaggedUserId != default)
                         {
                             var mediaUserPair = new MediaUserPair(myVideo, TaggedUserId, LoggedInUser);
                             mediaUserPair.Insert();
-                            HttpContext.Current.Response.Redirect($"edit_media?id={myVideo.Id}&user={TaggedUserId}", false);
+                            HttpContext.Current.Response.Redirect($"edit?id={myVideo.Id}&user={TaggedUserId}", false);
                         }
                         else
                         {
-                            HttpContext.Current.Response.Redirect($"edit_media?id={myVideo.Id}", false);
+                            HttpContext.Current.Response.Redirect($"edit?id={myVideo.Id}", false);
                         }
                     }
                     else
@@ -90,17 +90,17 @@ namespace ParsnipWebsite.Custom_Controls.Media
                             {
                                 var mediaTagPair = new MediaTagPair(myImage, MyMediaTag, LoggedInUser);
                                 mediaTagPair.Insert();
-                                HttpContext.Current.Response.Redirect($"edit_media?id={myImage.Id}&tag={MyMediaTag.Id}", false);
+                                HttpContext.Current.Response.Redirect($"edit?id={myImage.Id}&tag={MyMediaTag.Id}", false);
                             }
                             else if (TaggedUserId != default)
                             {
                                 var mediaUserPair = new MediaUserPair(myImage, TaggedUserId, LoggedInUser);
                                 mediaUserPair.Insert();
-                                HttpContext.Current.Response.Redirect($"edit_media?id={myImage.Id}&user={TaggedUserId}", false);
+                                HttpContext.Current.Response.Redirect($"edit?id={myImage.Id}&user={TaggedUserId}", false);
                             }
                             else
                             {
-                                HttpContext.Current.Response.Redirect($"edit_media?id={myImage.Id}", false);
+                                HttpContext.Current.Response.Redirect($"edit?id={myImage.Id}", false);
                             }
                         }
                         else
@@ -147,11 +147,11 @@ namespace ParsnipWebsite.Custom_Controls.Media
                     }
 
                     if (MyMediaTag != null)
-                        Response.Redirect($"edit_media?id={myYoutube.Id}&tag={MyMediaTag.Id}", false);
+                        Response.Redirect($"edit?id={myYoutube.Id}&tag={MyMediaTag.Id}", false);
                     else if (TaggedUserId != default)
-                        Response.Redirect($"edit_media?id={myYoutube.Id}&user={TaggedUserId}", false);
+                        Response.Redirect($"edit?id={myYoutube.Id}&user={TaggedUserId}", false);
                     else
-                        Response.Redirect($"edit_media?id={myYoutube.Id}", false);
+                        Response.Redirect($"edit?id={myYoutube.Id}", false);
                 }
             }
         }

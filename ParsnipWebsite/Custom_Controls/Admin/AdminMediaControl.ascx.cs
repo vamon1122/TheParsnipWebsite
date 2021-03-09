@@ -33,7 +33,7 @@ namespace ParsnipWebsite.Custom_Controls.Media
                 SetContainerWidth();
                 MyTitle.InnerHtml = value.Title;
                 MyTitle.ID = value.Id.ToString();
-                MyEdit.HRef = $"../../edit_media?id={value.Id}";
+                MyEdit.HRef = $"../../edit?id={value.Id}";
                 if(MyMediaTag != null && MyMediaTag.Id != default)
                 {
                     MyEdit.HRef += $"&tag={MyMediaTag.Id}";

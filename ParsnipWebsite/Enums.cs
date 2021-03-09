@@ -27,7 +27,7 @@ namespace ParsnipWebsite
         public static readonly PageIndex Krakow = new PageIndex("krakow");
         public static readonly PageIndex Portugal = new PageIndex("portugal");
         public static readonly PageIndex Amsterdam = new PageIndex("amsterdam");
-        public static readonly PageIndex EditMedia = new PageIndex("edit_media");
+        public static readonly PageIndex EditMedia = new PageIndex("edit");
         public static readonly PageIndex View = new PageIndex("view");
         public static readonly PageIndex Search = new PageIndex("search");
 
@@ -71,7 +71,7 @@ namespace ParsnipWebsite
                 case "amsterdam":
                     Value = value;
                     break;
-                case "edit_media":
+                case "edit":
                     Value = value;
                     break;
                 case "view":

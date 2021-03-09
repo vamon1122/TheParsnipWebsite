@@ -51,7 +51,7 @@ namespace ParsnipWebsite.Custom_Controls.Media
                 $"	             <p>Are you sure that you want to remove the tag \"{MyPair.Name}\" from the {myMedia.Type} called: \"{myMedia.Title}\"?</p>\n" +
                 "            </div>\n" +
                 "            <div class=\"w3-margin-bottom\">\n" +
-                $"               <a href=\"Edit_Media?removeusertag=true&id={myMedia.Id}&userid={MyPair.UserId}\" style=\"color: inherit;text-decoration: none;\">\n" +
+                $"               <a href=\"edit?removeusertag=true&id={myMedia.Id}&userid={MyPair.UserId}\" style=\"color: inherit;text-decoration: none;\">\n" +
                 "	                 <button type=\"button\" class=\"w3-btn w3-red\" >REMOVE</button>\n" +
                 "                </a>\n" +
                 $"             <button type=\"button\" class=\"w3-btn w3-black\" onclick=\"document.getElementById('delete{tempGuid}').style.display='none'\">Cancel</button>\n" +
