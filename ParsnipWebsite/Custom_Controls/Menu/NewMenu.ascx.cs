@@ -16,15 +16,8 @@ namespace ParsnipWebsite.Custom_Controls.Menu
         }
 
         private PageIndex _SelectedPage;
-        private bool _LoggedIn;
         public PageIndex SelectedPage { get { return _SelectedPage; } set { HighlightButtonsForPage(value); _SelectedPage = value; } }
-        private bool LoggedIn { get { return _LoggedIn; } set { 
-            if(value == true)
-                {
-                    
-                }
-                _LoggedIn = value;
-            } }
+        private bool LoggedIn { get { return _loggedInUser != null; } }
 
         private ParsnipData.Accounts.User _loggedInUser;
         public ParsnipData.Accounts.User LoggedInUser { get { return _loggedInUser; } set {
@@ -35,6 +28,8 @@ namespace ParsnipWebsite.Custom_Controls.Menu
                     Mobile_LogIn.Visible = false;
                     Desktop_LogOut.Visible = true;
                     Mobile_LogOut.Visible = true;
+                    loggedOutWidth.Visible = false;
+                    loggedInWidth.Visible = true;
                     CalcButtons();
 
 
@@ -43,12 +38,13 @@ namespace ParsnipWebsite.Custom_Controls.Menu
             
             }}
 
+        private bool _share;
         public bool Share
         {
-            get { return Modal_Share.Visible; }
+            get { return _share; }
             set
             {
-                Modal_Share.Visible = value;
+                _share = value;
                 CalcButtons();
             }
 
@@ -89,17 +85,20 @@ namespace ParsnipWebsite.Custom_Controls.Menu
                 }
                 else if (Share)
                 {
-                    Modal_Share.Visible = true;
-                    right_content.Style.Remove("min-width");
+                    if (LoggedIn)
+                    {
+                        Modal_Share.Visible = true;
+                        right_content.Style.Remove("min-width");
 
-                    if (LoggedInUser.AccountType == "admin")
-                    {
-                        Admin.Visible = true;
-                        minWidth += 141;
-                    }
-                    else
-                    {
-                        minWidth += 69;
+                        if (LoggedInUser.AccountType == "admin")
+                        {
+                            Admin.Visible = true;
+                            minWidth += 141;
+                        }
+                        else
+                        {
+                            minWidth += 69;
+                        }
                     }
                 }
                 //Serach button

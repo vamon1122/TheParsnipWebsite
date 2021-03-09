@@ -15,6 +15,24 @@ namespace ParsnipWebsite.Custom_Controls.Menu
     {
 
         /// <summary>
+        /// loggedInWidth control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl loggedInWidth;
+
+        /// <summary>
+        /// loggedOutWidth control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl loggedOutWidth;
+
+        /// <summary>
         /// Desktop_Home control.
         /// </summary>
         /// <remarks>

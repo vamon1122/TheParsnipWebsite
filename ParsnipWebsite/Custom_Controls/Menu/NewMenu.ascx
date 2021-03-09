@@ -2,7 +2,8 @@
 <div class="w3-top w3-card w3-red w3-large">
     <div class="main-container">
         <div style="margin:0px">
-            <div style="min-width:714px; height:0px" class="w3-hide-small w3-hide-medium"></div>
+            <div runat="server" id="loggedInWidth" style="min-width:714px; height:0px" class="w3-hide-small w3-hide-medium" Visible="false" />
+            <div runat="server" id="loggedOutWidth" style="min-width:697px; height:0px" class="w3-hide-small w3-hide-medium" Visible="true" />
             <%--<div style="min-width:56px; height:0px" class="w3-hide-large"></div>--%>
             <div id="left-content" class="w3-bar w3-red">
                 <a class="w3-bar-item w3-button w3-hide-large w3-left w3-hover-white w3-large w3-red w3-padding-large" href="javascript:void(0);" onclick="document.getElementById('mobileNav').style.display='block'" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
