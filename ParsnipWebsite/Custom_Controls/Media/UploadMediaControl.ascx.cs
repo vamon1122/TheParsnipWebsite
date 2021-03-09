@@ -36,13 +36,15 @@ namespace ParsnipWebsite.Custom_Controls.Media
                 UploadDiv.Style.Clear();
         }
 
-        public void Initialise(User loggedInUser, Page page)
+        public void Initialise(User loggedInUser, Page page, bool showButton = true)
         {
             myPage = page;
             LoggedInUser = loggedInUser;
             MyMediaTag = null;
             if (LoggedInUser.AccountType == "admin" || LoggedInUser.AccountType == "member")
                 UploadDiv.Style.Clear();
+
+            UploadDiv.Visible = showButton;
         }
 
         protected void Page_Load(object sender, EventArgs e)
