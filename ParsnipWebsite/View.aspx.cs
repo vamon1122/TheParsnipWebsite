@@ -74,48 +74,65 @@ namespace ParsnipWebsite
                         myVideo = Video.Select(myMediaShare.MediaId, myUserId);
                         myYoutubeVideo = Youtube.Select(myMediaShare.MediaId, myUserId);
 
-                        myMediaShare.View(myUser);
-                        MyMedia.ViewCount++;
+                        if(MyMedia != null)
+                        {
+                            myMediaShare.View(myUser);
+                            MyMedia.ViewCount++;
+                        }
                     }
                 }
             }
             else
             {
                 var tempUser = ParsnipData.Accounts.User.LogIn();
-                myVideo = Video.Select(new MediaId(Request.QueryString["id"]), tempUser.Id);
-                myYoutubeVideo = Youtube.Select(new MediaId(Request.QueryString["id"]), tempUser.Id);
-                myImage = ParsnipData.Media.Image.Select(new MediaId(Request.QueryString["id"].ToString()), tempUser == null ? default : tempUser.Id);
-                myUser = Account.SecurePage("view?id=" + Request.QueryString["id"], this, Data.DeviceType, "user", string.IsNullOrEmpty(MyMedia.Title) ? null : MyMedia.Title);
-                NewMenu.LoggedInUser = myUser;
-                
-
-                if (MyMedia != null)
+                if (tempUser != null)
                 {
-                    if (MyMedia.MyMediaShare != null)
+                    myVideo = Video.Select(new MediaId(Request.QueryString["id"]), tempUser.Id);
+                    myYoutubeVideo = Youtube.Select(new MediaId(Request.QueryString["id"]), tempUser.Id);
+                    myImage = ParsnipData.Media.Image.Select(new MediaId(Request.QueryString["id"].ToString()), tempUser == null ? default : tempUser.Id);
+                    myUser = Account.SecurePage("view?id=" + Request.QueryString["id"], this, Data.DeviceType, "user", MyMedia == null || string.IsNullOrEmpty(MyMedia.Title) ? null : MyMedia.Title);
+                    NewMenu.LoggedInUser = myUser;
+
+
+                    if (MyMedia != null)
                     {
-                        myMediaShare = MyMedia.MyMediaShare;
-
-                        if (myMediaShare == null)
+                        if (MyMedia.MyMediaShare != null)
                         {
-                            myMediaShare = new MediaShare(MyMedia.Id, myUser.Id);
-                            myMediaShare.Insert();
-                        }
-                    }
+                            myMediaShare = MyMedia.MyMediaShare;
 
-                    MyMedia.View(myUser);
+                            if (myMediaShare == null)
+                            {
+                                myMediaShare = new MediaShare(MyMedia.Id, myUser.Id);
+                                myMediaShare.Insert();
+                            }
+                        }
+
+                        MyMedia.View(myUser);
+                    }
                 }
             }
 
             if (MyMedia == null)
-                Response.Redirect("home?alert=P101");
+            {
+                if (Request.QueryString["alert"] == null)
+                {
+                    Response.Redirect($"view?id={Request.QueryString["id"]}&alert=P101");
+                }
+                else
+                {
+                    MediaContainer.Visible = false;
+                    MediaTagContainer.Visible = false;
+                }
+            }
             else
+            {
                 viewCount.InnerText = $"{MyMedia.ViewCount} view(s)";
+                ShareLink.Value = Request.Url.GetLeftPart(UriPartial.Authority) + "/view?share=" +
+                    myMediaShare.Id;
+            }
 
             NewMenu.LoggedInUser = myUser;
             NewMenu.HighlightButtonsForPage(PageIndex.Tag, "View");
-
-            ShareLink.Value = Request.Url.GetLeftPart(UriPartial.Authority) + "/view?share=" +
-                    myMediaShare.Id;
 
             //Get the image which the user is trying to access, and display it on the screen.
             if (MyMedia == null || string.IsNullOrEmpty(MyMedia.Compressed))

@@ -1,5 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="View.aspx.cs" Inherits="ParsnipWebsite.View_Image" %>
 <%@ Register Src="~/Custom_Controls/Menu/NewMenu.ascx" TagPrefix="menuControls" TagName="NewMenu" %>
+<%@ Register Src="~/Custom_Controls/ErrorHandler.ascx" TagPrefix="errorHandler" TagName="ErrorHandler" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,6 +18,7 @@
     <link rel="apple-touch-icon" href="Resources/Favicons/apple-icon.png" />
 </head>
 <body>
+    <errorHandler:ErrorHandler runat="server" ID="ErrorHandler" />
     <menuControls:NewMenu runat="server" ID="NewMenu" />
     <div runat="server" class="alert alert-danger alert-dismissible parsnip-alert" Visible="false" id="ShareUserSuspendedError">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
