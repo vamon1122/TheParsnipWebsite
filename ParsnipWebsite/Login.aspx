@@ -18,30 +18,11 @@
 </head>
 <body>
     <error:ErrorHandler runat="server" id="ErrorHandler" />
-    <div style="padding-top: 1.5%; padding-left:1.5%; padding-right:1.5%;">
-        
-    </div>
-    <div class="w3-display-middle">
-        <form runat="server">        
-            <img src="Resources/Media/Images/Local/Fat_Kieron_Cutout.JPG" style="max-width:100px; display:block; margin-left: auto; margin-right:auto;" />
-            <div>
-                <br />    
-                <asp:TextBox runat="server" CssClass="w3-input w3-border" ID="inputUsername" placeholder="username"  />
-                <br />
-                <div class="form-group">
-                    <asp:TextBox runat="server" TextMode="password" CssClass="w3-input w3-border" ID="inputPwd" placeholder="password" />
-                </div>
-                <div style="text-align:right; width:100%">
-                    <label class="form-check-label">Remember me:</label>
-                    <asp:CheckBox runat="server" CssClass="w3-check" ID="RememberPwd" />
-                </div>
-                <br />
-                <div style="float:right;">
-                    <asp:Button runat="server" ID="ButLogIn" OnClick="ButLogIn_Click" CssClass="w3-btn w3-black" Text="Log In"></asp:Button>
-                </div>
-            </div>
-        </form>
-    </div>
+    <form id="test" runat="server" defaultbutton="ButLogIn">        
+        <asp:TextBox runat="server" CssClass="w3-input w3-border" ID="inputUsername" placeholder="username"  />
+        <asp:TextBox runat="server" TextMode="password" CssClass="w3-input w3-border" ID="inputPwd" />
+        <asp:Button runat="server" ID="ButLogIn" OnClick="ButLogIn_Click" CssClass="w3-btn w3-black" Text="Log In"></asp:Button>
+    </form>
 </body>
 </html>
 

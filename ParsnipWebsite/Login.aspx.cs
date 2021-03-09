@@ -20,7 +20,8 @@ namespace ParsnipWebsite
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(Request.QueryString["url"] != null)
+            Page.Form.DefaultButton = "ButLogIn";
+            if (Request.QueryString["url"] != null)
             {
                 Redirect = Request.QueryString["url"];
                 if (Redirect == "me")
@@ -55,7 +56,7 @@ namespace ParsnipWebsite
 
                 }
 
-                myUser = ParsnipData.Accounts.User.LogIn(Request["inputUsername"].ToString(), RememberPwd.Checked, Request["inputPwd"].ToString(), RememberPwd.Checked);
+                //myUser = ParsnipData.Accounts.User.LogIn(Request["inputUsername"].ToString(), RememberPwd.Checked, Request["inputPwd"].ToString(), RememberPwd.Checked);
                 if (myUser != null)
                 {
                     new LogEntry(Log.LogInOut) { Text = String.Format("{0} logged in from {1} {2}.", myUser.FullName, myUser.PosessivePronoun, Data.DeviceType) };
