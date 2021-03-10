@@ -34,7 +34,7 @@ namespace ParsnipWebsite
         {
             //If there is an access token, get the token & it's data.
             //If there is no access token, check that the user is logged in.
-            var accessToken = Request.QueryString["share"];
+            var mediaShareId = Request.QueryString["share"];
 
 
             NewMenu.SelectedPage = PageIndex.View;
@@ -61,10 +61,18 @@ namespace ParsnipWebsite
                         throw ex;
                     }
 
-                    if (string.IsNullOrEmpty(myMediaShare.MediaId.ToString()))
+                    if (myMediaShare.MediaId == null)
                     {
-                        new LogEntry(Log.Debug) { Text = $"Someone tried to access share {myMediaShare.Id}. Access was denied because the person who created this link has been suspended." };
-                        ShareUserSuspendedError.Visible = true;
+                        if (Request.QueryString["alert"] == null)
+                        {
+                            new LogEntry(Log.Debug) { Text = $"Someone tried to access share {myMediaShare.Id}. Access was denied because the media was deleted or the person who created this link has been suspended." };
+                            Response.Redirect($"view?share={mediaShareId}&alert=P101");
+                        }
+                        else
+                        {
+                            MediaContainer.Visible = false;
+                            MediaTagContainer.Visible = false;
+                        }
                     }
                     else
                     {
@@ -292,7 +300,7 @@ namespace ParsnipWebsite
 
             NewMenu.LoggedInUser = myUser;
 
-            if (Request.QueryString["share"] != null)
+            if (Request.QueryString["share"] != null && string.IsNullOrEmpty(Request.QueryString["alert"]))
             {
                 User sharedBy = ParsnipData.Accounts.User.Select(myMediaShare.UserId);
 
