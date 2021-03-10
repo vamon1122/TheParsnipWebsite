@@ -24,7 +24,7 @@
 
     <form runat="server">
         <header class="w3-container w3-red w3-center" style="padding:60px 16px 20px 16px; margin-bottom: 20px">
-            <h1 class="w3-margin w3-jumbo jumbo-line-height" style="overflow-wrap: break-word" id="TagName" runat="server"></h1>
+            <h1 class="w3-margin w3-jumbo jumbo-line-height" style="overflow-wrap: break-word" id="TagName" runat="server">View Tag</h1>
             <mediaControls:UploadMediaControl runat="server" ID="UploadMediaControl" />
         </header>
         <div runat="server" id="DynamicMediaDiv" style="margin: auto; text-align:center" />

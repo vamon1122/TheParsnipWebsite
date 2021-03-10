@@ -20,6 +20,11 @@
         <h3>Search was blank!</h3>
         <p>You must type something before clicking the search button</p>
     </div>
+    <div class="w3-panel w3-yellow w3-opacity alert" id="TagExistsWarning">
+        <span class="w3-right dismiss" onclick="document.getElementById('TagExistsWarning').style.display='none'">x</span>
+        <h3>Tag Not Found</h3>
+        <p>The # / @ tag which you are looking for could not be found. This could be because it has been deleted, the person who created it has deleted their account or had it suspended, or the subject of the tag has asked for it to be removed.</p>
+    </div>
 </div>
 <script>
     var url_string = window.location.href
@@ -37,6 +42,9 @@
         }
         if (error === "P103") {
             document.getElementById("BlankSearchWarning").style = "display:block";
+        }
+        if (error === "P104") {
+            document.getElementById("TagExistsWarning").style = "display:block";
         }
     }
 

@@ -36,45 +36,74 @@ namespace ParsnipWebsite
             else
             {
                 var tagId = Convert.ToInt32(Request.QueryString["id"]);
-                var userId = Convert.ToInt32(Request.QueryString["user"]);
+                var taggedUserId = Convert.ToInt32(Request.QueryString["user"]);
 
                 if (tagId != default)
                 {
                     myTag = MediaTag.Select(tagId);
-                    TagName.InnerText = myTag.Name;
                 }
 
-                if(userId != default)
+                if (taggedUserId != default)
                 {
-                    myTaggedUser = ParsnipData.Accounts.User.Select(userId);
-                    TagName.InnerText = myTaggedUser.FullName;
+                    myTaggedUser = ParsnipData.Accounts.User.Select(taggedUserId);
                 }
 
                 string focus = Request.QueryString["focus"];
 
-                if (myTaggedUser == null)
+                if (myTag != null)
                 {
                     if (string.IsNullOrEmpty(focus))
                         myUser = Account.SecurePage($"tag?id={myTag.Id}", this, Data.DeviceType, "user", $"#{myTag.Name}");
                     else
                         myUser = Account.SecurePage($"tag?id={myTag.Id}&{focus}", this, Data.DeviceType, "user", $"#{myTag.Name}");
                 }
-                else
+                else if (myTaggedUser != null)
                 {
                     if (string.IsNullOrEmpty(focus))
                         myUser = Account.SecurePage($"tag?user={myTaggedUser.Id}", this, Data.DeviceType, "user", $"@{myTaggedUser.Username}");
                     else
                         myUser = Account.SecurePage($"tag?user={myTaggedUser.Id}&{focus}", this, Data.DeviceType, "user", $"@{myTaggedUser.Username}");
                 }
+                else 
+                {
+                    var param = "";
 
-                var tagText = myTag == null ? $"@{myTaggedUser.Username}" : $"#{myTag.Name}";
-                
+                    if (tagId != default)
+                        param = $"id={tagId}";
+                    if (taggedUserId != default)
+                        param = $"user={taggedUserId}";
+
+                    myUser = Account.SecurePage($"tag?{param}", this, Data.DeviceType, "user", $"No tag found");
+                    param += string.IsNullOrEmpty(param) ? "" : "&";
+
+                    if(string.IsNullOrEmpty(Request.QueryString["alert"]))
+                        Response.Redirect($"tag?{param}alert=P104");
+                }
+
+                if (myTag != null)
+                {
+                    TagName.InnerText = myTag.Name;
+                }
+                else if (myTaggedUser != null)
+                {
+                    TagName.InnerText = myTaggedUser.FullName;
+                }
+
                 NewMenu.LoggedInUser = myUser;
                 NewMenu.Upload = true;
-                NewMenu.HighlightButtonsForPage(PageIndex.Tag, tagText);
+                if (myTag != null || myTaggedUser != null)
+                {
+                    var tagText = myTag == null ? $"@{myTaggedUser.Username}" : $"#{myTag.Name}";
+                    NewMenu.HighlightButtonsForPage(PageIndex.Tag, tagText);
+                }
+                else
+                {
+                    NewMenu.SelectedPage = PageIndex.Tag;
+                }
+                
             }
 
-            if (myTaggedUser == null)
+            if (myTag != null)
             {
                 Page.Header.Controls.Add(new LiteralControl($"<meta property=\"og:title\" content=\"{myTag.Name}\" />"));
                 Page.Header.Controls.Add(new LiteralControl($"<meta property=\"og:description\" content=\"{myTag.Description}\" />"));
@@ -83,7 +112,7 @@ namespace ParsnipWebsite
 
                 Page.Title = $"Tag: {myTag.Name}";
             }
-            else
+            else if(myTaggedUser != null)
             {
                 Page.Header.Controls.Add(new LiteralControl($"<meta property=\"og:title\" content=\"{myTaggedUser.FullName} was tagged in...\" />"));
                 Page.Header.Controls.Add(new LiteralControl($"<meta property=\"og:description\" content=\"See pictures and videos which {myTaggedUser.FullName} has been tagged in!\" />"));
@@ -100,20 +129,22 @@ namespace ParsnipWebsite
 
             if (myTag != null)
                 UploadMediaControl.Initialise(myUser, myTag, this);
-            else
+            else if (myTaggedUser != null)
                 UploadMediaControl.Initialise(myUser, myTaggedUser.Id, this);
+            else
+                UploadMediaControl.Initialise(myUser, this);
         }
 
         protected void Page_LoadComplete(object sender, EventArgs e)
         {
-            if(myTaggedUser == null)
+            if (myTag != null)
             {
                 foreach (MediaControl mediaControl in MediaControl.GetAlbumAsMediaControls(myTag))
                 {
                     DynamicMediaDiv.Controls.Add(mediaControl);
                 }
             }
-            else
+            else if (myTaggedUser != null)
             {
                 foreach (MediaControl mediaControl in MediaControl.GetMediaUserPairAsMediaControls(myTaggedUser.Id))
                 {

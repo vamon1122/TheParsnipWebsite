@@ -48,24 +48,30 @@ namespace ParsnipWebsite
                 if (tagId != default)
                 {
                     var myTag = MediaTag.Select(tagId);
-                    Page.Header.Controls.Add(new LiteralControl($"<meta property=\"og:title\" content=\"CLICK to 👀 #{myTag.Name} content!\" />"));
-                    Page.Header.Controls.Add(new LiteralControl($"<meta property=\"og:description\" content=\"{myTag.Description}\" />"));
-                    Page.Header.Controls.Add(new LiteralControl($"<meta property=\"og:image\" content=\"{Request.Url.GetLeftPart(UriPartial.Authority)}/Resources/Media/Images/Web_Media/Lock.jpg\" />"));
-                    Page.Header.Controls.Add(new LiteralControl(string.Format("<meta property=\"og:alt\" content=\"{0}\" />", myTag.Description)));
+                    if (myTag != null)
+                    {
+                        Page.Header.Controls.Add(new LiteralControl($"<meta property=\"og:title\" content=\"CLICK to 👀 #{myTag.Name} content!\" />"));
+                        Page.Header.Controls.Add(new LiteralControl($"<meta property=\"og:description\" content=\"{myTag.Description}\" />"));
+                        Page.Header.Controls.Add(new LiteralControl($"<meta property=\"og:image\" content=\"{Request.Url.GetLeftPart(UriPartial.Authority)}/Resources/Media/Images/Web_Media/Lock.jpg\" />"));
+                        Page.Header.Controls.Add(new LiteralControl(string.Format("<meta property=\"og:alt\" content=\"{0}\" />", myTag.Description)));
 
-                    Page.Title = $"Tag: {myTag.Name}";
+                        Page.Title = $"Tag: {myTag.Name}";
+                    }
                 }
 
                 if (Request.QueryString["url"].Contains("tag?user="))
                 {
                     
                     var myTagUser = ParsnipData.Accounts.User.Select(userId);
-                    Page.Header.Controls.Add(new LiteralControl($"<meta property=\"og:title\" content=\"@{myTagUser.Username} ({myTagUser.Forename}) was tagged in these 👀...\" />"));
-                    Page.Header.Controls.Add(new LiteralControl($"<meta property=\"og:description\" content=\"See pictures and videos which {myTagUser.FullName} has been tagged in!\" />"));
-                    Page.Header.Controls.Add(new LiteralControl($"<meta property=\"og:image\" content=\"{Request.Url.GetLeftPart(UriPartial.Authority)}/Resources/Media/Images/Web_Media/Lock.jpg\" />"));
-                    Page.Header.Controls.Add(new LiteralControl(string.Format($"<meta property=\"og:alt\" content=\"See photos and videos which @{myTagUser.Username} ({myTagUser.FullName}) has been tagged in!\" />")));
+                    if (myTagUser != null)
+                    {
+                        Page.Header.Controls.Add(new LiteralControl($"<meta property=\"og:title\" content=\"@{myTagUser.Username} ({myTagUser.Forename}) was tagged in these 👀...\" />"));
+                        Page.Header.Controls.Add(new LiteralControl($"<meta property=\"og:description\" content=\"See pictures and videos which {myTagUser.FullName} has been tagged in!\" />"));
+                        Page.Header.Controls.Add(new LiteralControl($"<meta property=\"og:image\" content=\"{Request.Url.GetLeftPart(UriPartial.Authority)}/Resources/Media/Images/Web_Media/Lock.jpg\" />"));
+                        Page.Header.Controls.Add(new LiteralControl(string.Format($"<meta property=\"og:alt\" content=\"See photos and videos which @{myTagUser.Username} ({myTagUser.FullName}) has been tagged in!\" />")));
 
-                    Page.Title = $"Tag: {myTagUser.Forename}";
+                        Page.Title = $"Tag: {myTagUser.Forename}";
+                    }
                 }
             }
 
