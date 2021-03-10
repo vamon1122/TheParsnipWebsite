@@ -92,14 +92,13 @@ namespace ParsnipWebsite
             }
             else
             {
-                var tempUser = ParsnipData.Accounts.User.LogIn();
-                if (tempUser != null)
+                myUser = Account.SecurePage("view?id=" + Request.QueryString["id"], this, Data.DeviceType, "user", MyMedia == null || string.IsNullOrEmpty(MyMedia.Title) ? null : MyMedia.Title);
+                NewMenu.LoggedInUser = myUser;
+                if (myUser != null)
                 {
-                    myVideo = Video.Select(new MediaId(Request.QueryString["id"]), tempUser.Id);
-                    myYoutubeVideo = Youtube.Select(new MediaId(Request.QueryString["id"]), tempUser.Id);
-                    myImage = ParsnipData.Media.Image.Select(new MediaId(Request.QueryString["id"].ToString()), tempUser == null ? default : tempUser.Id);
-                    myUser = Account.SecurePage("view?id=" + Request.QueryString["id"], this, Data.DeviceType, "user", MyMedia == null || string.IsNullOrEmpty(MyMedia.Title) ? null : MyMedia.Title);
-                    NewMenu.LoggedInUser = myUser;
+                    myVideo = Video.Select(new MediaId(Request.QueryString["id"]), myUser.Id);
+                    myYoutubeVideo = Youtube.Select(new MediaId(Request.QueryString["id"]), myUser.Id);
+                    myImage = ParsnipData.Media.Image.Select(new MediaId(Request.QueryString["id"].ToString()), myUser == null ? default : myUser.Id);
 
 
                     if (MyMedia != null)
