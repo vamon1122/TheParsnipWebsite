@@ -74,13 +74,13 @@ namespace ParsnipWebsite.Custom_Controls.Menu
                         Admin.Visible = true;
                         Modal_Upload.Visible = true;
                         right_content.Style.Remove("min-width");
-                        minWidth += 150;
+                        minWidth += 130;
                     }
                     else if (LoggedInUser.AccountType != "user")
                     {
                         Modal_Upload.Visible = true;
                         right_content.Style.Remove("min-width");
-                        minWidth += 78;
+                        minWidth += 65;
                     }
                 }
                 else if (Share)
@@ -93,16 +93,16 @@ namespace ParsnipWebsite.Custom_Controls.Menu
                         if (LoggedInUser.AccountType == "admin")
                         {
                             Admin.Visible = true;
-                            minWidth += 141;
+                            minWidth += 130;
                         }
                         else
                         {
-                            minWidth += 69;
+                            minWidth += 65;
                         }
                     }
                 }
                 //Serach button
-                minWidth += 72;
+                minWidth += 65;
 
                 right_content.Style.Add("min-width", $"{minWidth}px");
             }
