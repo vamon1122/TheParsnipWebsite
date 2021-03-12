@@ -82,11 +82,13 @@ namespace ParsnipWebsite
 
                 if (myTag != null)
                 {
-                    TagName.InnerText = myTag.Name;
+                    TagName.InnerText = $"#{myTag.Name}";
+                    TagDescription.InnerText = myTag.Description;
                 }
                 else if (myTaggedUser != null)
                 {
-                    TagName.InnerText = myTaggedUser.FullName;
+                    TagName.InnerText = $"@{myTaggedUser.Username}";
+                    TagDescription.InnerText = $"Everything {myTaggedUser.Forename} has been tagged in";
                 }
 
                 NewMenu.LoggedInUser = myUser;

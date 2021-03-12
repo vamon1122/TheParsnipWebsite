@@ -42,6 +42,15 @@ namespace ParsnipWebsite
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl TagName;
 
         /// <summary>
+        /// TagDescription control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl TagDescription;
+
+        /// <summary>
         /// UploadMediaControl control.
         /// </summary>
         /// <remarks>
