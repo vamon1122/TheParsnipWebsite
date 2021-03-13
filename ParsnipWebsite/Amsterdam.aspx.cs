@@ -18,7 +18,7 @@ namespace ParsnipWebsite
     public partial class Amsterdam : System.Web.UI.Page
     {
         private User myUser;
-        static readonly MediaTag AmsterdamMediaTag = new MediaTag(4);
+        static readonly MediaTag AmsterdamMediaTag = MediaTag.Select((int)Data.MediaTagIds.Amsterdam);
 
         public Amsterdam()
         {
@@ -32,6 +32,9 @@ namespace ParsnipWebsite
                 myUser = Account.SecurePage("amsterdam", this, Data.DeviceType);
             else
                 myUser = Account.SecurePage("amsterdam?focus=" + Request.QueryString["focus"], this, Data.DeviceType);
+
+            TagName.InnerText = $"#{AmsterdamMediaTag.Name}";
+            TagDescription.InnerText = AmsterdamMediaTag.Description;
 
             NewMenu.SelectedPage = PageIndex.Amsterdam;
             NewMenu.LoggedInUser = myUser;

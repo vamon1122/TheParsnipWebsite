@@ -18,7 +18,7 @@ namespace ParsnipWebsite
     public partial class Memes : System.Web.UI.Page
     {
         private User myUser;
-        static readonly MediaTag MemesMediaTag = new MediaTag(3);
+        static readonly MediaTag MemesMediaTag = MediaTag.Select((int)Data.MediaTagIds.Memes);
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -26,6 +26,9 @@ namespace ParsnipWebsite
                 myUser = Account.SecurePage("memes", this, Data.DeviceType);
             else
                 myUser = Account.SecurePage("memes?focus=" + Request.QueryString["focus"], this, Data.DeviceType);
+
+            TagName.InnerText = $"#{MemesMediaTag.Name}";
+            TagDescription.InnerText = MemesMediaTag.Description;
 
             NewMenu.SelectedPage = PageIndex.Memes;
             NewMenu.LoggedInUser = myUser;

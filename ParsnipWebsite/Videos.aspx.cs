@@ -23,6 +23,9 @@ namespace ParsnipWebsite
             else
                 myUser = Account.SecurePage("videos?focus=" + Request.QueryString["focus"], this, Data.DeviceType);
 
+            TagName.InnerText = $"#{VideoMediaTag.Name}";
+            TagDescription.InnerText = VideoMediaTag.Description;
+
             NewMenu.SelectedPage = PageIndex.Videos;
             NewMenu.LoggedInUser = myUser;
             NewMenu.Upload = true;

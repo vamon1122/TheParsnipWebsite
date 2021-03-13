@@ -18,7 +18,7 @@ namespace ParsnipWebsite
     public partial class Photos : System.Web.UI.Page
     {
         private User myUser;
-        static readonly MediaTag PhotosMediaTag = new MediaTag(1);
+        static readonly MediaTag PhotosMediaTag = MediaTag.Select((int)Data.MediaTagIds.Photos);
 
         public Photos()
         {
@@ -32,6 +32,9 @@ namespace ParsnipWebsite
                 myUser = Account.SecurePage("photos", this, Data.DeviceType);
             else
                 myUser = Account.SecurePage("photos?focus=" + Request.QueryString["focus"], this, Data.DeviceType);
+
+            TagName.InnerText = $"#{PhotosMediaTag.Name}";
+            TagDescription.InnerText = PhotosMediaTag.Description;
 
             NewMenu.SelectedPage = PageIndex.Photos;
             NewMenu.LoggedInUser = myUser;
