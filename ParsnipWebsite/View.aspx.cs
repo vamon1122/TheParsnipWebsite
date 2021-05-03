@@ -13,20 +13,10 @@ namespace ParsnipWebsite
 {
     public partial class View_Image : System.Web.UI.Page
     {
-        User myUser;
-        ParsnipData.Media.Media myImage;
-        ParsnipData.Media.Video myVideo;
-        ParsnipData.Media.Youtube myYoutubeVideo;
-        public Media MyMedia { get {
+        public User myUser { get; set; }
 
-                if (myImage != null)
-                    return myImage;
-                if (myVideo != null)
-                    return myVideo;
-                if (myYoutubeVideo != null)
-                    return myYoutubeVideo;
-                return null;
-            } }
+        MediaView mediaView;
+        
         MediaShare myMediaShare;
         MediaShareId shareId;
 
@@ -36,7 +26,7 @@ namespace ParsnipWebsite
             //If there is no access token, check that the user is logged in.
             var mediaShareId = Request.QueryString["share"];
 
-
+            mediaView = new MediaView();
             NewMenu.SelectedPage = PageIndex.View;
             NewMenu.Share = true;
 
@@ -78,48 +68,43 @@ namespace ParsnipWebsite
                     {
                         User createdBy = ParsnipData.Accounts.User.Select(myMediaShare.UserId);
                         var myUserId = myUser == null ? default : myUser.Id;
-                        myImage = ParsnipData.Media.Image.Select(myMediaShare.MediaId, myUserId);
-                        myVideo = Video.Select(myMediaShare.MediaId, myUserId);
-                        myYoutubeVideo = Youtube.Select(myMediaShare.MediaId, myUserId);
+                        mediaView.Image = ParsnipData.Media.Image.Select(myMediaShare.MediaId, myUserId);
+                        mediaView.Video = Video.Select(myMediaShare.MediaId, myUserId);
+                        mediaView.YoutubeVideo = Youtube.Select(myMediaShare.MediaId, myUserId);
 
-                        if(MyMedia != null)
+                        if(mediaView.Media != null)
                         {
                             myMediaShare.View(myUser);
-                            MyMedia.ViewCount++;
+                            mediaView.Media.ViewCount++;
                         }
                     }
                 }
             }
             else
             {
-                myUser = Account.SecurePage("view?id=" + Request.QueryString["id"], this, Data.DeviceType, "user", MyMedia == null || string.IsNullOrEmpty(MyMedia.Title) ? null : MyMedia.Title);
+                myUser = Account.SecurePage($"view?id={Request.QueryString["id"]}", this, Data.DeviceType, Request, mediaView);
                 NewMenu.LoggedInUser = myUser;
                 if (myUser != null)
                 {
-                    myVideo = Video.Select(new MediaId(Request.QueryString["id"]), myUser.Id);
-                    myYoutubeVideo = Youtube.Select(new MediaId(Request.QueryString["id"]), myUser.Id);
-                    myImage = ParsnipData.Media.Image.Select(new MediaId(Request.QueryString["id"].ToString()), myUser == null ? default : myUser.Id);
-
-
-                    if (MyMedia != null)
+                    if (mediaView.Media != null)
                     {
-                        if (MyMedia.MyMediaShare != null)
+                        if (mediaView.Media.MyMediaShare != null)
                         {
-                            myMediaShare = MyMedia.MyMediaShare;
+                            myMediaShare = mediaView.Media.MyMediaShare;
 
                             if (myMediaShare == null)
                             {
-                                myMediaShare = new MediaShare(MyMedia.Id, myUser.Id);
+                                myMediaShare = new MediaShare(mediaView.Media.Id, myUser.Id);
                                 myMediaShare.Insert();
                             }
                         }
 
-                        MyMedia.View(myUser);
+                        mediaView.Media.View(myUser);
                     }
                 }
             }
 
-            if (MyMedia == null)
+            if (mediaView.Media == null)
             {
                 if (Request.QueryString["alert"] == null)
                 {
@@ -133,7 +118,7 @@ namespace ParsnipWebsite
             }
             else
             {
-                viewCount.InnerText = $"{MyMedia.ViewCount} view(s)";
+                viewCount.InnerText = $"{mediaView.Media.ViewCount} view(s)";
                 ShareLink.Value = Request.Url.GetLeftPart(UriPartial.Authority) + "/view?share=" +
                     myMediaShare.Id;
             }
@@ -142,7 +127,7 @@ namespace ParsnipWebsite
             NewMenu.HighlightButtonsForPage(PageIndex.Tag, "View");
 
             //Get the image which the user is trying to access, and display it on the screen.
-            if (MyMedia == null || string.IsNullOrEmpty(MyMedia.Compressed))
+            if (mediaView.Media == null || string.IsNullOrEmpty(mediaView.Media.Compressed))
             {
                 //ShareLinkContainer.Visible = false;
                 Button_ViewAlbum.Visible = false;
@@ -155,19 +140,19 @@ namespace ParsnipWebsite
             {
                 List<ViewTagControl> ViewTagControls = new List<ViewTagControl>();
                 Page httpHandler = (Page)HttpContext.Current.Handler;
-                foreach (MediaTagPair mediaTagPair in MyMedia.MediaTagPairs)
+                foreach (MediaTagPair mediaTagPair in mediaView.Media.MediaTagPairs)
                 {
                     ViewTagControl mediaTagPairViewControl = (ViewTagControl)httpHandler.LoadControl("~/Custom_Controls/Media/ViewTagControl.ascx");
-                    mediaTagPairViewControl.MyMedia = MyMedia;
+                    mediaTagPairViewControl.MyMedia = mediaView.Media;
                     mediaTagPairViewControl.MyTagPair = mediaTagPair;
                     mediaTagPairViewControl.UpdateLink();
                     ViewTagControls.Add(mediaTagPairViewControl);
                 }
 
-                foreach (MediaUserPair mediaUserPair in MyMedia.MediaUserPairs)
+                foreach (MediaUserPair mediaUserPair in mediaView.Media.MediaUserPairs)
                 {
                     ViewTagControl mediaUserPairViewControl = (ViewTagControl)httpHandler.LoadControl("~/Custom_Controls/Media/ViewTagControl.ascx");
-                    mediaUserPairViewControl.MyMedia = MyMedia;
+                    mediaUserPairViewControl.MyMedia = mediaView.Media;
                     mediaUserPairViewControl.MyUserPair = mediaUserPair;
                     mediaUserPairViewControl.UpdateLink();
                     ViewTagControls.Add(mediaUserPairViewControl);
@@ -178,22 +163,22 @@ namespace ParsnipWebsite
                     MediaTagContainer.Controls.Add(control);
                 }
 
-                if (MyMedia.AlbumId == 0)
+                if (mediaView.Media.AlbumId == 0)
                     Button_ViewAlbum.Visible = false;
 
-                ImageTitle.InnerText = MyMedia.Title;
-                Page.Title = MyMedia.Title;
+                ImageTitle.InnerText = mediaView.Media.Title;
+                Page.Title = mediaView.Media.Title;
 
-                if (MyMedia.Type == "image")
-                    ImagePreview.Src = MyMedia.Compressed;
+                if (mediaView.Media.Type == "image")
+                    ImagePreview.Src = mediaView.Media.Compressed;
 
-                Page.Header.Controls.Add(new LiteralControl(string.Format("<meta property=\"og:title\" content=\"{0}\" />", MyMedia.Title)));
+                Page.Header.Controls.Add(new LiteralControl(string.Format("<meta property=\"og:title\" content=\"{0}\" />", mediaView.Media.Title)));
                 //This will break youtube videos which have not had their thumbnail regenerated
-                Page.Header.Controls.Add(new LiteralControl(string.Format("<meta property=\"og:image\" content=\"{0}\" />", MyMedia.Compressed.Contains("https://lh3.googleusercontent.com") ? MyMedia.Compressed : string.Format("{0}/{1}", Request.Url.GetLeftPart(UriPartial.Authority), MyMedia.Compressed))));
+                Page.Header.Controls.Add(new LiteralControl(string.Format("<meta property=\"og:image\" content=\"{0}\" />", mediaView.Media.Compressed.Contains("https://lh3.googleusercontent.com") ? mediaView.Media.Compressed : string.Format("{0}/{1}", Request.Url.GetLeftPart(UriPartial.Authority), mediaView.Media.Compressed))));
                 Page.Header.Controls.Add(new LiteralControl("<meta property=\"og:type\" content=\"website\" />"));
                 Page.Header.Controls.Add(new LiteralControl(string.Format("<meta property=\"og:url\" content=\"{0}\" />", Request.Url.ToString())));
-                Page.Header.Controls.Add(new LiteralControl(string.Format("<meta property=\"og:description\" content=\"{0}\" />", MyMedia.Description)));
-                Page.Header.Controls.Add(new LiteralControl(string.Format("<meta property=\"og:alt\" content=\"{0}\" />", MyMedia.Alt)));
+                Page.Header.Controls.Add(new LiteralControl(string.Format("<meta property=\"og:description\" content=\"{0}\" />", mediaView.Media.Description)));
+                Page.Header.Controls.Add(new LiteralControl(string.Format("<meta property=\"og:alt\" content=\"{0}\" />", mediaView.Media.Alt)));
                 Page.Header.Controls.Add(new LiteralControl("<meta property=\"fb:app_id\" content=\"521313871968697\" />"));
 
                 if (Request.QueryString["share"] == null)
@@ -203,18 +188,18 @@ namespace ParsnipWebsite
                     MediaShare myMediaShare;
 
 
-                    myMediaShare = MyMedia.MyMediaShare;
+                    myMediaShare = mediaView.Media.MyMediaShare;
                     if (myMediaShare == null)
                     {
-                        myMediaShare = new MediaShare(MyMedia.Id, myUser.Id);
+                        myMediaShare = new MediaShare(mediaView.Media.Id, myUser.Id);
                         myMediaShare.Insert();
                     }
                 }
             }
 
-            if(myVideo != null)
+            if(mediaView.Video != null)
             {
-                if (myVideo.VideoData.XScale != default && myVideo.VideoData.YScale != default &&myVideo.IsPortrait())
+                if (mediaView.Video.VideoData.XScale != default && mediaView.Video.VideoData.YScale != default && mediaView.Video.IsPortrait())
                 {
                     video_container.Attributes.Remove("class");
                     video_container.Attributes.Add("class", "media-viewer-portrait");
@@ -225,9 +210,9 @@ namespace ParsnipWebsite
                 }
             }
 
-            if (myImage != null)
+            if (mediaView.Image != null)
             {
-                if (myImage.IsPortrait())
+                if (mediaView.Image.IsPortrait())
                 {
                     ImagePreview.Attributes.Remove("class");
                     ImagePreview.Attributes.Add("class", "media-viewer-portrait");
@@ -245,10 +230,10 @@ namespace ParsnipWebsite
 
         void Page_LoadComplete(object sender, EventArgs e)
         {
-            if(MyMedia == null)
+            if(mediaView.Media == null)
                 Button_ViewAlbum.Visible = false;
 
-            if (myVideo == null && myYoutubeVideo == null)
+            if (mediaView.Video == null && mediaView.YoutubeVideo == null)
             {
                     youtube_video_container.Visible = false;
                     video_container.Visible = false;
@@ -256,11 +241,11 @@ namespace ParsnipWebsite
             }
             else
             {
-                if (myVideo == null)
+                if (mediaView.Video == null)
                 {
                     youtube_video_container.Visible = true;
-                    ImageTitle.InnerText = myYoutubeVideo.Title;
-                    youtube_video.Attributes.Add("data-id", myYoutubeVideo.DataId);
+                    ImageTitle.InnerText = mediaView.YoutubeVideo.Title;
+                    youtube_video.Attributes.Add("data-id", mediaView.YoutubeVideo.DataId);
                     ImagePreview.Visible = false;
                     video_container.Visible = false;
                 }
@@ -269,20 +254,20 @@ namespace ParsnipWebsite
                     if (!Data.IsMobile)
                         video_container.Attributes.Add("autoplay", "autoplay");
 
-                    video_container.Poster = myVideo.Compressed;
+                    video_container.Poster = mediaView.Video.Compressed;
                     video_container.Visible = true;
-                    ImageTitle.InnerText = myVideo.Title;
-                    VideoSource.Src = myVideo.VideoData.VideoDir;
+                    ImageTitle.InnerText = mediaView.Video.Title;
+                    VideoSource.Src = mediaView.Video.VideoData.VideoDir;
                     ImagePreview.Visible = false;
                     youtube_video_container.Visible = false;
 
-                    if (myVideo.Status != null)
+                    if (mediaView.Video.Status != null)
                     {
-                        if (myVideo.Status.Equals(MediaStatus.Unprocessed))
+                        if (mediaView.Video.Status.Equals(MediaStatus.Unprocessed))
                             unprocessed.Visible = true;
-                        else if (myVideo.Status.Equals(MediaStatus.Processing))
+                        else if (mediaView.Video.Status.Equals(MediaStatus.Processing))
                             processing.Visible = true;
-                        else if (myVideo.Status.Equals(MediaStatus.Error))
+                        else if (mediaView.Video.Status.Equals(MediaStatus.Error))
                             error.Visible = true;
                     }
                 }
@@ -305,7 +290,7 @@ namespace ParsnipWebsite
 
                 new LogEntry(Log.General)
                 {
-                    Text = $"{personFullName} started watching video called \"{MyMedia.Title}\" " +
+                    Text = $"{personFullName} started watching video called \"{mediaView.Media.Title}\" " +
                     $"using {sharedBy.FullName}'s share link. This link has now been used {myMediaShare.TimesUsed} times!"
                 };
             }
@@ -315,7 +300,7 @@ namespace ParsnipWebsite
         {
             string redirect;
 
-            switch (MyMedia.AlbumId)
+            switch (mediaView.Media.AlbumId)
             {
                 case (int)Data.MediaTagIds.Amsterdam:
                     redirect = "~/amsterdam?focus=";
@@ -336,14 +321,14 @@ namespace ParsnipWebsite
                     redirect = "~/videos?focus=";
                     break;
                 case default(int):
-                    redirect = $"manage_media?id={MyMedia.Id}";
+                    redirect = $"manage_media?id={mediaView.Media.Id}";
                     break;
                 default:
-                    redirect = $"tag?id={MyMedia.AlbumId}&focus={MyMedia.Id}";
+                    redirect = $"tag?id={mediaView.Media.AlbumId}&focus={mediaView.Media.Id}";
                     break;
             }
 
-            Response.Redirect(redirect + MyMedia.Id);
+            Response.Redirect(redirect + mediaView.Media.Id);
         }
     }
 }
