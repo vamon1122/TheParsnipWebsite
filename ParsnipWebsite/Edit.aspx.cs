@@ -90,14 +90,7 @@ namespace ParsnipWebsite
 
             void Login()
             {
-                if (Request.QueryString["id"] == null)
-                    myUser = Account.SecurePage("edit", this, Data.DeviceType);
-                else if (Request.QueryString["tag"] != null)
-                    myUser = Account.SecurePage($"edit?id={Request.QueryString["id"]}&tag={Request.QueryString["tag"]}", this, Data.DeviceType);
-                else if (Request.QueryString["user"] != null)
-                    myUser = Account.SecurePage($"edit?id={Request.QueryString["id"]}&user={Request.QueryString["user"]}", this, Data.DeviceType);
-                else
-                    myUser = Account.SecurePage($"edit?id={Request.QueryString["id"]}", this, Data.DeviceType);
+                myUser = Account.SecurePage(this, Data.DeviceType);
 
                 NewMenu.SelectedPage = PageIndex.EditMedia;
                 NewMenu.LoggedInUser = myUser;

@@ -13,7 +13,7 @@ namespace ParsnipWebsite
         private User myUser;
         protected void Page_Load(object sender, EventArgs e)
         {
-            myUser = Account.SecurePage("bios", this, Data.DeviceType);
+            myUser = Account.SecurePage(this, Data.DeviceType);
             NewMenu.LoggedInUser = myUser;
             NewMenu.SelectedPage = PageIndex.Bios;
         }

@@ -22,6 +22,10 @@ namespace ParsnipWebsite
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(Data.DeviceType))
+            {
+                Response.Redirect($"get_device_info?url={Request.Url.PathAndQuery.Substring(1)}");
+            }
             //If there is an access token, get the token & it's data.
             //If there is no access token, check that the user is logged in.
             var mediaShareId = Request.QueryString["share"];
@@ -38,8 +42,6 @@ namespace ParsnipWebsite
                 }
                 else
                 {
-                    myUser = ParsnipData.Accounts.User.LogIn();
-                    NewMenu.LoggedInUser = myUser;
                     myMediaShare = new MediaShare(new MediaShareId(Request.QueryString["share"].ToString()));
                     shareId = myMediaShare.Id;
                     try
@@ -54,36 +56,15 @@ namespace ParsnipWebsite
                     if (myMediaShare.MediaId == null)
                     {
                         if (Request.QueryString["alert"] == null)
-                        {
-                            new LogEntry(Log.Debug) { Text = $"Someone tried to access share {myMediaShare.Id}. Access was denied because the media was deleted or the person who created this link has been suspended." };
                             Response.Redirect($"view?share={mediaShareId}&alert=P101");
-                        }
-                        else
-                        {
-                            MediaContainer.Visible = false;
-                            MediaTagContainer.Visible = false;
-                        }
                     }
-                    else
-                    {
-                        User createdBy = ParsnipData.Accounts.User.Select(myMediaShare.UserId);
-                        var myUserId = myUser == null ? default : myUser.Id;
-                        mediaView.Image = ParsnipData.Media.Image.Select(myMediaShare.MediaId, myUserId);
-                        mediaView.Video = Video.Select(myMediaShare.MediaId, myUserId);
-                        mediaView.YoutubeVideo = Youtube.Select(myMediaShare.MediaId, myUserId);
 
-                        if(mediaView.Media != null)
-                        {
-                            myMediaShare.View(myUser);
-                            mediaView.Media.ViewCount++;
-                        }
-                    }
+                    myUser = Account.PublicPage(this, myMediaShare, mediaView, Data.DeviceType);
                 }
             }
             else
             {
-                myUser = Account.SecurePage($"view?id={Request.QueryString["id"]}", this, Data.DeviceType, Request, mediaView);
-                NewMenu.LoggedInUser = myUser;
+                myUser = Account.SecurePage(this, Data.DeviceType, Request, mediaView);
                 if (myUser != null)
                 {
                     if (mediaView.Media != null)

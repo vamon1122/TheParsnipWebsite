@@ -28,10 +28,7 @@ namespace ParsnipWebsite
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Request.QueryString["focus"] == null)
-                myUser = Account.SecurePage("portugal", this, Data.DeviceType);
-            else
-                myUser = Account.SecurePage("portugal?focus=" + Request.QueryString["focus"], this, Data.DeviceType);
+            myUser = Account.SecurePage(this, Data.DeviceType);
 
             TagName.InnerText = $"#{PortugalMediaTag.Name}";
             TagDescription.InnerText = PortugalMediaTag.Description;

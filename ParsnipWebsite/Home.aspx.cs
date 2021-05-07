@@ -19,7 +19,12 @@ namespace ParsnipWebsite
         {
             MOTD.InnerHtml = System.Configuration.ConfigurationManager.AppSettings["MOTD"];
 
-            myUser = ParsnipData.Accounts.User.LogIn();
+            if (string.IsNullOrEmpty(Data.DeviceType))
+            {
+                Response.Redirect("get_device_info?url=home");
+            }
+
+            myUser = Account.PublicPage(this, Data.DeviceType);
             
             NewMenu.SelectedPage = PageIndex.Home;
             if (myUser != null)
@@ -39,12 +44,6 @@ namespace ParsnipWebsite
                     uploadForm.Visible = true;
                     UploadButtonPadding.Visible = true;
                 }
-            }
-
-
-            if (string.IsNullOrEmpty(Data.DeviceType))
-            {
-                Response.Redirect("get_device_info?url=home");
             }
 
             new LogEntry(Log.Debug)

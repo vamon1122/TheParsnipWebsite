@@ -18,9 +18,8 @@ namespace ParsnipWebsite
             if (Request.QueryString["id"] == null)
                 Response.Redirect("logs?id=0");
 
-            myUser = Account.SecurePage("logs", this, Data.DeviceType, "admin");
-
             selectedLogId = Convert.ToInt16(Request.QueryString["id"]);
+            myUser = Account.SecurePage(this, Data.DeviceType, "admin");
 
             List<LogEntry> LogEntries;
 

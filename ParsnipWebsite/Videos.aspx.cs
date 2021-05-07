@@ -18,10 +18,7 @@ namespace ParsnipWebsite
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Request.QueryString["focus"] == null)
-                myUser = Account.SecurePage("videos", this, Data.DeviceType);
-            else
-                myUser = Account.SecurePage("videos?focus=" + Request.QueryString["focus"], this, Data.DeviceType);
+            myUser = Account.SecurePage(this, Data.DeviceType);
 
             TagName.InnerText = $"#{VideoMediaTag.Name}";
             TagDescription.InnerText = VideoMediaTag.Description;

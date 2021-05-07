@@ -55,7 +55,7 @@ namespace ParsnipWebsite.Custom_Controls.Media
                 {
                     if (Video.IsValidFileExtension(MediaUpload.PostedFile.FileName.Split('.').Last()))
                     {
-                        new LogEntry(Log.General) { Text = $"{LoggedInUser.FullName} uploaded a video!" };
+                        LogUpload("video");
                         var myVideo = UploadVideo(LoggedInUser, MediaUpload);
 
                         if (MyMediaTag != null)
@@ -83,7 +83,7 @@ namespace ParsnipWebsite.Custom_Controls.Media
 
                         if (ParsnipData.Media.Image.IsValidFileExtension(originalFileExtension))
                         {
-                            new LogEntry(Log.General) { Text = $"{LoggedInUser.FullName} uploaded an image!" };
+                            LogUpload("image");
                             var myImage = UploadImage(LoggedInUser, MediaUpload);
 
                             if (MyMediaTag != null)
@@ -121,7 +121,7 @@ namespace ParsnipWebsite.Custom_Controls.Media
             }
             else
             {
-                new LogEntry(Log.General) { Text = $"{LoggedInUser.FullName} uploaded a youtube video!" };
+                LogUpload("youtube");
                 var rawDataId = TextBox_UploadDataId.Text;
                 var dataId = Youtube.ParseDataId(TextBox_UploadDataId.Text);
                 if (dataId == null)
@@ -191,5 +191,15 @@ namespace ParsnipWebsite.Custom_Controls.Media
             return null;
         }
 
+        public void LogUpload(string type)
+        {
+            var url = Page.Request.Url.PathAndQuery.Substring(1);
+            var a = $"<a href=\"{url}\">{url}</a>";
+            var urlNoParams = url.Split('?')[0];
+            var aNoParams = $"<a href=\"{urlNoParams}\">{urlNoParams}</a>";
+            var myCheck = !string.IsNullOrEmpty(MyMediaTag?.Name) || url != urlNoParams;
+            new LogEntry(Log.Test) { Text = $"{LoggedInUser.FullName} uploaded {(type == "image" ? "an" : "a")} {type}{(type == "youtube" ? " video" : string.Empty)} from {(MyMediaTag?.Name?.ToLower() == urlNoParams ? urlNoParams : (string.IsNullOrEmpty(MyMediaTag?.Name) ? $"the {(url == urlNoParams  ? a : urlNoParams)} page" : $"#{MyMediaTag.Name}"))}{(myCheck ? $" ({a})" : string.Empty)}!" };
+            new LogEntry(Log.Access) { Text = $"{LoggedInUser.FullName} uploaded {(type == "image" ? "an" : "a")} {type}{(type == "youtube" ? " video" : string.Empty)} from {(string.IsNullOrEmpty(MyMediaTag?.Name) || MyMediaTag.Name.ToLower() == urlNoParams ? $"the {(url == urlNoParams ? a : urlNoParams)} page" : $"#{MyMediaTag.Name}")}{(string.IsNullOrEmpty(MyMediaTag?.Name) || url == urlNoParams ? string.Empty : $" ({a})")}!" };
+        }
     }
 }

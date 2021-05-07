@@ -53,16 +53,16 @@ namespace ParsnipWebsite
                 if (myTag != null)
                 {
                     if (string.IsNullOrEmpty(focus))
-                        myUser = Account.SecurePage($"tag?id={myTag.Id}", this, Data.DeviceType, "user", $"#{myTag.Name}");
+                        myUser = Account.SecurePage(this, Data.DeviceType, "user", $"#{myTag.Name}");
                     else
-                        myUser = Account.SecurePage($"tag?id={myTag.Id}&{focus}", this, Data.DeviceType, "user", $"#{myTag.Name}");
+                        myUser = Account.SecurePage(this, Data.DeviceType, "user", $"#{myTag.Name}");
                 }
                 else if (myTaggedUser != null)
                 {
                     if (string.IsNullOrEmpty(focus))
-                        myUser = Account.SecurePage($"tag?user={myTaggedUser.Id}", this, Data.DeviceType, "user", $"@{myTaggedUser.Username}");
+                        myUser = Account.SecurePage(this, Data.DeviceType, "user", $"@{myTaggedUser.Username}");
                     else
-                        myUser = Account.SecurePage($"tag?user={myTaggedUser.Id}&{focus}", this, Data.DeviceType, "user", $"@{myTaggedUser.Username}");
+                        myUser = Account.SecurePage(this, Data.DeviceType, "user", $"@{myTaggedUser.Username}");
                 }
                 else 
                 {
@@ -73,7 +73,7 @@ namespace ParsnipWebsite
                     if (taggedUserId != default)
                         param = $"user={taggedUserId}";
 
-                    myUser = Account.SecurePage($"tag?{param}", this, Data.DeviceType, "user", $"No tag found");
+                    myUser = Account.SecurePage(this, Data.DeviceType, "user", $"No tag found");
                     param += string.IsNullOrEmpty(param) ? "" : "&";
 
                     if(string.IsNullOrEmpty(Request.QueryString["alert"]))

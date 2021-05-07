@@ -21,10 +21,7 @@ namespace ParsnipWebsite
 
             Page httpHandler = (Page)HttpContext.Current.Handler;
 
-            if (Request.QueryString["focus"] == null)
-                myUser = Account.SecurePage("myuploads", this, Data.DeviceType);
-            else
-                myUser = Account.SecurePage("myuploads?focus=" + Request.QueryString["focus"], this, Data.DeviceType);
+            myUser = Account.SecurePage(this, Data.DeviceType);
 
             NewMenu.LoggedInUser = myUser;
             NewMenu.Upload = true;

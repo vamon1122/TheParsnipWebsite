@@ -18,7 +18,7 @@ namespace ParsnipWebsite
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            myUser = Account.SecurePage("share_stats", this, Data.DeviceType, "admin");
+            myUser = Account.SecurePage(this, Data.DeviceType, "admin");
         }
 
         void Page_LoadComplete(object sender, EventArgs e)

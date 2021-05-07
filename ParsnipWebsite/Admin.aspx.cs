@@ -19,7 +19,7 @@ namespace ParsnipWebsite
         User myAccount;
         protected void Page_Load(object sender, EventArgs e)
         {
-            myAccount = Account.SecurePage("admin", this, Data.DeviceType, "admin");
+            myAccount = Account.SecurePage(this, Data.DeviceType, "admin");
             Assembly parsnipWebsiteAssembly = Assembly.LoadFrom(AppDomain.CurrentDomain.BaseDirectory + "bin\\ParsnipWebsite.dll");
             Version parsnipWebsiteVersion = parsnipWebsiteAssembly.GetName().Version;
 

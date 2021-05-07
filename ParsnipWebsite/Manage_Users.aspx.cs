@@ -24,7 +24,7 @@ namespace ParsnipWebsite
             //    Response.Redirect("manage_users?id=0");
                 
 
-            myUser = Account.SecurePage("manage_users", this, Data.DeviceType, "admin");
+            myUser = Account.SecurePage(this, Data.DeviceType, "admin");
 
             if (selectedUserId == default)
             {

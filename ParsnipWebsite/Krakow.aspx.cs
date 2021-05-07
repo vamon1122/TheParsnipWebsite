@@ -22,10 +22,7 @@ namespace ParsnipWebsite
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Request.QueryString["focus"] == null)
-                myUser = Account.SecurePage("krakow", this, Data.DeviceType);
-            else
-                myUser = Account.SecurePage("krakow?focus=" + Request.QueryString["focus"], this, Data.DeviceType);
+            myUser = Account.SecurePage(this, Data.DeviceType);
 
             TagName.InnerText = $"#{KrakowMediaTag.Name}";
             TagDescription.InnerText = KrakowMediaTag.Description;

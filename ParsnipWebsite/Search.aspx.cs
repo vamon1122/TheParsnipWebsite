@@ -18,12 +18,12 @@ namespace ParsnipWebsite
 
             if (Request.QueryString["text"] == null)
             {
-                myUser = Account.SecurePage("search", this, Data.DeviceType);
-                SearchMediaControl.Focus();
+                myUser = Account.SecurePage(this, Data.DeviceType);
             }
             else
-                myUser = Account.SecurePage("search?text=" + Request.QueryString["text"], this, Data.DeviceType);
-            
+                myUser = Account.SecurePage(this, Data.DeviceType, "user", $"\"{Request.QueryString["text"]}\"");
+
+            SearchMediaControl.Focus();
             NewMenu.LoggedInUser = myUser;
             NewMenu.Upload = true;
             NewMenu.HighlightButtonsForPage(PageIndex.Search, "Search");
