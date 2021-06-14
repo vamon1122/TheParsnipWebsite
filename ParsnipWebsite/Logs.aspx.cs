@@ -19,6 +19,12 @@ namespace ParsnipWebsite
                 Response.Redirect("logs?id=0");
 
             selectedLogId = Convert.ToInt16(Request.QueryString["id"]);
+        }
+
+        void Page_LoadComplete(object sender, EventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("----------Page load complete!");
+
             myUser = Account.SecurePage(this, Data.DeviceType, "admin");
 
             List<LogEntry> LogEntries;
@@ -41,11 +47,6 @@ namespace ParsnipWebsite
             }
 
             EntryCount.Text = string.Format("{0} entries found", LogEntries.Count());
-        }
-
-        void Page_LoadComplete(object sender, EventArgs e)
-        {
-            System.Diagnostics.Debug.WriteLine("----------Page load complete!");
 
             if (Request.QueryString["action"] != null)
             {
