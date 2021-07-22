@@ -51,6 +51,11 @@ namespace ParsnipWebsite.Custom_Controls.Media
                     MyEdit.HRef += $"&search={MySearch}";
                 }
 
+                if (Redirect != null)
+                {
+                    MyEdit.HRef += $"&redirect={Redirect}?focus={MyMedia.Id}";
+                }
+
                 if (value.Type == "image")
                 {
                     if (value.XScale != default || value.YScale != default)
@@ -108,6 +113,8 @@ namespace ParsnipWebsite.Custom_Controls.Media
             }
 
         }
+
+        public string Redirect { get; set; }
 
         public string ShareLink
         {

@@ -42,6 +42,15 @@ namespace ParsnipWebsite.Custom_Controls.Menu
         protected global::System.Web.UI.HtmlControls.HtmlAnchor Desktop_Home;
 
         /// <summary>
+        /// Desktop_Latest control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor Desktop_Latest;
+
+        /// <summary>
         /// Desktop_Memes control.
         /// </summary>
         /// <remarks>
@@ -157,6 +166,15 @@ namespace ParsnipWebsite.Custom_Controls.Menu
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor Mobile_Home;
+
+        /// <summary>
+        /// Mobile_Latest control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor Mobile_Latest;
 
         /// <summary>
         /// Mobile_Memes control.

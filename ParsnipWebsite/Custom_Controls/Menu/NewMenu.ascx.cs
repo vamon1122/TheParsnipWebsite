@@ -131,6 +131,8 @@ namespace ParsnipWebsite.Custom_Controls.Menu
                 return Desktop_Videos;
             if (page.Equals(PageIndex.Memes))
                 return Desktop_Memes;
+            if (page.Equals(PageIndex.Latest))
+                return Desktop_Latest;
             if (page.Equals(PageIndex.Bios))
                 return Selected_Page;
             if (page.Equals(PageIndex.Krakow))
@@ -163,6 +165,8 @@ namespace ParsnipWebsite.Custom_Controls.Menu
                 return Mobile_Videos;
             if (page.Equals(PageIndex.Memes))
                 return Mobile_Memes;
+            if (page.Equals(PageIndex.Latest))
+                return Mobile_Latest;
             if (page.Equals(PageIndex.Bios) ||
             page.Equals(PageIndex.Krakow) ||
             page.Equals(PageIndex.Portugal) ||

@@ -70,6 +70,10 @@ namespace ParsnipWebsite.Custom_Controls.Media
                             mediaUserPair.Insert();
                             HttpContext.Current.Response.Redirect($"edit?id={myVideo.Id}&user={TaggedUserId}", false);
                         }
+                        else if(myPage != null)
+                        {
+                            HttpContext.Current.Response.Redirect($"edit?id={myVideo.Id}&redirect={myPage.Request.Url.AbsolutePath.Substring(1, myPage.Request.Url.AbsolutePath.Length - 1)}?focus={myVideo.Id}", false);
+                        }
                         else
                         {
                             HttpContext.Current.Response.Redirect($"edit?id={myVideo.Id}", false);
@@ -97,6 +101,10 @@ namespace ParsnipWebsite.Custom_Controls.Media
                                 var mediaUserPair = new MediaUserPair(myImage, TaggedUserId, LoggedInUser);
                                 mediaUserPair.Insert();
                                 HttpContext.Current.Response.Redirect($"edit?id={myImage.Id}&user={TaggedUserId}", false);
+                            }
+                            else if (myPage != null)
+                            {
+                                HttpContext.Current.Response.Redirect($"edit?id={myImage.Id}&redirect={myPage.Request.Url.AbsolutePath.Substring(1, myPage.Request.Url.AbsolutePath.Length - 1)}?focus={myImage.Id}", false);
                             }
                             else
                             {
@@ -150,6 +158,8 @@ namespace ParsnipWebsite.Custom_Controls.Media
                         Response.Redirect($"edit?id={myYoutube.Id}&tag={MyMediaTag.Id}", false);
                     else if (TaggedUserId != default)
                         Response.Redirect($"edit?id={myYoutube.Id}&user={TaggedUserId}", false);
+                    else if (myPage != null)
+                        Response.Redirect($"edit?id={myYoutube.Id}&redirect={myPage.Request.Url.AbsolutePath.Substring(1, myPage.Request.Url.AbsolutePath.Length - 1)}?focus={myYoutube.Id}", false);
                     else
                         Response.Redirect($"edit?id={myYoutube.Id}", false);
                 }

@@ -7,12 +7,13 @@
 <div class="w3-top w3-card w3-red w3-large">
     <div class="main-container">
         <div style="margin:0px">
-            <div runat="server" id="loggedInWidth" style="min-width:714px; height:0px" class="w3-hide-small w3-hide-medium" Visible="false" />
-            <div runat="server" id="loggedOutWidth" style="min-width:697px; height:0px" class="w3-hide-small w3-hide-medium" Visible="true" />
+            <div runat="server" id="loggedInWidth" style="min-width:817.1px; height:0px" class="w3-hide-small w3-hide-medium" Visible="false" />
+            <div runat="server" id="loggedOutWidth" style="min-width:800.2px; height:0px" class="w3-hide-small w3-hide-medium" Visible="true" />
             <%--<div style="min-width:56px; height:0px" class="w3-hide-large"></div>--%>
             <div id="left-content" class="w3-bar w3-red">
                 <a class="w3-bar-item w3-button w3-hide-large w3-left w3-hover-white w3-large w3-red w3-padding-large" href="javascript:void(0);" onclick="document.getElementById('mobileNav').style.display='block'" title="Toggle Navigation Menu" style="width:65px"><i class="fa fa-bars"></i></a>
                 <a runat="server" id="Desktop_Home" href="../../home" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-padding-large w3-hover-white">Home</a>
+                <a runat="server" id="Desktop_Latest" href="../../latest" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-padding-large w3-hover-white">Latest</a>
                 <a runat="server" id="Desktop_Memes" href="../../memes" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-padding-large w3-hover-white">Memes</a>
                 <a runat="server" id="Desktop_Videos" href="../../videos" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-padding-large w3-hover-white">Videos</a>
                 <a runat="server" id="Desktop_Photos" href="../../photos" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-padding-large w3-hover-white">Photos</a>
@@ -41,6 +42,7 @@
     <div class="w3-modal" id="mobileNav" onclick="void(0)" style="padding:0px; background-color:transparent">
         <div id="" class="w3-bar-block w3-white w3-hide-large w3-large" style="margin-top: 51px">
             <a runat="server" id="Mobile_Home" href="../../home" class="w3-bar-item w3-button w3-padding-large">Home</a>
+            <a runat="server" id="Mobile_Latest" href="../../latest" class="w3-bar-item w3-button w3-padding-large">Latest</a>
               <a runat="server" id="Mobile_Memes" href="../../memes" class="w3-bar-item w3-button w3-padding-large">Memes</a>
             <a runat="server" id="Mobile_Videos" href="../../videos" class="w3-bar-item w3-button w3-padding-large">Videos</a>
             <a runat="server" id="Mobile_Photos" href="../../photos" class="w3-bar-item w3-button w3-padding-large">Photos</a>

@@ -44,6 +44,7 @@ namespace ParsnipWebsite
             var tagParam = Request.QueryString["tag"];
             var userTagParam = Request.QueryString["user"];
             var Search = Request.QueryString["search"];
+            var redirect = Request.QueryString["redirect"];
 
             Login();
             
@@ -215,7 +216,7 @@ namespace ParsnipWebsite
             {
 
 
-                if (OriginalTag == null && tagParam == null && userTagParam == null && MyMedia.AlbumId == default && MyMedia.MediaTagPairs.Count == default && !string.IsNullOrEmpty(OriginalAlbumRedirect))
+                if (OriginalTag == null && tagParam == null && userTagParam == null && MyMedia.AlbumId == default && MyMedia.MediaTagPairs.Count == default && !string.IsNullOrEmpty(OriginalAlbumRedirect) && string.IsNullOrEmpty(redirect))
                 {
                     OriginalAlbumRedirect = "myuploads?focus=" + MyMedia.Id.ToString();
                 }
@@ -254,6 +255,10 @@ namespace ParsnipWebsite
                             OriginalAlbumRedirect = $"tag?id={OriginalTag.Id}&focus={MyMedia.Id}";
                             break;
                     }
+                }
+                else if (!string.IsNullOrEmpty(redirect))
+                {
+                    OriginalAlbumRedirect = redirect;
                 }
                 else
                 {

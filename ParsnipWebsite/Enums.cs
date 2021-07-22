@@ -30,6 +30,7 @@ namespace ParsnipWebsite
         public static readonly PageIndex EditMedia = new PageIndex("edit");
         public static readonly PageIndex View = new PageIndex("view");
         public static readonly PageIndex Search = new PageIndex("search");
+        public static readonly PageIndex Latest = new PageIndex("latest");
 
         private PageIndex(string value)
         {
@@ -78,6 +79,9 @@ namespace ParsnipWebsite
                     Value = value;
                     break;
                 case "search":
+                    Value = value;
+                    break;
+                case "latest":
                     Value = value;
                     break;
                 default:

@@ -76,19 +76,6 @@ namespace ParsnipWebsite
 
             //seeYourself.Controls.Add(MySeeYourselfControl);
             //seeYourself.Visible = true;
-
-            int userId = myUser == null ? 0 : myUser.Id;
-            Media latestVideo = Media.SelectLatestVideo(userId);
-            if (latestVideo != null)
-            {
-                var MyVideoControl = (MediaControl)Page.LoadControl("~/Custom_Controls/Media/MediaControl.ascx");
-
-
-                latestVideo.Title = "LATEST VIDEO: " + latestVideo.Title;
-                MyVideoControl.MyMedia = latestVideo;
-
-                //LatestVideo.Controls.Add(MyVideoControl);
-            }
         }
     }
 }
