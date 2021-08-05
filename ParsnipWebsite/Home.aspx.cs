@@ -38,7 +38,7 @@ namespace ParsnipWebsite
             //LoginNudge.Visible = true;
             else
             {
-                UploadMediaControl.Initialise(myUser, this);
+                UploadMediaControl.Initialise(myUser, PageIndex.MyUploads);
                 if (myUser.AccountType == "admin" || myUser.AccountType == "member" || myUser.AccountType == "media")
                 {
                     uploadForm.Visible = true;

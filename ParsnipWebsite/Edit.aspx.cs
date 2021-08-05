@@ -436,7 +436,7 @@ namespace ParsnipWebsite
                         };
                     }
 
-                    string Redirect = MyMedia.AlbumId == default ? OriginalAlbumRedirect : $"{Request.Url.GetLeftPart(UriPartial.Authority)}/tag?id={MyMedia.AlbumId}&media={MyMedia.Id}";
+                    string Redirect = $"{OriginalAlbumRedirect}{(OriginalAlbumRedirect.Contains('?') ? '&' : '?')}focus={MyMedia.Id}";
                     if (changesWereSaved)
                     {
                         Response.Redirect(Redirect);

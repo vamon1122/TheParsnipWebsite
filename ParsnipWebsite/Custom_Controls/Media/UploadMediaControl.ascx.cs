@@ -17,30 +17,63 @@ namespace ParsnipWebsite.Custom_Controls.Media
         ParsnipData.Media.MediaTag MyMediaTag;
         int TaggedUserId;
         Page myPage;
+        ParsnipData.Media.Media MyMedia;
+        PageIndex RedirectTo;
+
+        public string EditLink
+        {
+            get
+            {
+                if (MyMedia == null)
+                    return string.Empty;
+
+                var redirect = string.Empty;
+                if (!string.IsNullOrEmpty(RedirectTo?.Value))
+                    redirect += $"redirect={RedirectTo.Value}";
+                else if (MyMediaTag != null)
+                    redirect += $"tag={MyMediaTag.Id}";
+                else if (TaggedUserId != default)
+                    redirect += $"user={TaggedUserId}";
+                else if (myPage != null)
+                    redirect += $"redirect={myPage.Request.Url.AbsolutePath.Substring(1, myPage.Request.Url.AbsolutePath.Length - 1)}";
+
+                var editLink = $"edit?id={MyMedia.Id}";
+                if (string.IsNullOrEmpty(redirect))
+                    return editLink;
+                else
+                    return $"{editLink}&{redirect}";
+            }
+        }
 
         public void Initialise(User loggedInUser, MediaTag myMediaTag, Page page)
         {
             myPage = page;
-            LoggedInUser = loggedInUser;
             MyMediaTag = myMediaTag;
-            if (LoggedInUser.AccountType == "admin" || LoggedInUser.AccountType == "member")
-                UploadDiv.Style.Clear();
+            Initialise(loggedInUser, false);
         }
 
         public void Initialise(User loggedInUser, int taggedUserId, Page page)
         {
             myPage = page;
-            LoggedInUser = loggedInUser;
             TaggedUserId = taggedUserId;
-            if (LoggedInUser.AccountType == "admin" || LoggedInUser.AccountType == "member")
-                UploadDiv.Style.Clear();
+            Initialise(loggedInUser, false);
         }
 
         public void Initialise(User loggedInUser, Page page, bool showButton = true)
         {
             myPage = page;
+            Initialise(loggedInUser, showButton);
+        }
+
+        public void Initialise(User loggedInUser, PageIndex redirectTo, bool showButton = true)
+        {
+            RedirectTo = redirectTo;
+            Initialise(loggedInUser, showButton);
+        }
+
+        private void Initialise(User loggedInUser, bool showButton)
+        {
             LoggedInUser = loggedInUser;
-            MyMediaTag = null;
             if (LoggedInUser.AccountType == "admin" || LoggedInUser.AccountType == "member")
                 UploadDiv.Style.Clear();
 
@@ -57,27 +90,20 @@ namespace ParsnipWebsite.Custom_Controls.Media
                     {
                         LogUpload("video");
                         var myVideo = UploadVideo(LoggedInUser, MediaUpload);
+                        MyMedia = myVideo;
 
                         if (MyMediaTag != null)
                         {
                             var mediaTagPair = new MediaTagPair(myVideo, MyMediaTag, LoggedInUser);
                             mediaTagPair.Insert();
-                            HttpContext.Current.Response.Redirect($"edit?id={myVideo.Id}&tag={MyMediaTag.Id}", false);
                         }
                         else if (TaggedUserId != default)
                         {
                             var mediaUserPair = new MediaUserPair(myVideo, TaggedUserId, LoggedInUser);
                             mediaUserPair.Insert();
-                            HttpContext.Current.Response.Redirect($"edit?id={myVideo.Id}&user={TaggedUserId}", false);
                         }
-                        else if(myPage != null)
-                        {
-                            HttpContext.Current.Response.Redirect($"edit?id={myVideo.Id}&redirect={myPage.Request.Url.AbsolutePath.Substring(1, myPage.Request.Url.AbsolutePath.Length - 1)}?focus={myVideo.Id}", false);
-                        }
-                        else
-                        {
-                            HttpContext.Current.Response.Redirect($"edit?id={myVideo.Id}", false);
-                        }
+
+                        Response.Redirect(EditLink, false);
                     }
                     else
                     {
@@ -89,27 +115,20 @@ namespace ParsnipWebsite.Custom_Controls.Media
                         {
                             LogUpload("image");
                             var myImage = UploadImage(LoggedInUser, MediaUpload);
+                            MyMedia = myImage;
 
                             if (MyMediaTag != null)
                             {
                                 var mediaTagPair = new MediaTagPair(myImage, MyMediaTag, LoggedInUser);
                                 mediaTagPair.Insert();
-                                HttpContext.Current.Response.Redirect($"edit?id={myImage.Id}&tag={MyMediaTag.Id}", false);
                             }
                             else if (TaggedUserId != default)
                             {
                                 var mediaUserPair = new MediaUserPair(myImage, TaggedUserId, LoggedInUser);
                                 mediaUserPair.Insert();
-                                HttpContext.Current.Response.Redirect($"edit?id={myImage.Id}&user={TaggedUserId}", false);
                             }
-                            else if (myPage != null)
-                            {
-                                HttpContext.Current.Response.Redirect($"edit?id={myImage.Id}&redirect={myPage.Request.Url.AbsolutePath.Substring(1, myPage.Request.Url.AbsolutePath.Length - 1)}?focus={myImage.Id}", false);
-                            }
-                            else
-                            {
-                                HttpContext.Current.Response.Redirect($"edit?id={myImage.Id}", false);
-                            }
+
+                            Response.Redirect(EditLink, false);
                         }
                         else
                         {
@@ -141,6 +160,7 @@ namespace ParsnipWebsite.Custom_Controls.Media
                     Youtube myYoutube = new Youtube(dataId, LoggedInUser);
                     myYoutube.Scrape();
                     myYoutube.Insert();
+                    MyMedia = myYoutube;
 
                     if (MyMediaTag != null)
                     {
@@ -154,14 +174,7 @@ namespace ParsnipWebsite.Custom_Controls.Media
                         mediaUserPair.Insert();
                     }
 
-                    if (MyMediaTag != null)
-                        Response.Redirect($"edit?id={myYoutube.Id}&tag={MyMediaTag.Id}", false);
-                    else if (TaggedUserId != default)
-                        Response.Redirect($"edit?id={myYoutube.Id}&user={TaggedUserId}", false);
-                    else if (myPage != null)
-                        Response.Redirect($"edit?id={myYoutube.Id}&redirect={myPage.Request.Url.AbsolutePath.Substring(1, myPage.Request.Url.AbsolutePath.Length - 1)}?focus={myYoutube.Id}", false);
-                    else
-                        Response.Redirect($"edit?id={myYoutube.Id}", false);
+                    Response.Redirect(EditLink, false);
                 }
             }
         }
