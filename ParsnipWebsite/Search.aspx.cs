@@ -28,9 +28,9 @@ namespace ParsnipWebsite
             NewMenu.Upload = true;
             NewMenu.HighlightButtonsForPage(PageIndex.Search, "Search");
 
-            UploadMediaControl.Initialise(myUser, this, false);
-
             var text = Request.QueryString["text"];
+            UploadMediaControl.Initialise(myUser, text);
+
             if (!IsPostBack && text != null)
             {
                 SearchMediaControl.TextBoxValue = text;

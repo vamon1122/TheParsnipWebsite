@@ -222,7 +222,7 @@ namespace ParsnipWebsite
                 }
                 else if (!string.IsNullOrEmpty(Search))
                 {
-                    OriginalAlbumRedirect = $"search?text={Search}&focus={MyMedia.Id}";
+                    OriginalAlbumRedirect = $"search?text={Search}";
                 }
                 else if (OriginalTag != null)
                 {

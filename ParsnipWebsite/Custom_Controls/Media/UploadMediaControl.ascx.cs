@@ -19,6 +19,7 @@ namespace ParsnipWebsite.Custom_Controls.Media
         Page myPage;
         ParsnipData.Media.Media MyMedia;
         PageIndex RedirectTo;
+        string Search;
 
         public string EditLink
         {
@@ -34,6 +35,8 @@ namespace ParsnipWebsite.Custom_Controls.Media
                     redirect += $"tag={MyMediaTag.Id}";
                 else if (TaggedUserId != default)
                     redirect += $"user={TaggedUserId}";
+                else if (!string.IsNullOrEmpty(Search))
+                    redirect += $"search={Search}";
                 else if (myPage != null)
                     redirect += $"redirect={myPage.Request.Url.AbsolutePath.Substring(1, myPage.Request.Url.AbsolutePath.Length - 1)}";
 
@@ -68,6 +71,12 @@ namespace ParsnipWebsite.Custom_Controls.Media
         public void Initialise(User loggedInUser, PageIndex redirectTo, bool showButton = true)
         {
             RedirectTo = redirectTo;
+            Initialise(loggedInUser, showButton);
+        }
+
+        public void Initialise(User loggedInUser, string search, bool showButton = true)
+        {
+            Search = search;
             Initialise(loggedInUser, showButton);
         }
 
