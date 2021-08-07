@@ -111,6 +111,11 @@ namespace ParsnipWebsite.Custom_Controls.Media
                             var mediaUserPair = new MediaUserPair(myVideo, TaggedUserId, LoggedInUser);
                             mediaUserPair.Insert();
                         }
+                        else if (string.IsNullOrEmpty(MyMedia.SearchTerms) && !string.IsNullOrEmpty(Search))
+                        {
+                            MyMedia.SearchTerms = Search;
+                            MyMedia.Update();
+                        }
 
                         Response.Redirect(EditLink, false);
                     }
@@ -135,6 +140,11 @@ namespace ParsnipWebsite.Custom_Controls.Media
                             {
                                 var mediaUserPair = new MediaUserPair(myImage, TaggedUserId, LoggedInUser);
                                 mediaUserPair.Insert();
+                            }
+                            else if (string.IsNullOrEmpty(MyMedia.SearchTerms) && !string.IsNullOrEmpty(Search))
+                            {
+                                MyMedia.SearchTerms = Search;
+                                MyMedia.Update();
                             }
 
                             Response.Redirect(EditLink, false);
@@ -181,6 +191,12 @@ namespace ParsnipWebsite.Custom_Controls.Media
                     {
                         var mediaUserPair = new MediaUserPair(myYoutube, TaggedUserId, LoggedInUser);
                         mediaUserPair.Insert();
+                    }
+
+                    if (string.IsNullOrEmpty(MyMedia.SearchTerms) && !string.IsNullOrEmpty(Search))
+                    {
+                        MyMedia.SearchTerms = Search;
+                        MyMedia.Update();
                     }
 
                     Response.Redirect(EditLink, false);
