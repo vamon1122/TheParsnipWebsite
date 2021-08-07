@@ -17,10 +17,12 @@
                         <asp:FileUpload ID="MediaUpload" runat="server" class="form-control-file" onchange="this.form.submit()" />
                     </label>
                     <br />
+                    <span  runat="server" id="UploadFromYoutube">
                     <label class="file-upload file-upload-btn" onclick="document.getElementById('uploadMedia').style.display='none'; document.getElementById('uploadYoutube').style.display='block';">            
                         <span><strong>Upload From Youtube</strong></span>
                     </label>
             <br />
+                    </span>
                         <a href="myuploads" class="file-upload file-upload-btn"><span><strong style="color: white">Manage My Uploads</strong></span></a>
           </div>
       </div>

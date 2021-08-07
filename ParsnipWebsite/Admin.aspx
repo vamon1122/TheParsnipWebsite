@@ -30,6 +30,10 @@
                     <asp:Button runat="server" ID="Button_SaveMOTD"  CssClass="btn btn-primary" Text="Save" OnClick="Button_UploadDataId_Click" />
                 </span>
             </div>
+            <div class="form-check">
+                <asp:CheckBox runat="server" ID="CheckBox_EnableYoutubeUploads" OnCheckedChanged="CheckBox_EnableYoutubeUploads_CheckedChanged" AutoPostBack="true" CssClass="form-check-input" type="checkbox" />
+                <label class="form-check-label" style="padding-top:4px" for="flexCheckDefault">Enable uploads from Youtube</label>
+            </div>
             <br />
             <asp:Label runat="server" ID="Label_ParsnipWebsiteVersion"></asp:Label>
             <br />

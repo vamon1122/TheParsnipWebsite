@@ -8,6 +8,7 @@ using ParsnipData.Media;
 using ParsnipData.Accounts;
 using System.Diagnostics;
 using ParsnipData.Logging;
+using System.Configuration;
 
 namespace ParsnipWebsite.Custom_Controls.Media
 {
@@ -156,6 +157,8 @@ namespace ParsnipWebsite.Custom_Controls.Media
                     }
                 }
             }
+
+            UploadFromYoutube.Visible = ConfigurationManager.AppSettings["EnableYoutubeUpload"] == "True";
         }
 
         protected void Button_UploadDataId_Click(object sender, EventArgs e)

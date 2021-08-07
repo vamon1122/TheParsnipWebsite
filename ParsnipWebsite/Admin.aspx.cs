@@ -30,6 +30,7 @@ namespace ParsnipWebsite
             Label_ParsnipDataVersion.Text = "ParsnipData v" + parsnipDataVersion.ToString();
 
             TextBox_MOTD.Text = ConfigurationManager.AppSettings["MOTD"];
+            CheckBox_EnableYoutubeUploads.Checked = ConfigurationManager.AppSettings["EnableYoutubeUpload"] == "True";
         }
 
         protected void OpenLogsButton_Click(object sender, EventArgs e)
@@ -50,6 +51,13 @@ namespace ParsnipWebsite
             TextBox_MOTD.Text = newMOTD;
             webConfigApp.Save();
 
+        }
+
+        protected void CheckBox_EnableYoutubeUploads_CheckedChanged(object sender, EventArgs e)
+        {
+            var isChecked = Request.Form["CheckBox_EnableYoutubeUploads"] == "on";
+            CheckBox_EnableYoutubeUploads.Checked = isChecked;
+            ConfigurationManager.AppSettings["EnableYoutubeUpload"] = isChecked.ToString();
         }
     }
 }
