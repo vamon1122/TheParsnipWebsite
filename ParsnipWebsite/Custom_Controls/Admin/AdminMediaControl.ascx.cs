@@ -1,159 +1,101 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Diagnostics;
 using ParsnipData.Media;
-using ParsnipData.Accounts;
 
 namespace ParsnipWebsite.Custom_Controls.Media
 {
-    public partial class AdminMediaControl : System.Web.UI.UserControl
+    public partial class AdminMediaControl : CommonMediaControl
     {
-        protected void Page_Load(object sender, EventArgs e)
+        protected override void SetMediaLogic(ParsnipData.Media.Media value)
         {
-
-        }
-
-        public ParsnipData.Media.MediaTag MyMediaTag { get; set; }
-
-        public ParsnipData.Media.MediaUserPair MyMediaUserPair { get; set; }
-
-        ParsnipData.Media.Media _myMedia;
-        public ParsnipData.Media.Media MyMedia
-        {
-            get
+            SetContainerWidth(MediaContainer);
+            MyTitle.InnerHtml = value.Title;
+            MyTitle.ID = value.Id.ToString();
+            MyEdit.HRef = $"../../edit?id={value.Id}";
+            if (MyMediaTag != null && MyMediaTag.Id != default)
             {
-                return _myMedia;
-            }
-            set {
-                _myMedia = value;
-                SetContainerWidth();
-                MyTitle.InnerHtml = value.Title;
-                MyTitle.ID = value.Id.ToString();
-                MyEdit.HRef = $"../../edit?id={value.Id}";
-                if(MyMediaTag != null && MyMediaTag.Id != default)
-                {
-                    MyEdit.HRef += $"&tag={MyMediaTag.Id}";
-                }
-
-                if (MyMediaUserPair != null && MyMediaUserPair.UserId != default)
-                {
-                    MyEdit.HRef += $"&user={MyMediaUserPair.UserId}";
-                }
-
-                if (value.Type == "image")
-                {
-                    if (value.XScale != default || value.YScale != default)
-                    {
-                        MyImageHolder.Style.Add("height", string.Format("{0}vmin", MyImageHolder.Width.Value * ((double)value.YScale / value.XScale)));
-                        MyImageHolder.Style.Add("max-height", string.Format("{0}px", maxWidth * ((double)value.YScale / value.XScale)));
-                    }
-
-                    MyAnchorLink.HRef = string.Format("../../view?id={0}", value.Id);
-
-                    MyImageHolder.Visible = true;
-                    MyImageHolder.Style.Add("margin-bottom", "8px");
-                    MyImageHolder.ImageUrl = value.Placeholder.Contains("http://") || value.Placeholder.Contains("https://") ? value.Placeholder : Request.Url.GetLeftPart(UriPartial.Authority) + "/" + value.Placeholder;
-                    MyImageHolder.Attributes.Add("data-src", value.Compressed.Contains("http://") || value.Compressed.Contains("https://") ? value.Compressed : Request.Url.GetLeftPart(UriPartial.Authority) + "/" + value.Compressed);
-                    MyImageHolder.Attributes.Add("data-srcset", value.Compressed.Contains("http://") || value.Compressed.Contains("https://") ? value.Compressed : Request.Url.GetLeftPart(UriPartial.Authority) + "/" + value.Compressed);
-                    
-                }
-                else if(_myMedia.Type == "video" || _myMedia.Type == "youtube")
-                {
-                    if (value.XScale != default || value.YScale != default)
-                    {
-                        thumbnail.Style.Add("height", string.Format("{0}vmin", width * ((double)value.YScale / value.XScale)));
-                        thumbnail.Style.Add("max-height", string.Format("{0}px", maxWidth * ((double)value.YScale / value.XScale)));
-                    }
-
-                    a_play_video.Visible = true;
-                    a_play_video.HRef = string.Format("../../view?id={0}", value.Id);
-
-                    if(_myMedia.Type == "video")
-                    {
-                        thumbnail.Src = Request.Url.GetLeftPart(UriPartial.Authority) + "/" + value.Placeholder;
-                        thumbnail.Attributes.Add("data-src", Request.Url.GetLeftPart(UriPartial.Authority) + "/" + value.Compressed);
-                        thumbnail.Attributes.Add("data-srcset", Request.Url.GetLeftPart(UriPartial.Authority) + "/" + value.Compressed);
-                    }
-                    else //YoutubeVideo
-                    {
-                        thumbnail.Src = value.Placeholder.Contains("https://") ? value.Placeholder : $"{Request.Url.GetLeftPart(UriPartial.Authority)}/{value.Placeholder}";
-                        thumbnail.Attributes.Add("data-src", value.Compressed.Contains("https://") ? value.Compressed : $"{Request.Url.GetLeftPart(UriPartial.Authority)}/{value.Compressed}");
-                        thumbnail.Attributes.Add("data-srcset", value.Compressed.Contains("https://") ? value.Compressed : $"{Request.Url.GetLeftPart(UriPartial.Authority)}/{value.Compressed}");
-                    }
-                    
-                }
-
-                if(MyMedia.Status != null)
-                {
-                    if (MyMedia.Status.Equals(MediaStatus.Unprocessed))
-                        MyTitle.InnerHtml += " ⚫ ";
-                    else if (MyMedia.Status.Equals(MediaStatus.Processing))
-                        MyTitle.InnerHtml += " 🔵 ";
-                    else if (MyMedia.Status.Equals(MediaStatus.Error))
-                        MyTitle.InnerHtml += " 🔴 ";
-                }
-
-                GenerateShareButton();
+                MyEdit.HRef += $"&tag={MyMediaTag.Id}";
             }
 
-        }
-
-        public string ShareLink
-        {
-            get
+            if (MyMediaUserPair != null && MyMediaUserPair.UserId != default)
             {
-                if(_anchorLink != null)
-                {
-                    return _anchorLink;
-                }
-
-                if (MyMedia.MyMediaShare == null || MyMedia.MyMediaShare.Id.ToString() == default)
-                {
-                    return "You must log in to share media";
-                }
-                else
-                {
-                    return Request.Url.GetLeftPart(UriPartial.Authority) + "/view?share=" + MyMedia.MyMediaShare.Id;
-                    /*
-                    if(MyMedia.Type == "image")
-                        return Request.Url.GetLeftPart(UriPartial.Authority) + "/view?share=" + MyMedia.MyMediaShare.Id;
-                    else
-                        return Request.Url.GetLeftPart(UriPartial.Authority) + "/watch?share=" + MyMedia.MyMediaShare.Id;
-                        */
-
-                };
+                MyEdit.HRef += $"&user={MyMediaUserPair.UserId}";
             }
+
+            if (MySearch != null)
+            {
+                MyEdit.HRef += $"&search={MySearch}";
+            }
+
+            if (Redirect != null)
+            {
+                MyEdit.HRef += $"&redirect={Redirect}?focus={MyMedia.Id}";
+            }
+
+            if (value.Type == "image")
+            {
+                if (value.XScale != default || value.YScale != default)
+                {
+                    MyImageHolder.Style.Add("height", string.Format("{0}vmin", MyImageHolder.Width.Value * ((double)value.YScale / value.XScale)));
+                    MyImageHolder.Style.Add("max-height", string.Format("{0}px", maxWidth * ((double)value.YScale / value.XScale)));
+                }
+
+                MyAnchorLink.HRef = string.Format("../../view?id={0}", value.Id);
+
+                MyImageHolder.Visible = true;
+                MyImageHolder.Style.Add("margin-bottom", "8px");
+                MyImageHolder.ImageUrl = value.Placeholder.Contains("http://") || value.Placeholder.Contains("https://") ? value.Placeholder : Request.Url.GetLeftPart(UriPartial.Authority) + "/" + value.Placeholder;
+                MyImageHolder.Attributes.Add("data-src", value.Compressed.Contains("http://") || value.Compressed.Contains("https://") ? value.Compressed : Request.Url.GetLeftPart(UriPartial.Authority) + "/" + value.Compressed);
+                MyImageHolder.Attributes.Add("data-srcset", value.Compressed.Contains("http://") || value.Compressed.Contains("https://") ? value.Compressed : Request.Url.GetLeftPart(UriPartial.Authority) + "/" + value.Compressed);
+
+            }
+            else if (_myMedia.Type == "video" || _myMedia.Type == "youtube")
+            {
+                if (value.XScale != default || value.YScale != default)
+                {
+                    thumbnail.Style.Add("height", string.Format("{0}vmin", width * ((double)value.YScale / value.XScale)));
+                    thumbnail.Style.Add("max-height", string.Format("{0}px", maxWidth * ((double)value.YScale / value.XScale)));
+                }
+
+                a_play_video.Visible = true;
+                a_play_video.HRef = string.Format("../../view?id={0}", value.Id);
+
+                if (_myMedia.Type == "video")
+                {
+                    thumbnail.Src = Request.Url.GetLeftPart(UriPartial.Authority) + "/" + value.Placeholder;
+                    thumbnail.Attributes.Add("data-src", Request.Url.GetLeftPart(UriPartial.Authority) + "/" + value.Compressed);
+                    thumbnail.Attributes.Add("data-srcset", Request.Url.GetLeftPart(UriPartial.Authority) + "/" + value.Compressed);
+                }
+                else //YoutubeVideo
+                {
+                    thumbnail.Src = value.Placeholder.Contains("https://") ? value.Placeholder : $"{Request.Url.GetLeftPart(UriPartial.Authority)}/{value.Placeholder}";
+                    thumbnail.Attributes.Add("data-src", value.Compressed.Contains("https://") ? value.Compressed : $"{Request.Url.GetLeftPart(UriPartial.Authority)}/{value.Compressed}");
+                    thumbnail.Attributes.Add("data-srcset", value.Compressed.Contains("https://") ? value.Compressed : $"{Request.Url.GetLeftPart(UriPartial.Authority)}/{value.Compressed}");
+                }
+
+            }
+
+            if (MyMedia.Status != null)
+            {
+                if (MyMedia.Status.Equals(MediaStatus.Unprocessed))
+                    MyTitle.InnerHtml += " ⚫ ";
+                else if (MyMedia.Status.Equals(MediaStatus.Processing))
+                    MyTitle.InnerHtml += " 🔵 ";
+                else if (MyMedia.Status.Equals(MediaStatus.Error))
+                    MyTitle.InnerHtml += " 🔴 ";
+            }
+
+            GenerateShareButton();
         }
 
-        public string AnchorLink { get { return _anchorLink; } set { _anchorLink = value; MyAnchorLink.HRef = value; } }
-        private string _anchorLink;
-
-
-
-        private ParsnipData.Media.Image _myImage;
-
-        double width;
-        double maxWidth = 480;
-
-        private void SetContainerWidth()
+        protected override void SetAnchorLink(string value)
         {
-            width = 100;
-            //width = Data.IsMobile ? 100 : 30;
-            //min_width = Data.IsMobile ? 0 : 480;
-            
-            
-            
-            MediaContainer.Style.Add("width", string.Format("{0}vmin", width));
-            MediaContainer.Style.Add("max-width", string.Format("{0}px", maxWidth));
-            //MediaContainer.Style.Add("min-width", string.Format("{0}px", min_width));
-
+            MyAnchorLink.HRef = value;
         }
 
-        private void GenerateShareButton()
+        protected override void GenerateShareButton()
         {
             Guid tempGuid = Guid.NewGuid();
             ShareButton.Attributes.Add("data-target", "#share" + tempGuid);
@@ -183,44 +125,10 @@ namespace ParsnipWebsite.Custom_Controls.Media
                 "               </div>\n" +
                 "           </div>\n" +
                 "      </div>\n" +
-                "   </div>\n",tempGuid, ShareLink);
+                "   </div>\n", tempGuid, ShareLink);
         }
 
-        public static List<AdminMediaControl> GetMediaUserPairAsAdminMediaControls(int mediaTagUserId)
-        {
-            var mediaControls = new List<AdminMediaControl>();
-            Page httpHandler = (Page)HttpContext.Current.Handler;
-            int loggedInUserId = ParsnipData.Accounts.User.LogIn().Id;
-
-            foreach (ParsnipData.Media.Media temp in MediaUserPair.GetAllMedia(mediaTagUserId, loggedInUserId))
-            {
-                AdminMediaControl myAdminMediaControl = (AdminMediaControl)httpHandler.LoadControl("~/Custom_Controls/Admin/AdminMediaControl.ascx");
-                myAdminMediaControl.MyMediaUserPair = new MediaUserPair() { UserId = mediaTagUserId, MediaId = temp.Id };
-                myAdminMediaControl.MyMedia = temp;
-                mediaControls.Add(myAdminMediaControl);
-            }
-
-            return mediaControls.OrderByDescending(mediaControl => mediaControl.MyMedia.DateTimeCaptured).ToList();
-        }
-
-        public static List<AdminMediaControl> GetAlbumAsAdminMediaControls(MediaTag mediaTag)
-        {
-            var mediaControls = new List<AdminMediaControl>();
-            Page httpHandler = (Page)HttpContext.Current.Handler;
-            int loggedInUserId = ParsnipData.Accounts.User.LogIn().Id;
-
-            foreach (ParsnipData.Media.Media temp in mediaTag.GetAllMedia(loggedInUserId))
-            {
-                AdminMediaControl myAdminMediaControl = (AdminMediaControl)httpHandler.LoadControl("~/Custom_Controls/Admin/AdminMediaControl.ascx");
-                myAdminMediaControl.MyMediaTag = mediaTag;
-                myAdminMediaControl.MyMedia = temp;
-                mediaControls.Add(myAdminMediaControl);
-            }
-
-            return mediaControls.OrderByDescending(mediaControl => mediaControl.MyMedia.DateTimeCaptured).ToList();
-        }
-
-        public static List<AdminMediaControl> GetUserMediaAsAdminMediaControls(int userId, int loggedInUserId)
+        public static List<AdminMediaControl> GetUserMediaAsAdminMediaControls(int userId, int loggedInUserId, PageIndex redirect)
         {
             var mediaControls = new List<AdminMediaControl>();
             Page httpHandler = (Page)HttpContext.Current.Handler;
@@ -228,6 +136,7 @@ namespace ParsnipWebsite.Custom_Controls.Media
             foreach (ParsnipData.Media.Media temp in ParsnipData.Media.Media.SelectByUserId(userId, loggedInUserId))
             {
                 AdminMediaControl myAdminMediaControl = (AdminMediaControl)httpHandler.LoadControl("~/Custom_Controls/Admin/AdminMediaControl.ascx");
+                myAdminMediaControl.Redirect = redirect.ToString();
                 myAdminMediaControl.MyMedia = temp;
                 mediaControls.Add(myAdminMediaControl);
             }

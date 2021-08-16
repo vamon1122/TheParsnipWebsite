@@ -1908,7 +1908,6 @@
     </Compile>
     <Compile Include="Custom_Controls\Admin\AdminMediaControl.ascx.cs">
       <DependentUpon>AdminMediaControl.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Custom_Controls\Admin\AdminMediaControl.ascx.designer.cs">
       <DependentUpon>AdminMediaControl.ascx</DependentUpon>
@@ -1927,6 +1926,9 @@
     </Compile>
     <Compile Include="Custom_Controls\ErrorHandler.ascx.designer.cs">
       <DependentUpon>ErrorHandler.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Custom_Controls\Media\CommonMediaControl.cs">
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Custom_Controls\Media\MediaAccordion.ascx.cs">
       <DependentUpon>MediaAccordion.ascx</DependentUpon>

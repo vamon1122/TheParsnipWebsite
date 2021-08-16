@@ -31,57 +31,29 @@ namespace ParsnipWebsite
         public static readonly PageIndex View = new PageIndex("view");
         public static readonly PageIndex Search = new PageIndex("search");
         public static readonly PageIndex Latest = new PageIndex("latest");
+        public static readonly PageIndex AdminManageMedia = new PageIndex("manage_media");
 
         private PageIndex(string value)
         {
             switch (value)
             {
                 case "home":
-                    Value = value;
-                    break;
                 case "photos":
-                    Value = value;
-                    break;
                 case "videos":
-                    Value = value;
-                    break;
                 case "memes":
-                    Value = value;
-                    break;
                 case "bios":
-                    Value = value;
-                    break;
                 case "myuploads":
-                    Value = value;
-                    break;
                 case "tag":
-                    Value = value;
-                    break;
                 case "login":
-                    Value = value;
-                    break;
                 case "logout":
-                    Value = value;
-                    break;
                 case "krakow":
-                    Value = value;
-                    break;
                 case "portugal":
-                    Value = value;
-                    break;
                 case "amsterdam":
-                    Value = value;
-                    break;
                 case "edit":
-                    Value = value;
-                    break;
                 case "view":
-                    Value = value;
-                    break;
                 case "search":
-                    Value = value;
-                    break;
                 case "latest":
+                case "manage_media":
                     Value = value;
                     break;
                 default:
