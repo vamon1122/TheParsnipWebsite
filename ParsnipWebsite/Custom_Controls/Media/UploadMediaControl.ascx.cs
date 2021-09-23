@@ -180,7 +180,6 @@ namespace ParsnipWebsite.Custom_Controls.Media
                 else
                 {
                     Youtube myYoutube = new Youtube(dataId, LoggedInUser);
-                    myYoutube.Scrape();
                     myYoutube.Insert();
                     MyMedia = myYoutube;
 
