@@ -18,7 +18,8 @@ namespace ParsnipWebsite
     {
         User myUser;
         private ParsnipData.Media.Media MyImage;
-        private Video MyVideo;
+        private Video myVideo;
+        public Video MyVideo { get { return myVideo ?? MyYoutubeVideo; } set { myVideo = value; } }
         private Youtube MyYoutubeVideo;
         private MediaShare myMediaShare;
 
@@ -160,15 +161,6 @@ namespace ParsnipWebsite
                     a_play_video.HRef = string.Format("../../view?id={0}", MyVideo.Id);
                     a_play_video.Visible = true;
                     Page.Title = "Edit Video";
-                    if (MyVideo.Thumbnails.Count() > 0)
-                    {
-                        ThumbnailSelectorContainer.Visible = true;
-                        foreach (var control in VideoThumbnailControl.GetVideoAsVideoThumbnailControls(MyVideo))
-                        {
-                            control.VideoThumbnailClick += new EventHandler(VideoThumbnail_ButtonClick);
-                            ThumbnailSelector.Controls.Add(control);
-                        }
-                    }
                 }
                 else if (MyImage != null)
                 {
@@ -190,6 +182,16 @@ namespace ParsnipWebsite
                 else
                 {
                     Response.Redirect("myuploads");
+                }
+
+                if (MyVideo?.Thumbnails?.Count() > 0)
+                {
+                    ThumbnailSelectorContainer.Visible = true;
+                    foreach (var control in VideoThumbnailControl.GetVideoAsVideoThumbnailControls(MyVideo))
+                    {
+                        control.VideoThumbnailClick += new EventHandler(VideoThumbnail_ButtonClick);
+                        ThumbnailSelector.Controls.Add(control);
+                    }
                 }
             }
 
