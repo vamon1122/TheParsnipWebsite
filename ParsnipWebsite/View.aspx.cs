@@ -241,19 +241,18 @@ namespace ParsnipWebsite
                     VideoSource.Src = mediaView.Video.VideoData.VideoDir;
                     ImagePreview.Visible = false;
                     youtube_video_container.Visible = false;
-
-                    if (mediaView.Video.Status != null)
-                    {
-                        if (mediaView.Video.Status.Equals(MediaStatus.Unprocessed))
-                            unprocessed.Visible = true;
-                        else if (mediaView.Video.Status.Equals(MediaStatus.Processing))
-                            processing.Visible = true;
-                        else if (mediaView.Video.Status.Equals(MediaStatus.Error))
-                            error.Visible = true;
-                    }
                 }
 
-                
+                var mediaStatus = mediaView.Video?.Status ?? mediaView.YoutubeVideo?.Status;
+                if (mediaStatus != null)
+                {
+                    if (mediaStatus.Equals(MediaStatus.Unprocessed))
+                        unprocessed.Visible = true;
+                    else if (mediaStatus.Equals(MediaStatus.Processing))
+                        processing.Visible = true;
+                    else if (mediaStatus.Equals(MediaStatus.Error))
+                        error.Visible = true;
+                }
 
                 ShareLink.Value = Request.Url.GetLeftPart(UriPartial.Authority) + "/view?share=" +
                     myMediaShare.Id;
