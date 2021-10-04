@@ -22,6 +22,7 @@ namespace ParsnipWebsite
         public Video MyVideo { get { return myVideo ?? MyYoutubeVideo; } set { myVideo = value; } }
         private Youtube MyYoutubeVideo;
         private MediaShare myMediaShare;
+        private bool isNew;
 
         public Media MyMedia
         {
@@ -131,6 +132,7 @@ namespace ParsnipWebsite
                 if (MyYoutubeVideo != null)
                 {
                     MyYoutubeVideo = Youtube.Select(new MediaId(Request.QueryString["id"]), myUser.Id);
+                    isNew = Session["isNew"] == null ? MyYoutubeVideo.IsNew : Convert.ToBoolean(Session["isNew"]);
                     MediaShare myMediaShare = MyYoutubeVideo.MyMediaShare;
                     if (myMediaShare == null)
                     {
@@ -392,6 +394,14 @@ namespace ParsnipWebsite
             }
         }
 
+        protected void Page_LoadComplete(object sender, EventArgs e)
+        {
+            if(MyYoutubeVideo != null) 
+                isNew = MyYoutubeVideo.IsNew;
+            
+            Session["isNew"] = isNew;
+        }
+
         protected void ButtonSave_Click(object sender, EventArgs e)
         {
             Debug.WriteLine("Save button clicked. Saving changes...");
@@ -422,7 +432,7 @@ namespace ParsnipWebsite
                         var searchTerms = Request["SearchTerms_Input"]?.ToString();
                             MyMedia.SearchTerms = string.IsNullOrEmpty(searchTerms) ? null : searchTerms.Trim();
 
-                        MyMedia.Update();
+                        MyMedia.Update(isNew);
                     }
                     else
                     {

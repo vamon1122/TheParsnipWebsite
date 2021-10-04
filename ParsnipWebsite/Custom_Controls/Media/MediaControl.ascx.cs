@@ -103,7 +103,7 @@ namespace ParsnipWebsite.Custom_Controls.Media
                 {
                     if (MyMedia.Status.Equals(MediaStatus.Unprocessed))
                         unprocessed.Visible = true;
-                    else if (MyMedia.Status.Equals(MediaStatus.Processing))
+                    else if (MyMedia.Status.Equals(MediaStatus.Processing) || MyMedia.Status.Equals(MediaStatus.Scraping))
                         processing.Visible = true;
                     else if (MyMedia.Status.Equals(MediaStatus.Error))
                         MyTitle.InnerHtml += " 🔴 - Error whilst processing";

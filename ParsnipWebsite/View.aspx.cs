@@ -248,7 +248,7 @@ namespace ParsnipWebsite
                 {
                     if (mediaStatus.Equals(MediaStatus.Unprocessed))
                         unprocessed.Visible = true;
-                    else if (mediaStatus.Equals(MediaStatus.Processing))
+                    else if (mediaStatus.Equals(MediaStatus.Processing) || mediaStatus.Equals(MediaStatus.Scraping))
                         processing.Visible = true;
                     else if (mediaStatus.Equals(MediaStatus.Error))
                         error.Visible = true;

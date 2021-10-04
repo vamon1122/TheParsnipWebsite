@@ -91,7 +91,7 @@ namespace ParsnipWebsite.Custom_Controls.Media
                 {
                     if (MyMedia.Status.Equals(MediaStatus.Unprocessed))
                         MyTitle.InnerHtml += " ⚫ ";
-                    else if (MyMedia.Status.Equals(MediaStatus.Processing))
+                    else if (MyMedia.Status.Equals(MediaStatus.Processing) || MyMedia.Status.Equals(MediaStatus.Scraping))
                         MyTitle.InnerHtml += " 🔵 ";
                     else if (MyMedia.Status.Equals(MediaStatus.Error))
                         MyTitle.InnerHtml += " 🔴 ";
