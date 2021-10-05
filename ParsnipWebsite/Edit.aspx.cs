@@ -116,7 +116,6 @@ namespace ParsnipWebsite
 
                 if (MyYoutubeVideo != null)
                 {
-                    MyYoutubeVideo = Youtube.Select(new MediaId(Request.QueryString["id"]), myUser.Id);
                     isNew = Session["isNew"] == null ? MyYoutubeVideo.IsNew : Convert.ToBoolean(Session["isNew"]);
                     MediaShare myMediaShare = MyYoutubeVideo.MyMediaShare;
                     if (myMediaShare == null)
