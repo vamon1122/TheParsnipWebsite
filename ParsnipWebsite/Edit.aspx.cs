@@ -49,6 +49,8 @@ namespace ParsnipWebsite
             var redirect = Request.QueryString["redirect"];
 
             Login();
+
+            RemoveTags();
             
             GetMedia(); //CheckPermissions() is dependent on this for CreatedByUserId
 
@@ -98,23 +100,6 @@ namespace ParsnipWebsite
                 NewMenu.SelectedPage = PageIndex.EditMedia;
                 NewMenu.LoggedInUser = myUser;
                 NewMenu.Share = true;
-
-                if (Request.QueryString["removetag"] == "true")
-                {
-                    MediaTagPair.Delete(new MediaId(Request.QueryString["id"]), Convert.ToInt32(Request.QueryString["tag"]));
-                    if (Request.QueryString["tag"] == null)
-                        Response.Redirect($"edit?id={Request.QueryString["id"]}");
-                    else
-                        Response.Redirect($"edit?id={Request.QueryString["id"]}&tag={Request.QueryString["tag"]}");
-                }
-                else if (Request.QueryString["removeusertag"] == "true")
-                {
-                    MediaUserPair.Delete(new MediaId(Request.QueryString["id"]), Convert.ToInt32(Request.QueryString["userid"]));
-                    if (Request.QueryString["userid"] == null)
-                        Response.Redirect($"edit?id={Request.QueryString["id"]}");
-                    else
-                        Response.Redirect($"edit?id={Request.QueryString["id"]}&userid={Request.QueryString["userid"]}");
-                }
             }
 
             void GetMedia()
@@ -205,6 +190,7 @@ namespace ParsnipWebsite
                     MediaTagPairControl mediaTagPairControl = (MediaTagPairControl)httpHandler.LoadControl("~/Custom_Controls/Media/MediaTagPairControl.ascx");
                     mediaTagPairControl.MyMedia = MyMedia;
                     mediaTagPairControl.MyPair = mediaTagPair;
+                    mediaTagPairControl.redirect = $"{HttpContext.Current.Request.Url}&removetag={mediaTagPair.MediaTag.Id}";
                     MediaTagContainer.Controls.Add(mediaTagPairControl);
                 }
                 foreach (MediaUserPair mediaUserPair in MyMedia.MediaUserPairs)
@@ -212,6 +198,7 @@ namespace ParsnipWebsite
                     MediaUserPairControl mediaUserPairControl = (MediaUserPairControl)httpHandler.LoadControl("~/Custom_Controls/Media/MediaUserPairControl.ascx");
                     mediaUserPairControl.MyMedia = MyMedia;
                     mediaUserPairControl.MyPair = mediaUserPair;
+                    mediaUserPairControl.redirect = $"{HttpContext.Current.Request.Url}&removeusertag={mediaUserPair.UserId}";
                     UserTagContainer.Controls.Add(mediaUserPairControl);
                 }
             }
@@ -390,6 +377,29 @@ namespace ParsnipWebsite
                             ThumbnailsAreProcessing.Visible = true;
                         }
                     }
+                }
+            }
+        
+            void RemoveTags()
+            {
+                var mediaId = new MediaId(Request.QueryString["id"]);
+                if (Request.QueryString["removetag"] != null)
+                {
+                    MediaTagPair.Delete(mediaId, Convert.ToInt32(Request.QueryString["removetag"]));
+                    Response.Redirect(UriWithoutParameters("removetag"));
+                }
+                if (Request.QueryString["removeusertag"] != null)
+                {
+                    MediaUserPair.Delete(mediaId, Convert.ToInt32(Request.QueryString["removeusertag"]));
+                    Response.Redirect(UriWithoutParameters("removeusertag"));
+                }
+
+                string UriWithoutParameters(string tag)
+                {
+                    var uri = HttpContext.Current.Request.Url;
+                    var newQueryString = HttpUtility.ParseQueryString(uri.Query);
+                    newQueryString.Remove(tag);
+                    return $"{uri.GetLeftPart(UriPartial.Path)}?{newQueryString}";
                 }
             }
         }
