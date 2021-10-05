@@ -116,7 +116,7 @@ namespace ParsnipWebsite
 
                 if (MyYoutubeVideo != null)
                 {
-                    isNew = Session["isNew"] == null ? MyYoutubeVideo.IsNew : Convert.ToBoolean(Session["isNew"]);
+                    isNew = Session[$"{MyYoutubeVideo.Id}_IsNew"] == null ? MyYoutubeVideo.IsNew : Convert.ToBoolean(Session[$"{MyYoutubeVideo.Id}_IsNew"]);
                     MediaShare myMediaShare = MyYoutubeVideo.MyMediaShare;
                     if (myMediaShare == null)
                     {
@@ -408,7 +408,7 @@ namespace ParsnipWebsite
             if(MyYoutubeVideo != null) 
                 isNew = MyYoutubeVideo.IsNew;
             
-            Session["isNew"] = isNew;
+            Session[$"{MyMedia.Id}_IsNew"] = isNew;
         }
 
         protected void ButtonSave_Click(object sender, EventArgs e)
