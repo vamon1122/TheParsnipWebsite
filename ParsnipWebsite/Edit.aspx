@@ -16,6 +16,7 @@
     <link rel="apple-touch-icon" sizes="114×114" href="Resources/Favicons/apple-icon-114×114.png" />
     <link rel="apple-touch-icon" sizes="72×72" href="Resources/Favicons/apple-icon-72x72.png" />
     <link rel="apple-touch-icon" href="Resources/Favicons/apple-icon.png" />
+    <style> .vertical_textbox { resize: none } </style>
 </head>
 <body>
     <menuControls:NewMenu runat="server" ID="NewMenu" />
@@ -33,7 +34,6 @@
                     <asp:Button runat="server" ID="AddMediaTagPair" OnClick="AddMediaTagPair_Click" Text="Add Tag" CssClass="w3-btn w3-black dropdown-button" />
                         </div>
                 <br />
-                <div runat="server" id="MediaTagContainer" class="w3-margin-bottom"></div>
                 <!-- User select -->
                 <label class="form-label">Tag People:</label>
                 <div style="display:flex">
@@ -42,26 +42,18 @@
                 </div>
                     
                 <br />
-                <div runat="server" id="UserTagContainer" class="w3-margin-bottom"></div>
+                <asp:TextBox CssClass="w3-input w3-border w3-margin-bottom vertical_textbox" runat="server" ID="TagText" />
+                <label class="form-label">Search Terms:</label>
+                <asp:TextBox CssClass="w3-input w3-border" runat="server" ID="SearchTerms_Input" />
+                <!--Submit behaviour not working on final VISIBLE TextBox. This is a blank TextBox which does not require
+                    submit behaviour-->
+                <input type="text" runat="server" style="height:0px; width:0px; padding:0px; border:0px" />
                 <label class="form-label">Date Captured:</label>
                 <input runat="server" class="w3-input w3-border w3-margin-bottom" id="input_date_media_captured" name="date" placeholder="DD/MM/YYYY" type="text" />
-            </div>
-            <a runat="server" ID="ImagePreviewContainer" visible="false">
-            <asp:Image runat="server" ID="ImagePreview" CssClass="image-preview" Width="100%" />
-                </a>
-            <a runat="server" id="a_play_video" visible="false" >
-                <div class="play-button-div">
-                    <img runat="server" id="thumbnail" style="width:100%" />
-                    <span class="play-button-icon">
-                        <img src="Resources\Media\Images\Web_Media\play_button_2.png" />
-                    </span>
-                </div>
-            </a>
-            <br />
             <div runat="server" id="ThumbnailsAreProcessing" Visible="false" class="w3-container">
                 Thumbnails are being generated for your video. Check back in a few minutes to pick your favourite!
             </div>
-            <div runat="server" id="ThumbnailSelectorContainer" Visible="false" class="w3-container">
+            <div runat="server" id="ThumbnailSelectorContainer" Visible="false">
                 <label class="form-label">Select a thumbnail:</label>
                 <div id="ThumbnailSelector" runat="server">
 
@@ -73,14 +65,7 @@
                     <span><strong>Upload New Thumbnail</strong></span>
                     <asp:FileUpload ID="ThumbnailUpload" runat="server" class="form-control-file" onchange="this.form.submit()" />
                 </label>
-                <br />
             </div>
-            <div class="w3-container">
-                <label class="form-label">Search Terms:</label>
-                <asp:TextBox CssClass="w3-input w3-border w3-margin-bottom" runat="server" ID="SearchTerms_Input" />
-                <!--Submit behaviour not working on final VISIBLE TextBox. This is a blank TextBox which does not require
-                    submit behaviour-->
-                <input type="text" runat="server" style="height:0px; width:0px; padding:0px; border:0px" />
             </div>
             <asp:Button runat="server" ID="btn_AdminDelete"  CssClass="w3-btn w3-black w3-margin-top" Width="100px" Text="Delete" Visible="false" OnClientClick="document.getElementById('confirmMediaDelete').style.display='block'; return false"></asp:Button>
             <asp:Button runat="server" ID="ButtonSave" class="w3-btn w3-black w3-margin-top" Text="Save" Width="100px" OnClick="ButtonSave_Click"></asp:Button>

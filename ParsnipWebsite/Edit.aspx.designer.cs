@@ -60,15 +60,6 @@ namespace ParsnipWebsite
         protected global::System.Web.UI.WebControls.Button AddMediaTagPair;
 
         /// <summary>
-        /// MediaTagContainer control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl MediaTagContainer;
-
-        /// <summary>
         /// DropDown_SelectUser control.
         /// </summary>
         /// <remarks>
@@ -87,13 +78,22 @@ namespace ParsnipWebsite
         protected global::System.Web.UI.WebControls.Button AddMediaUserPair;
 
         /// <summary>
-        /// UserTagContainer control.
+        /// TagText control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl UserTagContainer;
+        protected global::System.Web.UI.WebControls.TextBox TagText;
+
+        /// <summary>
+        /// SearchTerms_Input control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox SearchTerms_Input;
 
         /// <summary>
         /// input_date_media_captured control.
@@ -103,42 +103,6 @@ namespace ParsnipWebsite
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText input_date_media_captured;
-
-        /// <summary>
-        /// ImagePreviewContainer control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor ImagePreviewContainer;
-
-        /// <summary>
-        /// ImagePreview control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image ImagePreview;
-
-        /// <summary>
-        /// a_play_video control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor a_play_video;
-
-        /// <summary>
-        /// thumbnail control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlImage thumbnail;
 
         /// <summary>
         /// ThumbnailsAreProcessing control.
@@ -184,15 +148,6 @@ namespace ParsnipWebsite
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.FileUpload ThumbnailUpload;
-
-        /// <summary>
-        /// SearchTerms_Input control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox SearchTerms_Input;
 
         /// <summary>
         /// btn_AdminDelete control.

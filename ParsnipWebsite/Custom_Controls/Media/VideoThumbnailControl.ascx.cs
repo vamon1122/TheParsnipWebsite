@@ -37,8 +37,7 @@ namespace ParsnipWebsite.Custom_Controls.Media
 
         protected void thumbnailButton_Click(object sender, ImageClickEventArgs e)
         {
-            Thumbnail.SetAsActive();
-            VideoThumbnailClick(sender, e);
+            VideoThumbnailClick(Thumbnail.DisplayOrder, e);
         }
     }
 }

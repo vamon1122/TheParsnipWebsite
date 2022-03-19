@@ -79,7 +79,7 @@ namespace ParsnipWebsite
 
                 CheckForThumbnailUpload();
 
-                PopulateTags();
+                if(!IsPostBack) InitialiseTags();
 
                 PopulateTagDropDowns();
 
@@ -125,10 +125,6 @@ namespace ParsnipWebsite
                     }
                     ShareLink.Value = Request.Url.GetLeftPart(UriPartial.Authority) + "/view?share=" +
                     myMediaShare.Id;
-                    thumbnail.Src = MyYoutubeVideo.Compressed;
-                    input_date_media_captured.Value = MyYoutubeVideo.DateTimeCaptured.ToString();
-                    a_play_video.HRef = string.Format("../../view?id={0}", MyYoutubeVideo.Id);
-                    a_play_video.Visible = true;
                     Page.Title = "Edit Youtube Video";
                 }
                 else if (MyVideo != null)
@@ -142,10 +138,6 @@ namespace ParsnipWebsite
                     }
                     ShareLink.Value = Request.Url.GetLeftPart(UriPartial.Authority) + "/view?share=" +
                     myMediaShare.Id;
-                    thumbnail.Src = MyVideo.Compressed;
-                    input_date_media_captured.Value = MyVideo.DateTimeCaptured.ToString();
-                    a_play_video.HRef = string.Format("../../view?id={0}", MyVideo.Id);
-                    a_play_video.Visible = true;
                     Page.Title = "Edit Video";
                 }
                 else if (MyImage != null)
@@ -159,38 +151,25 @@ namespace ParsnipWebsite
                     }
                     ShareLink.Value = Request.Url.GetLeftPart(UriPartial.Authority) + "/view?share=" +
                     myMediaShare.Id;
-                    ImagePreview.ImageUrl = MyImage.Compressed;
-                    input_date_media_captured.Value = MyImage.DateTimeCaptured.ToString();
-                    ImagePreviewContainer.HRef = string.Format("../../view?id={0}", MyImage.Id);
-                    ImagePreviewContainer.Visible = true;
                     Page.Title = "Edit Image";
                 }
                 else
                 {
                     Response.Redirect("myuploads");
                 }
-
-                if (MyVideo?.Thumbnails?.Count() > 0)
-                {
-                    ThumbnailSelectorContainer.Visible = true;
-                    foreach (var control in VideoThumbnailControl.GetVideoAsVideoThumbnailControls(MyVideo))
-                    {
-                        control.VideoThumbnailClick += new EventHandler(VideoThumbnail_ButtonClick);
-                        ThumbnailSelector.Controls.Add(control);
-                    }
-                }
             }
 
-            void PopulateTags()
+            void InitialiseTags()
             {
                 Page httpHandler = (Page)HttpContext.Current.Handler;
+                var tagText = new List<Tuple<char, string>>(); 
                 foreach (MediaTagPair mediaTagPair in MyMedia.MediaTagPairs)
                 {
                     MediaTagPairControl mediaTagPairControl = (MediaTagPairControl)httpHandler.LoadControl("~/Custom_Controls/Media/MediaTagPairControl.ascx");
                     mediaTagPairControl.MyMedia = MyMedia;
                     mediaTagPairControl.MyPair = mediaTagPair;
                     mediaTagPairControl.redirect = $"{HttpContext.Current.Request.Url}&removetag={mediaTagPair.MediaTag.Id}";
-                    MediaTagContainer.Controls.Add(mediaTagPairControl);
+                    tagText.Add(new Tuple<char, string>('#', mediaTagPair.MediaTag.Name));
                 }
                 foreach (MediaUserPair mediaUserPair in MyMedia.MediaUserPairs)
                 {
@@ -198,8 +177,9 @@ namespace ParsnipWebsite
                     mediaUserPairControl.MyMedia = MyMedia;
                     mediaUserPairControl.MyPair = mediaUserPair;
                     mediaUserPairControl.redirect = $"{HttpContext.Current.Request.Url}&removeusertag={mediaUserPair.UserId}";
-                    UserTagContainer.Controls.Add(mediaUserPairControl);
+                    tagText.Add(new Tuple<char, string>('@', mediaUserPair.Name));
                 }
+                foreach (var textTag in tagText.OrderBy(x => x.Item2)) TagText.Text += $"{textTag.Item1}{textTag.Item2} ";
             }
 
             void GetOriginalRedirect()
@@ -267,22 +247,16 @@ namespace ParsnipWebsite
             void PopulateTagDropDowns()
             {
                 NewAlbumsDropDown.Items.Clear();
-                NewAlbumsDropDown.Items.Add(new ListItem() { Value = "0", Text = "(No tag selected)" });
-                foreach (MediaTag tempMediaTag in MediaTag.GetAllTags())
-                {
-                    NewAlbumsDropDown.Items.Add(new ListItem()
-                    {
-                        Value = Convert.ToString(tempMediaTag.Id),
-                        Text = tempMediaTag.Name
-                    });
-                }
+                NewAlbumsDropDown.Items.Add(new ListItem() { Value = "", Text = "(No tag selected)" });
+                foreach (MediaTag tempMediaTag in MediaTag.GetAllTags()) NewAlbumsDropDown.Items.Add(tempMediaTag.Name);
 
                 DropDown_SelectUser.Items.Clear();
+                DropDown_SelectUser.Items.Add(new ListItem() { Value = "", Text = "(No user selected)" });
                 foreach (User user in ParsnipData.Accounts.User.GetAllUsers())
                 {
                     DropDown_SelectUser.Items.Add(new ListItem()
                     {
-                        Value = Convert.ToString(user.Id),
+                        Value = user.Username,
                         Text = user.FullName
                     });
                 }
@@ -340,19 +314,26 @@ namespace ParsnipWebsite
 
             void DisplayMediaAttributes()
             {
-                if (MyMedia.Title != null && !string.IsNullOrEmpty(MyMedia.Title) && !string.IsNullOrWhiteSpace(MyMedia.Title))
-                {
-                    InputTitleTwo.Text = MyMedia.Title;
-                }
+                if (string.IsNullOrEmpty(InputTitleTwo.Text)) InputTitleTwo.Text = MyMedia.Title;
 
-                if (myUser.AccountType == "admin")
-                {
-                    btn_AdminDelete.Visible = true;
-                }
+                if (myUser.AccountType == "admin") btn_AdminDelete.Visible = true;
 
-                if (MyMedia.SearchTerms != null && !string.IsNullOrEmpty(MyMedia.SearchTerms) && !string.IsNullOrWhiteSpace(MyMedia.SearchTerms))
+                if(string.IsNullOrEmpty(SearchTerms_Input.Text)) SearchTerms_Input.Text = MyMedia.SearchTerms;
+
+                if(string.IsNullOrEmpty(input_date_media_captured.Value)) input_date_media_captured.Value = MyMedia.DateTimeCaptured.ToString();
+
+                if (MyVideo?.Thumbnails?.Count() > 0)
                 {
-                    SearchTerms_Input.Text = MyMedia.SearchTerms;
+                    ThumbnailSelectorContainer.Visible = true;
+                    if (ThumbnailSelector.Controls.Count == 1)
+                    {
+                        ThumbnailSelector.Controls.Clear();
+                        foreach (var control in VideoThumbnailControl.GetVideoAsVideoThumbnailControls(MyVideo))
+                        {
+                            control.VideoThumbnailClick += new EventHandler(VideoThumbnail_ButtonClick);
+                            ThumbnailSelector.Controls.Add(control);
+                        }
+                    }
                 }
             }
         
@@ -364,7 +345,8 @@ namespace ParsnipWebsite
                     {
                         var thumbnail = new VideoThumbnail(MyVideo, myUser, ThumbnailUpload.PostedFile);
                         thumbnail.Insert();
-                        Response.Redirect(Page.Request.Url.ToString(), true);
+                        ViewState["ActiveThumbnail"] = thumbnail.DisplayOrder;
+                        MyVideo.Thumbnails.Add(thumbnail);
                     }
 
                     if (MyVideo.Thumbnails.Count > 0 || !MyVideo.Status.Equals(MediaStatus.Complete))
@@ -409,6 +391,21 @@ namespace ParsnipWebsite
                 isNew = MyYoutubeVideo.IsNew;
             
             Session[$"{MyMedia.Id}_IsNew"] = isNew;
+
+            foreach (var control in ThumbnailSelector.Controls)
+            {
+                VideoThumbnailControl videoThumbnailControl;
+                try
+                {
+                    videoThumbnailControl = (VideoThumbnailControl)control;
+                }
+                catch (InvalidCastException)
+                {
+                    continue;
+                }
+
+                if(ViewState["ActiveThumbnail"] != null) videoThumbnailControl.IsActive = videoThumbnailControl.Thumbnail.DisplayOrder == (short)ViewState["ActiveThumbnail"];
+            }
         }
 
         protected void ButtonSave_Click(object sender, EventArgs e)
@@ -441,7 +438,34 @@ namespace ParsnipWebsite
                         var searchTerms = Request["SearchTerms_Input"]?.ToString();
                             MyMedia.SearchTerms = string.IsNullOrEmpty(searchTerms) ? null : searchTerms.Trim();
 
+                        var textTagsText = Request["TagText"]?.ToString();
+                        var textTags = textTagsText.Replace("#","-#").Replace("@","-@").Split(new char[] { '-' }, int.MaxValue, StringSplitOptions.RemoveEmptyEntries).Select(p => p.Trim()).ToList();
+
+                        foreach(var tag in textTags)
+                        {
+                            if (MyMedia.MediaTagPairs.Exists(x => $"#{x.MediaTag.Name}" == tag) || 
+                                MyMedia.MediaUserPairs.Exists(x => $"@{x.Name}" == tag)) continue;
+
+                            if (tag.Contains('@'))
+                                new MediaUserPair(MyMedia, tag.Replace("@", string.Empty), myUser).Insert();
+                            else
+                                new MediaTagPair(MyMedia, new MediaTag(tag.Replace("#", string.Empty)), myUser).Insert();
+                        }
+
+                        foreach (var tag in MyMedia.MediaTagPairs)
+                        {
+                            if (!textTags.Contains($"#{tag.MediaTag.Name}")) MediaTagPair.Delete(tag.MediaId, tag.MediaTag.Id);
+                        }
+
+                        foreach (var tag in MyMedia.MediaUserPairs)
+                        {
+                            if (!textTags.Contains($"@{tag.Name}")) MediaUserPair.Delete(tag.MediaId, tag.UserId);
+                        }
+
+                        //TODO - Combine into single method / proc
                         MyMedia.Update(isNew);
+                        var activeThumbnail = ViewState["ActiveThumbnail"];
+                        if (activeThumbnail != null) MyVideo?.Thumbnails.Single(x => x.DisplayOrder == (short)activeThumbnail).SetAsActive();
                     }
                     else
                     {
@@ -478,35 +502,19 @@ namespace ParsnipWebsite
         }
         protected void VideoThumbnail_ButtonClick(object sender, EventArgs e)
         {
-            Response.Redirect(Page.Request.Url.ToString(), true);
+            ViewState["ActiveThumbnail"] = (short)sender;
         }
 
         protected void AddMediaTagPair_Click(object sender, EventArgs e)
         {
-            int selectedTag = Convert.ToInt16(Request["NewAlbumsDropDown"]);
-            if (selectedTag != default)
-            {
-                MediaTag myMediaTag = new MediaTag(selectedTag);
-
-                MediaTagPair newMediaTagPair = new MediaTagPair(MyMedia, myMediaTag, myUser);
-                newMediaTagPair.Insert();
-
-                Response.Redirect(Page.Request.Url.ToString(), true);
-            }
+            var newAlbumsDropDown = Request["NewAlbumsDropDown"];
+            if(!string.IsNullOrWhiteSpace(newAlbumsDropDown)) TagText.Text += $"#{newAlbumsDropDown} ";
         }
 
         protected void AddMediaUserPair_Click(object sender, EventArgs e)
         {
-            int selectedUserId = Convert.ToInt16(Request["DropDown_SelectUser"]);
-            if (selectedUserId != default)
-            {
-                int userId = selectedUserId;
-
-                MediaUserPair newMediaUserPair = new MediaUserPair(MyMedia, selectedUserId, myUser);
-                newMediaUserPair.Insert();
-
-                Response.Redirect(Page.Request.Url.ToString(), true);
-            }
+            var dropDown_SelectUser = Request["DropDown_SelectUser"];
+            if (!string.IsNullOrWhiteSpace(dropDown_SelectUser)) TagText.Text += $"@{dropDown_SelectUser} ";
         }
     }
 }
