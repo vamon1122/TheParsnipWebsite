@@ -87,6 +87,15 @@ namespace ParsnipWebsite.Custom_Controls.Menu
         protected global::System.Web.UI.HtmlControls.HtmlAnchor Desktop_AfternoonT;
 
         /// <summary>
+        /// Desktop_Croatia control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor Desktop_Croatia;
+
+        /// <summary>
         /// Desktop_LogOut control.
         /// </summary>
         /// <remarks>
@@ -211,6 +220,15 @@ namespace ParsnipWebsite.Custom_Controls.Menu
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor Mobile_AfternoonT;
+
+        /// <summary>
+        /// Mobile_Croatia control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor Mobile_Croatia;
 
         /// <summary>
         /// Mobile_LogOut control.

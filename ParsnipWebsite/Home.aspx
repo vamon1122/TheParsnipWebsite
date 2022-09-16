@@ -35,9 +35,24 @@
                 <i class="fas fa-chevron-down fa-5x w3-hide-large w3-hide-medium"></i>
             </div>
         </header>
+        
         <div id="" class="w3-row-padding w3-padding-64 w3-container">
             <div class="w3-content">
-                <div class="w3-twothird">
+                <a href="croatia" style="text-decoration:none; -webkit-tap-highlight-color: rgba(0,0,0,0);">
+                    <div class="w3-twothird">
+                        <h1>Croatia <i class="fas fa-plane w3-text-red"></i></h1>
+                        <h5 class="w3-padding-32">Availability, activities, flights & bookings</h5>
+                        <p class="w3-text-grey"><u>Click here</u> for everything you need for our next adventure abroad!</p>
+                    </div>
+                </a>
+                <div class="w3-third w3-center">
+                </div>
+            </div>
+        </div>
+        <div id="" class="w3-row-padding w3-padding-64 w3-light-grey w3-container">
+            <div class="w3-content">
+                <div class="w3-third w3-center"></div>
+                <div class="w3-twothird w3-right">
                     <h1>Search <i class="fas fa-search w3-text-red"></i></h1>
                     <h5 class="w3-padding-32">Finding what you want just got a whole lot easier!</h5>
                     <p class="w3-text-grey">The powerful new <b>parsnip search engine™</b> means you can now search the entire parsnip catalogue in seconds! Get started below; just type something and tap search!</p>
@@ -47,8 +62,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="w3-third w3-center">
-                </div>
+                
             </div>
         </div>
         <%--<div id="section2" class="w3-row-padding w3-padding-64 w3-container">
@@ -63,14 +77,15 @@
                 </div>
             </div>
         </div>--%>
-        <div id="section2" class="w3-row-padding w3-light-grey w3-padding-64 w3-container">
+        <div id="section2" class="w3-row-padding  w3-padding-64 w3-container">
             <div class="w3-content">
-                <div class="w3-third w3-center"></div>
-                <div class="w3-twothird w3-right">
+                <div class="w3-twothird">
                     <h1><i class="fa fa-hashtag w3-text-red"></i>Awesome</h1>
                     <h5 class="w3-padding-32">There's no need to break a sweat trying to find *THAT* video anymore.</h5>
                     <p class="w3-text-grey">With 1000s of pictures and videos from the past 15 years, conveniently sorted into albums, there's no need to trawl through your camera roll and hope you haven't deleted it anymore (facepalm). You can even tag people! Have a go yourself... whenever you see the cloud button (top right), you can upload from your camera-roll or youtube, and tag a freind. It couldn't be easier!</p>
                     <div runat="server" id="MediaTagContainer" style="overflow:hidden" />
+                </div>
+                <div class="w3-third w3-center">
                 </div>
             </div>
         </div>
@@ -86,9 +101,9 @@
                 </div>
             </div>
         </div>--%>
-        <div class="w3-row-padding w3-padding-64 w3-container">
+        <div class="w3-row-padding w3-padding-64 w3-light-grey w3-container">
             <div class="w3-content">
-                <div class="w3-twothird">
+                <div class="w3-twothird w3-right">
                     <h1>Look to the <br class="w3-hide-large w3-hide-medium" />clouds <i class="fa fa-cloud w3-text-red"></i></h1>
                     <h5 class="w3-padding-32">Have you noticed the cloud floating in the top right of your screen?</h5>
                     <p class="w3-text-grey">Any time you see the cloud icon, you can tap it to upload some new content! Found a juicy old video? Don't let it get lost in the group chat... 

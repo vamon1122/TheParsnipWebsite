@@ -151,6 +151,8 @@ namespace ParsnipWebsite.Custom_Controls.Menu
                 return Selected_Page;
             if (page.Equals(PageIndex.Search))
                 return Selected_Page;
+            if (page.Equals(PageIndex.Croatia))
+                return Desktop_Croatia;
 
             return null;
         }

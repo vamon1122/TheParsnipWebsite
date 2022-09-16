@@ -31,6 +31,7 @@ namespace ParsnipWebsite
         public static readonly PageIndex View = new PageIndex("view");
         public static readonly PageIndex Search = new PageIndex("search");
         public static readonly PageIndex Latest = new PageIndex("latest");
+        public static readonly PageIndex Croatia = new PageIndex("croatia");
 
         private PageIndex(string value)
         {
@@ -82,6 +83,9 @@ namespace ParsnipWebsite
                     Value = value;
                     break;
                 case "latest":
+                    Value = value;
+                    break;
+                case "croatia":
                     Value = value;
                     break;
                 default:

@@ -73,6 +73,7 @@
     <Content Include="AfternoonT.html" />
     <Content Include="Amsterdam.aspx" />
     <Content Include="Bios.aspx" />
+    <Content Include="Croatia.aspx" />
     <Content Include="Custom_Controls\Admin\AdminMediaControl.ascx" />
     <Content Include="Custom_Controls\Loader.ascx" />
     <Content Include="Custom_Controls\Media\MediaAccordion.ascx" />
@@ -1912,6 +1913,13 @@
     </Compile>
     <Compile Include="Content_Removal.aspx.designer.cs">
       <DependentUpon>Content_Removal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Croatia.aspx.cs">
+      <DependentUpon>Croatia.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Croatia.aspx.designer.cs">
+      <DependentUpon>Croatia.aspx</DependentUpon>
     </Compile>
     <Compile Include="Custom_Controls\Admin\AdminMediaControl.ascx.cs">
       <DependentUpon>AdminMediaControl.ascx</DependentUpon>

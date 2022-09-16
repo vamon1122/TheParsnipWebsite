@@ -7,8 +7,8 @@
 <div class="w3-top w3-card w3-red w3-large">
     <div class="main-container">
         <div style="margin:0px">
-            <div runat="server" id="loggedInWidth" style="min-width:817.1px; height:0px" class="w3-hide-small w3-hide-medium" Visible="false" />
-            <div runat="server" id="loggedOutWidth" style="min-width:800.2px; height:0px" class="w3-hide-small w3-hide-medium" Visible="true" />
+            <div runat="server" id="loggedInWidth" style="min-width:977.1px; height:0px" class="w3-hide-small w3-hide-medium" Visible="false" />
+            <div runat="server" id="loggedOutWidth" style="min-width:960.2px; height:0px" class="w3-hide-small w3-hide-medium" Visible="true" />
             <%--<div style="min-width:56px; height:0px" class="w3-hide-large"></div>--%>
             <div id="left-content" class="w3-bar w3-red">
                 <a class="w3-bar-item w3-button w3-hide-large w3-left w3-hover-white w3-large w3-red w3-padding-large" href="javascript:void(0);" onclick="document.getElementById('mobileNav').style.display='block';PageMethods.OnMediaUnFocused('menu opened', document.body.id)" title="Toggle Navigation Menu" style="width:65px"><i class="fa fa-bars"></i></a>
@@ -20,6 +20,7 @@
                 <a runat="server" id="Desktop_AfternoonT" href="../../afternoont.html" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-padding-large w3-hover-white" onclick="PageMethods.OnMediaUnFocused('Afternoon T desktop-menu-item clicked', document.body.id)">Afternoon T</a>
                 <%--<a runat="server" id="Desktop_Bios" href="../../bios" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-padding-large w3-hover-white">Bios</a>--%>
                 <%--<a runat="server" id="Desktop_Krakow" href="../../krakow" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-padding-large w3-hover-white">Krakow</a>--%>
+                <a runat="server" id="Desktop_Croatia" href="../../croatia" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-padding-large w3-hover-white" onclick="PageMethods.OnMediaUnFocused('Croatia 2023 desktop-menu-item clicked', document.body.id)">Croatia 2023</a>
                 <a runat="server" id="Desktop_LogOut" href="../../logout" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-padding-large w3-hover-white" Visible="false" onclick="PageMethods.OnMediaUnFocused('Log Out desktop-menu-item clicked', document.body.id)">Log Out</a>
                 <a runat="server" id="Desktop_LogIn" href="../../login" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-padding-large w3-hover-white" onclick="PageMethods.OnMediaUnFocused('Log In desktop-menu-item clicked', document.body.id)">Log In</a>
             </div>
@@ -49,6 +50,7 @@
             <a runat="server" id="Mobile_AfternoonT" href="../../afternoont.html" class="w3-bar-item w3-button w3-padding-large">Afternoon T</a>
               <%--<a runat="server" id="Mobile_Bios" href="../../bios" class="w3-bar-item w3-button w3-padding-large">Bios</a>--%>
               <%--<a runat="server" id="Mobile_Krakow" href="../../krakow" class="w3-bar-item w3-button w3-padding-large">Krakow</a>--%>
+            <a runat="server" id="Mobile_Croatia" href="../../croatia" class="w3-bar-item w3-button w3-padding-large">Croatia 2023</a>
               <a runat="server" id="Mobile_LogOut" href="../../logout" class="w3-bar-item w3-button w3-padding-large" Visible="false">Log Out</a>
               <a runat="server" id="Mobile_LogIn" href="../../login" class="w3-bar-item w3-button w3-padding-large">Log In</a>
         </div>
