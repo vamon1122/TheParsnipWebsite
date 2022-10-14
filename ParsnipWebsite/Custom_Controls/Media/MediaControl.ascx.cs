@@ -69,6 +69,7 @@ namespace ParsnipWebsite.Custom_Controls.Media
                     MyImageHolder.Visible = true;
                     MyImageHolder.Style.Add("margin-bottom", "8px");
                     MyImageHolder.ImageUrl = value.Placeholder.Contains("http://") || value.Placeholder.Contains("https://") ? value.Placeholder : Request.Url.GetLeftPart(UriPartial.Authority) + "/" + value.Placeholder;
+                    MyImageHolder.ID = value.Id.ToString(); // Add("somecustom", value.);
                     MyImageHolder.Attributes.Add("data-src", value.Compressed.Contains("http://") || value.Compressed.Contains("https://") ? value.Compressed : Request.Url.GetLeftPart(UriPartial.Authority) + "/" + value.Compressed);
                     MyImageHolder.Attributes.Add("data-srcset", value.Compressed.Contains("http://") || value.Compressed.Contains("https://") ? value.Compressed : Request.Url.GetLeftPart(UriPartial.Authority) + "/" + value.Compressed);
                     

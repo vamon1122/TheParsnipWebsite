@@ -54,8 +54,9 @@
                                 lazyImage.srcset = lazyImage.dataset.srcset;
                                 lazyImage.classList.remove("lazy");
                                 //PageMethods.MyMethod(1, myMethodCallBackSuccess, myMethodCallBackFailed);
-                                PageMethods.MyMethod(1, myMethodCallBackSuccess);
+                                PageMethods.MyMethod(lazyImage.id, myMethodCallBackSuccess);
                                 //alert("test");
+                                
                                 lazyImageObserver.unobserve(lazyImage);
                             }
                         });

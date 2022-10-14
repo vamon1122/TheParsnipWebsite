@@ -30,9 +30,14 @@ namespace ParsnipWebsite
 
         [System.Web.Services.WebMethod()]
         [System.Web.Script.Services.ScriptMethod()]
-        public static void MyMethod(int id)
+        public static void MyMethod(string id)
         {
-            Debug.WriteLine("Insert a view into the database");
+            var mediaId = new MediaId(id.Split('_')[1]);
+            var tempMedia = new Media() { Id = mediaId};
+            tempMedia.View(ParsnipData.Accounts.User.LogIn());
+            // Find the div control as htmlgenericcontrol type, if found apply style
+            //System.Web.UI.HtmlControls.HtmlGenericControl div = (System.Web.UI.HtmlControls.HtmlGenericControl)e.Item.FindControl(id);
+            Debug.WriteLine($"{id} Insert a view into the database");
         }
 
         //[WebMethod]
