@@ -14,6 +14,7 @@
                     lazyImage.src = lazyImage.dataset.src;
                     lazyImage.srcset = lazyImage.dataset.srcset;
                     lazyImage.classList.remove("lazy");
+                    //PageMethods.MyMethod(1, myMethodCallBackSuccess, myMethodCallBackFailed)
                     lazyImageObserver.unobserve(lazyImage);
                 }
             });
@@ -28,3 +29,11 @@
         //I used Javascript/intersection-observer as a fallback
     }
 });
+
+function myMethodCallBackSuccess(response) {
+    alert(response);
+}
+
+function myMethodCallBackFailed(error) {
+    alert(error.get_message());
+}

@@ -12,6 +12,7 @@ using ParsnipData;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using ParsnipWebsite.Custom_Controls.Media;
+using System.Web.Services;
 
 namespace ParsnipWebsite
 {
@@ -26,6 +27,19 @@ namespace ParsnipWebsite
             //Retrieves wrong album ID and overwrites
             //PhotosAlbum.Select();
         }
+
+        [System.Web.Services.WebMethod()]
+        [System.Web.Script.Services.ScriptMethod()]
+        public static void MyMethod(int id)
+        {
+            Debug.WriteLine("Insert a view into the database");
+        }
+
+        //[WebMethod]
+        //public static string MyMethod()
+        //{
+        //    return DateTime.Now.ToString();
+        //}
 
         protected void Page_Load(object sender, EventArgs e)
         {
