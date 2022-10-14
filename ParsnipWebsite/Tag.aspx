@@ -24,14 +24,24 @@
 
     <form runat="server">
         <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true" />
+
+        
         <header class="w3-container w3-red w3-center" style="padding:60px 16px 20px 16px; margin-bottom: 20px">
             <h1 class="w3-margin w3-jumbo jumbo-line-height" style="overflow-wrap: break-word" id="TagName" runat="server">View Tag</h1>
             <p class="w3-xlarge" id="TagDescription" runat="server"></p>
             <mediaControls:UploadMediaControl runat="server" ID="UploadMediaControl" />
         </header>
         <div runat="server" id="DynamicMediaDiv" style="margin: auto; text-align:center" />
+
+        <script type="text/javascript" language="javascript">
+
+            PageMethods.set_path(PageMethods.get_path() + '.aspx');
+
+        </script>
         <script>
             <%--PageMethods.MyMethod(1,myMethodCallBackSuccess);--%>
+
+            
 
             function myMethodCallBackSuccess(response) {
                 //alert("something");
@@ -54,6 +64,7 @@
                                 lazyImage.srcset = lazyImage.dataset.srcset;
                                 lazyImage.classList.remove("lazy");
                                 //PageMethods.MyMethod(1, myMethodCallBackSuccess, myMethodCallBackFailed);
+                                //PageMethods.set_path("Tag.aspx");
                                 PageMethods.MyMethod(lazyImage.id, myMethodCallBackSuccess);
                                 //alert("test");
                                 
