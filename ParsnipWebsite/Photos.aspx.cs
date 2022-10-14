@@ -15,7 +15,7 @@ using ParsnipWebsite.Custom_Controls.Media;
 
 namespace ParsnipWebsite
 {
-    public partial class Photos : System.Web.UI.Page
+    public partial class Photos : MediaViewPage
     {
         private User myUser;
         static readonly MediaTag PhotosMediaTag = MediaTag.Select((int)Data.MediaTagIds.Photos);

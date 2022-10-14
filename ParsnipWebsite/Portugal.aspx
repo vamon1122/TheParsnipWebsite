@@ -2,6 +2,8 @@
 <%@ Register Src="~/Custom_Controls/Media/UploadMediaControl.ascx" TagPrefix="mediaControls" TagName="UploadMediaControl" %>
 <%@ Register Src="~/Custom_Controls/ErrorHandler.ascx" TagPrefix="errorHandler" TagName="ErrorHandler" %>
 <%@ Register Src="~/Custom_Controls/Menu/NewMenu.ascx" TagPrefix="menuControls" TagName="NewMenu" %>
+<%@ Register Src="~/Custom_Controls/Loader.ascx" TagPrefix="loader" TagName="Loader" %>
+<%@ Register Src="~/Custom_Controls/Media/MediaViewPageScripts.ascx" TagPrefix="scripts" TagName="MediaViewPageScripts" %>
 
 
 <!DOCTYPE html>
@@ -22,6 +24,7 @@
 <body>
     <errorHandler:ErrorHandler runat="server" ID="ErrorHandler" />
     <menuControls:NewMenu runat="server" ID="NewMenu" />
+    <loader:Loader runat="server" id="Loader" />
     
     <form runat="server">
         <header class="w3-container w3-red w3-center" style="padding:60px 16px 20px 16px; margin-bottom: 20px">
@@ -32,13 +35,7 @@
         <div runat="server" id="DynamicMediaDiv" style="margin: auto; text-align:center"></div>
     </form>
     
-    <script src="Libraries/jquery-3.5.1/jquery.min.js"></script>
-    <script src="Javascript/LazyImages.js"></script>
-    <script src="Javascript/IntersectionObserver.js"></script>
-    <script src="Javascript/smoothscroll.min.js"></script>
-    <script>smoothscroll.polyfill();</script>
-    <script src="Javascript/FocusImage.js"></script>
-    <script src="Javascript/W3ModalDismiss.js"></script>
+    <scripts:MediaViewPageScripts runat="server" ID="MediaViewPageScripts" />
 </body>
 </html>
 

@@ -11,7 +11,7 @@ using ParsnipData.Media;
 
 namespace ParsnipWebsite
 {
-    public partial class Videos : System.Web.UI.Page
+    public partial class Videos : MediaViewPage
     {
         private User myUser;
         static readonly MediaTag VideoMediaTag = MediaTag.Select((int)Data.MediaTagIds.Videos);

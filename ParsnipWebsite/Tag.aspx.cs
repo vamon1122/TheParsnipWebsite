@@ -15,7 +15,7 @@ using ParsnipWebsite.Custom_Controls.Media;
 
 namespace ParsnipWebsite
 {
-    public partial class View_Tag : System.Web.UI.Page
+    public partial class View_Tag : MediaViewPage
     {
         private User myUser;
         private MediaTag myTag;

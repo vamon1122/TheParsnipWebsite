@@ -10,7 +10,7 @@ using ParsnipWebsite.Custom_Controls.Media;
 
 namespace ParsnipWebsite
 {
-    public partial class Search_Website : System.Web.UI.Page
+    public partial class Search_Website : MediaViewPage
     {
         private User myUser;
         protected void Page_Load(object sender, EventArgs e)
