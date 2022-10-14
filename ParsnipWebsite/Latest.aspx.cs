@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace ParsnipWebsite
 {
-    public partial class Latest : System.Web.UI.Page
+    public partial class Latest : MediaViewPage
     {
         private User myUser;
 

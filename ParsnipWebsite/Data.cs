@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using ParsnipData.Cookies;
@@ -57,5 +58,17 @@ namespace ParsnipWebsite
         public static string DeviceLatitude { get { return Cookie.Read("deviceLatitude"); } }
         public static string DeviceLongitude { get { return Cookie.Read("deviceLongitude"); } }
         public static string SessionId { get { return Cookie.Read("sessionId"); } }
+        public static void OnMediaUnFocused(string reason, string bodyId = null)
+        {
+            HttpContext.Current.Session["CurrentViewId"] = null;
+            if (bodyId != null)
+            {
+                HttpContext.Current.Session[$"{bodyId}_PageHasHadFocusInTheCurrentSession"] = true;
+                HttpContext.Current.Session[$"{bodyId}_CurrentUnfocusedViewMediaId"] = HttpContext.Current.Session[$"{bodyId}_CurrentViewMediaId"] ?? HttpContext.Current.Session[$"{bodyId}_CurrentUnfocusedViewMediaId"];
+                HttpContext.Current.Session[$"{bodyId}_CurrentViewMediaId"] = null;
+                HttpContext.Current.Session[$"{bodyId}_CurrentViewId"] = null;
+            }
+            Debug.WriteLine($"Media focus was cleared ({reason})");
+        }
     }
 }

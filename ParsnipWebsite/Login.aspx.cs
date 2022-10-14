@@ -10,6 +10,7 @@ using ParsnipData.Accounts;
 using BenLog;
 using System.Diagnostics;
 using ParsnipData.Media;
+using System.Web.Services;
 
 namespace ParsnipWebsite
 {
@@ -39,30 +40,6 @@ namespace ParsnipWebsite
                 Redirect = "home";
             }
 
-            if (IsPostBack)
-            {
-                //I am postback! Login was probably clicked...
-                var tempUsername = ""; 
-                var tempPassword = "";
-
-                try
-                {
-                    
-                    
-                }
-                catch
-                {
-
-                }
-
-                myUser = ParsnipData.Accounts.User.LogIn(Request["inputUsername"].ToString(), RememberPwd.Checked, Request["inputPwd"].ToString(), RememberPwd.Checked);
-                if (myUser != null)
-                {
-                    new LogEntry(Log.LogInOut) { Text = String.Format("{0} logged in from {1} {2}.", myUser.FullName, myUser.PosessivePronoun, Data.DeviceType) };
-                    WriteCookie();
-                    Response.Redirect(Redirect);
-                }
-            }
             myUser = new User("login");
 
             if (String.IsNullOrEmpty(inputUsername.Text) && String.IsNullOrWhiteSpace(inputUsername.Text))
@@ -84,9 +61,17 @@ namespace ParsnipWebsite
             Cookie.WritePerm("accountType", myUser.AccountType);
         }
 
-        protected void ButLogIn_Click(object sender, EventArgs e)
+        [WebMethod(EnableSession = true)]
+        public static bool OnTryLogin(string username, string password, bool rememberPassword)
         {
-            
+            var Request = HttpContext.Current.Request;
+            Debug.WriteLine("Logging In");
+
+            var myUser = ParsnipData.Accounts.User.LogIn(username, rememberPassword, password, rememberPassword);
+
+            if (myUser != null) Cookie.WritePerm("accountType", myUser.AccountType);
+
+            return myUser != null;
         }
     }
 }

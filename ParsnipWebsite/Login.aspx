@@ -23,6 +23,7 @@
     </div>
     <div class="w3-display-middle">
         <form runat="server">        
+            <asp:ScriptManager runat="server" EnablePageMethods="true" />
             <img src="Resources/Media/Images/Local/Fat_Kieron_Cutout.JPG" style="max-width:100px; display:block; margin-left: auto; margin-right:auto;" />
             <div>
                 <br />    
@@ -33,15 +34,40 @@
                 </div>
                 <div style="text-align:right; width:100%">
                     <label class="form-check-label">Remember me:</label>
-                    <asp:CheckBox runat="server" CssClass="w3-check" ID="RememberPwd" />
+                    <input type="checkbox" id="inputRememberPwd" />
                 </div>
                 <br />
                 <div style="float:right;">
-                    <asp:Button runat="server" ID="ButLogIn" OnClick="ButLogIn_Click" CssClass="w3-btn w3-black" Text="Log In"></asp:Button>
+                    <button onclick="TryLogin(); return false;" class="w3-btn w3-black">LogIn</button>
                 </div>
             </div>
         </form>
     </div>
+    <script>
+        PageMethods.set_path(PageMethods.get_path() + '.aspx');
+
+        function TryLogin() {
+            document.getElementById('inputPwd').focus();
+
+            var username = document.getElementById('inputUsername').value;
+            var password = document.getElementById('inputPwd').value;
+            var rememberPassword = document.getElementById('inputRememberPwd').checked;
+            PageMethods.OnTryLogin(username, password, rememberPassword, OnTryLoginComplete);
+        }
+
+        function OnTryLoginComplete(response, userContext, methodName) {
+            if (response == true) {
+                const params = new Proxy(new URLSearchParams(window.location.search), {
+                    get: (searchParams, prop) => searchParams.get(prop),
+                });
+
+                window.location.href = params.url ?? 'home';
+            }
+            else {
+                alert('Login failed');
+            }
+        }
+    </script>
 </body>
 </html>
 

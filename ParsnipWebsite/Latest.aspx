@@ -3,6 +3,8 @@
 <%@ Register Src="~/Custom_Controls/ErrorHandler.ascx" TagPrefix="errorHandler" TagName="ErrorHandler" %>
 <%@ Register Src="~/Custom_Controls/Menu/NewMenu.ascx" TagPrefix="menuControls" TagName="NewMenu" %>
 <%@ Register Src="~/Custom_Controls/Media/MediaAccordion.ascx" TagPrefix="mediaControls" TagName="MediaAccordion" %>
+<%@ Register Src="~/Custom_Controls/Loader.ascx" TagPrefix="loader" TagName="Loader" %>
+<%@ Register Src="~/Custom_Controls/Media/MediaViewPageScripts.ascx" TagPrefix="scripts" TagName="MediaViewPageScripts" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -22,7 +24,9 @@
 <body>
     <errorHandler:ErrorHandler runat="server" ID="ErrorHandler" />
     <menuControls:NewMenu runat="server" ID="NewMenu" />
+    <loader:Loader runat="server" id="Loader" />
     <form runat="server">
+        <asp:ScriptManager runat="server" EnablePageMethods="true" />
         <header class="w3-container w3-red w3-center" style="padding:60px 16px 20px 16px; margin-bottom: 20px">
             <h1 class="w3-margin w3-jumbo jumbo-line-height" style="overflow-wrap: break-word" id="TagName" runat="server">Latest Uploads</h1>
             <p class="w3-xlarge" id="TagDescription" runat="server"></p>
@@ -40,13 +44,7 @@
         <mediaControls:MediaAccordion runat="server" id="LastMonthAccordion" Visible="false" />
         <mediaControls:MediaAccordion runat="server" id="LastThreeMonthsAccordion" Visible="false" />
     </form>    
-    <script src="Libraries/jquery-3.5.1/jquery.min.js"></script>
-    <script src="Javascript/LazyImages.js"></script>
-    <script src="Javascript/IntersectionObserver.js"></script>
-    <script src="Javascript/smoothscroll.min.js"></script>
-    <script>smoothscroll.polyfill();</script>
-    <script src="Javascript/FocusImage.js"></script>
-    <script src="Javascript/W3ModalDismiss.js"></script>
+    <scripts:MediaViewPageScripts runat="server" id="MediaViewPageScripts" />
     <script src="Javascript/Accordion.js"></script>
 </body>
 </html>

@@ -33,6 +33,15 @@ namespace ParsnipWebsite
         protected global::ParsnipWebsite.Custom_Controls.Menu.NewMenu NewMenu;
 
         /// <summary>
+        /// Loader control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::ParsnipWebsite.Custom_Controls.Loader Loader;
+
+        /// <summary>
         /// TagName control.
         /// </summary>
         /// <remarks>
@@ -67,5 +76,14 @@ namespace ParsnipWebsite
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl DynamicMediaDiv;
+
+        /// <summary>
+        /// MediaViewPageScripts control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::ParsnipWebsite.Custom_Controls.Media.MediaViewPageScripts MediaViewPageScripts;
     }
 }
