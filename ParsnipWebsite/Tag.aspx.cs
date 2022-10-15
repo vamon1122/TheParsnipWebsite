@@ -13,6 +13,9 @@ using System.Data.SqlClient;
 using System.Diagnostics;
 using ParsnipWebsite.Custom_Controls.Media;
 using System.Web.Services;
+using System.Timers;
+using System.Threading;
+using System.Configuration;
 
 namespace ParsnipWebsite
 {
@@ -26,17 +29,49 @@ namespace ParsnipWebsite
         {
             //Retrieves wrong album ID and overwrites
             //PhotosAlbum.Select();
+            
+        }
+
+        private static System.Timers.Timer aTimer;
+        private static MediaId currentlyViewedID;
+
+        private static void SetTimer(MediaId id, User loggedInUser)
+        {
+            // Create a timer with a two second interval.
+            aTimer = new System.Timers.Timer(Convert.ToInt16(ConfigurationManager.AppSettings["InsertImageViewAfterMilliseconds"]));
+            // Hook up the Elapsed event for the timer. 
+            //aTimer.Elapsed += OnTimedEvent;
+            aTimer.Elapsed += (sender, e) => OnTimedEvent(sender, e, id, loggedInUser);
+            aTimer.AutoReset = false;
+            aTimer.Enabled = true;
+        }
+
+        private static void OnTimedEvent(Object source, ElapsedEventArgs e, MediaId id, User loggedInUser)
+        {
+            //Debug.WriteLine($"{id} / {currentlyViewedID} 2 seconds have passed since {id} was first viewed. {currentlyViewedID} is now in view. The Elapsed event was raised at {e.SignalTime:HH:mm:ss.fff}"                         );
+            if (id.Equals(currentlyViewedID))
+            {
+                var tempMedia = new Media() { Id = id };
+                tempMedia.View(loggedInUser);
+                Debug.WriteLine($"{id} has been viewed for 2 seconds. Inserting view");
+            }
+            else
+            {
+                Debug.WriteLine($"{id} no longer in view. View NOT inserted");
+            }
         }
 
         [System.Web.Services.WebMethod()]
         [System.Web.Script.Services.ScriptMethod()]
         public static void MyMethod(string id)
         {
+            
             var mediaId = new MediaId(id.Split('_')[1]);
+            currentlyViewedID = mediaId;
             if (mediaId.ToString() == "thumbnail") return;
-            var tempMedia = new Media() { Id = mediaId};
-            tempMedia.View(ParsnipData.Accounts.User.LogIn());
-            Debug.WriteLine($"{id} Insert a view into the database");
+            SetTimer(mediaId, ParsnipData.Accounts.User.LogIn());
+            
+            
         }
 
         //[WebMethod]
