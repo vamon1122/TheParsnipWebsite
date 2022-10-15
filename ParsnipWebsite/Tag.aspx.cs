@@ -33,10 +33,9 @@ namespace ParsnipWebsite
         public static void MyMethod(string id)
         {
             var mediaId = new MediaId(id.Split('_')[1]);
+            if (mediaId.ToString() == "thumbnail") return;
             var tempMedia = new Media() { Id = mediaId};
             tempMedia.View(ParsnipData.Accounts.User.LogIn());
-            // Find the div control as htmlgenericcontrol type, if found apply style
-            //System.Web.UI.HtmlControls.HtmlGenericControl div = (System.Web.UI.HtmlControls.HtmlGenericControl)e.Item.FindControl(id);
             Debug.WriteLine($"{id} Insert a view into the database");
         }
 
