@@ -33,59 +33,38 @@
         </header>
         <div runat="server" id="DynamicMediaDiv" style="margin: auto; text-align:center" />
 
-        <script type="text/javascript" language="javascript">
-
-            PageMethods.set_path(PageMethods.get_path() + '.aspx');
-
-        </script>
-        <script>
-            <%--PageMethods.MyMethod(1,myMethodCallBackSuccess);--%>
-
-            
-
-            function myMethodCallBackSuccess(response) {
-                //alert("something");
-                //alert(response);
-            }
-
-            function myMethodCallBackFailed(error) {
-                alert(error.get_message());
-            }
-
-            document.addEventListener("DOMContentLoaded", function () {
-                var lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
-
-                if ("IntersectionObserver" in window) {
-                    let lazyImageObserver = new IntersectionObserver(function (entries, observer) {
-                        entries.forEach(function (entry) {
-                            if (entry.isIntersecting) {
-                                let lazyImage = entry.target;
-                                lazyImage.src = lazyImage.dataset.src;
-                                lazyImage.srcset = lazyImage.dataset.srcset;
-                                lazyImage.classList.remove("lazy");
-                                //PageMethods.MyMethod(1, myMethodCallBackSuccess, myMethodCallBackFailed);
-                                //PageMethods.set_path("Tag.aspx");
-                                PageMethods.MyMethod(lazyImage.id, myMethodCallBackSuccess);
-                                //alert("test");
-                                
-                                //lazyImageObserver.unobserve(lazyImage);
-                            }
-                        });
-                    });
-                    lazyImages.forEach(function (lazyImage) {
-                        lazyImageObserver.observe(lazyImage);
-                    });
-                }
-                else {
-                    //I used Javascript/intersection-observer as a fallback
-                }
-            });
-        </script>
+        
     
     </form>    
 
+    <script>
+        PageMethods.set_path(PageMethods.get_path() + '.aspx');
+
+
+        document.addEventListener("DOMContentLoaded", function () {
+            var viewedImages = [].slice.call(document.querySelectorAll("img.lazy"));
+
+            if ("TopIntersectionObserver" in window) {
+                let imageViewObserver = new TopIntersectionObserver(function (entries, observer) {
+                    entries.forEach(function (entry) {
+                        if (entry.isIntersecting) {
+                            let viewedImage = entry.target;
+                            PageMethods.MyMethod(viewedImage.id);
+                        }
+                    });
+                });
+                viewedImages.forEach(function (viewedImage) {
+                    imageViewObserver.observe(viewedImage);
+                });
+            }
+            else {
+                //I used Javascript/intersection-observer as a fallback
+            }
+        });
+    </script>
     <script src="Libraries/jquery-3.5.1/jquery.min.js"></script>
-    <%--<script src="Javascript/LazyImages.js"></script>--%>
+    <script src="Javascript/LazyImages.js"></script>
+    <script src="Javascript/TopIntersectionObserver.js"></script>
     <script src="Javascript/IntersectionObserver.js"></script>
     <script src="Javascript/smoothscroll.min.js"></script>
     <script>smoothscroll.polyfill();</script>
