@@ -68,7 +68,7 @@
                                 PageMethods.MyMethod(lazyImage.id, myMethodCallBackSuccess);
                                 //alert("test");
                                 
-                                lazyImageObserver.unobserve(lazyImage);
+                                //lazyImageObserver.unobserve(lazyImage);
                             }
                         });
                     });
