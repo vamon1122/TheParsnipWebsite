@@ -20,12 +20,14 @@ namespace ParsnipWebsite
             var splitContainerId = containerId.Split('_');
             if (splitContainerId.Length < 2 || splitContainerId.Last() == "thumbnail")
             {
+                session["CurrentViewMediaId"] = null;
                 Debug.WriteLine($"Video focused (Ignoring)");
                 return;
             }
             StartImageViewTimer(thisViewId, new MediaId(splitContainerId.Last()), ParsnipData.Accounts.User.LogIn());
             void StartImageViewTimer(Guid viewId, MediaId mediaId, User loggedInUser)
             {
+                session["CurrentViewMediaId"] = mediaId;
                 Debug.WriteLine($"Image focused ({mediaId} is an image. Starting timer...)");
                 System.Timers.Timer insertViewTimer;
                 insertViewTimer = new System.Timers.Timer(Convert.ToInt16(ConfigurationManager.AppSettings["InsertImageViewAfterMilliseconds"]));
@@ -44,6 +46,29 @@ namespace ParsnipWebsite
                     }
                     Debug.WriteLine($"View NOT inserted ({mediaId} was no longer in view after 2 seconds)");
                 }
+            }
+        }
+
+        [WebMethod]
+        public static void OnMediaUnFocused()
+        {
+            HttpContext.Current.Session["CurrentViewId"] = Guid.NewGuid();
+            Debug.WriteLine($"Media was un-focused. View cancelled");
+        }
+
+        [WebMethod]
+        public static void OnMediaReFocused()
+        {
+            var session = HttpContext.Current.Session;
+            //session["CurrentViewId"] = Guid.NewGuid();
+            if(session["CurrentViewMediaId"] == null)
+            {
+                Debug.WriteLine($"There was no media to re-focus");
+            }
+            else
+            {
+                Debug.WriteLine($"Media was Re-focused. View re-started");
+                OnMediaCenterScreen("control_" + session["CurrentViewMediaId"].ToString());
             }
         }
     }

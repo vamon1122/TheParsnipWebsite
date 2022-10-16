@@ -11,7 +11,7 @@
             <div runat="server" id="loggedOutWidth" style="min-width:800.2px; height:0px" class="w3-hide-small w3-hide-medium" Visible="true" />
             <%--<div style="min-width:56px; height:0px" class="w3-hide-large"></div>--%>
             <div id="left-content" class="w3-bar w3-red">
-                <a class="w3-bar-item w3-button w3-hide-large w3-left w3-hover-white w3-large w3-red w3-padding-large" href="javascript:void(0);" onclick="document.getElementById('mobileNav').style.display='block'" title="Toggle Navigation Menu" style="width:65px"><i class="fa fa-bars"></i></a>
+                <a class="w3-bar-item w3-button w3-hide-large w3-left w3-hover-white w3-large w3-red w3-padding-large" href="javascript:void(0);" onclick="document.getElementById('mobileNav').style.display='block';PageMethods.OnMediaUnFocused()" title="Toggle Navigation Menu" style="width:65px"><i class="fa fa-bars"></i></a>
                 <a runat="server" id="Desktop_Home" href="../../home" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-padding-large w3-hover-white">Home</a>
                 <a runat="server" id="Desktop_Latest" href="../../latest" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-padding-large w3-hover-white">Latest</a>
                 <a runat="server" id="Desktop_Memes" href="../../memes" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-padding-large w3-hover-white">Memes</a>
