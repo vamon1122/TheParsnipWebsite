@@ -24,7 +24,6 @@ namespace ParsnipWebsite
         private User myUser;
         private MediaTag myTag;
         private User myTaggedUser;
-        private static Guid currentViewId; //TODO - Stop me from spanning across sessions
 
         public View_Tag()
         {
@@ -36,10 +35,12 @@ namespace ParsnipWebsite
         [WebMethod]
         public static void OnMediaCenterScreen(string containerId)
         {
-            currentViewId = Guid.NewGuid();
+            var thisViewId = Guid.NewGuid();
+            var session = HttpContext.Current.Session;
+            session["CurrentViewId"] = thisViewId.ToString();
             var splitContainerId = containerId.Split('_');
             if (splitContainerId.Length < 2 || splitContainerId[1] == "thumbnail") return;
-            StartImageViewTimer(currentViewId, new MediaId(splitContainerId[1]), ParsnipData.Accounts.User.LogIn());
+            StartImageViewTimer(thisViewId, new MediaId(splitContainerId[1]), ParsnipData.Accounts.User.LogIn());
             void StartImageViewTimer(Guid viewId, MediaId mediaId, User loggedInUser)
             {
                 System.Timers.Timer insertViewTimer;
@@ -50,7 +51,7 @@ namespace ParsnipWebsite
 
                 void OnImageViewTimerComplete()
                 {
-                    if (viewId.Equals(currentViewId))
+                    if (viewId.ToString() == session["CurrentViewId"].ToString())
                     {
                         var tempMedia = new Media() { Id = mediaId };
                         tempMedia.View(loggedInUser);
