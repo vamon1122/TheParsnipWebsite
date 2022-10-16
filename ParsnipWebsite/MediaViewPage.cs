@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Web.Services;
 using System.Web;
 using System;
+using System.Linq;
 
 namespace ParsnipWebsite
 {
@@ -17,11 +18,15 @@ namespace ParsnipWebsite
             var session = HttpContext.Current.Session;
             session["CurrentViewId"] = thisViewId.ToString();
             var splitContainerId = containerId.Split('_');
-            if (splitContainerId.Length < 2 || splitContainerId[1] == "thumbnail") return;
-            StartImageViewTimer(thisViewId, new MediaId(splitContainerId[1]), ParsnipData.Accounts.User.LogIn());
+            if (splitContainerId.Length < 2 || splitContainerId.Last() == "thumbnail")
+            {
+                Debug.WriteLine($"Video focused (Ignoring)");
+                return;
+            }
+            StartImageViewTimer(thisViewId, new MediaId(splitContainerId.Last()), ParsnipData.Accounts.User.LogIn());
             void StartImageViewTimer(Guid viewId, MediaId mediaId, User loggedInUser)
             {
-                Debug.WriteLine($"Media focused ({mediaId} touched the center of the screen)");
+                Debug.WriteLine($"Image focused ({mediaId} is an image. Starting timer...)");
                 System.Timers.Timer insertViewTimer;
                 insertViewTimer = new System.Timers.Timer(Convert.ToInt16(ConfigurationManager.AppSettings["InsertImageViewAfterMilliseconds"]));
                 insertViewTimer.Elapsed += (sender, e) => OnImageViewTimerComplete();

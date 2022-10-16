@@ -15,7 +15,7 @@ using ParsnipWebsite.Custom_Controls.Media;
 
 namespace ParsnipWebsite
 {
-    public partial class Memes : System.Web.UI.Page
+    public partial class Memes : MediaViewPage
     {
         private User myUser;
         static readonly MediaTag MemesMediaTag = MediaTag.Select((int)Data.MediaTagIds.Memes);

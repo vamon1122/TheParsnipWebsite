@@ -31,6 +31,7 @@
     <errorHandler:ErrorHandler runat="server" ID="ErrorHandler" />
     <menuControls:NewMenu runat="server" ID="NewMenu" />
     <form runat="server">
+        <asp:ScriptManager runat="server" EnablePageMethods="true" />
         <header class="w3-container w3-red w3-center" style="padding:60px 16px 20px 16px; margin-bottom: 20px">
         <h1 class="w3-margin w3-jumbo jumbo-line-height" style="overflow-wrap: break-word" runat="server">Search</h1>
             <mediaControls:UploadMediaControl runat="server" ID="UploadMediaControl" />
@@ -55,5 +56,7 @@
     <script>smoothscroll.polyfill();</script>
     <script src="Javascript/FocusImage.js"></script>
     <script src="Javascript/W3ModalDismiss.js"></script>
+    <script src="Javascript/CenterIntersectionObserver.js"></script>
+    <script src="Javascript/ViewImages.js"></script>
 </body>
 </html>

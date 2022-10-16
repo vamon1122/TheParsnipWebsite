@@ -23,7 +23,7 @@
     <menuControls:NewMenu runat="server" ID="NewMenu" />
 
     <form runat="server">
-        <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true" />
+        <asp:ScriptManager runat="server" EnablePageMethods="true" />
 
         
         <header class="w3-container w3-red w3-center" style="padding:60px 16px 20px 16px; margin-bottom: 20px">
@@ -35,16 +35,16 @@
 
         
     
-    </form>    
-    <script src="Javascript/ViewImages.js"></script>
+    </form>
     <script src="Libraries/jquery-3.5.1/jquery.min.js"></script>
     <script src="Javascript/LazyImages.js"></script>
-    <script src="Javascript/TopIntersectionObserver.js"></script>
     <script src="Javascript/IntersectionObserver.js"></script>
     <script src="Javascript/smoothscroll.min.js"></script>
     <script>smoothscroll.polyfill();</script>
     <script src="Javascript/FocusImage.js"></script>
     <script src="Javascript/W3ModalDismiss.js"></script>
+    <script src="Javascript/CenterIntersectionObserver.js"></script>
+    <script src="Javascript/ViewImages.js"></script>
 </body>
 </html>
 
