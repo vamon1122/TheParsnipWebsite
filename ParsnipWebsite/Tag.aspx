@@ -49,7 +49,7 @@
                     entries.forEach(function (entry) {
                         if (entry.isIntersecting) {
                             let viewedImage = entry.target;
-                            PageMethods.MyMethod(viewedImage.id);
+                            PageMethods.OnMediaCenterScreen(viewedImage.id);
                         }
                     });
                 });

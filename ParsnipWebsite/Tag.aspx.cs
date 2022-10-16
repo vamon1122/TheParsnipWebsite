@@ -24,6 +24,7 @@ namespace ParsnipWebsite
         private User myUser;
         private MediaTag myTag;
         private User myTaggedUser;
+        private static Guid currentViewId; //TODO - Stop me from spanning across sessions
 
         public View_Tag()
         {
@@ -32,57 +33,34 @@ namespace ParsnipWebsite
             
         }
 
-        private static System.Timers.Timer insertViewTimer;
-        private static Guid currentViewId;
-
-        private static void SetTimer(Guid viewId, MediaId mediaId, User loggedInUser)
-        {
-            // Create a timer with a two second interval.
-            insertViewTimer = new System.Timers.Timer(Convert.ToInt16(ConfigurationManager.AppSettings["InsertImageViewAfterMilliseconds"]));
-            // Hook up the Elapsed event for the timer. 
-            //aTimer.Elapsed += OnTimedEvent;
-            insertViewTimer.Elapsed += (sender, e) => OnTimedEvent(sender, e, viewId, mediaId, loggedInUser);
-            insertViewTimer.AutoReset = false;
-            insertViewTimer.Enabled = true;
-        }
-
-        private static void OnTimedEvent(Object source, ElapsedEventArgs e, Guid viewId, MediaId mediaId, User loggedInUser)
-        {
-            //Debug.WriteLine($"{id} / {currentlyViewedID} 2 seconds have passed since {id} was first viewed. {currentlyViewedID} is now in view. The Elapsed event was raised at {e.SignalTime:HH:mm:ss.fff}"                         );
-            if (viewId.Equals(currentViewId))
-            {
-                var tempMedia = new Media() { Id = mediaId };
-                tempMedia.View(loggedInUser);
-                Debug.WriteLine($"{mediaId} has been viewed for 2 seconds. Inserting view");
-            }
-            else
-            {
-                Debug.WriteLine($"{mediaId} no longer in view. View NOT inserted");
-            }
-        }
-
         [WebMethod]
-        public static void MyMethod(string containerId)
+        public static void OnMediaCenterScreen(string containerId)
         {
-            try
+            currentViewId = Guid.NewGuid();
+            var splitContainerId = containerId.Split('_');
+            if (splitContainerId.Length < 2 || splitContainerId[1] == "thumbnail") return;
+            StartImageViewTimer(currentViewId, new MediaId(splitContainerId[1]), ParsnipData.Accounts.User.LogIn());
+            void StartImageViewTimer(Guid viewId, MediaId mediaId, User loggedInUser)
             {
-                currentViewId = Guid.NewGuid();
-                var splitContainerId = containerId.Split('_');
-                if (splitContainerId.Length < 2 || splitContainerId[1] == "thumbnail") return;
-                var mediaId = new MediaId(splitContainerId[1]);
-                SetTimer(currentViewId, mediaId, ParsnipData.Accounts.User.LogIn());
-            }
-            catch(Exception ex)
-            {
+                System.Timers.Timer insertViewTimer;
+                insertViewTimer = new System.Timers.Timer(Convert.ToInt16(ConfigurationManager.AppSettings["InsertImageViewAfterMilliseconds"]));
+                insertViewTimer.Elapsed += (sender, e) => OnImageViewTimerComplete();
+                insertViewTimer.AutoReset = false;
+                insertViewTimer.Enabled = true;
 
+                void OnImageViewTimerComplete()
+                {
+                    if (viewId.Equals(currentViewId))
+                    {
+                        var tempMedia = new Media() { Id = mediaId };
+                        tempMedia.View(loggedInUser);
+                        Debug.WriteLine($"Inserting view ({mediaId} was still in view after 2 seconds)");
+                        return;
+                    }
+                    Debug.WriteLine($"View NOT inserted ({mediaId} was no longer in view after 2 seconds)");
+                }
             }
         }
-
-        //[WebMethod]
-        //public static string MyMethod()
-        //{
-        //    return DateTime.Now.ToString();
-        //}
 
         protected void Page_Load(object sender, EventArgs e)
         {
