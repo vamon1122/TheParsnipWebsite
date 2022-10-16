@@ -82,6 +82,7 @@
     <Content Include="Javascript\Accordion.js" />
     <Content Include="Javascript\Cookies.js" />
     <Content Include="Javascript\DeviceInfo.js" />
+    <Content Include="Javascript\ViewImages.js" />
     <Content Include="Javascript\TopIntersectionObserver.js" />
     <Content Include="Javascript\W3ModalDismiss.js" />
     <Content Include="Latest.aspx" />
@@ -2095,6 +2096,9 @@
     </Compile>
     <Compile Include="Me.aspx.designer.cs">
       <DependentUpon>Me.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MediaViewPage.cs">
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Memes.aspx.cs">
       <DependentUpon>Memes.aspx</DependentUpon>
