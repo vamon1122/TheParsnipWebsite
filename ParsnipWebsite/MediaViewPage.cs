@@ -41,10 +41,10 @@ namespace ParsnipWebsite
                     {
                         var tempMedia = new Media() { Id = mediaId };
                         tempMedia.View(loggedInUser);
-                        Debug.WriteLine($"View inserted ({mediaId} was still in view after 2 seconds)");
+                        Debug.WriteLine($"View inserted ({mediaId} was viwed continuously for 2 seconds)");
                         return;
                     }
-                    Debug.WriteLine($"View NOT inserted ({mediaId} was no longer in view after 2 seconds)");
+                    Debug.WriteLine($"View NOT inserted ({mediaId} was NOT viewed continuously for 2 seconds)");
                 }
             }
         }
