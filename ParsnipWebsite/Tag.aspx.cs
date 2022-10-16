@@ -32,46 +32,50 @@ namespace ParsnipWebsite
             
         }
 
-        private static System.Timers.Timer aTimer;
-        private static MediaId currentlyViewedID;
+        private static System.Timers.Timer insertViewTimer;
+        private static Guid currentViewId;
 
-        private static void SetTimer(MediaId id, User loggedInUser)
+        private static void SetTimer(Guid viewId, MediaId mediaId, User loggedInUser)
         {
             // Create a timer with a two second interval.
-            aTimer = new System.Timers.Timer(Convert.ToInt16(ConfigurationManager.AppSettings["InsertImageViewAfterMilliseconds"]));
+            insertViewTimer = new System.Timers.Timer(Convert.ToInt16(ConfigurationManager.AppSettings["InsertImageViewAfterMilliseconds"]));
             // Hook up the Elapsed event for the timer. 
             //aTimer.Elapsed += OnTimedEvent;
-            aTimer.Elapsed += (sender, e) => OnTimedEvent(sender, e, id, loggedInUser);
-            aTimer.AutoReset = false;
-            aTimer.Enabled = true;
+            insertViewTimer.Elapsed += (sender, e) => OnTimedEvent(sender, e, viewId, mediaId, loggedInUser);
+            insertViewTimer.AutoReset = false;
+            insertViewTimer.Enabled = true;
         }
 
-        private static void OnTimedEvent(Object source, ElapsedEventArgs e, MediaId id, User loggedInUser)
+        private static void OnTimedEvent(Object source, ElapsedEventArgs e, Guid viewId, MediaId mediaId, User loggedInUser)
         {
             //Debug.WriteLine($"{id} / {currentlyViewedID} 2 seconds have passed since {id} was first viewed. {currentlyViewedID} is now in view. The Elapsed event was raised at {e.SignalTime:HH:mm:ss.fff}"                         );
-            if (id.Equals(currentlyViewedID))
+            if (viewId.Equals(currentViewId))
             {
-                var tempMedia = new Media() { Id = id };
+                var tempMedia = new Media() { Id = mediaId };
                 tempMedia.View(loggedInUser);
-                Debug.WriteLine($"{id} has been viewed for 2 seconds. Inserting view");
+                Debug.WriteLine($"{mediaId} has been viewed for 2 seconds. Inserting view");
             }
             else
             {
-                Debug.WriteLine($"{id} no longer in view. View NOT inserted");
+                Debug.WriteLine($"{mediaId} no longer in view. View NOT inserted");
             }
         }
 
-        [System.Web.Services.WebMethod()]
-        [System.Web.Script.Services.ScriptMethod()]
-        public static void MyMethod(string id)
+        [WebMethod]
+        public static void MyMethod(string containerId)
         {
-            
-            var mediaId = new MediaId(id.Split('_')[1]);
-            currentlyViewedID = mediaId;
-            if (mediaId.ToString() == "thumbnail") return;
-            SetTimer(mediaId, ParsnipData.Accounts.User.LogIn());
-            
-            
+            try
+            {
+                currentViewId = Guid.NewGuid();
+                var splitContainerId = containerId.Split('_');
+                if (splitContainerId.Length < 2 || splitContainerId[1] == "thumbnail") return;
+                var mediaId = new MediaId(splitContainerId[1]);
+                SetTimer(currentViewId, mediaId, ParsnipData.Accounts.User.LogIn());
+            }
+            catch(Exception ex)
+            {
+
+            }
         }
 
         //[WebMethod]
