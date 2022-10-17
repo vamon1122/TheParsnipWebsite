@@ -37,7 +37,7 @@ namespace ParsnipWebsite
 
                 void OnImageViewTimerComplete()
                 {
-                    if (viewId.ToString() == session["CurrentViewId"].ToString())
+                    if (viewId.ToString() == session["CurrentViewId"]?.ToString())
                     {
                         var tempMedia = new Media() { Id = mediaId };
                         tempMedia.View(loggedInUser);
@@ -52,7 +52,7 @@ namespace ParsnipWebsite
         [WebMethod]
         public static void OnMediaUnFocused()
         {
-            HttpContext.Current.Session["CurrentViewId"] = Guid.NewGuid();
+            HttpContext.Current.Session["CurrentViewId"] = null;
             Debug.WriteLine($"Media was un-focused. View cancelled");
         }
 
