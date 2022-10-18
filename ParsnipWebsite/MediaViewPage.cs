@@ -30,7 +30,8 @@ namespace ParsnipWebsite
                 session["CurrentViewMediaId"] = mediaId;
                 Debug.WriteLine($"Image focused ({mediaId} is an image. Starting timer...)");
                 System.Timers.Timer insertViewTimer;
-                insertViewTimer = new System.Timers.Timer(Convert.ToInt16(ConfigurationManager.AppSettings["InsertImageViewAfterMilliseconds"]));
+                var milliseconds = Convert.ToInt16(ConfigurationManager.AppSettings["InsertImageViewAfterMilliseconds"]);
+                insertViewTimer = new System.Timers.Timer(milliseconds);
                 insertViewTimer.Elapsed += (sender, e) => OnImageViewTimerComplete();
                 insertViewTimer.AutoReset = false;
                 insertViewTimer.Enabled = true;
@@ -40,7 +41,7 @@ namespace ParsnipWebsite
                     if (viewId.ToString() == session["CurrentViewId"]?.ToString())
                     {
                         var tempMedia = new Media() { Id = mediaId };
-                        tempMedia.View(loggedInUser);
+                        tempMedia.View(loggedInUser, true, milliseconds);
                         Debug.WriteLine($"View inserted ({mediaId} was viwed continuously for 2 seconds)");
                         return;
                     }
