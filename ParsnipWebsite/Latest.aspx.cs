@@ -12,6 +12,8 @@ namespace ParsnipWebsite
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            Data.OnMediaUnFocused();
+
             myUser = Account.SecurePage(this, Data.DeviceType);
 
             NewMenu.SelectedPage = PageIndex.Latest;

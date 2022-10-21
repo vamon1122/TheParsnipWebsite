@@ -43,6 +43,8 @@ namespace ParsnipWebsite
         string OriginalAlbumRedirect;
         protected void Page_Load(object sender, EventArgs e)
         {
+            Data.OnMediaUnFocused();
+
             var tagParam = Request.QueryString["tag"];
             var userTagParam = Request.QueryString["user"];
             var Search = Request.QueryString["search"];

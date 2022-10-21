@@ -17,6 +17,8 @@ namespace ParsnipWebsite
         private User myUser;
         protected void Page_Load(object sender, EventArgs e)
         {
+            Data.OnMediaUnFocused();
+
             MOTD.InnerHtml = System.Configuration.ConfigurationManager.AppSettings["MOTD"];
 
             if (string.IsNullOrEmpty(Data.DeviceType))

@@ -51,11 +51,7 @@ namespace ParsnipWebsite
         }
 
         [WebMethod]
-        public static void OnMediaUnFocused()
-        {
-            HttpContext.Current.Session["CurrentViewId"] = null;
-            Debug.WriteLine($"Media was un-focused. View cancelled");
-        }
+        public static void OnMediaUnFocused() => Data.OnMediaUnFocused();
 
         [WebMethod]
         public static void OnMediaReFocused()

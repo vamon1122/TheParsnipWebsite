@@ -22,6 +22,8 @@ namespace ParsnipWebsite
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            Data.OnMediaUnFocused();
+
             if (string.IsNullOrEmpty(Data.DeviceType))
             {
                 Response.Redirect($"get_device_info?url={Request.Url.PathAndQuery.Substring(1)}");
