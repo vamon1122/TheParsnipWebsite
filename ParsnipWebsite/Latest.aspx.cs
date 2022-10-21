@@ -12,7 +12,7 @@ namespace ParsnipWebsite
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Data.OnMediaUnFocused();
+            //Data.OnMediaUnFocused();
 
             myUser = Account.SecurePage(this, Data.DeviceType);
 
@@ -21,6 +21,8 @@ namespace ParsnipWebsite
             NewMenu.Upload = true;
 
             UploadMediaControl.Initialise(myUser, this);
+
+            //Data.OnMediaUnFocused();
         }
 
         protected void Page_LoadComplete(object sender, EventArgs e)
@@ -75,6 +77,10 @@ namespace ParsnipWebsite
                 LastThreeMonthsAccordion.Media = controls.LastThreeMonths;
                 LastThreeMonthsAccordion.Text = "Last three months";
             }
+
+            //Data.OnMediaUnFocused();
         }
+
+        protected void Page_PreRender(object sender, EventArgs e) => Data.OnMediaUnFocused();
     }
 }
