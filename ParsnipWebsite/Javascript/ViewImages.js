@@ -34,4 +34,10 @@ document.addEventListener("DOMContentLoaded", function () {
         window.onfocus = onFocus;
         window.onblur = onBlur;
     }
+
+    window.addEventListener('beforeunload', function (e) {
+        PageMethods.OnMediaUnFocused()
+        //e.preventDefault();
+        //e.returnValue = '';
+    });
 });
