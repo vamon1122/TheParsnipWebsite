@@ -19,4 +19,19 @@ document.addEventListener("DOMContentLoaded", function () {
     else {
         //I used Javascript/intersection-observer as a fallback
     }
+
+    function onBlur() {
+        PageMethods.OnMediaUnFocused();
+    };
+    function onFocus() {
+        PageMethods.OnMediaReFocused();
+    };
+
+    if (/*@cc_on!@*/false) { // check for Internet Explorer
+        document.onfocusin = onFocus;
+        document.onfocusout = onBlur;
+    } else {
+        window.onfocus = onFocus;
+        window.onblur = onBlur;
+    }
 });
