@@ -2114,6 +2114,9 @@
     <Compile Include="MyUploads.aspx.designer.cs">
       <DependentUpon>MyUploads.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ParsnipPage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Photos.aspx.cs">
       <DependentUpon>Photos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

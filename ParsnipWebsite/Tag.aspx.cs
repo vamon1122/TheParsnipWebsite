@@ -35,8 +35,6 @@ namespace ParsnipWebsite
         
         protected void Page_Load(object sender, EventArgs e)
         {
-            Data.OnMediaUnFocused();
-
             if (string.IsNullOrEmpty(Request.QueryString["id"]) && string.IsNullOrEmpty(Request.QueryString["user"]))
             {
                 Response.Redirect("home");

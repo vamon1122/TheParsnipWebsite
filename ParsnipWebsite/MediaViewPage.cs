@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace ParsnipWebsite
 {
-    public class MediaViewPage : System.Web.UI.Page
+    public class MediaViewPage : ParsnipPage
     {
         [WebMethod]
         public static void OnMediaCenterScreen(string containerId)

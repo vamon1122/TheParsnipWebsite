@@ -12,13 +12,11 @@ using System.Configuration;
 
 namespace ParsnipWebsite
 {
-    public partial class Home : System.Web.UI.Page
+    public partial class Home : ParsnipPage
     {
         private User myUser;
         protected void Page_Load(object sender, EventArgs e)
         {
-            Data.OnMediaUnFocused();
-
             MOTD.InnerHtml = System.Configuration.ConfigurationManager.AppSettings["MOTD"];
 
             if (string.IsNullOrEmpty(Data.DeviceType))
