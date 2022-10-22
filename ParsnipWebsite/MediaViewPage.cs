@@ -42,6 +42,8 @@ namespace ParsnipWebsite
                     {
                         var tempMedia = new Media() { Id = mediaId };
                         tempMedia.View(loggedInUser, true, milliseconds);
+                        session["CurrentViewMediaId"] = null;
+                        session["CurrentViewId"] = null;
                         Debug.WriteLine($"View inserted ({mediaId} was viwed continuously for 2 seconds)");
                         return;
                     }
@@ -64,9 +66,12 @@ namespace ParsnipWebsite
             }
             else
             {
-                Debug.WriteLine($"Media was Re-focused. View re-started");
+                Debug.WriteLine($"Refocusing media...");
                 OnMediaCenterScreen("control_" + session["CurrentViewMediaId"].ToString());
             }
         }
+
+        [WebMethod]
+        public static void OnClose() => Debug.WriteLine("Tab closed");
     }
 }

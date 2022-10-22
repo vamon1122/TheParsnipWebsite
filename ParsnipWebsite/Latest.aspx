@@ -19,7 +19,7 @@
     <link rel="apple-touch-icon" sizes="72×72" href="Resources/Favicons/apple-icon-72x72.png" />
     <link rel="apple-touch-icon" href="Resources/Favicons/apple-icon.png" />
 </head>
-<body>
+<body onunload="PageMethods.OnClose()">
     <errorHandler:ErrorHandler runat="server" ID="ErrorHandler" />
     <menuControls:NewMenu runat="server" ID="NewMenu" />
     <form runat="server">
