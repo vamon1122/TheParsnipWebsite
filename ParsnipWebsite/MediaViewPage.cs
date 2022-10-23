@@ -32,8 +32,8 @@ namespace ParsnipWebsite
                 session["CurrentViewMediaId"] = mediaId;
                 Debug.WriteLine($"Image focused ({mediaId} is an image. Starting timer...)");
                 System.Timers.Timer minInsertViewTimer;
-                var imageViewThreshold = Convert.ToInt16(ConfigurationManager.AppSettings["InsertImageViewAfterMilliseconds"]);
-                minInsertViewTimer = new System.Timers.Timer(imageViewThreshold);
+                var imageViewThreshold = TimeSpan.FromMilliseconds(Convert.ToInt16(ConfigurationManager.AppSettings["InsertImageViewAfterMilliseconds"]));
+                minInsertViewTimer = new System.Timers.Timer(imageViewThreshold.TotalMilliseconds);
                 minInsertViewTimer.Elapsed += (sender, e) => OnImageViewThresholdMet();
                 minInsertViewTimer.AutoReset = false;
                 minInsertViewTimer.Enabled = true;
@@ -55,7 +55,7 @@ namespace ParsnipWebsite
                             {
                                 checkViewStillInFocus.Close();
                                 timer.Stop();
-                                session["CurrentViewMediaId"] = null;
+                                //session["CurrentViewMediaId"] = null;
                                 session["CurrentViewId"] = null;
 
                                 TimeSpan timeTaken = timer.Elapsed;
