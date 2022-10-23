@@ -43,7 +43,6 @@ namespace ParsnipWebsite
                     if (viewId.ToString() == session["CurrentViewId"]?.ToString())
                     {
                         System.Timers.Timer checkViewStillInFocus;
-                        var checkViewStillInFocusMilliseconds = Convert.ToInt16(ConfigurationManager.AppSettings["InsertImageViewAfterMilliseconds"]);
                         checkViewStillInFocus = new System.Timers.Timer(1);
                         checkViewStillInFocus.Elapsed += (sender, e) => OnViewStillInFocus();
                         checkViewStillInFocus.AutoReset = true;
@@ -55,18 +54,17 @@ namespace ParsnipWebsite
                             {
                                 checkViewStillInFocus.Close();
                                 timer.Stop();
-                                //session["CurrentViewMediaId"] = null;
                                 session["CurrentViewId"] = null;
 
                                 TimeSpan timeTaken = timer.Elapsed;
                                 var tempMedia = new Media() { Id = mediaId };
                                 tempMedia.View(loggedInUser, true, imageViewThreshold, timer.Elapsed);
-                                Debug.WriteLine($"View inserted ({mediaId} was viwed continuously for {timeTaken.TotalSeconds} seconds)");
+                                Debug.WriteLine($"View inserted ({mediaId} was viewed continuously for {timeTaken.TotalSeconds} seconds)");
                                 return;
                             }
                         }
                     }
-                    else Debug.WriteLine($"View NOT inserted ({mediaId} was NOT viewed continuously for 2 seconds)");
+                    else Debug.WriteLine($"View NOT inserted ({mediaId} was NOT viewed continuously for {imageViewThreshold.TotalSeconds} seconds)");
                 }
             }
         }
