@@ -36,7 +36,7 @@ namespace ParsnipWebsite
 
         protected void Page_LoadComplete(object sender, EventArgs e)
         {
-            foreach (MediaControl mc in MediaControl.GetAlbumAsMediaControls(KrakowMediaTag))
+            foreach (MediaControl mc in MediaControl.GetAlbumAsMediaControls(KrakowMediaTag, this))
             {
                 DynamicMediaDiv.Controls.Add(mc);
             }

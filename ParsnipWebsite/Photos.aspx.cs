@@ -41,7 +41,7 @@ namespace ParsnipWebsite
 
         protected void Page_LoadComplete(object sender, EventArgs e)
         {
-            foreach (MediaControl mediaControl in MediaControl.GetAlbumAsMediaControls(PhotosMediaTag))
+            foreach (MediaControl mediaControl in MediaControl.GetAlbumAsMediaControls(PhotosMediaTag, this))
             {
                 DynamicMediaDiv.Controls.Add(mediaControl);
             }

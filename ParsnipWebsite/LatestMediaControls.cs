@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
+using static ParsnipWebsite.Enums;
 
 namespace ParsnipWebsite
 {
@@ -28,10 +29,10 @@ namespace ParsnipWebsite
             LastThreeMonths = new List<MediaControl>();
         }
 
-        public static LatestMediaControls GetLatestMediaAsLatestMediaControls(List<Media> latestMedia, string redirect)
+        public static LatestMediaControls GetLatestMediaAsLatestMediaControls(List<Media> latestMedia, string redirect, ParsnipPage httpHandler)
         {
             var mediaControls = new LatestMediaControls();
-            Page httpHandler = (Page)HttpContext.Current.Handler;
+            //ParsnipPage httpHandler = (ParsnipPage)HttpContext.Current.Handler;
             int loggedInUserId = ParsnipData.Accounts.User.LogIn().Id;
 
             var lastMinute = latestMedia.Where(x => x.DateTimeCreated > ParsnipData.Parsnip.AdjustedTime.AddMinutes(-1));
@@ -47,6 +48,8 @@ namespace ParsnipWebsite
                 foreach (var media in lastMinute)
                 {
                     MediaControl myMediaControl = (MediaControl)httpHandler.LoadControl("~/Custom_Controls/Media/MediaControl.ascx");
+                    //myMediaControl.ID = $"{httpHandler.PageId}_{media.Id}";
+                    myMediaControl.PageId = httpHandler.PageId;
                     myMediaControl.Redirect = redirect;
                     myMediaControl.MyMedia = media;
                     mediaControls.LastMinute.Add(myMediaControl);
@@ -58,6 +61,8 @@ namespace ParsnipWebsite
                 foreach (var media in lastHour)
                 {
                     MediaControl myMediaControl = (MediaControl)httpHandler.LoadControl("~/Custom_Controls/Media/MediaControl.ascx");
+                    //myMediaControl.ID = $"{httpHandler.PageId}_{media.Id}";
+                    myMediaControl.PageId = httpHandler.PageId;
                     myMediaControl.Redirect = redirect;
                     myMediaControl.MyMedia = media;
                     mediaControls.LastHour.Add(myMediaControl);
@@ -69,6 +74,8 @@ namespace ParsnipWebsite
                 foreach (var media in today)
                 {
                     MediaControl myMediaControl = (MediaControl)httpHandler.LoadControl("~/Custom_Controls/Media/MediaControl.ascx");
+                    //myMediaControl.ID = $"{httpHandler.PageId}_{media.Id}";
+                    myMediaControl.PageId = httpHandler.PageId;
                     myMediaControl.Redirect = redirect;
                     myMediaControl.MyMedia = media;
                     mediaControls.Today.Add(myMediaControl);
@@ -80,6 +87,8 @@ namespace ParsnipWebsite
                 foreach (var media in yesterday)
                 {
                     MediaControl myMediaControl = (MediaControl)httpHandler.LoadControl("~/Custom_Controls/Media/MediaControl.ascx");
+                    //myMediaControl.ID = $"{httpHandler.PageId}_{media.Id}";
+                    myMediaControl.PageId = httpHandler.PageId;
                     myMediaControl.Redirect = redirect;
                     myMediaControl.MyMedia = media;
                     mediaControls.Yesterday.Add(myMediaControl);
@@ -91,6 +100,8 @@ namespace ParsnipWebsite
                 foreach (var media in lastWeek)
                 {
                     MediaControl myMediaControl = (MediaControl)httpHandler.LoadControl("~/Custom_Controls/Media/MediaControl.ascx");
+                    //myMediaControl.ID = $"{httpHandler.PageId}_{media.Id}";
+                    myMediaControl.PageId = httpHandler.PageId;
                     myMediaControl.Redirect = redirect;
                     myMediaControl.MyMedia = media;
                     mediaControls.LastWeek.Add(myMediaControl);
@@ -102,6 +113,8 @@ namespace ParsnipWebsite
                 foreach (var media in lastMonth)
                 {
                     MediaControl myMediaControl = (MediaControl)httpHandler.LoadControl("~/Custom_Controls/Media/MediaControl.ascx");
+                    //myMediaControl.ID = $"{httpHandler.PageId}_{media.Id}";
+                    myMediaControl.PageId = httpHandler.PageId;
                     myMediaControl.Redirect = redirect;
                     myMediaControl.MyMedia = media;
                     mediaControls.LastMonth.Add(myMediaControl);
@@ -113,6 +126,8 @@ namespace ParsnipWebsite
                 foreach (var media in lastThreeMonths)
                 {
                     MediaControl myMediaControl = (MediaControl)httpHandler.LoadControl("~/Custom_Controls/Media/MediaControl.ascx");
+                    //myMediaControl.ID = $"{httpHandler.PageId}_{media.Id}";
+                    myMediaControl.PageId = httpHandler.PageId;
                     myMediaControl.Redirect = redirect;
                     myMediaControl.MyMedia = media;
                     mediaControls.LastThreeMonths.Add(myMediaControl);

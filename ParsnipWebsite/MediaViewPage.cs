@@ -18,18 +18,19 @@ namespace ParsnipWebsite
             timer.Start();
             var thisViewId = Guid.NewGuid();
             var session = HttpContext.Current.Session;
-            session["CurrentViewId"] = thisViewId.ToString();
             var splitContainerId = containerId.Split('_');
+            var PageId = splitContainerId[2];
+            session[$"{PageId}_CurrentViewId"] = thisViewId.ToString();
             if (splitContainerId.Length < 2 || splitContainerId.Last() == "thumbnail")
             {
-                session["CurrentViewMediaId"] = null;
+                session[$"{PageId}_CurrentViewMediaId"] = null;
                 Debug.WriteLine($"Video focused (Ignoring)");
                 return;
             }
-            StartImageViewTimer(thisViewId, new MediaId(splitContainerId.Last()), ParsnipData.Accounts.User.LogIn());
-            void StartImageViewTimer(Guid viewId, MediaId mediaId, User loggedInUser)
+            StartImageViewTimer(thisViewId, PageId, $"{splitContainerId[3]}", ParsnipData.Accounts.User.LogIn());
+            void StartImageViewTimer(Guid viewId, string pageId, string mediaId, User loggedInUser)
             {
-                session["CurrentViewMediaId"] = mediaId;
+                session[$"{pageId}_CurrentViewMediaId"] = mediaId;
                 Debug.WriteLine($"Image focused ({mediaId} is an image. Starting timer...)");
                 System.Timers.Timer minInsertViewTimer;
                 var imageViewThreshold = TimeSpan.FromMilliseconds(Convert.ToInt16(ConfigurationManager.AppSettings["InsertImageViewAfterMilliseconds"]));
@@ -40,7 +41,7 @@ namespace ParsnipWebsite
 
                 void OnImageViewThresholdMet()
                 {
-                    if (viewId.ToString() == session["CurrentViewId"]?.ToString())
+                    if (viewId.ToString() == session[$"{pageId}_CurrentViewId"]?.ToString())
                     {
                         System.Timers.Timer checkViewStillInFocus;
                         checkViewStillInFocus = new System.Timers.Timer(1);
@@ -50,13 +51,13 @@ namespace ParsnipWebsite
 
                         void OnViewStillInFocus()
                         {
-                            if (viewId.ToString() != session["CurrentViewId"]?.ToString())
+                            if (viewId.ToString() != session[$"{pageId}_CurrentViewId"]?.ToString())
                             {
                                 checkViewStillInFocus.Close();
                                 timer.Stop();
 
                                 TimeSpan timeTaken = timer.Elapsed;
-                                var tempMedia = new Media() { Id = mediaId };
+                                var tempMedia = new Media() { Id = new MediaId(mediaId.Split('_').Last()) };
                                 tempMedia.View(loggedInUser, true, imageViewThreshold, timer.Elapsed);
                                 Debug.WriteLine($"View inserted ({mediaId} was viewed continuously for {timeTaken.TotalSeconds} seconds)");
                                 return;
@@ -83,7 +84,7 @@ namespace ParsnipWebsite
             else
             {
                 Debug.WriteLine($"Refocusing media...");
-                OnMediaCenterScreen("control_" + session["CurrentViewMediaId"].ToString());
+                OnMediaCenterScreen("control_id_" + session["CurrentViewMediaId"].ToString());
             }
         }
 

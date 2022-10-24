@@ -23,7 +23,7 @@ namespace ParsnipWebsite
 
         protected void Page_LoadComplete(object sender, EventArgs e)
         {
-            var controls = LatestMediaControls.GetLatestMediaAsLatestMediaControls(Media.SelectLatestMedia(myUser.Id), "latest");
+            var controls = LatestMediaControls.GetLatestMediaAsLatestMediaControls(Media.SelectLatestMedia(myUser.Id), "latest", this);
             if (controls.LastMinute.Count() > 0)
             {
                 NoMediaContainer.Visible = false;

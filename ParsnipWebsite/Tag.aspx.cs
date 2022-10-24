@@ -147,14 +147,14 @@ namespace ParsnipWebsite
         {
             if (myTag != null)
             {
-                foreach (MediaControl mediaControl in MediaControl.GetAlbumAsMediaControls(myTag))
+                foreach (MediaControl mediaControl in MediaControl.GetAlbumAsMediaControls(myTag, this))
                 {
                     DynamicMediaDiv.Controls.Add(mediaControl);
                 }
             }
             else if (myTaggedUser != null)
             {
-                foreach (MediaControl mediaControl in MediaControl.GetMediaUserPairAsMediaControls(myTaggedUser.Id))
+                foreach (MediaControl mediaControl in MediaControl.GetMediaUserPairAsMediaControls(myTaggedUser.Id, this))
                 {
                     DynamicMediaDiv.Controls.Add(mediaControl);
                 }

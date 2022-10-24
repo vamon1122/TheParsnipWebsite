@@ -71,7 +71,7 @@ namespace ParsnipWebsite
                 MediaTagContainer.Controls.Add(control);
             }
 
-            foreach (var mediaControl in MediaControl.GetMediaSearchResultAsMediaControls(searchResults))
+            foreach (var mediaControl in MediaControl.GetMediaSearchResultAsMediaControls(searchResults, this))
             {
                 MediaContainer.Controls.Add(mediaControl);
             }

@@ -23,6 +23,16 @@ namespace ParsnipWebsite.Custom_Controls.Media
 
         public string MySearch { get; set; }
 
+
+        private Guid _pageId;
+        public Guid PageId 
+        { 
+            get => _pageId;
+            set { 
+                _pageId = value; 
+            }
+        }
+
         ParsnipData.Media.Media _myMedia;
         public ParsnipData.Media.Media MyMedia
         {
@@ -69,7 +79,7 @@ namespace ParsnipWebsite.Custom_Controls.Media
                     MyImageHolder.Visible = true;
                     MyImageHolder.Style.Add("margin-bottom", "8px");
                     MyImageHolder.ImageUrl = value.Placeholder.Contains("http://") || value.Placeholder.Contains("https://") ? value.Placeholder : Request.Url.GetLeftPart(UriPartial.Authority) + "/" + value.Placeholder;
-                    MyImageHolder.ID = value.Id.ToString(); // Add("somecustom", value.);
+                    MyImageHolder.ID = $"{PageId}_{value.Id}"; // Add("somecustom", value.);
                     MyImageHolder.Attributes.Add("data-src", value.Compressed.Contains("http://") || value.Compressed.Contains("https://") ? value.Compressed : Request.Url.GetLeftPart(UriPartial.Authority) + "/" + value.Compressed);
                     MyImageHolder.Attributes.Add("data-srcset", value.Compressed.Contains("http://") || value.Compressed.Contains("https://") ? value.Compressed : Request.Url.GetLeftPart(UriPartial.Authority) + "/" + value.Compressed);
                     
@@ -84,8 +94,9 @@ namespace ParsnipWebsite.Custom_Controls.Media
 
                     a_play_video.Visible = true;
                     a_play_video.HRef = string.Format("../../view?id={0}", value.Id);
+                    thumbnail.ID = $"{PageId}_{value.Id}";
 
-                    if(_myMedia.Type == "video")
+                    if (_myMedia.Type == "video")
                     {
                         thumbnail.Src = Request.Url.GetLeftPart(UriPartial.Authority) + "/" + value.Placeholder;
                         thumbnail.Attributes.Add("data-src", Request.Url.GetLeftPart(UriPartial.Authority) + "/" + value.Compressed);
@@ -194,8 +205,9 @@ namespace ParsnipWebsite.Custom_Controls.Media
                 "   </div>\n";
         }
 
-        public static List<MediaControl> GetMediaUserPairAsMediaControls(int mediaTagUserId)
+        public static List<MediaControl> GetMediaUserPairAsMediaControls(int mediaTagUserId, ParsnipPage page)
         {
+            
             var mediaControls = new List<MediaControl>();
             Page httpHandler = (Page)HttpContext.Current.Handler;
             int loggedInUserId = ParsnipData.Accounts.User.LogIn().Id;
@@ -203,6 +215,7 @@ namespace ParsnipWebsite.Custom_Controls.Media
             foreach (ParsnipData.Media.Media temp in MediaUserPair.GetAllMedia(mediaTagUserId, loggedInUserId))
             {
                 MediaControl myMediaControl = (MediaControl)httpHandler.LoadControl("~/Custom_Controls/Media/MediaControl.ascx");
+                myMediaControl.PageId = page.PageId;
                 myMediaControl.MyMediaUserPair = new MediaUserPair() { UserId = mediaTagUserId, MediaId = temp.Id };
                 myMediaControl.MyMedia = temp;
                 mediaControls.Add(myMediaControl);
@@ -214,7 +227,7 @@ namespace ParsnipWebsite.Custom_Controls.Media
         }
 
 
-        public static List<MediaControl> GetMediaSearchResultAsMediaControls(MediaSearchResult mediaSearchResult)
+        public static List<MediaControl> GetMediaSearchResultAsMediaControls(MediaSearchResult mediaSearchResult, ParsnipPage page)
         {
             var mediaControls = new List<MediaControl>();
             Page httpHandler = (Page)HttpContext.Current.Handler;
@@ -222,6 +235,7 @@ namespace ParsnipWebsite.Custom_Controls.Media
             foreach (ParsnipData.Media.Media temp in mediaSearchResult.Media)
             {
                 MediaControl myMediaControl = (MediaControl)httpHandler.LoadControl("~/Custom_Controls/Media/MediaControl.ascx");
+                myMediaControl.PageId = page.PageId;
                 myMediaControl.MySearch = mediaSearchResult.SearchTerms;
                 myMediaControl.MyMedia = temp;
                 mediaControls.Add(myMediaControl);
@@ -230,7 +244,7 @@ namespace ParsnipWebsite.Custom_Controls.Media
             return mediaControls.ToList();
         }
 
-        public static List<MediaControl> GetAlbumAsMediaControls(MediaTag mediaTag)
+        public static List<MediaControl> GetAlbumAsMediaControls(MediaTag mediaTag, ParsnipPage page)
         {
             var mediaControls = new List<MediaControl>();
             Page httpHandler = (Page)HttpContext.Current.Handler;
@@ -239,6 +253,7 @@ namespace ParsnipWebsite.Custom_Controls.Media
             foreach (ParsnipData.Media.Media temp in mediaTag.GetAllMedia(loggedInUserId))
             {
                 MediaControl myMediaControl = (MediaControl)httpHandler.LoadControl("~/Custom_Controls/Media/MediaControl.ascx");
+                myMediaControl.PageId = page.PageId;
                 myMediaControl.MyMediaTag = mediaTag;
                 myMediaControl.MyMedia = temp;
                 mediaControls.Add(myMediaControl);
