@@ -12,24 +12,24 @@ namespace ParsnipWebsite
     public class MediaViewPage : ParsnipPage
     {
         [WebMethod]
-        public static void OnMediaCenterScreen(string containerId)
+        public static void OnMediaCenterScreen(string containerId, string bodyId)
         {
             var timer = new Stopwatch();
             timer.Start();
             var thisViewId = Guid.NewGuid();
             var session = HttpContext.Current.Session;
-            session["CurrentViewId"] = thisViewId.ToString();
+            session[$"{bodyId}_CurrentViewId"] = thisViewId.ToString();
             var splitContainerId = containerId.Split('_');
             if (splitContainerId.Length < 2 || splitContainerId.Last() == "thumbnail")
             {
-                session["CurrentViewMediaId"] = null;
+                session[$"{bodyId}_CurrentViewMediaId"] = null;
                 Debug.WriteLine($"Video focused (Ignoring)");
                 return;
             }
             StartImageViewTimer(thisViewId, new MediaId(splitContainerId.Last()), ParsnipData.Accounts.User.LogIn());
             void StartImageViewTimer(Guid viewId, MediaId mediaId, User loggedInUser)
             {
-                session["CurrentViewMediaId"] = mediaId;
+                session[$"{bodyId}_CurrentViewMediaId"] = mediaId;
                 Debug.WriteLine($"Image focused ({mediaId} is an image. Starting timer...)");
                 System.Timers.Timer minInsertViewTimer;
                 var imageViewThreshold = TimeSpan.FromMilliseconds(Convert.ToInt16(ConfigurationManager.AppSettings["InsertImageViewAfterMilliseconds"]));
@@ -40,7 +40,7 @@ namespace ParsnipWebsite
 
                 void OnImageViewThresholdMet()
                 {
-                    if (viewId.ToString() == session["CurrentViewId"]?.ToString())
+                    if (viewId.ToString() == session[$"{bodyId}_CurrentViewId"]?.ToString())
                     {
                         System.Timers.Timer checkViewStillInFocus;
                         checkViewStillInFocus = new System.Timers.Timer(1);
@@ -50,7 +50,7 @@ namespace ParsnipWebsite
 
                         void OnViewStillInFocus()
                         {
-                            if (viewId.ToString() != session["CurrentViewId"]?.ToString())
+                            if (viewId.ToString() != session[$"{bodyId}_CurrentViewId"]?.ToString())
                             {
                                 checkViewStillInFocus.Close();
                                 timer.Stop();
@@ -76,14 +76,14 @@ namespace ParsnipWebsite
         {
             var session = HttpContext.Current.Session;
             //session["CurrentViewId"] = Guid.NewGuid();
-            if(session["CurrentViewMediaId"] == null && session[$"{bodyId}_CurrentUnfocusedViewId"] == null)
+            if(session[$"{bodyId}_CurrentViewMediaId"] == null && session[$"{bodyId}_CurrentUnfocusedViewId"] == null)
             {
                 Debug.WriteLine($"There was no media to re-focus");
             }
             else
             {
-                Debug.WriteLine($"Refocusing media... {bodyId}");
-                OnMediaCenterScreen("control_" + session[$"{bodyId}_CurrentUnfocusedViewId"].ToString());
+                Debug.WriteLine($"Refocusing media...");
+                OnMediaCenterScreen("control_" + session[$"{bodyId}_CurrentUnfocusedViewId"].ToString(), bodyId);
             }
         }
 

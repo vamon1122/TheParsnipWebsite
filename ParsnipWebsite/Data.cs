@@ -63,10 +63,11 @@ namespace ParsnipWebsite
             HttpContext.Current.Session["CurrentViewId"] = null;
             if (bodyId != null)
             {
-                HttpContext.Current.Session[$"{bodyId}_CurrentUnfocusedViewId"] = HttpContext.Current.Session["CurrentViewMediaId"];
-                HttpContext.Current.Session["CurrentViewMediaId"] = null;
+                HttpContext.Current.Session[$"{bodyId}_CurrentUnfocusedViewId"] = HttpContext.Current.Session[$"{bodyId}_CurrentViewMediaId"];
+                HttpContext.Current.Session[$"{bodyId}_CurrentViewMediaId"] = null;
+                HttpContext.Current.Session[$"{bodyId}_CurrentViewId"] = null;
             }
-            Debug.WriteLine($"Media focus was cleared {reason}. Id = {bodyId}");
+            Debug.WriteLine($"Media focus was cleared ({reason})");
         }
     }
 }
