@@ -72,7 +72,7 @@ namespace ParsnipWebsite
         public static void OnMediaUnFocused(string feedback, string unfocusedId) => Data.OnMediaUnFocused(feedback, unfocusedId);
 
         [WebMethod(EnableSession = true)]
-        public static void OnMediaReFocused(string bodyId)
+        public static void OnMediaReFocused(string bodyId, string feedback)
         {
             var session = HttpContext.Current.Session;
             //session["CurrentViewId"] = Guid.NewGuid();
@@ -82,7 +82,7 @@ namespace ParsnipWebsite
             }
             else
             {
-                Debug.WriteLine($"Refocusing media...");
+                Debug.WriteLine($"Refocusing media... ({feedback})");
                 OnMediaCenterScreen("control_" + session[$"{bodyId}_CurrentUnfocusedViewId"].ToString(), bodyId);
             }
         }

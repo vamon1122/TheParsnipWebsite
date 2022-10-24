@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
             PageMethods.OnMenuOpenMediaNotReFocused();
         }
         else {
-            PageMethods.OnMediaReFocused(document.body.id);
+            PageMethods.OnMediaReFocused(document.body.id, 'tab back in focus');
         }
     };
 
