@@ -54,7 +54,6 @@ namespace ParsnipWebsite
                             {
                                 checkViewStillInFocus.Close();
                                 timer.Stop();
-                                session["CurrentViewId"] = null;
 
                                 TimeSpan timeTaken = timer.Elapsed;
                                 var tempMedia = new Media() { Id = mediaId };
