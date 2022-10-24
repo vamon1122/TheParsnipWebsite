@@ -22,7 +22,7 @@ namespace ParsnipWebsite
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Data.OnMediaUnFocused();
+            //Data.OnMediaUnFocused();
 
             if (string.IsNullOrEmpty(Data.DeviceType))
             {

@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function onBlur() {
-        PageMethods.OnMediaUnFocused();
+        PageMethods.OnMediaUnFocused("window unfocused");
     };
     function onFocus() {
         if (document.getElementById('mobileNav').style.display == 'block') {
@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     window.addEventListener('beforeunload', function (e) {
-        PageMethods.OnMediaUnFocused()
+        PageMethods.OnMediaUnFocused('tab / window closed')
         //e.preventDefault();
         //e.returnValue = '';
     });

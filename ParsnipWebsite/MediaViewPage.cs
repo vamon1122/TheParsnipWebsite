@@ -69,7 +69,7 @@ namespace ParsnipWebsite
         }
 
         [WebMethod]
-        public static void OnMediaUnFocused() => Data.OnMediaUnFocused();
+        public static void OnMediaUnFocused() => Data.OnMediaUnFocused("OnMediaUnFocused");
 
         [WebMethod]
         public static void OnMediaReFocused()
