@@ -12,18 +12,35 @@ namespace ParsnipWebsite
     public class MediaViewPage : ParsnipPage
     {
         [WebMethod]
-        public static void OnMediaCenterScreen(string containerId, string bodyId)
+        public static void OnMediaCenterScreen(string containerId, string bodyId, bool docIsHidden)
         {
+            
             var timer = new Stopwatch();
             timer.Start();
+
             var thisViewId = Guid.NewGuid();
             var session = HttpContext.Current.Session;
             session[$"{bodyId}_CurrentViewId"] = thisViewId.ToString();
             var splitContainerId = containerId.Split('_');
-            if (splitContainerId.Length < 2 || splitContainerId.Last() == "thumbnail")
+            //if(splitContainerId.Length <= 2)
+            //{
+            //    Debug.WriteLine($"There was no media ID to focus... bug???");
+            //    return;
+            //}
+            if (splitContainerId.Last() == "thumbnail")
             {
                 session[$"{bodyId}_CurrentViewMediaId"] = null;
                 Debug.WriteLine($"Video focused (Ignoring)");
+                return;
+            }
+            if (docIsHidden)
+            {
+                Debug.WriteLine("Tab is not in focus. View postponed");
+                //session[$"{bodyId}_CurrentUnfocusedViewId"] = thisViewId.ToString();
+                //session[$"{bodyId}_CurrentViewMediaId"] = new MediaId(splitContainerId.Last());
+                session[$"{bodyId}_CurrentUnfocusedViewMediaId"] = splitContainerId.Last();
+                session[$"{bodyId}_CurrentViewMediaId"] = null;
+                session[$"{bodyId}_CurrentViewId"] = null;
                 return;
             }
             StartImageViewTimer(thisViewId, new MediaId(splitContainerId.Last()), ParsnipData.Accounts.User.LogIn());
@@ -76,14 +93,14 @@ namespace ParsnipWebsite
         {
             var session = HttpContext.Current.Session;
             //session["CurrentViewId"] = Guid.NewGuid();
-            if(session[$"{bodyId}_CurrentViewMediaId"] == null && session[$"{bodyId}_CurrentUnfocusedViewId"] == null)
+            if(session[$"{bodyId}_CurrentUnfocusedViewMediaId"] == null)
             {
-                Debug.WriteLine($"There was no media to re-focus");
+                Debug.WriteLine($"There was no media to re-focus ({feedback})");
             }
             else
             {
                 Debug.WriteLine($"Refocusing media... ({feedback})");
-                OnMediaCenterScreen("control_" + session[$"{bodyId}_CurrentUnfocusedViewId"].ToString(), bodyId);
+                OnMediaCenterScreen("control_" + session[$"{bodyId}_CurrentUnfocusedViewMediaId"].ToString(), bodyId, false);
             }
         }
 

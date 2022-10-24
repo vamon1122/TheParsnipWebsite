@@ -63,7 +63,7 @@ namespace ParsnipWebsite
             HttpContext.Current.Session["CurrentViewId"] = null;
             if (bodyId != null)
             {
-                HttpContext.Current.Session[$"{bodyId}_CurrentUnfocusedViewId"] = HttpContext.Current.Session[$"{bodyId}_CurrentViewMediaId"];
+                HttpContext.Current.Session[$"{bodyId}_CurrentUnfocusedViewMediaId"] = HttpContext.Current.Session[$"{bodyId}_CurrentViewMediaId"];
                 HttpContext.Current.Session[$"{bodyId}_CurrentViewMediaId"] = null;
                 HttpContext.Current.Session[$"{bodyId}_CurrentViewId"] = null;
             }
