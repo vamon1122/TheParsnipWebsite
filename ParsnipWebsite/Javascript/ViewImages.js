@@ -7,8 +7,18 @@ document.addEventListener("DOMContentLoaded", function () {
         let imageViewObserver = new TopIntersectionObserver(function (entries, observer) {
             entries.forEach(function (entry) {
                 if (entry.isIntersecting) {
-                    let viewedImage = entry.target;
-                    PageMethods.OnMediaCenterScreen(viewedImage.id);
+
+                    if (document.getElementById('mobileNav').style.display == 'block') {
+                        document.getElementById('mobileNav').style.display = 'none'
+                    }
+
+                    //if (document.getElementById('mobileNav').style.display == 'block') {
+                    //    PageMethods.OnMenuOpenMediaNotFocused();
+                    //}
+                    //else {
+                        let viewedImage = entry.target;
+                        PageMethods.OnMediaCenterScreen(viewedImage.id);
+                    //}
                 }
             });
         });
@@ -24,7 +34,12 @@ document.addEventListener("DOMContentLoaded", function () {
         PageMethods.OnMediaUnFocused();
     };
     function onFocus() {
-        PageMethods.OnMediaReFocused();
+        if (document.getElementById('mobileNav').style.display == 'block') {
+            PageMethods.OnMenuOpenMediaNotReFocused();
+        }
+        else {
+            PageMethods.OnMediaReFocused();
+        }
     };
 
     if (/*@cc_on!@*/false) { // check for Internet Explorer

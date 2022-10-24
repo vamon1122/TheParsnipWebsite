@@ -89,5 +89,11 @@ namespace ParsnipWebsite
 
         [WebMethod]
         public static void OnClose() => Debug.WriteLine("Tab closed");
+
+        [WebMethod]
+        public static void OnMenuOpenMediaNotReFocused() => Debug.WriteLine("Menu is open! Media not refocused.");
+
+        [WebMethod]
+        public static void OnMenuOpenMediaNotFocused() => Debug.WriteLine("Menu is open! Media not focused.");
     }
 }
