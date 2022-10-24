@@ -19,7 +19,7 @@
     <link rel="apple-touch-icon" sizes="72×72" href="Resources/Favicons/apple-icon-72x72.png" />
     <link rel="apple-touch-icon" href="Resources/Favicons/apple-icon.png" />
 </head>
-<body>
+<body id="SomeLatestId">
     <errorHandler:ErrorHandler runat="server" ID="ErrorHandler" />
     <menuControls:NewMenu runat="server" ID="NewMenu" />
     <form runat="server">
@@ -40,7 +40,11 @@
         <mediaControls:MediaAccordion runat="server" id="LastWeekAccordion" Visible="false" />
         <mediaControls:MediaAccordion runat="server" id="LastMonthAccordion" Visible="false" />
         <mediaControls:MediaAccordion runat="server" id="LastThreeMonthsAccordion" Visible="false" />
-    </form>    
+    </form> 
+    <%--<script>
+        document.body.id = "somegeneratedid"
+    </script>--%>
+    <script src="Javascript/BodyId.js"></script>
     <script src="Libraries/jquery-3.5.1/jquery.min.js"></script>
     <script src="Javascript/LazyImages.js"></script>
     <script src="Javascript/IntersectionObserver.js"></script>

@@ -31,14 +31,14 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function onBlur() {
-        PageMethods.OnMediaUnFocused("window unfocused");
+        PageMethods.OnMediaUnFocused("window unfocused", document.body.id);
     };
     function onFocus() {
         if (document.getElementById('mobileNav').style.display == 'block') {
             PageMethods.OnMenuOpenMediaNotReFocused();
         }
         else {
-            PageMethods.OnMediaReFocused();
+            PageMethods.OnMediaReFocused(document.body.id);
         }
     };
 
@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     window.addEventListener('beforeunload', function (e) {
-        PageMethods.OnMediaUnFocused('tab / window closed')
+        PageMethods.OnMediaUnFocused('tab / window closed', document.body.id)
         //e.preventDefault();
         //e.returnValue = '';
     });

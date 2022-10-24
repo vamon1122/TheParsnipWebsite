@@ -58,10 +58,15 @@ namespace ParsnipWebsite
         public static string DeviceLatitude { get { return Cookie.Read("deviceLatitude"); } }
         public static string DeviceLongitude { get { return Cookie.Read("deviceLongitude"); } }
         public static string SessionId { get { return Cookie.Read("sessionId"); } }
-        public static void OnMediaUnFocused(string reason)
+        public static void OnMediaUnFocused(string reason, string bodyId = null)
         {
             HttpContext.Current.Session["CurrentViewId"] = null;
-            Debug.WriteLine($"Media focus was cleared {reason}");
+            if (bodyId != null)
+            {
+                HttpContext.Current.Session[$"{bodyId}_CurrentUnfocusedViewId"] = HttpContext.Current.Session["CurrentViewMediaId"];
+                HttpContext.Current.Session["CurrentViewMediaId"] = null;
+            }
+            Debug.WriteLine($"Media focus was cleared {reason}. Id = {bodyId}");
         }
     }
 }

@@ -69,21 +69,21 @@ namespace ParsnipWebsite
         }
 
         [WebMethod]
-        public static void OnMediaUnFocused() => Data.OnMediaUnFocused("OnMediaUnFocused");
+        public static void OnMediaUnFocused(string feedback, string unfocusedId) => Data.OnMediaUnFocused(feedback, unfocusedId);
 
-        [WebMethod]
-        public static void OnMediaReFocused()
+        [WebMethod(EnableSession = true)]
+        public static void OnMediaReFocused(string bodyId)
         {
             var session = HttpContext.Current.Session;
             //session["CurrentViewId"] = Guid.NewGuid();
-            if(session["CurrentViewMediaId"] == null)
+            if(session["CurrentViewMediaId"] == null && session[$"{bodyId}_CurrentUnfocusedViewId"] == null)
             {
                 Debug.WriteLine($"There was no media to re-focus");
             }
             else
             {
-                Debug.WriteLine($"Refocusing media...");
-                OnMediaCenterScreen("control_" + session["CurrentViewMediaId"].ToString());
+                Debug.WriteLine($"Refocusing media... {bodyId}");
+                OnMediaCenterScreen("control_" + session[$"{bodyId}_CurrentUnfocusedViewId"].ToString());
             }
         }
 
