@@ -89,18 +89,20 @@ namespace ParsnipWebsite
         public static void OnMediaUnFocused(string feedback, string unfocusedId) => Data.OnMediaUnFocused(feedback, unfocusedId);
 
         [WebMethod(EnableSession = true)]
-        public static void OnMediaReFocused(string bodyId, string feedback)
+        public static bool OnMediaReFocused(string bodyId, string feedback)
         {
             var session = HttpContext.Current.Session;
             //session["CurrentViewId"] = Guid.NewGuid();
             if(session[$"{bodyId}_CurrentUnfocusedViewMediaId"] == null)
             {
-                Debug.WriteLine($"There was no media to re-focus ({feedback})");
+                Debug.WriteLine($"There was no media to re-focus ({feedback}). Page should be refreshed...");
+                return true;
             }
             else
             {
                 Debug.WriteLine($"Refocusing media... ({feedback})");
                 OnMediaCenterScreen("control_" + session[$"{bodyId}_CurrentUnfocusedViewMediaId"].ToString(), bodyId, false);
+                return false;
             }
         }
 
@@ -112,5 +114,8 @@ namespace ParsnipWebsite
 
         [WebMethod]
         public static void OnMenuOpenMediaNotFocused() => Debug.WriteLine("Menu is open! Media not focused.");
+
+        [WebMethod]
+        public static void OnWrite(string writeMe) => Debug.WriteLine(writeMe);
     }
 }

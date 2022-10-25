@@ -38,7 +38,14 @@ document.addEventListener("DOMContentLoaded", function () {
             PageMethods.OnMenuOpenMediaNotReFocused();
         }
         else {
-            PageMethods.OnMediaReFocused(document.body.id, 'tab back in focus');
+            PageMethods.OnMediaReFocused(document.body.id, 'tab back in focus', OnSuccess);
+            function OnSuccess(response, userContext, methodName) {
+                PageMethods.OnWrite('response = ' + response);
+                if (response == true) {
+                    PageMethods.OnWrite('Refreshing the page...');
+                    window.location.href = window.location.href;
+                }
+            }
         }
     };
 
