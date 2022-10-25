@@ -60,9 +60,11 @@ namespace ParsnipWebsite
         public static string SessionId { get { return Cookie.Read("sessionId"); } }
         public static void OnMediaUnFocused(string reason, string bodyId = null)
         {
+            //Debug.WriteLine("Page has had focus!");
             HttpContext.Current.Session["CurrentViewId"] = null;
             if (bodyId != null)
             {
+                HttpContext.Current.Session[$"{bodyId}_PageHasHadFocusInTheCurrentSession"] = true;
                 HttpContext.Current.Session[$"{bodyId}_CurrentUnfocusedViewMediaId"] = HttpContext.Current.Session[$"{bodyId}_CurrentViewMediaId"] ?? HttpContext.Current.Session[$"{bodyId}_CurrentUnfocusedViewMediaId"];
                 HttpContext.Current.Session[$"{bodyId}_CurrentViewMediaId"] = null;
                 HttpContext.Current.Session[$"{bodyId}_CurrentViewId"] = null;

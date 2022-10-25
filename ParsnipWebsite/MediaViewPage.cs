@@ -30,9 +30,11 @@ namespace ParsnipWebsite
             if (splitContainerId.Last() == "thumbnail")
             {
                 session[$"{bodyId}_CurrentViewMediaId"] = null;
+                session[$"{bodyId}_ThumbnailIsCurrentlyFocused"] = true;
                 Debug.WriteLine($"Video focused (Ignoring)");
                 return;
             }
+            session[$"{bodyId}_ThumbnailIsCurrentlyFocused"] = false;
             if (docIsHidden)
             {
                 Debug.WriteLine("Tab is not in focus. View postponed");
@@ -95,13 +97,20 @@ namespace ParsnipWebsite
             //session["CurrentViewId"] = Guid.NewGuid();
             if(session[$"{bodyId}_CurrentUnfocusedViewMediaId"] == null)
             {
-                Debug.WriteLine($"There was no media to re-focus ({feedback}). Page should be refreshed...");
-                return true;
+                var thumbnailWasFocused = session[$"{bodyId}_ThumbnailIsCurrentlyFocused"] != null && Convert.ToBoolean(session[$"{bodyId}_ThumbnailIsCurrentlyFocused"]);
+                if (Convert.ToBoolean(session[$"{bodyId}_PageHasHadFocusInTheCurrentSession"]) && !thumbnailWasFocused)
+                {
+                    Debug.WriteLine($"The current page never had focus in the current session. Refresh is required... ({feedback})");
+                    return true;
+                }
+                Debug.WriteLine($"There was no media to re-focus{(thumbnailWasFocused ? " because a thumbnail is in view" : string.Empty)} ({feedback})");
+                return false;
             }
             else
             {
                 Debug.WriteLine($"Refocusing media... ({feedback})");
                 OnMediaCenterScreen("control_" + session[$"{bodyId}_CurrentUnfocusedViewMediaId"].ToString(), bodyId, false);
+                session[$"{bodyId}_CurrentUnfocusedViewMediaId"] = null;
                 return false;
             }
         }
