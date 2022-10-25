@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     //}
                     //else {
                         let viewedImage = entry.target;
-                        PageMethods.OnMediaCenterScreen(viewedImage.id, document.body.id, document.hidden);
+                        PageMethods.OnMediaCenterScreen(viewedImage.id, document.body.id, !document.hasFocus());
                     //}
                 }
             });
