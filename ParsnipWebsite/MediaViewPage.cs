@@ -95,15 +95,17 @@ namespace ParsnipWebsite
         {
             var session = HttpContext.Current.Session;
             //session["CurrentViewId"] = Guid.NewGuid();
-            if(session[$"{bodyId}_CurrentUnfocusedViewMediaId"] == null)
+
+            if (!Convert.ToBoolean(session[$"{bodyId}_PageHasHadFocusInTheCurrentSession"]))
             {
-                var thumbnailWasFocused = session[$"{bodyId}_ThumbnailIsCurrentlyFocused"] != null && Convert.ToBoolean(session[$"{bodyId}_ThumbnailIsCurrentlyFocused"]);
-                if (Convert.ToBoolean(session[$"{bodyId}_PageHasHadFocusInTheCurrentSession"]) && !thumbnailWasFocused)
-                {
-                    Debug.WriteLine($"The current page never had focus in the current session. Refresh is required... ({feedback})");
-                    return true;
-                }
-                Debug.WriteLine($"There was no media to re-focus{(thumbnailWasFocused ? " because a thumbnail is in view" : string.Empty)} ({feedback})");
+                Debug.WriteLine($"The current page never had focus in the current session. Refresh is required... ({feedback})");
+                return true;
+            }
+
+            var thumbnailWasFocused = session[$"{bodyId}_ThumbnailIsCurrentlyFocused"] != null && Convert.ToBoolean(session[$"{bodyId}_ThumbnailIsCurrentlyFocused"]);
+            if (session[$"{bodyId}_CurrentUnfocusedViewMediaId"] == null)
+            {
+                Debug.WriteLine($"There was no media to re-focus{(thumbnailWasFocused ? " because a thumbnail is in view" : " but the page has been viewed")} ({feedback})");
                 return false;
             }
             else
