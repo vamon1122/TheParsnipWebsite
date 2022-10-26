@@ -96,25 +96,23 @@ namespace ParsnipWebsite
             var session = HttpContext.Current.Session;
             //session["CurrentViewId"] = Guid.NewGuid();
 
-            if (!Convert.ToBoolean(session[$"{bodyId}_PageHasHadFocusInTheCurrentSession"]))
+            if (session[$"{bodyId}_CurrentUnfocusedViewMediaId"] == null)
             {
+                if (Convert.ToBoolean(session[$"{bodyId}_PageHasHadFocusInTheCurrentSession"]))
+                {
+                    var thumbnailWasFocused = session[$"{bodyId}_ThumbnailIsCurrentlyFocused"] != null && Convert.ToBoolean(session[$"{bodyId}_ThumbnailIsCurrentlyFocused"]);
+                    Debug.WriteLine($"There was no media to re-focus{(thumbnailWasFocused ? " because a thumbnail is in view" : " but the page has been viewed")} ({feedback})");
+                    return false;
+                }
+
                 Debug.WriteLine($"The current page never had focus in the current session. Refresh is required... ({feedback})");
                 return true;
             }
 
-            var thumbnailWasFocused = session[$"{bodyId}_ThumbnailIsCurrentlyFocused"] != null && Convert.ToBoolean(session[$"{bodyId}_ThumbnailIsCurrentlyFocused"]);
-            if (session[$"{bodyId}_CurrentUnfocusedViewMediaId"] == null)
-            {
-                Debug.WriteLine($"There was no media to re-focus{(thumbnailWasFocused ? " because a thumbnail is in view" : " but the page has been viewed")} ({feedback})");
-                return false;
-            }
-            else
-            {
-                Debug.WriteLine($"Refocusing media... ({feedback})");
-                OnMediaCenterScreen("control_" + session[$"{bodyId}_CurrentUnfocusedViewMediaId"].ToString(), bodyId, false);
-                session[$"{bodyId}_CurrentUnfocusedViewMediaId"] = null;
-                return false;
-            }
+            Debug.WriteLine($"Refocusing media... ({feedback})");
+            OnMediaCenterScreen("control_" + session[$"{bodyId}_CurrentUnfocusedViewMediaId"].ToString(), bodyId, false);
+            session[$"{bodyId}_CurrentUnfocusedViewMediaId"] = null;
+            return false;
         }
 
         [WebMethod]
