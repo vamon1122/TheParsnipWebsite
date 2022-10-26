@@ -112,6 +112,7 @@ namespace ParsnipWebsite
             Debug.WriteLine($"Refocusing media... ({feedback})");
             OnMediaCenterScreen("control_" + session[$"{bodyId}_CurrentUnfocusedViewMediaId"].ToString(), bodyId, false);
             session[$"{bodyId}_CurrentUnfocusedViewMediaId"] = null;
+            session[$"{bodyId}_PageHasHadFocusInTheCurrentSession"] = true;
             return false;
         }
 
