@@ -74,6 +74,7 @@
     <Content Include="Amsterdam.aspx" />
     <Content Include="Bios.aspx" />
     <Content Include="Custom_Controls\Admin\AdminMediaControl.ascx" />
+    <Content Include="Custom_Controls\Loader.ascx" />
     <Content Include="Custom_Controls\Media\MediaAccordion.ascx" />
     <Content Include="Custom_Controls\Media\SearchMediaControl.ascx" />
     <Content Include="Custom_Controls\Media\VideoThumbnailControl.ascx" />
@@ -1931,6 +1932,13 @@
     </Compile>
     <Compile Include="Custom_Controls\ErrorHandler.ascx.designer.cs">
       <DependentUpon>ErrorHandler.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Custom_Controls\Loader.ascx.cs">
+      <DependentUpon>Loader.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Custom_Controls\Loader.ascx.designer.cs">
+      <DependentUpon>Loader.ascx</DependentUpon>
     </Compile>
     <Compile Include="Custom_Controls\Media\MediaAccordion.ascx.cs">
       <DependentUpon>MediaAccordion.ascx</DependentUpon>

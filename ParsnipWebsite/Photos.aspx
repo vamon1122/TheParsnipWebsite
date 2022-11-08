@@ -21,6 +21,7 @@
 <body>
     <errorHandler:ErrorHandler runat="server" ID="ErrorHandler" />
     <menuControls:NewMenu runat="server" ID="NewMenu" />
+    <errorHandler:Loader runat="server" id="Loader" />
     <form runat="server">
         <asp:ScriptManager runat="server" EnablePageMethods="true" />
         <header class="w3-container w3-red w3-center" style="padding:60px 16px 20px 16px; margin-bottom: 20px">

@@ -3,8 +3,8 @@
 document.addEventListener("DOMContentLoaded", function () {
     var viewedImages = [].slice.call(document.querySelectorAll("img.lazy"));
 
-    if ("TopIntersectionObserver" in window) {
-        let imageViewObserver = new TopIntersectionObserver(function (entries, observer) {
+    if ("CenterIntersectionObserver" in window) {
+        let imageViewObserver = new CenterIntersectionObserver(function (entries, observer) {
             entries.forEach(function (entry) {
                 if (entry.isIntersecting) {
 
@@ -42,6 +42,10 @@ document.addEventListener("DOMContentLoaded", function () {
             function OnSuccess(response, userContext, methodName) {
                 //PageMethods.OnWrite('response = ' + response);
                 if (response == true) {
+                    //document.getElementById('cover').display = 'block';
+                    $("#cover").fadeIn(100);
+                    //alert("something");
+                    //$("#cover").fadeOut(100); //after done.
                     PageMethods.OnWrite('Refreshing the page...');
                     window.location.href = window.location.href;
                 }

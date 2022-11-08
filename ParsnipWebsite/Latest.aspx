@@ -3,6 +3,8 @@
 <%@ Register Src="~/Custom_Controls/ErrorHandler.ascx" TagPrefix="errorHandler" TagName="ErrorHandler" %>
 <%@ Register Src="~/Custom_Controls/Menu/NewMenu.ascx" TagPrefix="menuControls" TagName="NewMenu" %>
 <%@ Register Src="~/Custom_Controls/Media/MediaAccordion.ascx" TagPrefix="mediaControls" TagName="MediaAccordion" %>
+<%@ Register Src="~/Custom_Controls/Loader.ascx" TagPrefix="errorHandler" TagName="Loader" %>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -14,6 +16,8 @@
     <link rel="stylesheet" href="Libraries/Fonts/Montserrat/Montserrat.css" />
     <link rel="stylesheet" href="Libraries/fontawesome-free-5.15.1-web/css/all.css" />
     <link rel="stylesheet" type="text/css" href="Css/MediaStyle.css" />
+    <link rel="stylesheet" type="text/css" href="Css/Spinner.css" />
+
     <!-- FAVICONS -->
     <link rel="apple-touch-icon" sizes="114×114" href="Resources/Favicons/apple-icon-114×114.png" />
     <link rel="apple-touch-icon" sizes="72×72" href="Resources/Favicons/apple-icon-72x72.png" />
@@ -22,6 +26,7 @@
 <body id="SomeLatestId">
     <errorHandler:ErrorHandler runat="server" ID="ErrorHandler" />
     <menuControls:NewMenu runat="server" ID="NewMenu" />
+    <errorHandler:Loader runat="server" id="Loader" />
     <form runat="server">
         <asp:ScriptManager runat="server" EnablePageMethods="true" />
         <header class="w3-container w3-red w3-center" style="padding:60px 16px 20px 16px; margin-bottom: 20px">

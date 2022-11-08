@@ -11,17 +11,17 @@
 {
     'use strict';
 
-    // Exits early if all TopIntersectionObserver and TopIntersectionObserverEntry
+    // Exits early if all CenterIntersectionObserver and CenterIntersectionObserverEntry
     // features are natively supported.
-    if ('TopIntersectionObserver' in window &&
-        'TopIntersectionObserverEntry' in window &&
-        'intersectionRatio' in window.TopIntersectionObserverEntry.prototype)
+    if ('CenterIntersectionObserver' in window &&
+        'CenterIntersectionObserverEntry' in window &&
+        'intersectionRatio' in window.CenterIntersectionObserverEntry.prototype)
     {
         // Minimal polyfill for Edge 15's lack of `isIntersecting`
-        // See: https://github.com/w3c/TopIntersectionObserver/issues/211
-        if (!('isIntersecting' in window.TopIntersectionObserverEntry.prototype))
+        // See: https://github.com/w3c/CenterIntersectionObserver/issues/211
+        if (!('isIntersecting' in window.CenterIntersectionObserverEntry.prototype))
         {
-            Object.defineProperty(window.TopIntersectionObserverEntry.prototype,
+            Object.defineProperty(window.CenterIntersectionObserverEntry.prototype,
                 'isIntersecting', {
                     get: function ()
                     {
@@ -34,21 +34,21 @@
 
 
     /**
-     * An TopIntersectionObserver registry. This registry exists to hold a strong
-     * reference to TopIntersectionObserver instances currently observing a target
+     * An CenterIntersectionObserver registry. This registry exists to hold a strong
+     * reference to CenterIntersectionObserver instances currently observing a target
      * element. Without this registry, instances without another reference may be
      * garbage collected.
      */
     var registry = [];
 
     /**
-     * Creates the global TopIntersectionObserverEntry constructor.
-     * https://w3c.github.io/TopIntersectionObserver/#intersection-observer-entry
+     * Creates the global CenterIntersectionObserverEntry constructor.
+     * https://w3c.github.io/CenterIntersectionObserver/#intersection-observer-entry
      * @param {Object} entry A dictionary of instance properties.
      * @constructor
      */
 
-    function TopIntersectionObserverEntry(entry)
+    function CenterIntersectionObserverEntry(entry)
     {
         this.time = entry.time;
         this.target = entry.target;
@@ -67,7 +67,7 @@
         if (targetArea)
         {
             // Round the intersection ratio to avoid floating point math issues:
-            // https://github.com/w3c/TopIntersectionObserver/issues/324
+            // https://github.com/w3c/CenterIntersectionObserver/issues/324
             this.intersectionRatio = Number((intersectionArea / targetArea).toFixed(4));
         }
         else
@@ -78,15 +78,15 @@
     }
 
     /**
-     * Creates the global TopIntersectionObserver constructor.
-     * https://w3c.github.io/TopIntersectionObserver/#intersection-observer-interface
+     * Creates the global CenterIntersectionObserver constructor.
+     * https://w3c.github.io/CenterIntersectionObserver/#intersection-observer-interface
      * @param {Function} callback The function to be invoked after intersection
      *     changes have queued. The function is not invoked if the queue has
      *     been emptied by calling the `takeRecords` method.
      * @param {Object=} opt_options Optional configuration options.
      * @constructor
      */
-    function TopIntersectionObserver(callback, opt_options)
+    function CenterIntersectionObserver(callback, opt_options)
     {
         var options = opt_options || {};
 
@@ -124,7 +124,7 @@
      * The minimum interval within which the document will be checked for
      * intersection changes.
      */
-    TopIntersectionObserver.prototype.THROTTLE_TIMEOUT = 100;
+    CenterIntersectionObserver.prototype.THROTTLE_TIMEOUT = 100;
 
 
     /**
@@ -132,14 +132,14 @@
      * this can be updated on a per instance basis and must be set prior to
      * calling `observe` on the first target.
      */
-    TopIntersectionObserver.prototype.POLL_INTERVAL = null;
+    CenterIntersectionObserver.prototype.POLL_INTERVAL = null;
 
 
     /**
      * Use a mutation observer on the root element
      * to detect intersection changes.
      */
-    TopIntersectionObserver.prototype.USE_MUTATION_OBSERVER = true;
+    CenterIntersectionObserver.prototype.USE_MUTATION_OBSERVER = true;
 
 
     /**
@@ -147,7 +147,7 @@
      * the thresholds values.
      * @param {Element} target The DOM element to observe.
      */
-    TopIntersectionObserver.prototype.observe = function (target)
+    CenterIntersectionObserver.prototype.observe = function (target)
     {
         var isTargetAlreadyObserved = this._observationTargets.some(function (item)
         {
@@ -175,7 +175,7 @@
      * Stops observing a target element for intersection changes.
      * @param {Element} target The DOM element to observe.
      */
-    TopIntersectionObserver.prototype.unobserve = function (target)
+    CenterIntersectionObserver.prototype.unobserve = function (target)
     {
         this._observationTargets =
             this._observationTargets.filter(function (item)
@@ -193,7 +193,7 @@
     /**
      * Stops observing all target elements for intersection changes.
      */
-    TopIntersectionObserver.prototype.disconnect = function ()
+    CenterIntersectionObserver.prototype.disconnect = function ()
     {
         this._observationTargets = [];
         this._unmonitorIntersections();
@@ -207,7 +207,7 @@
      * callback to obtain the absolute most up-to-date intersection information.
      * @return {Array} The currently queued entries.
      */
-    TopIntersectionObserver.prototype.takeRecords = function ()
+    CenterIntersectionObserver.prototype.takeRecords = function ()
     {
         var records = this._queuedEntries.slice();
         this._queuedEntries = [];
@@ -224,7 +224,7 @@
      *     a list of threshold values, defaulting to [0].
      * @return {Array} A sorted list of unique and valid threshold values.
      */
-    TopIntersectionObserver.prototype._initThresholds = function (opt_threshold)
+    CenterIntersectionObserver.prototype._initThresholds = function (opt_threshold)
     {
         var threshold = opt_threshold || [0];
         if (!Array.isArray(threshold)) threshold = [threshold];
@@ -250,7 +250,7 @@
      * @return {Array<Object>} An array of margin objects with the keys
      *     value and unit.
      */
-    TopIntersectionObserver.prototype._parseRootMargin = function (opt_rootMargin)
+    CenterIntersectionObserver.prototype._parseRootMargin = function (opt_rootMargin)
     {
         var marginString = '-50% 0% -50% 0%';
         var margins = marginString.split(/\s+/).map(function (margin)
@@ -277,7 +277,7 @@
      * happening, and if the page's visibility state is visible.
      * @private
      */
-    TopIntersectionObserver.prototype._monitorIntersections = function ()
+    CenterIntersectionObserver.prototype._monitorIntersections = function ()
     {
         if (!this._monitoringIntersections)
         {
@@ -314,7 +314,7 @@
      * Stops polling for intersection changes.
      * @private
      */
-    TopIntersectionObserver.prototype._unmonitorIntersections = function ()
+    CenterIntersectionObserver.prototype._unmonitorIntersections = function ()
     {
         if (this._monitoringIntersections)
         {
@@ -341,7 +341,7 @@
      * schedules the callback to be invoked.
      * @private
      */
-    TopIntersectionObserver.prototype._checkForIntersections = function ()
+    CenterIntersectionObserver.prototype._checkForIntersections = function ()
     {
         var rootIsInDom = this._rootIsInDom();
         var rootRect = rootIsInDom ? this._getRootRect() : getEmptyRect();
@@ -355,7 +355,7 @@
             var intersectionRect = rootIsInDom && rootContainsTarget &&
                 this._computeTargetAndRootIntersection(target, rootRect);
 
-            var newEntry = item.entry = new TopIntersectionObserverEntry({
+            var newEntry = item.entry = new CenterIntersectionObserverEntry({
                 time: now(),
                 target: target,
                 boundingClientRect: targetRect,
@@ -397,7 +397,7 @@
      * Accepts a target and root rect computes the intersection between then
      * following the algorithm in the spec.
      * TODO(philipwalton): at this time clip-path is not considered.
-     * https://w3c.github.io/TopIntersectionObserver/#calculate-intersection-rect-algo
+     * https://w3c.github.io/CenterIntersectionObserver/#calculate-intersection-rect-algo
      * @param {Element} target The target DOM element
      * @param {Object} rootRect The bounding rect of the root after being
      *     expanded by the rootMargin value.
@@ -405,7 +405,7 @@
      *     intersection is found.
      * @private
      */
-    TopIntersectionObserver.prototype._computeTargetAndRootIntersection =
+    CenterIntersectionObserver.prototype._computeTargetAndRootIntersection =
         function (target, rootRect)
         {
 
@@ -463,7 +463,7 @@
      * @return {Object} The expanded root rect.
      * @private
      */
-    TopIntersectionObserver.prototype._getRootRect = function ()
+    CenterIntersectionObserver.prototype._getRootRect = function ()
     {
         var rootRect;
         if (this.root)
@@ -493,7 +493,7 @@
      * @return {Object} The expanded rect.
      * @private
      */
-    TopIntersectionObserver.prototype._expandRectByRootMargin = function (rect)
+    CenterIntersectionObserver.prototype._expandRectByRootMargin = function (rect)
     {
         var margins = this._rootMarginValues.map(function (margin, i)
         {
@@ -516,14 +516,14 @@
     /**
      * Accepts an old and new entry and returns true if at least one of the
      * threshold values has been crossed.
-     * @param {?TopIntersectionObserverEntry} oldEntry The previous entry for a
+     * @param {?CenterIntersectionObserverEntry} oldEntry The previous entry for a
      *    particular target element or null if no previous entry exists.
-     * @param {TopIntersectionObserverEntry} newEntry The current entry for a
+     * @param {CenterIntersectionObserverEntry} newEntry The current entry for a
      *    particular target element.
      * @return {boolean} Returns true if a any threshold has been crossed.
      * @private
      */
-    TopIntersectionObserver.prototype._hasCrossedThreshold =
+    CenterIntersectionObserver.prototype._hasCrossedThreshold =
         function (oldEntry, newEntry)
         {
 
@@ -557,7 +557,7 @@
      * @return {boolean} True if the root element is an element and is in the DOM.
      * @private
      */
-    TopIntersectionObserver.prototype._rootIsInDom = function ()
+    CenterIntersectionObserver.prototype._rootIsInDom = function ()
     {
         return !this.root || containsDeep(document, this.root);
     };
@@ -569,18 +569,18 @@
      * @return {boolean} True if the target element is a child of root.
      * @private
      */
-    TopIntersectionObserver.prototype._rootContainsTarget = function (target)
+    CenterIntersectionObserver.prototype._rootContainsTarget = function (target)
     {
         return containsDeep(this.root || document, target);
     };
 
 
     /**
-     * Adds the instance to the global TopIntersectionObserver registry if it isn't
+     * Adds the instance to the global CenterIntersectionObserver registry if it isn't
      * already present.
      * @private
      */
-    TopIntersectionObserver.prototype._registerInstance = function ()
+    CenterIntersectionObserver.prototype._registerInstance = function ()
     {
         if (registry.indexOf(this) < 0)
         {
@@ -590,10 +590,10 @@
 
 
     /**
-     * Removes the instance from the global TopIntersectionObserver registry.
+     * Removes the instance from the global CenterIntersectionObserver registry.
      * @private
      */
-    TopIntersectionObserver.prototype._unregisterInstance = function ()
+    CenterIntersectionObserver.prototype._unregisterInstance = function ()
     {
         var index = registry.indexOf(this);
         if (index != -1) registry.splice(index, 1);
@@ -720,7 +720,7 @@
         } catch (err)
         {
             // Ignore Windows 7 IE11 "Unspecified error"
-            // https://github.com/w3c/TopIntersectionObserver/pull/205
+            // https://github.com/w3c/CenterIntersectionObserver/pull/205
         }
 
         if (!rect) return getEmptyRect();
@@ -805,7 +805,7 @@
 
 
     // Exposes the constructors globally.
-    window.TopIntersectionObserver = TopIntersectionObserver;
-    window.TopIntersectionObserverEntry = TopIntersectionObserverEntry;
+    window.CenterIntersectionObserver = CenterIntersectionObserver;
+    window.CenterIntersectionObserverEntry = CenterIntersectionObserverEntry;
 
 }(window, document));
