@@ -14,7 +14,7 @@
     border-top: 16px solid #3498db;
     width: 120px;
     height: 120px;
-    -webkit-animation: spin 2s linear infinite; /* Safari */
+    -webkit-animation: spin 2s linear infinite !important; /* Safari */
     animation: spin 2s linear infinite;
 }
 
@@ -51,8 +51,16 @@
     display: none;
 }
 </style>
-<div id="cover">
+<!--Spinner stops once page starts reloading on iphone-->
+<%--<div id="desktop_cover" class="cover">
     <div class="spinner_container">
         <div class="spinner"></div>
+    </div>
+    
+</div>--%>
+
+<div id="cover">
+    <div class="spinner_container">
+        <h1>Loading...</h1>
     </div>
 </div>

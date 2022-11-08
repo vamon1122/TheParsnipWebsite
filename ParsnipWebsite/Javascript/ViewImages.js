@@ -43,7 +43,18 @@ document.addEventListener("DOMContentLoaded", function () {
                 //PageMethods.OnWrite('response = ' + response);
                 if (response == true) {
                     //document.getElementById('cover').display = 'block';
-                    $("#cover").fadeIn(100);
+                    //$("#cover").fadeIn(100);
+                    //$("#cover").display='block';
+
+                    //if (isMobile()) {
+                    //    document.getElementById('mobile_cover').style.display = 'block'
+                    //}
+                    //else {
+                    //    document.getElementById('desktop_cover').style.display = 'block'
+                    //}
+
+                    document.getElementById('cover').style.display = 'block'
+                    
                     //alert("something");
                     //$("#cover").fadeOut(100); //after done.
                     PageMethods.OnWrite('Refreshing the page...');
