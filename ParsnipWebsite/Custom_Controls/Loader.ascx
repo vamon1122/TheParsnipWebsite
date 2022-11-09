@@ -64,3 +64,9 @@
         <h1>Loading...</h1>
     </div>
 </div>
+
+<%--<div id="cover">
+    <div class="spinner_container">
+        <img src="Resources/Media/Images/Web_Media/Spinner.gif" />
+    </div>
+</div>--%>
