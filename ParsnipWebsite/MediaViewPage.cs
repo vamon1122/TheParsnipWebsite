@@ -13,6 +13,30 @@ namespace ParsnipWebsite
 {
     public class MediaViewPage : System.Web.UI.Page
     {
+        private static TimeSpan? ImageViewThreshold = null;
+        private static TimeSpan RefreshImageViewThreshold()
+        {
+            var configValue = TimeSpan.FromMilliseconds(Convert.ToInt16(ConfigurationManager.AppSettings["InsertImageViewAfterMilliseconds"]));
+            if (ImageViewThreshold == null)
+            {
+                var debug = "[WARNING] There was no existing threshold loaded from the config (Was the application only just started?) TODO - Insert into database";
+                new LogEntry(Log.Debug) { Text = debug };
+                //Insert config change;
+            }
+
+            //if (ImageViewThreshold != null) Debug.WriteLine("[GOOD :)] There was an existing threshold loaded from the config. Good :)");
+            
+            if (ImageViewThreshold != null && configValue != ImageViewThreshold)
+            {
+                var debug = "Image view threshold has changed! TODO - Insert into database";
+                new LogEntry(Log.Debug) { Text = debug };
+                //Insert config change;
+            }
+            ImageViewThreshold = configValue;
+
+            return configValue;
+        }
+
         [WebMethod]
         public static void OnMediaCenterScreen(string containerId, string bodyId, bool tabInFocus)
         {
@@ -51,8 +75,8 @@ namespace ParsnipWebsite
                 session[$"{bodyId}_CurrentViewMediaId"] = mediaId;
                 Debug.WriteLine($"Image focused ({mediaId} is an image. Starting timer...)");
                 System.Timers.Timer minInsertViewTimer;
-                var imageViewThreshold = TimeSpan.FromMilliseconds(Convert.ToInt16(ConfigurationManager.AppSettings["InsertImageViewAfterMilliseconds"]));
-                minInsertViewTimer = new System.Timers.Timer(imageViewThreshold.TotalMilliseconds);
+                var currentImageThreshold = RefreshImageViewThreshold();
+                minInsertViewTimer = new System.Timers.Timer(currentImageThreshold.TotalMilliseconds);
                 minInsertViewTimer.Elapsed += (sender, e) => OnImageViewThresholdMet();
                 minInsertViewTimer.AutoReset = false;
                 minInsertViewTimer.Enabled = true;
@@ -76,7 +100,8 @@ namespace ParsnipWebsite
 
                                 TimeSpan timeTaken = timer.Elapsed;
                                 var tempMedia = Media.Select(mediaId);
-                                tempMedia.View(loggedInUser, true, imageViewThreshold, timer.Elapsed);
+                                //TODO - Remove ImageViewThreshold parameter
+                                tempMedia.View(loggedInUser, true, currentImageThreshold, timer.Elapsed);
                                 var isUntitled = string.IsNullOrEmpty(tempMedia.Title);
                                 new LogEntry(Log.Access, session.SessionID) { Text = $"{loggedInUser.FullName} scrolled an{(isUntitled ? " untitled " : " ")}image for {Math.Round(timeTaken.TotalSeconds, 0, MidpointRounding.AwayFromZero)} secs{(isUntitled ? string.Empty : $": {tempMedia.Title}")} (<a href=\"{baseUrl}view?id={mediaId}\">view?id={mediaId}</a>)" };
                                 return;
