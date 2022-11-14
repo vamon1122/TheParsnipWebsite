@@ -40,8 +40,6 @@ namespace ParsnipWebsite
 
         void Page_LoadComplete(object sender, EventArgs e)
         {
-            Debug.WriteLine("----------Page load complete!");
-
             if (Request.QueryString["action"] != null)
             {
                 string action = Request.QueryString["action"];

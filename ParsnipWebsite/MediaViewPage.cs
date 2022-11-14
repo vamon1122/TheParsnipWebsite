@@ -68,10 +68,19 @@ namespace ParsnipWebsite
                 return;
             }
 
-            StartImageViewTimer(thisViewId, new MediaId(splitContainerId.Last()), ParsnipData.Accounts.User.LogIn());
-
-            void StartImageViewTimer(Guid viewId, MediaId mediaId, User loggedInUser)
+            var loggedInUser = ParsnipData.Accounts.User.LogIn();
+            if(loggedInUser == null)
             {
+                Debug.WriteLine("User not logged in edge-case");
+                //The user logged out, re-focused the page (js 'refocus' method breaks when user logs out) and is scrolling having been logged out
+            }
+
+            StartImageViewTimer();
+
+            void StartImageViewTimer()
+            {
+                var viewId = thisViewId;
+                var mediaId = new MediaId(splitContainerId.Last());
                 session[$"{bodyId}_CurrentViewMediaId"] = mediaId;
                 Debug.WriteLine($"Image focused ({mediaId} is an image. Starting timer...)");
                 System.Timers.Timer minInsertViewTimer;

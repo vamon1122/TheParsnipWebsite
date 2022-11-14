@@ -23,8 +23,6 @@ namespace ParsnipWebsite
 
         void Page_LoadComplete(object sender, EventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("----------Page load complete!");
-
             myUser = Account.SecurePage(this, Data.DeviceType, "admin");
 
             List<LogEntry> LogEntries;
