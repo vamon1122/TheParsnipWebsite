@@ -12,7 +12,7 @@ using System.Configuration;
 
 namespace ParsnipWebsite
 {
-    public partial class Home : System.Web.UI.Page
+    public partial class Home : ParsnipPage
     {
         private User myUser;
         protected void Page_Load(object sender, EventArgs e)

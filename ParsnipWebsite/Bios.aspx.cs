@@ -8,7 +8,7 @@ using ParsnipData.Accounts;
 
 namespace ParsnipWebsite
 {
-    public partial class Bios : System.Web.UI.Page
+    public partial class Bios : ParsnipPage
     {
         private User myUser;
         protected void Page_Load(object sender, EventArgs e)

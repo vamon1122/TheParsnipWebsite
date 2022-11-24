@@ -12,16 +12,16 @@
             <%--<div style="min-width:56px; height:0px" class="w3-hide-large"></div>--%>
             <div id="left-content" class="w3-bar w3-red">
                 <a class="w3-bar-item w3-button w3-hide-large w3-left w3-hover-white w3-large w3-red w3-padding-large" href="javascript:void(0);" onclick="document.getElementById('mobileNav').style.display='block';PageMethods.OnMediaUnFocused('menu opened', document.body.id)" title="Toggle Navigation Menu" style="width:65px"><i class="fa fa-bars"></i></a>
-                <a runat="server" id="Desktop_Home" href="../../home" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-padding-large w3-hover-white">Home</a>
-                <a runat="server" id="Desktop_Latest" href="../../latest" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-padding-large w3-hover-white">Latest</a>
-                <a runat="server" id="Desktop_Memes" href="../../memes" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-padding-large w3-hover-white">Memes</a>
-                <a runat="server" id="Desktop_Videos" href="../../videos" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-padding-large w3-hover-white">Videos</a>
-                <a runat="server" id="Desktop_Photos" href="../../photos" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-padding-large w3-hover-white">Photos</a>
-                <a runat="server" id="Desktop_AfternoonT" href="../../afternoont.html" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-padding-large w3-hover-white">Afternoon T</a>
+                <a runat="server" id="Desktop_Home" href="../../home" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-padding-large w3-hover-white" onclick="PageMethods.OnMediaUnFocused('Home desktop-menu-item clicked', document.body.id)">Home</a>
+                <a runat="server" id="Desktop_Latest" href="../../latest" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-padding-large w3-hover-white" onclick="PageMethods.OnMediaUnFocused('Latest desktop-menu-item clicked', document.body.id)">Latest</a>
+                <a runat="server" id="Desktop_Memes" href="../../memes" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-padding-large w3-hover-white" onclick="PageMethods.OnMediaUnFocused('Memes desktop-menu-item clicked', document.body.id)">Memes</a>
+                <a runat="server" id="Desktop_Videos" href="../../videos" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-padding-large w3-hover-white" onclick="PageMethods.OnMediaUnFocused('Videos desktop-menu-item clicked', document.body.id)">Videos</a>
+                <a runat="server" id="Desktop_Photos" href="../../photos" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-padding-large w3-hover-white" onclick="PageMethods.OnMediaUnFocused('Photos desktop-menu-item clicked', document.body.id)">Photos</a>
+                <a runat="server" id="Desktop_AfternoonT" href="../../afternoont.html" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-padding-large w3-hover-white" onclick="PageMethods.OnMediaUnFocused('Afternoon T desktop-menu-item clicked', document.body.id)">Afternoon T</a>
                 <%--<a runat="server" id="Desktop_Bios" href="../../bios" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-padding-large w3-hover-white">Bios</a>--%>
                 <%--<a runat="server" id="Desktop_Krakow" href="../../krakow" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-padding-large w3-hover-white">Krakow</a>--%>
-                <a runat="server" id="Desktop_LogOut" href="../../logout" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-padding-large w3-hover-white" Visible="false">Log Out</a>
-                <a runat="server" id="Desktop_LogIn" href="../../login" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-padding-large w3-hover-white">Log In</a>
+                <a runat="server" id="Desktop_LogOut" href="../../logout" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-padding-large w3-hover-white" Visible="false" onclick="PageMethods.OnMediaUnFocused('Log Out desktop-menu-item clicked', document.body.id)">Log Out</a>
+                <a runat="server" id="Desktop_LogIn" href="../../login" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-padding-large w3-hover-white" onclick="PageMethods.OnMediaUnFocused('Log In desktop-menu-item clicked', document.body.id)">Log In</a>
             </div>
         </div>
 
@@ -31,10 +31,10 @@
         <a runat="server" id="Selected_Page" href="../../#" class="w3-bar-item w3-button w3-padding-large w3-white" Visible="false" style="max-width:100%; text-overflow:ellipsis; white-space: nowrap">View Tag</a>
     </div>
     <div runat="server" id="right_content" class="w3-red" style="min-width:0px">
-        <span runat="server" id="Modal_Upload" class="w3-bar-item w3-button context-button w3-black w3-right" onclick="document.getElementById('uploadMedia').style.display='block'" Visible="false" ><i class="fa fa-cloud-upload-alt fa-lg"></i></span>
-        <span runat="server" id="Modal_Share" class="w3-bar-item w3-button context-button w3-black w3-right" onclick="document.getElementById('shareModal').style.display='block'" Visible="false" ><i class="fa fa-share-alt fa-lg"></i></span>
-        <a runat="server" id="Search_Button" class="w3-bar-item w3-button context-button w3-black w3-right" href="../../search" ><i class="fas fa-search fa-lg"></i></a>
-        <a runat="server" id="Admin" class="w3-bar-item w3-button context-button w3-black w3-right" href="../../admin" Visible="false" ><i class="fas fa-tools fa-lg"></i></a>
+        <span runat="server" id="Modal_Upload" class="w3-bar-item w3-button context-button w3-black w3-right" onclick="PageMethods.OnMediaUnFocused('Upload menu-item clicked', document.body.id); document.getElementById('uploadMedia').style.display='block'" Visible="false" ><i class="fa fa-cloud-upload-alt fa-lg"></i></span>
+        <span runat="server" id="Modal_Share" class="w3-bar-item w3-button context-button w3-black w3-right" onclick="PageMethods.OnMediaUnFocused('Share menu-item clicked', document.body.id); document.getElementById('shareModal').style.display='block'" Visible="false" ><i class="fa fa-share-alt fa-lg"></i></span>
+        <a runat="server" id="Search_Button" class="w3-bar-item w3-button context-button w3-black w3-right" href="../../search" onclick="PageMethods.OnMediaUnFocused('Search menu-item clicked', document.body.id)"><i class="fas fa-search fa-lg"></i></a>
+        <a runat="server" id="Admin" class="w3-bar-item w3-button context-button w3-black w3-right" href="../../admin" Visible="false" onclick="PageMethods.OnMediaUnFocused('Admin menu-item clicked', document.body.id)"><i class="fas fa-tools fa-lg"></i></a>
     </div>
     </div>
   <!-- Navbar on small screens -->

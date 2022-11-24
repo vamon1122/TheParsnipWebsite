@@ -23,6 +23,7 @@
     <mediaControls:ErrorHandler runat="server" ID="ErrorHandler" />
     <menuControls:NewMenu runat="server" ID="NewMenu" />
     <form runat="server" id="uploadForm" style="height:70px">
+        <asp:ScriptManager runat="server" EnablePageMethods="true" />
         <header class="w3-container w3-red w3-center" style="padding:60px 16px 0px 16px">
             <h1 class="w3-margin w3-jumbo jumbo-line-height">#The<wbr />Parsnip Website</h1>
             <p class="w3-xlarge" id="MOTD" runat="server"></p>
@@ -100,6 +101,7 @@
         </div>
     </form>
 
+    <script src="Javascript/PageMethods.js"></script>
     <script src="Libraries/jquery-3.5.1/jquery.min.js"></script>
     <script src="Javascript/LazyImages.js"></script>
     <script src="Javascript/IntersectionObserver.js"></script>
