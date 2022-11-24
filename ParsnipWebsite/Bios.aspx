@@ -20,6 +20,8 @@
 <body style="text-align:center">
     <menuControls:NewMenu runat="server" ID="NewMenu" />
 
+    <form runat="server"><asp:ScriptManager runat="server" EnablePageMethods="true" /></form>
+
     <header class="w3-container w3-red w3-center" style="padding:60px 16px 20px 16px; margin-bottom: 20px">
         <h1 class="w3-margin w3-jumbo jumbo-line-height" >Bios</h1>
     </header>
@@ -44,6 +46,7 @@
     <img src="Resources/Media/Images/Local/Bios/Kieron_Chat.PNG" id="Kieron_chat" class="image-preview" />
     <br />
     <br />
+    <script src="Javascript/PageMethods.js"></script>
     <script src="Libraries/jquery-3.5.1/jquery.min.js"></script>
     <script src="Javascript/LazyImages.js"></script>
     <script src="Javascript/IntersectionObserver.js"></script>

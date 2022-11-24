@@ -1,4 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="MediaViewPageScripts.ascx.cs" Inherits="ParsnipWebsite.Custom_Controls.Media.MediaViewPageScripts" %>
+<script src="Javascript/PageMethods.js"></script>
 <script src="Javascript/BodyId.js"></script>
 <script src="Libraries/jquery-3.5.1/jquery.min.js"></script>
 <script src="Javascript/LazyImages.js"></script>

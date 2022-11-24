@@ -1,6 +1,4 @@
-﻿PageMethods.set_path(PageMethods.get_path() + '.aspx');
-
-document.addEventListener("DOMContentLoaded", function ()
+﻿document.addEventListener("DOMContentLoaded", function ()
 {
     var viewedImages = [].slice.call(document.querySelectorAll("img.lazy"));
 

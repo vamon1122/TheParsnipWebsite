@@ -85,6 +85,7 @@
     <Content Include="Javascript\BodyId.js" />
     <Content Include="Javascript\Cookies.js" />
     <Content Include="Javascript\DeviceInfo.js" />
+    <Content Include="Javascript\PageMethods.js" />
     <Content Include="Javascript\ViewImages.js" />
     <Content Include="Javascript\CenterIntersectionObserver.js" />
     <Content Include="Javascript\W3ModalDismiss.js" />
@@ -2113,6 +2114,9 @@
     </Compile>
     <Compile Include="Me.aspx.designer.cs">
       <DependentUpon>Me.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ParsnipPage.cs">
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="MediaViewPage.cs">
       <SubType>ASPXCodeBehind</SubType>
