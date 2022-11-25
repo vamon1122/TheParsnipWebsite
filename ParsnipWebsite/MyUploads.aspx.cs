@@ -12,7 +12,7 @@ using System.Configuration;
 
 namespace ParsnipWebsite
 {
-    public partial class MyUploads : System.Web.UI.Page
+    public partial class MyUploads : MediaViewPage
     {
         private User myUser;
         protected void Page_Load(object sender, EventArgs e)
