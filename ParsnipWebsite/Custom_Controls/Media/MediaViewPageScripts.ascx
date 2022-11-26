@@ -9,4 +9,6 @@
 <script src="Javascript/FocusImage.js"></script>
 <script src="Javascript/W3ModalDismiss.js"></script>
 <script src="Javascript/CenterIntersectionObserver.js"></script>
+<script src="Javascript/Cookies.js"></script>
+<script src="Javascript/Stopwatch.js"></script>
 <script src="Javascript/ViewImages.js"></script>

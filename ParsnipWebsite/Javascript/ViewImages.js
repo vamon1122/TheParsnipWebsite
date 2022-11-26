@@ -1,20 +1,93 @@
-﻿document.addEventListener("DOMContentLoaded", function ()
+﻿function doBlurMedia(reason) {
+    var bodyId = document.body.id;
+    var currentViewCookieId = bodyId + '_CurrentViewId';
+    createCookie(currentViewCookieId, null);
+    createCookie(bodyId + '_PageHasHadFocusInTheCurrentSession', true);
+    createCookie(bodyId + '_CurrentUnfocusedViewMediaId', getCookie(bodyId + '_CurrentViewMediaId'));
+    createCookie(bodyId + '_CurrentViewId', null);
+    PageMethods.WriteDebug('JS: The tab was unfocused (' + reason + '), clearning focus');
+}
+
+function doFocusMedia(reason) {
+    var bodyId = document.body.id;
+    var currentViewCookieId = bodyId + '_CurrentViewId';
+    //TODO - Should I be removed? I think this was to fix an issue with using webmethods to monitor views?
+    //if (getCookie(bodyId + '_PageHasHadFocusInTheCurrentSession')) {
+        var existingCookie = getCookie(bodyId + '_CurrentUnfocusedViewMediaId');
+        PageMethods.WriteDebug('JS: The tab was re-focused (' + reason + '). Current image view will be started... id=' + existingCookie + '.');
+        doView('blah_' + existingCookie)
+    //}
+    //else {
+    //    PageMethods.WriteDebug('JS: The tab was focused for the first time in the session (' + reason + ')');
+    //}
+}
+
+function doView(controlId) {
+    var bodyId = document.body.id;
+    var currentViewCookieId = bodyId + '_CurrentViewId';
+
+    var _StopWatch = new StopWatch();
+    _StopWatch.start();
+
+    var mediaId = controlId.split("_")[1];
+    createCookie(bodyId + '_CurrentViewMediaId', mediaId);
+    createCookie(bodyId + '_CurrentViewStartTime', _StopWatch.startTime());
+
+    if (!document.hasFocus()) {
+        PageMethods.WriteDebug('JS: Media was viewed but the tab was not in focus. NOT doing view of mediaID: ' + mediaId);
+        createCookie(bodyId + '_CurrentUnfocusedViewMediaId', mediaId);
+        return;
+    }
+    if (mediaId === 'thumbnail') {
+        PageMethods.WriteDebug('JS: Thumbnail was focused. NOT doing view of mediaID: ' + mediaId);
+        createCookie(currentViewCookieId, null)
+    }
+    else {
+        PageMethods.WriteDebug('JS: Doing view of mediaID: ' + mediaId);
+
+        var viewId = uuidv4();
+
+        createCookie(currentViewCookieId, viewId)
+
+        checkStillInFocus();
+
+        function uuidv4() {
+            return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
+                (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+            );
+        }
+
+        function checkStillInFocus() {
+            if (getCookie(currentViewCookieId) === viewId) {
+                setTimeout(checkStillInFocus, 1);
+            }
+            else {
+                _StopWatch.stop();
+                var duration = _StopWatch.duration();
+                PageMethods.OnMediaViewed(mediaId, duration, false);
+            }
+        }
+    }
+}
+
+document.addEventListener("DOMContentLoaded", function ()
 {
+    var bodyId = document.body.id;
+    var currentViewCookieId = bodyId + '_CurrentViewId';
+
     var viewedImages = [].slice.call(document.querySelectorAll("img.lazy"));
 
     if ("CenterIntersectionObserver" in window) {
         let imageViewObserver = new CenterIntersectionObserver(function (entries, observer)
         {
             entries.forEach(function (entry) {
-                if (entry.isIntersecting)
-                {
-                    if (document.getElementById('mobileNav').style.display == 'block')
-                    {
+                if (entry.isIntersecting) {
+                    if (document.getElementById('mobileNav').style.display == 'block') {
                         document.getElementById('mobileNav').style.display = 'none'
                     }
 
                     let viewedImage = entry.target;
-                    PageMethods.OnMediaCenterScreen(viewedImage.id, document.body.id, !document.hasFocus());
+                    doView(viewedImage.id);
                 }
             });
         });
@@ -30,7 +103,7 @@
 
     function onBlur()
     {
-        PageMethods.OnMediaUnFocused("tab / window unfocused", document.body.id);
+        doBlurMedia('tab lost focus');
     };
 
     function onFocus()
@@ -41,14 +114,7 @@
         }
         else
         {
-            PageMethods.OnMediaReFocused(document.body.id, 'tab back in focus', OnSuccess);
-            function OnSuccess(response, userContext, methodName) {
-                if (response == true) {
-                    document.getElementById('cover').style.display = 'block';
-                    disableScroll();
-                    window.location.href = window.location.href;
-                }
-            }
+            doFocusMedia('tab gained focus');
         }
     };
 
@@ -61,8 +127,9 @@
         window.onblur = onBlur;
     }
 
-    window.addEventListener('beforeunload', function (e)
-    {
-        PageMethods.OnMediaUnFocused('tab / window closed', document.body.id)
+    window.addEventListener('beforeunload', function (e) {
+        var mediaId = getCookie(bodyId + '_CurrentViewMediaId');
+        var seconds = (performance.now() - getCookie(bodyId + '_CurrentViewStartTime')) / 1000;
+        PageMethods.OnMediaViewed(mediaId, seconds, true);
     });
 });
