@@ -82,6 +82,7 @@
     <Content Include="Custom_Controls\Menu\NewMenu.ascx" />
     <Content Include="Custom_Controls\Snowflakes.ascx" />
     <Content Include="Javascript\Accordion.js" />
+    <Content Include="Javascript\Stopwatch.js" />
     <Content Include="Javascript\BodyId.js" />
     <Content Include="Javascript\Cookies.js" />
     <Content Include="Javascript\DeviceInfo.js" />

@@ -10,7 +10,7 @@
         </a>
         <a runat="server" id="a_play_video" visible="false" >
             <div class="play-button-div" style="padding-bottom:5px">
-                <img runat="server" id="thumbnail" class="lazy" style="width:100%" />
+                <asp:Image runat="server" id="thumbnail" class="lazy" style="width:100%" />
                 <span class="play-button-icon">
                     <img src="../../Resources/Media/Images/Web_Media/play-button-3.svg" class="play-button" />
                 </span>

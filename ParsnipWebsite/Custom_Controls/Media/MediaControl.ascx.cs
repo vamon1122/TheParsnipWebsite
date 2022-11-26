@@ -76,6 +76,7 @@ namespace ParsnipWebsite.Custom_Controls.Media
                 }
                 else if(_myMedia.Type == "video" || _myMedia.Type == "youtube")
                 {
+                    thumbnail.ID = $"thumbnail_{value.Id}";
                     if (value.XScale != default || value.YScale != default)
                     {
                         thumbnail.Style.Add("height", string.Format("{0}vmin", width * ((double)value.YScale / value.XScale)));
@@ -87,13 +88,13 @@ namespace ParsnipWebsite.Custom_Controls.Media
 
                     if(_myMedia.Type == "video")
                     {
-                        thumbnail.Src = Request.Url.GetLeftPart(UriPartial.Authority) + "/" + value.Placeholder;
+                        thumbnail.ImageUrl = Request.Url.GetLeftPart(UriPartial.Authority) + "/" + value.Placeholder;
                         thumbnail.Attributes.Add("data-src", Request.Url.GetLeftPart(UriPartial.Authority) + "/" + value.Compressed);
                         thumbnail.Attributes.Add("data-srcset", Request.Url.GetLeftPart(UriPartial.Authority) + "/" + value.Compressed);
                     }
                     else //YoutubeVideo
                     {
-                        thumbnail.Src = value.Placeholder.Contains("https://") ? value.Placeholder : $"{Request.Url.GetLeftPart(UriPartial.Authority)}/{value.Placeholder}";
+                        thumbnail.ImageUrl = value.Placeholder.Contains("https://") ? value.Placeholder : $"{Request.Url.GetLeftPart(UriPartial.Authority)}/{value.Placeholder}";
                         thumbnail.Attributes.Add("data-src", value.Compressed.Contains("https://") ? value.Compressed : $"{Request.Url.GetLeftPart(UriPartial.Authority)}/{value.Compressed}");
                         thumbnail.Attributes.Add("data-srcset", value.Compressed.Contains("https://") ? value.Compressed : $"{Request.Url.GetLeftPart(UriPartial.Authority)}/{value.Compressed}");
                     }
