@@ -44,6 +44,7 @@
         <div runat="server" id="viewCount"></div>
     </div>
     <form id="form1" runat="server" style="width:100%; margin-bottom:5%">
+        <asp:ScriptManager runat="server" EnablePageMethods="true" />
         <br />
         <br />
         <div style="padding-left:2.5%; padding-right:2.5%">

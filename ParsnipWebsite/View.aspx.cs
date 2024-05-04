@@ -11,7 +11,7 @@ using ParsnipWebsite.Custom_Controls.Media;
 
 namespace ParsnipWebsite
 {
-    public partial class View_Image : System.Web.UI.Page
+    public partial class View_Image : ParsnipPage
     {
         public User myUser { get; set; }
 
