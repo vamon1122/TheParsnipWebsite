@@ -14,7 +14,7 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace ParsnipWebsite
 {
-    public partial class Edit_Media : System.Web.UI.Page
+    public partial class Edit_Media : ParsnipPage
     {
         User myUser;
         private ParsnipData.Media.Media MyImage;

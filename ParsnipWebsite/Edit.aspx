@@ -25,6 +25,7 @@
     </header>
     <div class="w3-center" style="padding-bottom:5%; text-align: center" >
         <form id="form1" runat="server" defaultbutton="ButtonSave" >
+            <asp:ScriptManager runat="server" EnablePageMethods="true" />
             <div class="w3-container">
                 <label class="form-label">Title:</label>
                 <asp:TextBox CssClass="w3-input w3-border w3-margin-bottom" runat="server" ID="InputTitleTwo" />
