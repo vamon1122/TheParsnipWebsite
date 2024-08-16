@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using ParsnipData;
 using ParsnipData.Cookies;
 using ParsnipData.Media;
 
@@ -52,14 +53,14 @@ namespace ParsnipWebsite
                     {
                         Page.Header.Controls.Add(new LiteralControl($"<meta property=\"og:title\" content=\"CLICK to 👀 #{myTag.Name} content!\" />"));
                         Page.Header.Controls.Add(new LiteralControl($"<meta property=\"og:description\" content=\"{myTag.Description}\" />"));
-                        Page.Header.Controls.Add(new LiteralControl($"<meta property=\"og:image\" content=\"{Request.Url.GetLeftPart(UriPartial.Authority)}/Resources/Media/Images/Web_Media/Lock.jpg\" />"));
                         Page.Header.Controls.Add(new LiteralControl(string.Format("<meta property=\"og:alt\" content=\"{0}\" />", myTag.Description)));
+
+                        addOGTagsForNonMediaEntity();
 
                         Page.Title = $"Tag: {myTag.Name}";
                     }
-                }
-
-                if (Request.QueryString["url"].Contains("tag?user="))
+                } 
+                else if (Request.QueryString["url"].Contains("tag?user="))
                 {
                     
                     var myTagUser = ParsnipData.Accounts.User.Select(userId);
@@ -67,19 +68,37 @@ namespace ParsnipWebsite
                     {
                         Page.Header.Controls.Add(new LiteralControl($"<meta property=\"og:title\" content=\"@{myTagUser.Username} ({myTagUser.Forename}) was tagged in these 👀...\" />"));
                         Page.Header.Controls.Add(new LiteralControl($"<meta property=\"og:description\" content=\"See pictures and videos which {myTagUser.FullName} has been tagged in!\" />"));
-                        Page.Header.Controls.Add(new LiteralControl($"<meta property=\"og:image\" content=\"{Request.Url.GetLeftPart(UriPartial.Authority)}/Resources/Media/Images/Web_Media/Lock.jpg\" />"));
                         Page.Header.Controls.Add(new LiteralControl(string.Format($"<meta property=\"og:alt\" content=\"See photos and videos which @{myTagUser.Username} ({myTagUser.FullName}) has been tagged in!\" />")));
+
+                        addOGTagsForNonMediaEntity();
 
                         Page.Title = $"Tag: {myTagUser.Forename}";
                     }
                 }
+                else if (Request.QueryString["url"].Contains("view?share="))
+                {
+                    var myShare = new MediaShare(new MediaShareId(Request.QueryString["url"].Split('&')[0].Split('=').Last()));
+                    myShare.Select();
+                    var myMedia = Media.Select(myShare.MediaId);
+                    Page.Header.Controls.Add(new LiteralControl($"<meta property=\"og:title\" content=\"{myMedia.Title}\" />"));
+                    Page.Header.Controls.Add(new LiteralControl($"<meta property=\"og:image\" content=\"https://test.theparsnip.co.uk/{myMedia.Compressed}\" />"));
+                    Page.Header.Controls.Add(new LiteralControl($"<meta property=\"og:url\" content=\"https://test.theparsnip.co.uk/view?share={myShare.Id}\" />"));
+                    var tagsString = string.IsNullOrEmpty(myMedia.Description) ? myMedia.GetAtsAndTagsAsString() : myMedia.Description;
+                        Page.Header.Controls.Add(new LiteralControl($"<meta property=\"og:description\" content=\"{tagsString}\" />"));
+                }
             }
-
-            Page.Header.Controls.Add(new LiteralControl("<meta property=\"og:image:width\" content=\"853\" />"));
-            Page.Header.Controls.Add(new LiteralControl("<meta property=\"og:image:height\" content=\"480\" />"));
             Page.Header.Controls.Add(new LiteralControl("<meta property=\"og:type\" content=\"website\" />"));
-            Page.Header.Controls.Add(new LiteralControl($"<meta property=\"og:url\" content=\"{Request.Url}\" />"));
             Page.Header.Controls.Add(new LiteralControl("<meta property=\"fb:app_id\" content=\"521313871968697\" />"));
+
+            
+
+            void addOGTagsForNonMediaEntity()
+            {
+                Page.Header.Controls.Add(new LiteralControl($"<meta property=\"og:image\" content=\"{Request.Url.GetLeftPart(UriPartial.Authority)}/Resources/Media/Images/Web_Media/Lock.jpg\" />"));
+                Page.Header.Controls.Add(new LiteralControl($"<meta property=\"og:url\" content=\"{Request.Url}\" />"));
+                Page.Header.Controls.Add(new LiteralControl("<meta property=\"og:image:width\" content=\"853\" />"));
+                Page.Header.Controls.Add(new LiteralControl("<meta property=\"og:image:height\" content=\"480\" />"));
+            }
         }
     }
 }
